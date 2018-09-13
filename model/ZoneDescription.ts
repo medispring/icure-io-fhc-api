@@ -24,41 +24,29 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class ZoneDescription {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as ZoneDescription, json)
   }
-  birthday?: number
+  label?: string
 
-  complete?: boolean
+  length?: number
 
-  deceased?: number
+  position?: number
 
-  errors?: Array<models.Error>
+  type?: ZoneDescription.TypeEnum
 
-  firstName?: string
+  value?: string
 
-  from?: number
+  zone?: string
 
-  hcParty?: models.HcpartyType
+  zones?: Array<string>
 
-  inss?: string
-
-  io?: string
-
-  lastName?: string
-
-  mutuality?: string
-
-  payment?: boolean
-
-  reference?: string
-
-  regNrWithMut?: string
-
-  sex?: string
-
-  to?: number
-
-  valueHash?: string
+  zonesList?: string
+}
+export namespace ZoneDescription {
+  export enum TypeEnum {
+    ALPHANUMERICAL = <any>"ALPHANUMERICAL",
+    NUMERICAL = <any>"NUMERICAL"
+  }
 }

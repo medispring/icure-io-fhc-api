@@ -24,41 +24,11 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class RecordRecordOrSegmentDescription {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as RecordRecordOrSegmentDescription, json)
   }
-  birthday?: number
+  description?: models.RecordOrSegmentDescription
 
-  complete?: boolean
-
-  deceased?: number
-
-  errors?: Array<models.Error>
-
-  firstName?: string
-
-  from?: number
-
-  hcParty?: models.HcpartyType
-
-  inss?: string
-
-  io?: string
-
-  lastName?: string
-
-  mutuality?: string
-
-  payment?: boolean
-
-  reference?: string
-
-  regNrWithMut?: string
-
-  sex?: string
-
-  to?: number
-
-  valueHash?: string
+  zones?: Array<models.Zone>
 }

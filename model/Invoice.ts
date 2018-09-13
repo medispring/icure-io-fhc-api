@@ -24,41 +24,28 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class Invoice {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as Invoice, json)
   }
-  birthday?: number
+  invoiceNumber?: number
 
-  complete?: boolean
+  invoiceRef?: string
 
-  deceased?: number
+  ioCode?: string
 
-  errors?: Array<models.Error>
+  items?: Array<models.InvoiceItem>
 
-  firstName?: string
+  patient?: models.Patient
 
-  from?: number
-
-  hcParty?: models.HcpartyType
-
-  inss?: string
-
-  io?: string
-
-  lastName?: string
-
-  mutuality?: string
-
-  payment?: boolean
-
-  reference?: string
-
-  regNrWithMut?: string
-
-  sex?: string
-
-  to?: number
-
-  valueHash?: string
+  reason?: Invoice.ReasonEnum
+}
+export namespace Invoice {
+  export enum ReasonEnum {
+    Chimiotherapy = <any>"Chimiotherapy",
+    ProfessionalDisease = <any>"ProfessionalDisease",
+    WorkAccident = <any>"WorkAccident",
+    Accident = <any>"Accident",
+    Other = <any>"Other"
+  }
 }

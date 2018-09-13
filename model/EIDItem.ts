@@ -24,41 +24,17 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class EIDItem {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as EIDItem, json)
   }
-  birthday?: number
+  deviceType?: string
 
-  complete?: boolean
+  readDate?: number
 
-  deceased?: number
+  readHour?: number
 
-  errors?: Array<models.Error>
+  readType?: string
 
-  firstName?: string
-
-  from?: number
-
-  hcParty?: models.HcpartyType
-
-  inss?: string
-
-  io?: string
-
-  lastName?: string
-
-  mutuality?: string
-
-  payment?: boolean
-
-  reference?: string
-
-  regNrWithMut?: string
-
-  sex?: string
-
-  to?: number
-
-  valueHash?: string
+  readvalue?: string
 }

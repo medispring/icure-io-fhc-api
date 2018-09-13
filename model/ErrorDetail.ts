@@ -24,41 +24,49 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class ErrorDetail {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as ErrorDetail, json)
   }
-  birthday?: number
+  creationDate?: number
 
-  complete?: boolean
+  errorCodeComment?: string
 
-  deceased?: number
+  index?: number
 
-  errors?: Array<models.Error>
+  invoicingYearMonth?: number
 
-  firstName?: string
+  mutualityCode?: number
 
-  from?: number
+  oaResult?: string
 
-  hcParty?: models.HcpartyType
+  record?: models.RecordRecordOrSegmentDescription
 
-  inss?: string
+  rejectionCode1?: string
 
-  io?: string
+  rejectionCode2?: string
 
-  lastName?: string
+  rejectionCode3?: string
 
-  mutuality?: string
+  rejectionDescr1?: string
 
-  payment?: boolean
+  rejectionDescr2?: string
 
-  reference?: string
+  rejectionDescr3?: string
 
-  regNrWithMut?: string
+  rejectionLetter1?: string
 
-  sex?: string
+  rejectionLetter2?: string
 
-  to?: number
+  rejectionLetter3?: string
 
-  valueHash?: string
+  rejectionZoneDescr1?: string
+
+  rejectionZoneDescr2?: string
+
+  rejectionZoneDescr3?: string
+
+  reserve?: string
+
+  sendingId?: number
 }

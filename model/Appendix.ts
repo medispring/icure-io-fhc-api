@@ -24,41 +24,17 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class Appendix {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as Appendix, json)
   }
-  birthday?: number
+  data?: Array<string>
 
-  complete?: boolean
+  documentSeq?: number
 
-  deceased?: number
+  mimeType?: string
 
-  errors?: Array<models.Error>
+  path?: string
 
-  firstName?: string
-
-  from?: number
-
-  hcParty?: models.HcpartyType
-
-  inss?: string
-
-  io?: string
-
-  lastName?: string
-
-  mutuality?: string
-
-  payment?: boolean
-
-  reference?: string
-
-  regNrWithMut?: string
-
-  sex?: string
-
-  to?: number
-
-  valueHash?: string
+  verseSeq?: number
 }

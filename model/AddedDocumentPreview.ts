@@ -24,41 +24,23 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class AddedDocumentPreview {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as AddedDocumentPreview, json)
   }
-  birthday?: number
+  addressUrl?: string
 
-  complete?: boolean
+  descrFr?: string
 
-  deceased?: number
+  descrNl?: string
 
-  errors?: Array<models.Error>
+  documentSeq?: number
 
-  firstName?: string
+  id?: number
 
-  from?: number
+  localPath?: string
 
-  hcParty?: models.HcpartyType
+  mimeType?: string
 
-  inss?: string
-
-  io?: string
-
-  lastName?: string
-
-  mutuality?: string
-
-  payment?: boolean
-
-  reference?: string
-
-  regNrWithMut?: string
-
-  sex?: string
-
-  to?: number
-
-  valueHash?: string
+  verseSeq?: number
 }

@@ -24,41 +24,19 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class AgreementResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as AgreementResponse, json)
   }
-  birthday?: number
+  acknowledged?: boolean
 
-  complete?: boolean
+  content?: Array<string>
 
-  deceased?: number
+  errors?: models.CollectionProblem
 
-  errors?: Array<models.Error>
+  transactions?: Array<models.AgreementTransaction>
 
-  firstName?: string
+  transactions$freehealthConnector?: Array<models.AgreementTransaction>
 
-  from?: number
-
-  hcParty?: models.HcpartyType
-
-  inss?: string
-
-  io?: string
-
-  lastName?: string
-
-  mutuality?: string
-
-  payment?: boolean
-
-  reference?: string
-
-  regNrWithMut?: string
-
-  sex?: string
-
-  to?: number
-
-  valueHash?: string
+  warnings?: models.CollectionProblem
 }

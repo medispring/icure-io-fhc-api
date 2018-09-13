@@ -24,41 +24,23 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class InvoicesBatch {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as InvoicesBatch, json)
   }
-  birthday?: number
+  batchRef?: string
 
-  complete?: boolean
+  invoices?: Array<models.Invoice>
 
-  deceased?: number
+  invoicingMonth?: number
 
-  errors?: Array<models.Error>
+  invoicingYear?: number
 
-  firstName?: string
+  ioFederationCode?: string
 
-  from?: number
+  numericalRef?: number
 
-  hcParty?: models.HcpartyType
+  sender?: models.InvoiceSender
 
-  inss?: string
-
-  io?: string
-
-  lastName?: string
-
-  mutuality?: string
-
-  payment?: boolean
-
-  reference?: string
-
-  regNrWithMut?: string
-
-  sex?: string
-
-  to?: number
-
-  valueHash?: string
+  uniqueSendNumber?: number
 }
