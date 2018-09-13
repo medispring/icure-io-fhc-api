@@ -83,10 +83,12 @@ export namespace XHR {
       }
 
       if (method === "POST" || method === "PUT") {
-        if (!contentType) {
-          jsXHR.setRequestHeader("Content-Type", "application/json")
+        if(contentType && contentType.data === "application/json") {
+          jsXHR.send(JSON.stringify(data));
         }
-        jsXHR.send(JSON.stringify(data))
+        else {
+          jsXHR.send(data);
+        }
       } else {
         jsXHR.send()
       }
