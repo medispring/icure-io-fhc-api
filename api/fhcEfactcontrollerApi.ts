@@ -67,8 +67,11 @@ export class fhcEfactcontrollerApi {
       (ssin ? "&ssin=" + ssin : "") +
       (firstName ? "&firstName=" + firstName : "") +
       (lastName ? "&lastName=" + lastName : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.EfactMessage(it)))
       .catch(err => this.handleError(err))
   }
@@ -89,8 +92,11 @@ export class fhcEfactcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.EfactSendResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }

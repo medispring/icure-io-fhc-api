@@ -60,8 +60,11 @@ export class fhcEhboxcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -90,8 +93,11 @@ export class fhcEhboxcontrollerApi {
       (alternateKeystorePassPhrase
         ? "&alternateKeystorePassPhrase=" + alternateKeystorePassPhrase
         : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.Message(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -110,8 +116,11 @@ export class fhcEhboxcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.BoxInfo(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -139,8 +148,11 @@ export class fhcEhboxcontrollerApi {
       (alternateKeystorePassPhrase
         ? "&alternateKeystorePassPhrase=" + alternateKeystorePassPhrase
         : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.Message(it)))
       .catch(err => this.handleError(err))
   }
@@ -165,8 +177,11 @@ export class fhcEhboxcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -191,8 +206,11 @@ export class fhcEhboxcontrollerApi {
       (publicationReceipt ? "&publicationReceipt=" + publicationReceipt : "") +
       (receptionReceipt ? "&receptionReceipt=" + receptionReceipt : "") +
       (readReceipt ? "&readReceipt=" + readReceipt : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }

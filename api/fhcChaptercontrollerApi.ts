@@ -85,8 +85,11 @@ export class fhcChaptercontrollerApi {
       (start ? "&start=" + start : "") +
       (end ? "&end=" + end : "") +
       (reference ? "&reference=" + reference : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -118,8 +121,11 @@ export class fhcChaptercontrollerApi {
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "") +
       (iorequestReference ? "&iorequestReference=" + iorequestReference : "")
-
-    return XHR.sendCommand("DELETE", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -149,8 +155,11 @@ export class fhcChaptercontrollerApi {
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "")
-
-    return XHR.sendCommand("DELETE", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -167,8 +176,11 @@ export class fhcChaptercontrollerApi {
         .replace("{language}", language + "") +
       "?ts=" +
       new Date().getTime()
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.ParagraphPreview(it)))
       .catch(err => this.handleError(err))
   }
@@ -185,8 +197,11 @@ export class fhcChaptercontrollerApi {
         .replace("{language}", language + "") +
       "?ts=" +
       new Date().getTime()
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.ParagraphPreview(it)))
       .catch(err => this.handleError(err))
   }
@@ -203,8 +218,11 @@ export class fhcChaptercontrollerApi {
         .replace("{paragraphName}", paragraphName + "") +
       "?ts=" +
       new Date().getTime()
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.AddedDocumentPreview(it)))
       .catch(err => this.handleError(err))
   }
@@ -253,8 +271,11 @@ export class fhcChaptercontrollerApi {
       (end ? "&end=" + end : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "") +
       (ioRequestReference ? "&ioRequestReference=" + ioRequestReference : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }

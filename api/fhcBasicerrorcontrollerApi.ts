@@ -46,8 +46,11 @@ export class fhcBasicerrorcontrollerApi {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-
-    return XHR.sendCommand("DELETE", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -55,8 +58,11 @@ export class fhcBasicerrorcontrollerApi {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -64,8 +70,11 @@ export class fhcBasicerrorcontrollerApi {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-
-    return XHR.sendCommand("HEAD", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("HEAD", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -73,8 +82,11 @@ export class fhcBasicerrorcontrollerApi {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-
-    return XHR.sendCommand("OPTIONS", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("OPTIONS", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -82,8 +94,11 @@ export class fhcBasicerrorcontrollerApi {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-
-    return XHR.sendCommand("PATCH", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("PATCH", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -91,8 +106,11 @@ export class fhcBasicerrorcontrollerApi {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -100,8 +118,11 @@ export class fhcBasicerrorcontrollerApi {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-
-    return XHR.sendCommand("PUT", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("PUT", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }

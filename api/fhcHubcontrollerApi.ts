@@ -70,8 +70,11 @@ export class fhcHubcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.HcPartyConsent(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -105,8 +108,11 @@ export class fhcHubcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.Consent(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -140,8 +146,11 @@ export class fhcHubcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.Patient(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -182,8 +191,11 @@ export class fhcHubcontrollerApi {
       (therLinkType ? "&therLinkType=" + therLinkType : "") +
       (from ? "&from=" + from : "") +
       (to ? "&to=" + to : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.TherapeuticLink(it)))
       .catch(err => this.handleError(err))
   }
@@ -226,8 +238,11 @@ export class fhcHubcontrollerApi {
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
       (id ? "&id=" + id : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -270,8 +285,11 @@ export class fhcHubcontrollerApi {
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
       (id ? "&id=" + id : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -317,8 +335,11 @@ export class fhcHubcontrollerApi {
       (authorSsin ? "&authorSsin=" + authorSsin : "") +
       (isGlobal ? "&isGlobal=" + isGlobal : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "")
-
-    return XHR.sendCommand("GET", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.TransactionSummary(it)))
       .catch(err => this.handleError(err))
   }
@@ -361,8 +382,11 @@ export class fhcHubcontrollerApi {
       (firstName ? "&firstName=" + firstName : "") +
       (gender ? "&gender=" + gender : "") +
       (dateOfBirth ? "&dateOfBirth=" + dateOfBirth : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.Patient(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -403,8 +427,11 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (hubApplication ? "&hubApplication=" + hubApplication : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.PutTransactionSetResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -445,8 +472,11 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (hubApplication ? "&hubApplication=" + hubApplication : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/xml"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.TransactionIdType(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -482,8 +512,11 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
       .catch(err => this.handleError(err))
   }
@@ -520,8 +553,11 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "")
-
-    return XHR.sendCommand("POST", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
       .catch(err => this.handleError(err))
   }
@@ -564,8 +600,11 @@ export class fhcHubcontrollerApi {
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
       (id ? "&id=" + id : "")
-
-    return XHR.sendCommand("DELETE", _url, this.headers, _body)
+    const headers = this.headers
+    headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
