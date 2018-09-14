@@ -42,7 +42,7 @@ export class fhcBasicerrorcontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
-  errorHtmlUsingDELETE(): Promise<models.ModelAndView | any> {
+  errorUsingDELETE(): Promise<{ [key: string]: any } | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
@@ -51,10 +51,10 @@ export class fhcBasicerrorcontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("DELETE", _url, headers, _body)
-      .then(doc => new models.ModelAndView(doc.body as JSON))
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  errorHtmlUsingGET(): Promise<models.ModelAndView | any> {
+  errorUsingGET(): Promise<{ [key: string]: any } | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
@@ -63,10 +63,10 @@ export class fhcBasicerrorcontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => new models.ModelAndView(doc.body as JSON))
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  errorHtmlUsingHEAD(): Promise<models.ModelAndView | any> {
+  errorUsingHEAD(): Promise<{ [key: string]: any } | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
@@ -75,10 +75,10 @@ export class fhcBasicerrorcontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("HEAD", _url, headers, _body)
-      .then(doc => new models.ModelAndView(doc.body as JSON))
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  errorHtmlUsingOPTIONS(): Promise<models.ModelAndView | any> {
+  errorUsingOPTIONS(): Promise<{ [key: string]: any } | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
@@ -87,10 +87,10 @@ export class fhcBasicerrorcontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("OPTIONS", _url, headers, _body)
-      .then(doc => new models.ModelAndView(doc.body as JSON))
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  errorHtmlUsingPATCH(): Promise<models.ModelAndView | any> {
+  errorUsingPATCH(): Promise<{ [key: string]: any } | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
@@ -99,10 +99,10 @@ export class fhcBasicerrorcontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("PATCH", _url, headers, _body)
-      .then(doc => new models.ModelAndView(doc.body as JSON))
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  errorHtmlUsingPOST(): Promise<models.ModelAndView | any> {
+  errorUsingPOST(): Promise<{ [key: string]: any } | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
@@ -111,10 +111,10 @@ export class fhcBasicerrorcontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
-      .then(doc => new models.ModelAndView(doc.body as JSON))
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  errorHtmlUsingPUT(): Promise<models.ModelAndView | any> {
+  errorUsingPUT(): Promise<{ [key: string]: any } | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
@@ -123,7 +123,7 @@ export class fhcBasicerrorcontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("PUT", _url, headers, _body)
-      .then(doc => new models.ModelAndView(doc.body as JSON))
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
 }
