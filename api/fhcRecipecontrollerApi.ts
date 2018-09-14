@@ -67,8 +67,8 @@ export class fhcRecipecontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -83,8 +83,8 @@ export class fhcRecipecontrollerApi {
       "/recipe/gal/{galId}".replace("{galId}", galId + "") +
       "?ts=" +
       new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -96,8 +96,8 @@ export class fhcRecipecontrollerApi {
 
     const _url =
       this.host + "/recipe/{rid}".replace("{rid}", rid + "") + "?ts=" + new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -127,8 +127,8 @@ export class fhcRecipecontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -158,8 +158,8 @@ export class fhcRecipecontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -192,8 +192,8 @@ export class fhcRecipecontrollerApi {
       (hcpName ? "&hcpName=" + hcpName : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (reason ? "&reason=" + reason : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("DELETE", _url, headers, _body)
@@ -230,8 +230,8 @@ export class fhcRecipecontrollerApi {
       (patientId ? "&patientId=" + patientId : "") +
       (executorId ? "&executorId=" + executorId : "") +
       (text ? "&text=" + text : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -265,8 +265,8 @@ export class fhcRecipecontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("PUT", _url, headers, _body)

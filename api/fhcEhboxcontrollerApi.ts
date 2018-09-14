@@ -60,8 +60,8 @@ export class fhcEhboxcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -93,8 +93,8 @@ export class fhcEhboxcontrollerApi {
       (alternateKeystorePassPhrase
         ? "&alternateKeystorePassPhrase=" + alternateKeystorePassPhrase
         : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -116,8 +116,8 @@ export class fhcEhboxcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -148,8 +148,8 @@ export class fhcEhboxcontrollerApi {
       (alternateKeystorePassPhrase
         ? "&alternateKeystorePassPhrase=" + alternateKeystorePassPhrase
         : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -177,8 +177,8 @@ export class fhcEhboxcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -206,8 +206,8 @@ export class fhcEhboxcontrollerApi {
       (publicationReceipt ? "&publicationReceipt=" + publicationReceipt : "") +
       (receptionReceipt ? "&receptionReceipt=" + receptionReceipt : "") +
       (readReceipt ? "&readReceipt=" + readReceipt : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)

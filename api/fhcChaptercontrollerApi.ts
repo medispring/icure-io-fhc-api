@@ -85,8 +85,8 @@ export class fhcChaptercontrollerApi {
       (start ? "&start=" + start : "") +
       (end ? "&end=" + end : "") +
       (reference ? "&reference=" + reference : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -121,8 +121,8 @@ export class fhcChaptercontrollerApi {
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "") +
       (iorequestReference ? "&iorequestReference=" + iorequestReference : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("DELETE", _url, headers, _body)
@@ -155,8 +155,8 @@ export class fhcChaptercontrollerApi {
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("DELETE", _url, headers, _body)
@@ -176,8 +176,8 @@ export class fhcChaptercontrollerApi {
         .replace("{language}", language + "") +
       "?ts=" +
       new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -197,8 +197,8 @@ export class fhcChaptercontrollerApi {
         .replace("{language}", language + "") +
       "?ts=" +
       new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -218,8 +218,8 @@ export class fhcChaptercontrollerApi {
         .replace("{paragraphName}", paragraphName + "") +
       "?ts=" +
       new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -271,8 +271,8 @@ export class fhcChaptercontrollerApi {
       (end ? "&end=" + end : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "") +
       (ioRequestReference ? "&ioRequestReference=" + ioRequestReference : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)

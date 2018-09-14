@@ -42,88 +42,88 @@ export class fhcBasicerrorcontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
-  errorUsingDELETE(): Promise<{ [key: string]: any } | any> {
+  errorHtmlUsingDELETE(): Promise<models.ModelAndView | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("DELETE", _url, headers, _body)
-      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .then(doc => new models.ModelAndView(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  errorUsingGET(): Promise<{ [key: string]: any } | any> {
+  errorHtmlUsingGET(): Promise<models.ModelAndView | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .then(doc => new models.ModelAndView(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  errorUsingHEAD(): Promise<{ [key: string]: any } | any> {
+  errorHtmlUsingHEAD(): Promise<models.ModelAndView | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("HEAD", _url, headers, _body)
-      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .then(doc => new models.ModelAndView(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  errorUsingOPTIONS(): Promise<{ [key: string]: any } | any> {
+  errorHtmlUsingOPTIONS(): Promise<models.ModelAndView | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("OPTIONS", _url, headers, _body)
-      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .then(doc => new models.ModelAndView(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  errorUsingPATCH(): Promise<{ [key: string]: any } | any> {
+  errorHtmlUsingPATCH(): Promise<models.ModelAndView | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("PATCH", _url, headers, _body)
-      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .then(doc => new models.ModelAndView(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  errorUsingPOST(): Promise<{ [key: string]: any } | any> {
+  errorHtmlUsingPOST(): Promise<models.ModelAndView | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
-      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .then(doc => new models.ModelAndView(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  errorUsingPUT(): Promise<{ [key: string]: any } | any> {
+  errorHtmlUsingPUT(): Promise<models.ModelAndView | any> {
     let _body = null
 
     const _url = this.host + "/error" + "?ts=" + new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("PUT", _url, headers, _body)
-      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .then(doc => new models.ModelAndView(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 }

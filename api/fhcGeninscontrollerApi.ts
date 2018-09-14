@@ -75,8 +75,8 @@ export class fhcGeninscontrollerApi {
       (date ? "&date=" + date : "") +
       (endDate ? "&endDate=" + endDate : "") +
       (hospitalized ? "&hospitalized=" + hospitalized : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -113,8 +113,8 @@ export class fhcGeninscontrollerApi {
       (date ? "&date=" + date : "") +
       (endDate ? "&endDate=" + endDate : "") +
       (hospitalized ? "&hospitalized=" + hospitalized : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)

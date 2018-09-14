@@ -60,8 +60,8 @@ export class fhcAddressbookcontrollerApi {
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -86,8 +86,8 @@ export class fhcAddressbookcontrollerApi {
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -112,8 +112,8 @@ export class fhcAddressbookcontrollerApi {
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -138,8 +138,8 @@ export class fhcAddressbookcontrollerApi {
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -164,8 +164,8 @@ export class fhcAddressbookcontrollerApi {
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -192,8 +192,8 @@ export class fhcAddressbookcontrollerApi {
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (firstName ? "&firstName=" + firstName : "") +
       (type ? "&type=" + type : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -218,8 +218,8 @@ export class fhcAddressbookcontrollerApi {
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (type ? "&type=" + type : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)

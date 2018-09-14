@@ -50,8 +50,8 @@ export class fhcStscontrollerApi {
       "/sts/keystore/check/{keystoreId}".replace("{keystoreId}", keystoreId + "") +
       "?ts=" +
       new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -66,8 +66,8 @@ export class fhcStscontrollerApi {
       "/sts/token/check/{tokenId}".replace("{tokenId}", tokenId + "") +
       "?ts=" +
       new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -83,8 +83,8 @@ export class fhcStscontrollerApi {
       "/sts/token/{tokenId}".replace("{tokenId}", tokenId + "") +
       "?ts=" +
       new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -107,8 +107,8 @@ export class fhcStscontrollerApi {
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (ssin ? "&ssin=" + ssin : "") +
       (isMedicalHouse ? "&isMedicalHouse=" + isMedicalHouse : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -123,8 +123,8 @@ export class fhcStscontrollerApi {
         new Blob(file, { type: "application/octet-stream" })
       )
     const _url = this.host + "/sts/keystore" + "?ts=" + new Date().getTime()
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "multipart/form-data"))
     return XHR.sendCommand("POST", _url, headers, _body)

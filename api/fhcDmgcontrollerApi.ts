@@ -67,8 +67,8 @@ export class fhcDmgcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -100,8 +100,8 @@ export class fhcDmgcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -141,8 +141,8 @@ export class fhcDmgcontrollerApi {
       (oa ? "&oa=" + oa : "") +
       (regNrWithMut ? "&regNrWithMut=" + regNrWithMut : "") +
       (requestDate ? "&requestDate=" + requestDate : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -176,8 +176,8 @@ export class fhcDmgcontrollerApi {
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (oa ? "&oa=" + oa : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -222,8 +222,8 @@ export class fhcDmgcontrollerApi {
       (patientLastName ? "&patientLastName=" + patientLastName : "") +
       (patientGender ? "&patientGender=" + patientGender : "") +
       (requestDate ? "&requestDate=" + requestDate : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -257,8 +257,8 @@ export class fhcDmgcontrollerApi {
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (oa ? "&oa=" + oa : "") +
       (requestDate ? "&requestDate=" + requestDate : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -293,8 +293,8 @@ export class fhcDmgcontrollerApi {
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (bic ? "&bic=" + bic : "") +
       (iban ? "&iban=" + iban : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)

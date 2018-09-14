@@ -67,8 +67,8 @@ export class fhcEfactcontrollerApi {
       (ssin ? "&ssin=" + ssin : "") +
       (firstName ? "&firstName=" + firstName : "") +
       (lastName ? "&lastName=" + lastName : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -92,8 +92,8 @@ export class fhcEfactcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)

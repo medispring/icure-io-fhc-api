@@ -70,8 +70,8 @@ export class fhcHubcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -108,8 +108,8 @@ export class fhcHubcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -146,8 +146,8 @@ export class fhcHubcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -191,8 +191,8 @@ export class fhcHubcontrollerApi {
       (therLinkType ? "&therLinkType=" + therLinkType : "") +
       (from ? "&from=" + from : "") +
       (to ? "&to=" + to : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -238,8 +238,8 @@ export class fhcHubcontrollerApi {
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
       (id ? "&id=" + id : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -285,8 +285,8 @@ export class fhcHubcontrollerApi {
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
       (id ? "&id=" + id : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -335,8 +335,8 @@ export class fhcHubcontrollerApi {
       (authorSsin ? "&authorSsin=" + authorSsin : "") +
       (isGlobal ? "&isGlobal=" + isGlobal : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -382,8 +382,8 @@ export class fhcHubcontrollerApi {
       (firstName ? "&firstName=" + firstName : "") +
       (gender ? "&gender=" + gender : "") +
       (dateOfBirth ? "&dateOfBirth=" + dateOfBirth : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -427,8 +427,8 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (hubApplication ? "&hubApplication=" + hubApplication : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -472,8 +472,8 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (hubApplication ? "&hubApplication=" + hubApplication : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/xml"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -512,8 +512,8 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -553,8 +553,8 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -600,8 +600,8 @@ export class fhcHubcontrollerApi {
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
       (id ? "&id=" + id : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("DELETE", _url, headers, _body)

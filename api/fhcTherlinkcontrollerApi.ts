@@ -59,8 +59,8 @@ export class fhcTherlinkcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -108,8 +108,8 @@ export class fhcTherlinkcontrollerApi {
       (endDate ? "&endDate=" + endDate : "") +
       (type ? "&type=" + type : "") +
       (sign ? "&sign=" + sign : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
@@ -135,8 +135,8 @@ export class fhcTherlinkcontrollerApi {
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (sign ? "&sign=" + sign : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -186,8 +186,8 @@ export class fhcTherlinkcontrollerApi {
       (therLinkType ? "&therLinkType=" + therLinkType : "") +
       (comment ? "&comment=" + comment : "") +
       (sign ? "&sign=" + sign : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -237,8 +237,8 @@ export class fhcTherlinkcontrollerApi {
       (therLinkType ? "&therLinkType=" + therLinkType : "") +
       (comment ? "&comment=" + comment : "") +
       (sign ? "&sign=" + sign : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -264,8 +264,8 @@ export class fhcTherlinkcontrollerApi {
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (sign ? "&sign=" + sign : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)

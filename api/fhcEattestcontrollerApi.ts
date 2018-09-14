@@ -72,8 +72,8 @@ export class fhcEattestcontrollerApi {
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpCbe ? "&hcpCbe=" + hcpCbe : "") +
       (date ? "&date=" + date : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -110,8 +110,8 @@ export class fhcEattestcontrollerApi {
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpCbe ? "&hcpCbe=" + hcpCbe : "") +
       (date ? "&date=" + date : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)

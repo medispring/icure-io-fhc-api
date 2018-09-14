@@ -74,8 +74,8 @@ export class fhcTarificationcontrollerApi {
       (date ? "&date=" + date : "") +
       (gmdNihii ? "&gmdNihii=" + gmdNihii : "") +
       (justification ? "&justification=" + justification : "")
-    const headers = this.headers
-    headers
+    let headers = this.headers
+    headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
