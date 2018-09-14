@@ -19,6 +19,7 @@
     "typescript": "^2.9.2"
   },
   "scripts": {
+    "gen": "java -classpath swagger-codegen-cli.jar io.swagger.codegen.SwaggerCodegen generate -i https://fhcacc.icure.cloud/v2/api-docs -l typescript --additional-properties classPrefix=fhc -o ./",
     "test": "mocha --require ts-node/register --watch-extensions ts 'test/**/*.ts'",
     "build": "tsc",
     "prepublish": "rm -rf dist && npm run build",
