@@ -51,11 +51,11 @@ export class fhcChaptercontrollerApi {
     hcpFirstName: string,
     hcpLastName: string,
     patientSsin: string,
-    civicsVersion: string,
     patientDateOfBirth: number,
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
+    civicsVersion?: string,
     paragraph?: string,
     start?: number,
     end?: number,
@@ -65,9 +65,7 @@ export class fhcChaptercontrollerApi {
 
     const _url =
       this.host +
-      "/chap4/consult/{patientSsin}/{civicsVersion}"
-        .replace("{patientSsin}", patientSsin + "")
-        .replace("{civicsVersion}", civicsVersion + "") +
+      "/chap4/consult/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
@@ -81,6 +79,7 @@ export class fhcChaptercontrollerApi {
       (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
       (patientLastName ? "&patientLastName=" + patientLastName : "") +
       (patientGender ? "&patientGender=" + patientGender : "") +
+      (civicsVersion ? "&civicsVersion=" + civicsVersion : "") +
       (paragraph ? "&paragraph=" + paragraph : "") +
       (start ? "&start=" + start : "") +
       (end ? "&end=" + end : "") +
@@ -224,6 +223,27 @@ export class fhcChaptercontrollerApi {
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.AddedDocumentPreview(it)))
+      .catch(err => this.handleError(err))
+  }
+  getParagraphInfosUsingGET(
+    chapterName: string,
+    paragraphName: string
+  ): Promise<models.ParagraphInfos | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/chap4/sam/info/{chapterName}/{paragraphName}"
+        .replace("{chapterName}", chapterName + "")
+        .replace("{paragraphName}", paragraphName + "") +
+      "?ts=" +
+      new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.ParagraphInfos(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   requestAgreementUsingPOST(
