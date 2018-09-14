@@ -68,7 +68,9 @@ export namespace XHR {
       const contentType = headers && headers.find(it => it.header === "Content-Type")
       if (headers != null) {
         headers.forEach(header => {
-          jsXHR.setRequestHeader(header.header, header.data)
+          if (header.header !== "Content-Type" || header.data !== "multipart/form-data") {
+            jsXHR.setRequestHeader(header.header, header.data)
+          }
         })
       }
 
