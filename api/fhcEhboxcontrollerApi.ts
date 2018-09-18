@@ -73,9 +73,7 @@ export class fhcEhboxcontrollerApi {
     tokenId: string,
     passPhrase: string,
     boxId: string,
-    messageId: string,
-    alternateKeystoreId?: string,
-    alternateKeystorePassPhrase?: string
+    messageId: string
   ): Promise<models.Message | any> {
     let _body = null
 
@@ -88,16 +86,41 @@ export class fhcEhboxcontrollerApi {
       new Date().getTime() +
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
-      (alternateKeystoreId ? "&alternateKeystoreId=" + alternateKeystoreId : "") +
-      (alternateKeystorePassPhrase
-        ? "&alternateKeystorePassPhrase=" + alternateKeystorePassPhrase
-        : "")
+      (passPhrase ? "&passPhrase=" + passPhrase : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.Message(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+  getFullMessageUsingPOST(
+    keystoreId: string,
+    tokenId: string,
+    passPhrase: string,
+    boxId: string,
+    messageId: string,
+    alternateKeystores: models.AltKeystoresList
+  ): Promise<models.Message | any> {
+    let _body = null
+    _body = alternateKeystores
+
+    const _url =
+      this.host +
+      "/ehbox/{boxId}/{messageId}"
+        .replace("{boxId}", boxId + "")
+        .replace("{messageId}", messageId + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (keystoreId ? "&keystoreId=" + keystoreId : "") +
+      (tokenId ? "&tokenId=" + tokenId : "") +
+      (passPhrase ? "&passPhrase=" + passPhrase : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.Message(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -129,9 +152,7 @@ export class fhcEhboxcontrollerApi {
     tokenId: string,
     passPhrase: string,
     boxId: string,
-    limit: number,
-    alternateKeystoreId?: string,
-    alternateKeystorePassPhrase?: string
+    limit: number
   ): Promise<Array<models.Message> | any> {
     let _body = null
 
@@ -143,16 +164,40 @@ export class fhcEhboxcontrollerApi {
       (keystoreId ? "&keystoreId=" + keystoreId : "") +
       (tokenId ? "&tokenId=" + tokenId : "") +
       (passPhrase ? "&passPhrase=" + passPhrase : "") +
-      (limit ? "&limit=" + limit : "") +
-      (alternateKeystoreId ? "&alternateKeystoreId=" + alternateKeystoreId : "") +
-      (alternateKeystorePassPhrase
-        ? "&alternateKeystorePassPhrase=" + alternateKeystorePassPhrase
-        : "")
+      (limit ? "&limit=" + limit : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => (doc.body as Array<JSON>).map(it => new models.Message(it)))
+      .catch(err => this.handleError(err))
+  }
+  loadMessagesUsingPOST(
+    keystoreId: string,
+    tokenId: string,
+    passPhrase: string,
+    boxId: string,
+    limit: number,
+    alternateKeystores: models.AltKeystoresList
+  ): Promise<Array<models.Message> | any> {
+    let _body = null
+    _body = alternateKeystores
+
+    const _url =
+      this.host +
+      "/ehbox/{boxId}".replace("{boxId}", boxId + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (keystoreId ? "&keystoreId=" + keystoreId : "") +
+      (tokenId ? "&tokenId=" + tokenId : "") +
+      (passPhrase ? "&passPhrase=" + passPhrase : "") +
+      (limit ? "&limit=" + limit : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.Message(it)))
       .catch(err => this.handleError(err))
   }
