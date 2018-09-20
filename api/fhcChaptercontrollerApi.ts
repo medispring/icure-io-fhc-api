@@ -43,9 +43,9 @@ export class fhcChaptercontrollerApi {
   }
 
   agreementRequestsConsultationUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
@@ -68,9 +68,6 @@ export class fhcChaptercontrollerApi {
       "/chap4/consult/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
@@ -88,18 +85,21 @@ export class fhcChaptercontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   cancelAgreementUsingDELETE(
-    keystoreId: string,
-    tokenId: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
-    passPhrase: string,
+    xFHCPassPhrase: string,
     patientSsin: string,
     decisionReference: string,
     iorequestReference: string
@@ -111,31 +111,31 @@ export class fhcChaptercontrollerApi {
       "/chap4/cancel/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "") +
       (iorequestReference ? "&iorequestReference=" + iorequestReference : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   closeAgreementUsingDELETE(
-    keystoreId: string,
-    tokenId: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
-    passPhrase: string,
+    xFHCPassPhrase: string,
     patientSsin: string,
     decisionReference: string
   ): Promise<models.AgreementResponse | any> {
@@ -146,18 +146,18 @@ export class fhcChaptercontrollerApi {
       "/chap4/close/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -247,13 +247,13 @@ export class fhcChaptercontrollerApi {
       .catch(err => this.handleError(err))
   }
   requestAgreementUsingPOST(
-    keystoreId: string,
-    tokenId: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
-    passPhrase: string,
+    xFHCPassPhrase: string,
     patientSsin: string,
     requestType: string,
     civicsVersion: string,
@@ -278,13 +278,10 @@ export class fhcChaptercontrollerApi {
         .replace("{paragraph}", paragraph + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (verses ? "&verses=" + verses : "") +
       (incomplete ? "&incomplete=" + incomplete : "") +
       (start ? "&start=" + start : "") +
@@ -295,6 +292,9 @@ export class fhcChaptercontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))

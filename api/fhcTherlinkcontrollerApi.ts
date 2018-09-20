@@ -43,34 +43,30 @@ export class fhcTherlinkcontrollerApi {
   }
 
   doesLinkExistUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     therLink: models.TherapeuticLinkDto
   ): Promise<models.TherapeuticLinkDto | any> {
     let _body = null
     _body = therLink
 
-    const _url =
-      this.host +
-      "/therlink/check" +
-      "?ts=" +
-      new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+    const _url = this.host + "/therlink/check" + "?ts=" + new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.TherapeuticLinkDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getAllTherapeuticLinksUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
@@ -94,9 +90,6 @@ export class fhcTherlinkcontrollerApi {
         .replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
@@ -112,14 +105,17 @@ export class fhcTherlinkcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.TherapeuticLinkMessageDto(it)))
       .catch(err => this.handleError(err))
   }
   getAllTherapeuticLinksWithQueryLinkUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     queryLink: models.TherapeuticLinkDto,
     sign?: boolean
   ): Promise<Array<models.TherapeuticLinkMessageDto> | any> {
@@ -127,26 +123,22 @@ export class fhcTherlinkcontrollerApi {
     _body = queryLink
 
     const _url =
-      this.host +
-      "/therlink/query" +
-      "?ts=" +
-      new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
-      (sign ? "&sign=" + sign : "")
+      this.host + "/therlink/query" + "?ts=" + new Date().getTime() + (sign ? "&sign=" + sign : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.TherapeuticLinkMessageDto(it)))
       .catch(err => this.handleError(err))
   }
   registerTherapeuticLinkUsingPOST1(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
@@ -169,9 +161,6 @@ export class fhcTherlinkcontrollerApi {
       "/therlink/register" +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
@@ -190,14 +179,17 @@ export class fhcTherlinkcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.TherapeuticLinkMessageDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   revokeLinkUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
@@ -222,9 +214,6 @@ export class fhcTherlinkcontrollerApi {
         .replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
@@ -241,14 +230,17 @@ export class fhcTherlinkcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.TherapeuticLinkMessageDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   revokeLinkUsingPOST1(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     therLink: models.TherapeuticLinkDto,
     sign?: boolean
   ): Promise<models.TherapeuticLinkMessageDto | any> {
@@ -256,18 +248,14 @@ export class fhcTherlinkcontrollerApi {
     _body = therLink
 
     const _url =
-      this.host +
-      "/therlink/revoke" +
-      "?ts=" +
-      new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
-      (sign ? "&sign=" + sign : "")
+      this.host + "/therlink/revoke" + "?ts=" + new Date().getTime() + (sign ? "&sign=" + sign : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.TherapeuticLinkMessageDto(doc.body as JSON))
       .catch(err => this.handleError(err))

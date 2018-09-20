@@ -44,9 +44,9 @@ export class fhcHubcontrollerApi {
 
   getHcpConsentUsingGET(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpLastName: string,
     hcpFirstName: string,
@@ -62,9 +62,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
@@ -74,15 +71,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.HcPartyConsent(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getPatientConsentUsingGET1(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -99,9 +99,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -112,15 +109,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.Consent(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getPatientUsingGET(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -137,9 +137,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -150,15 +147,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.Patient(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getTherapeuticLinksUsingGET(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -180,9 +180,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
@@ -195,15 +192,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.TherapeuticLink(it)))
       .catch(err => this.handleError(err))
   }
   getTransactionSetUsingGET(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -227,9 +227,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -242,15 +239,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
   getTransactionUsingGET(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -274,9 +274,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -289,15 +286,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
   getTransactionsListUsingGET(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -320,9 +320,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -339,15 +336,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.TransactionSummary(it)))
       .catch(err => this.handleError(err))
   }
   putPatientUsingPOST(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -370,9 +370,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -386,15 +383,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.Patient(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   putTransactionSetUsingPOST(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -417,9 +417,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -431,15 +428,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.PutTransactionSetResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   putTransactionUsingPOST(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -462,9 +462,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -476,15 +473,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/xml"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.TransactionIdType(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   registerPatientConsentUsingPOST1(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -502,9 +502,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -516,15 +513,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
       .catch(err => this.handleError(err))
   }
   registerTherapeuticLinkUsingPOST(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -544,9 +544,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
@@ -557,15 +554,18 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
       .catch(err => this.handleError(err))
   }
   revokeTransactionUsingDELETE(
     endpoint: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpLastName: string,
     hcpFirstName: string,
     hcpNihii: string,
@@ -589,9 +589,6 @@ export class fhcHubcontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (endpoint ? "&endpoint=" + endpoint : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -604,6 +601,9 @@ export class fhcHubcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))

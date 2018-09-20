@@ -44,9 +44,9 @@ export class fhcTarificationcontrollerApi {
 
   consultTarificationUsingPOST(
     ssin: string,
-    tokenId: string,
-    keystoreId: string,
-    passPhrase: string,
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
     hcpFirstName: string,
     hcpLastName: string,
     hcpNihii: string,
@@ -64,9 +64,6 @@ export class fhcTarificationcontrollerApi {
       "/tarif/{ssin}".replace("{ssin}", ssin + "") +
       "?ts=" +
       new Date().getTime() +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
@@ -78,6 +75,9 @@ export class fhcTarificationcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.TarificationConsultationResult(doc.body as JSON))
       .catch(err => this.handleError(err))

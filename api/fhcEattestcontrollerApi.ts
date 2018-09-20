@@ -44,9 +44,9 @@ export class fhcEattestcontrollerApi {
 
   sendAttestUsingPOST(
     patientSsin: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
@@ -63,9 +63,6 @@ export class fhcEattestcontrollerApi {
       "/eattest/send/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
@@ -76,15 +73,18 @@ export class fhcEattestcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.SendAttestResult(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   sendAttestWithResponseUsingPOST(
     patientSsin: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
@@ -101,9 +101,6 @@ export class fhcEattestcontrollerApi {
       "/eattest/send/{patientSsin}/verbose".replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
@@ -114,6 +111,9 @@ export class fhcEattestcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.SendAttestResultWithResponse(doc.body as JSON))
       .catch(err => this.handleError(err))

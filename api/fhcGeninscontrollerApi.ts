@@ -45,9 +45,9 @@ export class fhcGeninscontrollerApi {
   getGeneralInsurabilityByMembershipUsingGET(
     io: string,
     ioMembership: string,
-    tokenId: string,
-    keystoreId: string,
-    passPhrase: string,
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
@@ -65,9 +65,6 @@ export class fhcGeninscontrollerApi {
         .replace("{ioMembership}", ioMembership + "") +
       "?ts=" +
       new Date().getTime() +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
@@ -79,15 +76,18 @@ export class fhcGeninscontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.InsurabilityInfoDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getGeneralInsurabilityUsingGET(
     ssin: string,
-    tokenId: string,
-    keystoreId: string,
-    passPhrase: string,
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
@@ -103,9 +103,6 @@ export class fhcGeninscontrollerApi {
       "/genins/{ssin}".replace("{ssin}", ssin + "") +
       "?ts=" +
       new Date().getTime() +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
@@ -117,6 +114,9 @@ export class fhcGeninscontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.InsurabilityInfoDto(doc.body as JSON))
       .catch(err => this.handleError(err))

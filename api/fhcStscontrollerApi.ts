@@ -42,75 +42,67 @@ export class fhcStscontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
-  checkKeystoreExistUsingGET(keystoreId: string): Promise<boolean | any> {
+  checkKeystoreExistUsingGET(xFHCKeystoreId: string): Promise<boolean | any> {
     let _body = null
 
-    const _url =
-      this.host +
-      "/sts/keystore/check/{keystoreId}".replace("{keystoreId}", keystoreId + "") +
-      "?ts=" +
-      new Date().getTime()
+    const _url = this.host + "/sts/keystore/check" + "?ts=" + new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  checkTokenValidUsingGET(tokenId: string): Promise<boolean | any> {
+  checkTokenValidUsingGET(xFHCTokenId: string): Promise<boolean | any> {
     let _body = null
 
-    const _url =
-      this.host +
-      "/sts/token/check/{tokenId}".replace("{tokenId}", tokenId + "") +
-      "?ts=" +
-      new Date().getTime()
+    const _url = this.host + "/sts/token/check" + "?ts=" + new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  registerTokenUsingPOST(token: string, tokenId: string): Promise<any | Boolean> {
+  registerTokenUsingPOST(xFHCTokenId: string, token: string): Promise<any | Boolean> {
     let _body = null
     _body = token
 
-    const _url =
-      this.host +
-      "/sts/token/{tokenId}".replace("{tokenId}", tokenId + "") +
-      "?ts=" +
-      new Date().getTime()
+    const _url = this.host + "/sts/token" + "?ts=" + new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
       .catch(err => this.handleError(err))
   }
   requestTokenUsingGET(
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
     ssin: string,
-    keystoreId: string,
     isMedicalHouse?: boolean
   ): Promise<models.SamlTokenResult | any> {
     let _body = null
 
     const _url =
       this.host +
-      "/sts/token/{keystoreId}".replace("{keystoreId}", keystoreId + "") +
+      "/sts/token" +
       "?ts=" +
       new Date().getTime() +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (ssin ? "&ssin=" + ssin : "") +
       (isMedicalHouse ? "&isMedicalHouse=" + isMedicalHouse : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.SamlTokenResult(doc.body as JSON))
       .catch(err => this.handleError(err))

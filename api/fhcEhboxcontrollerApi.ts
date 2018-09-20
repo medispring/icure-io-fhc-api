@@ -43,9 +43,9 @@ export class fhcEhboxcontrollerApi {
   }
 
   deleteMessagesUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     messageIds: Array<string>,
     source: string
   ): Promise<boolean | any> {
@@ -56,22 +56,22 @@ export class fhcEhboxcontrollerApi {
       this.host +
       "/ehbox/move/from/{source}".replace("{source}", source + "") +
       "?ts=" +
-      new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+      new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
   getFullMessageUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     boxId: string,
     messageId: string
   ): Promise<models.Message | any> {
@@ -83,22 +83,22 @@ export class fhcEhboxcontrollerApi {
         .replace("{boxId}", boxId + "")
         .replace("{messageId}", messageId + "") +
       "?ts=" +
-      new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+      new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.Message(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getFullMessageUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     boxId: string,
     messageId: string,
     alternateKeystores: models.AltKeystoresList
@@ -112,45 +112,41 @@ export class fhcEhboxcontrollerApi {
         .replace("{boxId}", boxId + "")
         .replace("{messageId}", messageId + "") +
       "?ts=" +
-      new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+      new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.Message(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getInfosUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string
   ): Promise<models.BoxInfo | any> {
     let _body = null
 
-    const _url =
-      this.host +
-      "/ehbox" +
-      "?ts=" +
-      new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+    const _url = this.host + "/ehbox" + "?ts=" + new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.BoxInfo(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  loadMessagesUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+  loadMessagesUsingGET1(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     boxId: string,
     limit: number
   ): Promise<Array<models.Message> | any> {
@@ -161,22 +157,22 @@ export class fhcEhboxcontrollerApi {
       "/ehbox/{boxId}".replace("{boxId}", boxId + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (limit ? "&limit=" + limit : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.Message(it)))
       .catch(err => this.handleError(err))
   }
   loadMessagesUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     boxId: string,
     limit: number,
     alternateKeystores: models.AltKeystoresList
@@ -189,22 +185,22 @@ export class fhcEhboxcontrollerApi {
       "/ehbox/{boxId}".replace("{boxId}", boxId + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (limit ? "&limit=" + limit : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.Message(it)))
       .catch(err => this.handleError(err))
   }
   moveMessagesUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     messageIds: Array<string>,
     source: string,
     destination: string
@@ -218,22 +214,22 @@ export class fhcEhboxcontrollerApi {
         .replace("{source}", source + "")
         .replace("{destination}", destination + "") +
       "?ts=" +
-      new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+      new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
   sendMessageUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     publicationReceipt: boolean,
     receptionReceipt: boolean,
     readReceipt: boolean
@@ -245,9 +241,6 @@ export class fhcEhboxcontrollerApi {
       "/ehbox" +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (publicationReceipt ? "&publicationReceipt=" + publicationReceipt : "") +
       (receptionReceipt ? "&receptionReceipt=" + receptionReceipt : "") +
       (readReceipt ? "&readReceipt=" + readReceipt : "")
@@ -255,6 +248,9 @@ export class fhcEhboxcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))

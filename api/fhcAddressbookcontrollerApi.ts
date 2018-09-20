@@ -43,9 +43,9 @@ export class fhcAddressbookcontrollerApi {
   }
 
   getHcpByNihiiUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     nihii: string,
     language?: string
   ): Promise<models.HealthcareParty | any> {
@@ -56,22 +56,22 @@ export class fhcAddressbookcontrollerApi {
       "/ab/hcp/nihii/{nihii}".replace("{nihii}", nihii + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.HealthcareParty(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getHcpBySsinUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     ssin: string,
     language?: string
   ): Promise<models.HealthcareParty | any> {
@@ -82,22 +82,22 @@ export class fhcAddressbookcontrollerApi {
       "/ab/hcp/ssin/{ssin}".replace("{ssin}", ssin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.HealthcareParty(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getOrgByCbeUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     cbe: string,
     language?: string
   ): Promise<models.HealthcareParty | any> {
@@ -108,22 +108,22 @@ export class fhcAddressbookcontrollerApi {
       "/ab/org/cbe/{cbe}".replace("{cbe}", cbe + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.HealthcareParty(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getOrgByEhpUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     ehp: string,
     language?: string
   ): Promise<models.HealthcareParty | any> {
@@ -134,22 +134,22 @@ export class fhcAddressbookcontrollerApi {
       "/ab/org/ehp/{ehp}".replace("{ehp}", ehp + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.HealthcareParty(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getOrgByNihiiUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     nihii: string,
     language?: string
   ): Promise<models.HealthcareParty | any> {
@@ -160,22 +160,22 @@ export class fhcAddressbookcontrollerApi {
       "/ab/org/nihii/{nihii}".replace("{nihii}", nihii + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (language ? "&language=" + language : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.HealthcareParty(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   searchHcpUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     lastName: string,
     firstName?: string,
     type?: string
@@ -187,23 +187,23 @@ export class fhcAddressbookcontrollerApi {
       "/ab/search/hcp/{lastName}".replace("{lastName}", lastName + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (firstName ? "&firstName=" + firstName : "") +
       (type ? "&type=" + type : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.HealthcareParty(it)))
       .catch(err => this.handleError(err))
   }
   searchOrgUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     name: string,
     type?: string
   ): Promise<Array<models.HealthcareParty> | any> {
@@ -214,14 +214,14 @@ export class fhcAddressbookcontrollerApi {
       "/ab/search/org/{name}".replace("{name}", name + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (type ? "&type=" + type : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.HealthcareParty(it)))
       .catch(err => this.handleError(err))

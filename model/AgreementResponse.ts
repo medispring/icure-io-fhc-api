@@ -36,7 +36,7 @@ export class AgreementResponse {
 
   transactions?: Array<models.AgreementTransaction>
 
-  transactions$freehealthConnector?: Array<models.AgreementTransaction>
+  transactions$freehealthConnectorMain?: Array<models.AgreementTransaction>
 
   warnings?: models.CollectionProblem
 }

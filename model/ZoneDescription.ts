@@ -28,6 +28,8 @@ export class ZoneDescription {
   constructor(json: JSON | any) {
     Object.assign(this as ZoneDescription, json)
   }
+  cs?: boolean
+
   label?: string
 
   length?: number

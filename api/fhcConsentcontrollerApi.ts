@@ -43,9 +43,9 @@ export class fhcConsentcontrollerApi {
   }
 
   getPatientConsentUsingGET(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
@@ -61,9 +61,6 @@ export class fhcConsentcontrollerApi {
       "/consent/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
@@ -74,14 +71,17 @@ export class fhcConsentcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.ConsentMessageDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   registerPatientConsentUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
@@ -99,9 +99,6 @@ export class fhcConsentcontrollerApi {
       "/consent/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
@@ -114,14 +111,17 @@ export class fhcConsentcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.ConsentMessageDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   revokePatientConsentUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
@@ -138,9 +138,6 @@ export class fhcConsentcontrollerApi {
       "/consent/revoke/{patientSsin}" +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
@@ -151,6 +148,9 @@ export class fhcConsentcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.ConsentMessageDto(doc.body as JSON))
       .catch(err => this.handleError(err))

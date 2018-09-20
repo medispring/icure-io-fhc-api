@@ -42,12 +42,12 @@ export class fhcEfactcontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
-  sendBatchUsingGET(
+  loadMessagesUsingGET(
     nihii: string,
     language: string,
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     ssin: string,
     firstName: string,
     lastName: string
@@ -61,9 +61,6 @@ export class fhcEfactcontrollerApi {
         .replace("{language}", language + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (ssin ? "&ssin=" + ssin : "") +
       (firstName ? "&firstName=" + firstName : "") +
       (lastName ? "&lastName=" + lastName : "")
@@ -71,31 +68,56 @@ export class fhcEfactcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.EfactMessage(it)))
       .catch(err => this.handleError(err))
   }
+  makeFlatFileTestUsingPOST(batch: models.InvoicesBatch): Promise<string | any> {
+    let _body = null
+    _body = batch
+
+    const _url = this.host + "/efact/flat/test" + "?ts=" + new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
+  makeFlatFileUsingPOST(batch: models.InvoicesBatch): Promise<string | any> {
+    let _body = null
+    _body = batch
+
+    const _url = this.host + "/efact/flat" + "?ts=" + new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
   sendBatchUsingPOST(
-    keystoreId: string,
-    tokenId: string,
-    passPhrase: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
     batch: models.InvoicesBatch
   ): Promise<models.EfactSendResponse | any> {
     let _body = null
     _body = batch
 
-    const _url =
-      this.host +
-      "/efact/batch" +
-      "?ts=" +
-      new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+    const _url = this.host + "/efact/batch" + "?ts=" + new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.EfactSendResponse(doc.body as JSON))
       .catch(err => this.handleError(err))

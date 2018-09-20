@@ -43,13 +43,13 @@ export class fhcRecipecontrollerApi {
   }
 
   createPrescriptionUsingPOST(
-    keystoreId: string,
-    tokenId: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    passPhrase: string,
+    xFHCPassPhrase: string,
     prescription: models.PrescriptionRequest
   ): Promise<models.Prescription | any> {
     let _body = null
@@ -60,17 +60,17 @@ export class fhcRecipecontrollerApi {
       "/recipe" +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
-      (hcpName ? "&hcpName=" + hcpName : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+      (hcpName ? "&hcpName=" + hcpName : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.Prescription(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -105,13 +105,13 @@ export class fhcRecipecontrollerApi {
       .catch(err => this.handleError(err))
   }
   listFeedbacksUsingGET(
-    keystoreId: string,
-    tokenId: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    passPhrase: string
+    xFHCPassPhrase: string
   ): Promise<Array<models.Feedback> | any> {
     let _body = null
 
@@ -120,29 +120,29 @@ export class fhcRecipecontrollerApi {
       "/recipe/all/feedbacks" +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
-      (hcpName ? "&hcpName=" + hcpName : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+      (hcpName ? "&hcpName=" + hcpName : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.Feedback(it)))
       .catch(err => this.handleError(err))
   }
   listOpenPrescriptionsUsingGET(
-    keystoreId: string,
-    tokenId: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    passPhrase: string
+    xFHCPassPhrase: string
   ): Promise<Array<models.Prescription> | any> {
     let _body = null
 
@@ -151,29 +151,29 @@ export class fhcRecipecontrollerApi {
       "/recipe" +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
-      (hcpName ? "&hcpName=" + hcpName : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+      (hcpName ? "&hcpName=" + hcpName : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.Prescription(it)))
       .catch(err => this.handleError(err))
   }
   revokePrescriptionUsingDELETE(
-    keystoreId: string,
-    tokenId: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    passPhrase: string,
+    xFHCPassPhrase: string,
     rid: string,
     reason: string
   ): Promise<any | Boolean> {
@@ -184,30 +184,30 @@ export class fhcRecipecontrollerApi {
       "/recipe/{rid}".replace("{rid}", rid + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (reason ? "&reason=" + reason : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
       .catch(err => this.handleError(err))
   }
   sendNotificationUsingPOST(
-    keystoreId: string,
-    tokenId: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    passPhrase: string,
+    xFHCPassPhrase: string,
     rid: string,
     patientId?: string,
     executorId?: string,
@@ -220,13 +220,10 @@ export class fhcRecipecontrollerApi {
       "/recipe/notify/{rid}".replace("{rid}", rid + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "") +
       (patientId ? "&patientId=" + patientId : "") +
       (executorId ? "&executorId=" + executorId : "") +
       (text ? "&text=" + text : "")
@@ -234,18 +231,21 @@ export class fhcRecipecontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
       .catch(err => this.handleError(err))
   }
   updateFeedbackFlagUsingPUT(
-    keystoreId: string,
-    tokenId: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    passPhrase: string,
+    xFHCPassPhrase: string,
     rid: string,
     feedbackFlag: boolean
   ): Promise<any | Boolean> {
@@ -258,17 +258,17 @@ export class fhcRecipecontrollerApi {
         .replace("{feedbackFlag}", feedbackFlag + "") +
       "?ts=" +
       new Date().getTime() +
-      (keystoreId ? "&keystoreId=" + keystoreId : "") +
-      (tokenId ? "&tokenId=" + tokenId : "") +
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
-      (hcpName ? "&hcpName=" + hcpName : "") +
-      (passPhrase ? "&passPhrase=" + passPhrase : "")
+      (hcpName ? "&hcpName=" + hcpName : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("PUT", _url, headers, _body)
       .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
       .catch(err => this.handleError(err))

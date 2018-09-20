@@ -28,6 +28,8 @@ export class Invoice {
   constructor(json: JSON | any) {
     Object.assign(this as Invoice, json)
   }
+  hospitalisedPatient?: boolean
+
   invoiceNumber?: number
 
   invoiceRef?: string
