@@ -68,7 +68,7 @@ export class fhcStscontrollerApi {
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  registerTokenUsingPOST(xFHCTokenId: string, token: string): Promise<any | Boolean> {
+  registerTokenUsingPOST(token: string, xFHCTokenId: string): Promise<any | Boolean> {
     let _body = null
     _body = token
 
@@ -83,9 +83,9 @@ export class fhcStscontrollerApi {
       .catch(err => this.handleError(err))
   }
   requestTokenUsingGET(
-    xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     ssin: string,
+    xFHCKeystoreId: string,
     isMedicalHouse?: boolean
   ): Promise<models.SamlTokenResult | any> {
     let _body = null
@@ -101,8 +101,8 @@ export class fhcStscontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.SamlTokenResult(doc.body as JSON))
       .catch(err => this.handleError(err))
