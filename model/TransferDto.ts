@@ -24,39 +24,13 @@
 
 import * as models from "./models"
 
-export class InsurabilityInfoDto {
+export class TransferDto {
   constructor(json: JSON | any) {
-    Object.assign(this as InsurabilityInfoDto, json)
+    Object.assign(this as TransferDto, json)
   }
-  dateOfBirth?: number
+  date?: number
 
-  deceased?: number
+  direction?: string
 
-  faultCode?: string
-
-  faultMessage?: string
-
-  faultSource?: string
-
-  firstName?: string
-
-  generalSituation?: string
-
-  hospitalizedInfo?: models.HospitalizedInfoDto
-
-  inss?: string
-
-  insurabilities?: Array<models.InsurabilityItemDto>
-
-  lastName?: string
-
-  medicalHouseInfo?: models.MedicalHouseInfoDto
-
-  paymentByIo?: boolean
-
-  sex?: string
-
-  specialSocialCategory?: boolean
-
-  transfers?: Array<models.TransferDto>
+  io?: string
 }
