@@ -24,19 +24,13 @@
 
 import * as models from "./models"
 
-export class AgreementResponse {
+export class SigningValue {
   constructor(json: JSON | any) {
-    Object.assign(this as AgreementResponse, json)
+    Object.assign(this as SigningValue, json)
   }
-  acknowledged?: boolean
+  signingDownloadFileName?: string
 
-  content?: Array<string>
+  signingType?: string
 
-  errors?: models.CollectionProblem
-
-  transactions?: Array<models.AgreementTransaction>
-
-  transactions$freehealthConnector?: Array<models.AgreementTransaction>
-
-  warnings?: models.CollectionProblem
+  textSigningContent?: string
 }

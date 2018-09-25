@@ -24,19 +24,43 @@
 
 import * as models from "./models"
 
-export class AgreementResponse {
+export class DocumentMessage {
   constructor(json: JSON | any) {
-    Object.assign(this as AgreementResponse, json)
+    Object.assign(this as DocumentMessage, json)
   }
-  acknowledged?: boolean
+  annex?: Array<models.Document>
 
-  content?: Array<string>
+  annexList?: Array<models.Document>
 
-  errors?: models.CollectionProblem
+  copyMailTo?: Array<string>
 
-  transactions?: Array<models.AgreementTransaction>
+  customMetas?: { [key: string]: string }
 
-  transactions$freehealthConnector?: Array<models.AgreementTransaction>
+  destinations?: Array<models.Addressee>
 
-  warnings?: models.CollectionProblem
+  document?: models.Document
+
+  documentTitle?: string
+
+  expirationDateTime?: number
+
+  freeInformationTableRows?: { [key: string]: string }
+
+  freeInformationTableTitle?: string
+
+  freeText?: string
+
+  id?: string
+
+  mandatee?: models.Addressee
+
+  patientInss?: string
+
+  publicationDateTime?: number
+
+  publicationId?: string
+
+  sender?: models.Addressee
+
+  size?: string
 }

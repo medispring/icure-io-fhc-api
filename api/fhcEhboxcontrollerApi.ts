@@ -230,11 +230,13 @@ export class fhcEhboxcontrollerApi {
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
+    message: models.DocumentMessage,
     publicationReceipt: boolean,
     receptionReceipt: boolean,
     readReceipt: boolean
   ): Promise<boolean | any> {
     let _body = null
+    _body = message
 
     const _url =
       this.host +
