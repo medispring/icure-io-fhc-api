@@ -42,6 +42,8 @@ export class DocumentMessage {
 
   documentTitle?: string
 
+  encrypted?: boolean
+
   expirationDateTime?: number
 
   freeInformationTableRows?: { [key: string]: string }
@@ -50,7 +52,13 @@ export class DocumentMessage {
 
   freeText?: string
 
+  hasAnnex?: boolean
+
+  hasFreeInformations?: boolean
+
   id?: string
+
+  important?: boolean
 
   mandatee?: models.Addressee
 
@@ -63,4 +71,10 @@ export class DocumentMessage {
   sender?: models.Addressee
 
   size?: string
+
+  usePublicationReceipt?: boolean
+
+  useReadReceipt?: boolean
+
+  useReceivedReceipt?: boolean
 }
