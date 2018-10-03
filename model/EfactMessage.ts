@@ -30,6 +30,8 @@ export class EfactMessage {
   }
   detail?: string
 
+  hashValue?: string
+
   id?: string
 
   message?: models.Message

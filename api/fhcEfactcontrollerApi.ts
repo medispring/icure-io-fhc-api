@@ -42,6 +42,39 @@ export class fhcEfactcontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
+  confirmUsingPUT(
+    nihii: string,
+    language: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    ssin: string,
+    firstName: string,
+    lastName: string,
+    valueHashes: Array<string>
+  ): Promise<boolean | any> {
+    let _body = null
+    _body = valueHashes
+
+    const _url =
+      this.host +
+      "/efact/confirm".replace("{nihii}", nihii + "").replace("{language}", language + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (ssin ? "&ssin=" + ssin : "") +
+      (firstName ? "&firstName=" + firstName : "") +
+      (lastName ? "&lastName=" + lastName : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("PUT", _url, headers, _body)
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
   loadMessagesUsingGET(
     nihii: string,
     language: string,
