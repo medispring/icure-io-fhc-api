@@ -1,19 +1,27 @@
 {
   "name": "fhc-api",
-  "version": "1.0.0",
+  "version": "1.0.12",
   "description": "Typescript version of Freehealth Connector standalone API client",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/form-data": "^2.2.1",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.1.2",
+    "form-data": "^2.3.2",
     "husky": "^0.14.3",
+    "mocha": "^5.2.0",
     "prettier": "^1.13.5",
     "pretty-quick": "^1.6.0",
+    "ts-node": "^7.0.1",
     "typescript": "^2.9.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen": "java -classpath swagger-codegen-cli.jar io.swagger.codegen.SwaggerCodegen generate -i https://fhcacc.icure.cloud/v2/api-docs -l typescript --additional-properties classPrefix=fhc -o ./",
+    "genloc": "java -classpath swagger-codegen-cli.jar io.swagger.codegen.SwaggerCodegen generate -i http://127.0.0.1:8090/v2/api-docs -l typescript --additional-properties classPrefix=fhc -o ./",
+    "test": "mocha --require ts-node/register --watch-extensions ts 'test/**/*.ts'",
     "build": "tsc",
     "prepublish": "rm -rf dist && npm run build",
     "precommit": "pretty-quick --staged"

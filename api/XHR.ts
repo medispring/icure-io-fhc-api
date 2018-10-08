@@ -27,13 +27,13 @@ export namespace XHR {
         .map(head => new Header(head[0], head[1]))
       this.contentType = ""
       this.headers.map(head => {
-        if (head.header === "content-type") {
-          this.contentType = head.data
+        if (head.header && head.header.toLowerCase() === "content-type") {
+          this.contentType = head.data && head.data.toLowerCase()
           if (head.data.startsWith("application/json")) {
             this.body = JSON.parse(jsXHR.response)
           } else if (head.data.startsWith("application/octet-stream")) {
             try {
-              this.body = JSON.parse(jsXHR.response)
+              this.body = JSON.parse(jsXHR.response.toString())
               console.log("parse done")
             } catch (e) {
               console.log("parse fail")
@@ -65,10 +65,17 @@ export namespace XHR {
     return new Promise<Data>(function(resolve, reject) {
       var jsXHR = new XMLHttpRequest()
       jsXHR.open(method, url)
-      const contentType = headers && headers.find(it => it.header === "Content-Type")
+      const contentType =
+        headers &&
+        headers.find(it => (it.header ? it.header.toLowerCase() === "content-type" : false))
       if (headers != null) {
         headers.forEach(header => {
-          jsXHR.setRequestHeader(header.header, header.data)
+          if (
+            header.header.toLowerCase() !== "content-type" ||
+            header.data !== "multipart/form-data"
+          ) {
+            jsXHR.setRequestHeader(header.header, header.data)
+          }
         })
       }
 
@@ -83,11 +90,10 @@ export namespace XHR {
       }
 
       if (method === "POST" || method === "PUT") {
-        if(contentType && contentType.data === "application/json") {
-          jsXHR.send(JSON.stringify(data));
-        }
-        else {
-          jsXHR.send(data);
+        if (contentType && contentType.data === "application/json") {
+          jsXHR.send(JSON.stringify(data))
+        } else {
+          jsXHR.send(data)
         }
       } else {
         jsXHR.send()
