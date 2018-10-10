@@ -29,4 +29,6 @@ export class Zone {
     Object.assign(this as Zone, json)
   }
   value?: any
+
+  zoneDescription?: models.ZoneDescription
 }

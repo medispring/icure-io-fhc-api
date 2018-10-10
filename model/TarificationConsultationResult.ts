@@ -30,7 +30,7 @@ export class TarificationConsultationResult {
   }
   birthdate?: Date
 
-  codes?: Array<string>
+  codeResults?: Array<models.CodeResult>
 
   ct1?: string
 
@@ -44,23 +44,15 @@ export class TarificationConsultationResult {
 
   fees?: Array<models.Payment>
 
-  financialContracts?: Array<string>
-
   firstName?: string
 
   insurancePeriodEnd?: Date
 
   insurancePeriodStart?: Date
 
-  justification?: number
-
   lastName?: string
 
   niss?: string
-
-  patientFees?: Array<models.Payment>
-
-  reimbursements?: Array<models.Payment>
 
   sex?: TarificationConsultationResult.SexEnum
 }

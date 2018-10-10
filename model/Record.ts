@@ -24,27 +24,13 @@
 
 import * as models from "./models"
 
-export class InvoiceSender {
+export class Record {
   constructor(json: JSON | any) {
-    Object.assign(this as InvoiceSender, json)
+    Object.assign(this as Record, json)
   }
-  bce?: number
+  description?: models.RecordOrSegmentDescription
 
-  bic?: string
+  errorDetail?: models.ErrorDetail
 
-  conventionCode?: number
-
-  firstName?: string
-
-  iban?: string
-
-  lastName?: string
-
-  nihii?: number
-
-  phoneNumber?: number
-
-  specialist?: boolean
-
-  ssin?: string
+  zones?: Array<models.Zone>
 }

@@ -24,27 +24,19 @@
 
 import * as models from "./models"
 
-export class InvoiceSender {
+export class CodeResult {
   constructor(json: JSON | any) {
-    Object.assign(this as InvoiceSender, json)
+    Object.assign(this as CodeResult, json)
   }
-  bce?: number
+  code?: string
 
-  bic?: string
+  contract?: string
 
-  conventionCode?: number
+  fee?: models.Payment
 
-  firstName?: string
+  justification?: number
 
-  iban?: string
+  patientFee?: models.Payment
 
-  lastName?: string
-
-  nihii?: number
-
-  phoneNumber?: number
-
-  specialist?: boolean
-
-  ssin?: string
+  reimbursement?: models.Payment
 }

@@ -40,11 +40,7 @@ export class ZoneDescription {
 
   value?: string
 
-  zone?: string
-
   zones?: Array<string>
-
-  zonesList?: string
 }
 export namespace ZoneDescription {
   export enum TypeEnum {

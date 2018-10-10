@@ -34,7 +34,7 @@ export class EfactMessage {
 
   id?: string
 
-  message?: models.Message
+  message?: Array<models.Record>
 
   name?: string
 

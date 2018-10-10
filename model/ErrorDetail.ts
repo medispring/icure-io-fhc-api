@@ -40,8 +40,6 @@ export class ErrorDetail {
 
   oaResult?: string
 
-  record?: models.RecordRecordOrSegmentDescription
-
   rejectionCode1?: string
 
   rejectionCode2?: string

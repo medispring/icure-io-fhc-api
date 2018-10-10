@@ -29,6 +29,4 @@ export class RecordOrSegmentDescription {
     Object.assign(this as RecordOrSegmentDescription, json)
   }
   zoneDescriptions?: Array<models.ZoneDescription>
-
-  zoneDescriptionsByZone?: { [key: string]: models.ZoneDescription }
 }

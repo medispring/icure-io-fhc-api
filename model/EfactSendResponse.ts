@@ -28,6 +28,8 @@ export class EfactSendResponse {
   constructor(json: JSON | any) {
     Object.assign(this as EfactSendResponse, json)
   }
+  detail?: string
+
   inputReference?: string
 
   success?: boolean

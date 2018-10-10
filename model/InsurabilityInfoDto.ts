@@ -32,6 +32,8 @@ export class InsurabilityInfoDto {
 
   deceased?: number
 
+  errors?: Array<models.MycarenetError>
+
   faultCode?: string
 
   faultMessage?: string
@@ -56,7 +58,15 @@ export class InsurabilityInfoDto {
 
   sex?: string
 
+  soapRequest?: string
+
+  soapResponse?: string
+
   specialSocialCategory?: boolean
 
   transfers?: Array<models.TransferDto>
+
+  xmlRequest?: string
+
+  xmlResponse?: string
 }
