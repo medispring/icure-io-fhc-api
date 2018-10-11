@@ -29,6 +29,8 @@ export class InvoicesBatch {
     Object.assign(this as InvoicesBatch, json)
   }
   batchRef?: string
+  
+  fileRef?: string
 
   invoices?: Array<models.Invoice>
 
