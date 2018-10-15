@@ -32,6 +32,8 @@ export class TarificationConsultationResult {
 
   codeResults?: Array<models.CodeResult>
 
+  commonInputResponse?: string
+
   ct1?: string
 
   ct2?: string
@@ -42,8 +44,6 @@ export class TarificationConsultationResult {
 
   errors?: Array<models.MycarenetError>
 
-  fees?: Array<models.Payment>
-
   firstName?: string
 
   insurancePeriodEnd?: Date
@@ -53,6 +53,8 @@ export class TarificationConsultationResult {
   lastName?: string
 
   niss?: string
+
+  retrieveTransactionRequest?: string
 
   sex?: TarificationConsultationResult.SexEnum
 }

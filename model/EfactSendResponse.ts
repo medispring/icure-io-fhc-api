@@ -32,6 +32,8 @@ export class EfactSendResponse {
 
   inputReference?: string
 
+  records?: Array<models.Record>
+
   success?: boolean
 
   tack?: models.TAck
