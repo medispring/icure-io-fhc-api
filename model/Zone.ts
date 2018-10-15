@@ -28,6 +28,8 @@ export class Zone {
   constructor(json: JSON | any) {
     Object.assign(this as Zone, json)
   }
+  description?: string
+
   value?: any
 
   zoneDescription?: models.ZoneDescription

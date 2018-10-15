@@ -54,7 +54,9 @@ export class fhcTarificationcontrollerApi {
     codes: Array<string>,
     date?: number,
     gmdNihii?: string,
-    justification?: string
+    justification?: string,
+    traineeSsin?: string,
+    traineeNihii?: string
   ): Promise<models.TarificationConsultationResult | any> {
     let _body = null
     _body = codes
@@ -70,7 +72,9 @@ export class fhcTarificationcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (date ? "&date=" + date : "") +
       (gmdNihii ? "&gmdNihii=" + gmdNihii : "") +
-      (justification ? "&justification=" + justification : "")
+      (justification ? "&justification=" + justification : "") +
+      (traineeSsin ? "&traineeSsin=" + traineeSsin : "") +
+      (traineeNihii ? "&traineeNihii=" + traineeNihii : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
