@@ -24,23 +24,13 @@
 
 import * as models from "./models"
 
-export class EfactMessage {
+export class CommonOutput {
   constructor(json: JSON | any) {
-    Object.assign(this as EfactMessage, json)
+    Object.assign(this as CommonOutput, json)
   }
-  commonOutput?: models.CommonOutput
+  inputReference?: string
 
-  detail?: string
+  nipReference?: string
 
-  hashValue?: string
-
-  id?: string
-
-  message?: Array<models.Record>
-
-  name?: string
-
-  tack?: models.TAck
-
-  xades?: string
+  outputReference?: string
 }
