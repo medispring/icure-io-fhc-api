@@ -255,6 +255,10 @@ export class fhcChaptercontrollerApi {
     hcpLastName: string,
     xFHCPassPhrase: string,
     patientSsin: string,
+    patientDateOfBirth: number,
+    patientFirstName: string,
+    patientLastName: string,
+    patientGender: string,
     requestType: string,
     civicsVersion: string,
     paragraph: string,
@@ -282,6 +286,10 @@ export class fhcChaptercontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (patientDateOfBirth ? "&patientDateOfBirth=" + patientDateOfBirth : "") +
+      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
+      (patientLastName ? "&patientLastName=" + patientLastName : "") +
+      (patientGender ? "&patientGender=" + patientGender : "") +
       (verses ? "&verses=" + verses : "") +
       (incomplete ? "&incomplete=" + incomplete : "") +
       (start ? "&start=" + start : "") +
