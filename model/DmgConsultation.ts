@@ -34,7 +34,7 @@ export class DmgConsultation {
 
   deceased?: number
 
-  errors?: Array<models.Error>
+  errors?: Array<models.MycarenetError>
 
   firstName?: string
 

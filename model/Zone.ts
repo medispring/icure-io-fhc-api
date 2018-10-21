@@ -32,5 +32,7 @@ export class Zone {
 
   value?: any
 
+  zone?: string
+
   zoneDescription?: models.ZoneDescription
 }

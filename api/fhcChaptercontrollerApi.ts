@@ -95,12 +95,16 @@ export class fhcChaptercontrollerApi {
   cancelAgreementUsingDELETE(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
-    xFHCPassPhrase: string,
     patientSsin: string,
+    patientDateOfBirth: number,
+    patientFirstName: string,
+    patientLastName: string,
+    patientGender: string,
     decisionReference: string,
     iorequestReference: string
   ): Promise<models.AgreementResponse | any> {
@@ -115,6 +119,10 @@ export class fhcChaptercontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (patientDateOfBirth ? "&patientDateOfBirth=" + patientDateOfBirth : "") +
+      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
+      (patientLastName ? "&patientLastName=" + patientLastName : "") +
+      (patientGender ? "&patientGender=" + patientGender : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "") +
       (iorequestReference ? "&iorequestReference=" + iorequestReference : "")
     let headers = this.headers
@@ -131,12 +139,16 @@ export class fhcChaptercontrollerApi {
   closeAgreementUsingDELETE(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
-    xFHCPassPhrase: string,
     patientSsin: string,
+    patientDateOfBirth: number,
+    patientFirstName: string,
+    patientLastName: string,
+    patientGender: string,
     decisionReference: string
   ): Promise<models.AgreementResponse | any> {
     let _body = null
@@ -150,6 +162,10 @@ export class fhcChaptercontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (patientDateOfBirth ? "&patientDateOfBirth=" + patientDateOfBirth : "") +
+      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
+      (patientLastName ? "&patientLastName=" + patientLastName : "") +
+      (patientGender ? "&patientGender=" + patientGender : "") +
       (decisionReference ? "&decisionReference=" + decisionReference : "")
     let headers = this.headers
     headers = headers
@@ -225,6 +241,27 @@ export class fhcChaptercontrollerApi {
       .then(doc => (doc.body as Array<JSON>).map(it => new models.AddedDocumentPreview(it)))
       .catch(err => this.handleError(err))
   }
+  getMppsForParagraphUsingGET(
+    chapterName: string,
+    paragraphName: string
+  ): Promise<Array<models.MppPreview> | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/chap4/sam/mpps/{chapterName}/{paragraphName}"
+        .replace("{chapterName}", chapterName + "")
+        .replace("{paragraphName}", paragraphName + "") +
+      "?ts=" +
+      new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => (doc.body as Array<JSON>).map(it => new models.MppPreview(it)))
+      .catch(err => this.handleError(err))
+  }
   getParagraphInfosUsingGET(
     chapterName: string,
     paragraphName: string
@@ -249,11 +286,11 @@ export class fhcChaptercontrollerApi {
   requestAgreementUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
-    xFHCPassPhrase: string,
     patientSsin: string,
     patientDateOfBirth: number,
     patientFirstName: string,
@@ -263,12 +300,12 @@ export class fhcChaptercontrollerApi {
     civicsVersion: string,
     paragraph: string,
     verses: string,
-    incomplete: boolean,
-    start: number,
-    end: number,
-    decisionReference: string,
-    ioRequestReference: string,
-    appendices: Array<models.Appendix>
+    appendices: Array<models.Appendix>,
+    incomplete?: boolean,
+    start?: number,
+    end?: number,
+    decisionReference?: string,
+    ioRequestReference?: string
   ): Promise<models.AgreementResponse | any> {
     let _body = null
     _body = appendices

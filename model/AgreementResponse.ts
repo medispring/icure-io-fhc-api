@@ -32,11 +32,11 @@ export class AgreementResponse {
 
   content?: Array<string>
 
-  errors?: models.CollectionProblem
+  errors?: Array<models.MycarenetError>
 
   transactions?: Array<models.AgreementTransaction>
 
-  transactions$freehealthConnector?: Array<models.AgreementTransaction>
+  transactions$freehealthConnectorMain?: Array<models.AgreementTransaction>
 
-  warnings?: models.CollectionProblem
+  warnings?: Array<models.MycarenetError>
 }

@@ -24,17 +24,11 @@
 
 import * as models from "./models"
 
-export class DmgMessage {
+export class MppId {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgMessage, json)
+    Object.assign(this as MppId, json)
   }
-  complete?: boolean
+  id?: string
 
-  errors?: Array<models.MycarenetError>
-
-  io?: string
-
-  reference?: string
-
-  valueHash?: string
+  lang?: string
 }

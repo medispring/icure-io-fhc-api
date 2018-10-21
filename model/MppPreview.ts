@@ -24,17 +24,59 @@
 
 import * as models from "./models"
 
-export class DmgMessage {
+export class MppPreview {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgMessage, json)
+    Object.assign(this as MppPreview, json)
   }
-  complete?: boolean
+  cmucomb?: string
 
-  errors?: Array<models.MycarenetError>
+  contentfluidquantity?: number
 
-  io?: string
+  contentfluidquantitytoadd?: number
 
-  reference?: string
+  contentfluidunits?: string
 
-  valueHash?: string
+  contentfluidunitstoadd?: string
+
+  contentquantity?: number
+
+  contentquantitytoadd?: number
+
+  contentunits?: string
+
+  contentunitstoadd?: string
+
+  copy?: string
+
+  id?: models.MppId
+
+  index?: number
+
+  inncluster?: string
+
+  law?: string
+
+  name?: string
+
+  note?: string
+
+  ouc?: string
+
+  pos?: string
+
+  pricepatomnio?: number
+
+  pricepatstd?: number
+
+  pubprice?: number
+
+  ranking?: number
+
+  rrsstate?: string
+
+  specifier?: string
+
+  ssec?: string
+
+  use?: string
 }
