@@ -283,6 +283,29 @@ export class fhcChaptercontrollerApi {
       .then(doc => new models.ParagraphInfos(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
+  getVtmNamesForParagraphUsingGET(
+    chapterName: string,
+    paragraphName: string,
+    language: string
+  ): Promise<Array<string> | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/chap4/sam/vtms/{chapterName}/{paragraphName}/{language}"
+        .replace("{chapterName}", chapterName + "")
+        .replace("{paragraphName}", paragraphName + "")
+        .replace("{language}", language + "") +
+      "?ts=" +
+      new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => (doc.body as Array<JSON>).map(it => JSON.parse(JSON.stringify(it))))
+      .catch(err => this.handleError(err))
+  }
   requestAgreementUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,

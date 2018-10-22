@@ -30,13 +30,13 @@ export class AgreementResponse {
   }
   acknowledged?: boolean
 
+  commonOutput?: models.CommonOutput
+
   content?: Array<string>
 
   errors?: Array<models.MycarenetError>
 
   transactions?: Array<models.AgreementTransaction>
-
-  transactions$freehealthConnectorMain?: Array<models.AgreementTransaction>
 
   warnings?: Array<models.MycarenetError>
 }

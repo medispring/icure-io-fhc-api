@@ -44,9 +44,17 @@ export class AgreementTransaction {
 
   paragraph?: string
 
+  quantityUnit?: string
+
+  quantityValue?: number
+
+  refusalJustification?: { [key: string]: string }
+
   responseType?: string
 
   start?: Date
+
+  timestamp?: number
 
   unitNumber?: number
 }
