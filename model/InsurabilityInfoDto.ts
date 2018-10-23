@@ -28,6 +28,8 @@ export class InsurabilityInfoDto {
   constructor(json: JSON | any) {
     Object.assign(this as InsurabilityInfoDto, json)
   }
+  commonOutput?: models.CommonOutput
+
   dateOfBirth?: number
 
   deceased?: number
@@ -54,19 +56,13 @@ export class InsurabilityInfoDto {
 
   medicalHouseInfo?: models.MedicalHouseInfoDto
 
+  mycarenetConversation?: models.MycarenetConversation
+
   paymentByIo?: boolean
 
   sex?: string
 
-  soapRequest?: string
-
-  soapResponse?: string
-
   specialSocialCategory?: boolean
 
   transfers?: Array<models.TransferDto>
-
-  xmlRequest?: string
-
-  xmlResponse?: string
 }

@@ -34,6 +34,8 @@ export class AgreementTransaction {
 
   content?: Array<string>
 
+  coverageType?: string
+
   decisionReference?: string
 
   end?: Date
@@ -52,7 +54,17 @@ export class AgreementTransaction {
 
   responseType?: string
 
+  restStrength?: number
+
+  restStrengthUnit?: string
+
+  restUnitNumber?: number
+
   start?: Date
+
+  strength?: number
+
+  strengthUnit?: string
 
   timestamp?: number
 

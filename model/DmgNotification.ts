@@ -28,6 +28,8 @@ export class DmgNotification {
   constructor(json: JSON | any) {
     Object.assign(this as DmgNotification, json)
   }
+  commonOutput?: models.CommonOutput
+
   complete?: boolean
 
   errors?: Array<models.MycarenetError>
@@ -37,6 +39,8 @@ export class DmgNotification {
   hcParty?: models.HcpartyType
 
   io?: string
+
+  mycarenetConversation?: models.MycarenetConversation
 
   payment?: boolean
 

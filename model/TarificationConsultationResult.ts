@@ -32,7 +32,7 @@ export class TarificationConsultationResult {
 
   codeResults?: Array<models.CodeResult>
 
-  commonInputResponse?: string
+  commonOutput?: models.CommonOutput
 
   ct1?: string
 
@@ -52,9 +52,9 @@ export class TarificationConsultationResult {
 
   lastName?: string
 
-  niss?: string
+  mycarenetConversation?: models.MycarenetConversation
 
-  retrieveTransactionRequest?: string
+  niss?: string
 
   sex?: TarificationConsultationResult.SexEnum
 }

@@ -106,7 +106,7 @@ export class fhcChaptercontrollerApi {
     patientLastName: string,
     patientGender: string,
     decisionReference: string,
-    iorequestReference: string
+    iorequestReference?: string
   ): Promise<models.AgreementResponse | any> {
     let _body = null
 

@@ -28,6 +28,8 @@ export class DmgRegistration {
   constructor(json: JSON | any) {
     Object.assign(this as DmgRegistration, json)
   }
+  commonOutput?: models.CommonOutput
+
   complete?: boolean
 
   date?: Date
@@ -35,6 +37,8 @@ export class DmgRegistration {
   errors?: Array<models.MycarenetError>
 
   io?: string
+
+  mycarenetConversation?: models.MycarenetConversation
 
   reference?: string
 

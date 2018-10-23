@@ -34,15 +34,5 @@ export class SendAttestResultWithResponse {
 
   invoicingNumber?: string
 
-  kmehrMessage?: Array<string>
-
-  soapRequest?: string
-
-  soapResponse?: string
-
   xades?: Array<string>
-
-  xmlRequest?: string
-
-  xmlResponse?: string
 }

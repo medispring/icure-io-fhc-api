@@ -36,6 +36,8 @@ export class AgreementResponse {
 
   errors?: Array<models.MycarenetError>
 
+  mycarenetConversation?: models.MycarenetConversation
+
   transactions?: Array<models.AgreementTransaction>
 
   warnings?: Array<models.MycarenetError>

@@ -24,21 +24,15 @@
 
 import * as models from "./models"
 
-export class DmgMessage {
+export class MycarenetConversation {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgMessage, json)
+    Object.assign(this as MycarenetConversation, json)
   }
-  commonOutput?: models.CommonOutput
+  soapRequest?: string
 
-  complete?: boolean
+  soapResponse?: string
 
-  errors?: Array<models.MycarenetError>
+  transactionRequest?: string
 
-  io?: string
-
-  mycarenetConversation?: models.MycarenetConversation
-
-  reference?: string
-
-  valueHash?: string
+  transactionResponse?: string
 }

@@ -30,6 +30,8 @@ export class DmgConsultation {
   }
   birthday?: number
 
+  commonOutput?: models.CommonOutput
+
   complete?: boolean
 
   deceased?: number
@@ -49,6 +51,8 @@ export class DmgConsultation {
   lastName?: string
 
   mutuality?: string
+
+  mycarenetConversation?: models.MycarenetConversation
 
   payment?: boolean
 

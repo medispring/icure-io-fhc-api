@@ -28,6 +28,8 @@ export class DmgAcknowledge {
   constructor(json: JSON | any) {
     Object.assign(this as DmgAcknowledge, json)
   }
+  commonOutput?: models.CommonOutput
+
   complete?: boolean
 
   date?: number
@@ -41,6 +43,8 @@ export class DmgAcknowledge {
   message?: string
 
   minor?: string
+
+  mycarenetConversation?: models.MycarenetConversation
 
   reference?: string
 
