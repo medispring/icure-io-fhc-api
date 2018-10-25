@@ -149,7 +149,7 @@ export class fhcDmgcontrollerApi {
       .then(doc => new models.DmgConsultation(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  getDmgMessagesUsingGET(
+  getDmgMessagesUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
@@ -180,7 +180,7 @@ export class fhcDmgcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("GET", _url, headers, _body)
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.DmgMessage(it)))
       .catch(err => this.handleError(err))
   }

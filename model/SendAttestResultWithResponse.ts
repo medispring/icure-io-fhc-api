@@ -32,7 +32,11 @@ export class SendAttestResultWithResponse {
 
   attest?: models.Eattest
 
+  commonOutput?: models.CommonOutput
+
   invoicingNumber?: string
+
+  mycarenetConversation?: models.MycarenetConversation
 
   xades?: Array<string>
 }
