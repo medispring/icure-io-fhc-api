@@ -24,8 +24,43 @@
 
 import * as models from "./models"
 
-export class CollectionProblem {
+export class DmgExtension {
   constructor(json: JSON | any) {
-    Object.assign(this as CollectionProblem, json)
+    Object.assign(this as DmgExtension, json)
   }
+  birthday?: Date
+
+  claim?: string
+
+  commonOutput?: models.CommonOutput
+
+  complete?: boolean
+
+  deceased?: Date
+
+  encounterDate?: Date
+
+  errors?: Array<models.MycarenetError>
+
+  firstName?: string
+
+  hcParty?: models.HcpartyType
+
+  inss?: string
+
+  io?: string
+
+  lastName?: string
+
+  mutuality?: string
+
+  mycarenetConversation?: models.MycarenetConversation
+
+  reference?: string
+
+  regNrWithMut?: string
+
+  sex?: string
+
+  valueHash?: string
 }

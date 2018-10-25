@@ -159,7 +159,7 @@ export class fhcDmgcontrollerApi {
     hcpLastName: string,
     oa: string,
     messageNames: Array<string>
-  ): Promise<Array<models.DmgMessage> | any> {
+  ): Promise<models.DmgsList | any> {
     let _body = null
     _body = messageNames
 
@@ -181,7 +181,7 @@ export class fhcDmgcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
-      .then(doc => (doc.body as Array<JSON>).map(it => new models.DmgMessage(it)))
+      .then(doc => new models.DmgsList(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   notifyDmgUsingPOST(

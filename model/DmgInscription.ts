@@ -24,13 +24,59 @@
 
 import * as models from "./models"
 
-export class Problem {
+export class DmgInscription {
   constructor(json: JSON | any) {
-    Object.assign(this as Problem, json)
+    Object.assign(this as DmgInscription, json)
   }
-  cds?: Array<models.CDERROR>
+  birthday?: Date
 
-  description?: string
+  commonOutput?: models.CommonOutput
 
-  url?: string
+  complete?: boolean
+
+  deceased?: Date
+
+  errors?: Array<models.MycarenetError>
+
+  firstName?: string
+
+  from?: Date
+
+  hcParty?: models.HcpartyType
+
+  inss?: string
+
+  io?: string
+
+  lastName?: string
+
+  mutuality?: string
+
+  mycarenetConversation?: models.MycarenetConversation
+
+  payment1Amount?: number
+
+  payment1Currency?: string
+
+  payment1Date?: Date
+
+  payment1Ref?: string
+
+  payment2Amount?: number
+
+  payment2Currency?: string
+
+  payment2Date?: Date
+
+  payment2Ref?: string
+
+  reference?: string
+
+  regNrWithMut?: string
+
+  sex?: string
+
+  to?: Date
+
+  valueHash?: string
 }
