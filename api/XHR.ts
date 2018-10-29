@@ -59,9 +59,9 @@ export namespace XHR {
       )
     ).then(function(response) {
       const ct = response.headers.get("content-type") || "text/plain"
-      return (ct === "application/octet-stream"
+      return (ct.startsWith("application/octet-stream")
         ? response.arrayBuffer()
-        : ct === "application/json"
+        : ct.startsWith("application/json")
           ? response.json()
           : response.text()
       ).then(d => new Data(response.status, ct, d))
