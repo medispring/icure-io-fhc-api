@@ -50,10 +50,10 @@ export class fhcDmgcontrollerApi {
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
-    dmgTacks: Array<models.DmgAcknowledge>
+    dmgAcksHashes: Array<string>
   ): Promise<boolean | any> {
     let _body = null
-    _body = dmgTacks
+    _body = dmgAcksHashes
 
     const _url =
       this.host +
@@ -83,10 +83,10 @@ export class fhcDmgcontrollerApi {
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
-    dmgMessages: Array<models.DmgMessage>
+    dmgMessagesHashes: Array<string>
   ): Promise<boolean | any> {
     let _body = null
-    _body = dmgMessages
+    _body = dmgMessagesHashes
 
     const _url =
       this.host +
