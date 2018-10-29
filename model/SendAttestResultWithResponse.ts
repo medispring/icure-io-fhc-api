@@ -36,6 +36,8 @@ export class SendAttestResultWithResponse {
 
   invoicingNumber?: string
 
+  kmehrMessage?: Array<string>
+
   mycarenetConversation?: models.MycarenetConversation
 
   xades?: Array<string>

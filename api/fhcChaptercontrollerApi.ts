@@ -220,6 +220,33 @@ export class fhcChaptercontrollerApi {
       .then(doc => (doc.body as Array<JSON>).map(it => new models.ParagraphPreview(it)))
       .catch(err => this.handleError(err))
   }
+  getAddedDocumentUsingGET(
+    chapterName: string,
+    paragraphName: string,
+    verseSeq: number,
+    docSeq: number,
+    language: string
+  ): Promise<any | Boolean> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/chap4/sam/docpreview/{chapterName}/{paragraphName}/{verseSeq}/{docSeq}/{language}"
+        .replace("{chapterName}", chapterName + "")
+        .replace("{paragraphName}", paragraphName + "")
+        .replace("{verseSeq}", verseSeq + "")
+        .replace("{docSeq}", docSeq + "")
+        .replace("{language}", language + "") +
+      "?ts=" +
+      new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
+      .catch(err => this.handleError(err))
+  }
   getAddedDocumentsUsingGET(
     chapterName: string,
     paragraphName: string
