@@ -199,7 +199,11 @@ export class fhcDmgcontrollerApi {
     patientFirstName?: string,
     patientLastName?: string,
     patientGender?: string,
-    requestDate?: number
+    requestDate?: number,
+    traineeSupervisorSsin?: string,
+    traineeSupervisorNihii?: string,
+    traineeSupervisorFirstName?: string,
+    traineeSupervisorLastName?: string
   ): Promise<models.DmgNotification | any> {
     let _body = null
 
@@ -218,7 +222,13 @@ export class fhcDmgcontrollerApi {
       (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
       (patientLastName ? "&patientLastName=" + patientLastName : "") +
       (patientGender ? "&patientGender=" + patientGender : "") +
-      (requestDate ? "&requestDate=" + requestDate : "")
+      (requestDate ? "&requestDate=" + requestDate : "") +
+      (traineeSupervisorSsin ? "&traineeSupervisorSsin=" + traineeSupervisorSsin : "") +
+      (traineeSupervisorNihii ? "&traineeSupervisorNihii=" + traineeSupervisorNihii : "") +
+      (traineeSupervisorFirstName
+        ? "&traineeSupervisorFirstName=" + traineeSupervisorFirstName
+        : "") +
+      (traineeSupervisorLastName ? "&traineeSupervisorLastName=" + traineeSupervisorLastName : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
