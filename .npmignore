@@ -1,6 +1,3 @@
 node_modules
-api/
-model/
 test/
 .idea/
-swagger-codegen-cli.jar
