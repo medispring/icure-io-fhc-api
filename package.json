@@ -24,8 +24,8 @@
     "test": "mocha --require ts-node/register --watch-extensions ts 'test/**/*.ts'",
     "build": "tsc",
     "prepublish": "rm -rf dist && npm run build",
-    "precommit": "pretty-quick --staged",
-    "install": "npm i"
+    "preinstall": "rm -rf dist && npm run build",
+    "precommit": "pretty-quick --staged"
   },
   "repository": {
     "type": "git",
