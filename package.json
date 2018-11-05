@@ -25,7 +25,7 @@
     "build": "tsc",
     "prepublish": "rm -rf dist && npm run build",
     "precommit": "pretty-quick --staged",
-    "preinstall": "npm i"
+    "install": "npm i"
   },
   "repository": {
     "type": "git",
