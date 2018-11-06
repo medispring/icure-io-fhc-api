@@ -24,49 +24,11 @@
 
 import * as models from "./models"
 
-export class AgreementTransaction {
+export class TAckResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as AgreementTransaction, json)
+    Object.assign(this as TAckResponse, json)
   }
-  accepted?: boolean
+  tack?: models.TAck
 
-  careProviderReference?: string
-
-  content?: Array<string>
-
-  coverageType?: string
-
-  decisionReference?: string
-
-  end?: number
-
-  inTreatment?: boolean
-
-  ioRequestReference?: string
-
-  paragraph?: string
-
-  quantityUnit?: string
-
-  quantityValue?: number
-
-  refusalJustification?: { [key: string]: string }
-
-  responseType?: string
-
-  restStrength?: number
-
-  restStrengthUnit?: string
-
-  restUnitNumber?: number
-
-  start?: number
-
-  strength?: number
-
-  strengthUnit?: string
-
-  timestamp?: number
-
-  unitNumber?: number
+  xadesT?: models.Base64Binary
 }

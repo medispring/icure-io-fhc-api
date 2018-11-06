@@ -24,49 +24,11 @@
 
 import * as models from "./models"
 
-export class AgreementTransaction {
+export class Base64Binary {
   constructor(json: JSON | any) {
-    Object.assign(this as AgreementTransaction, json)
+    Object.assign(this as Base64Binary, json)
   }
-  accepted?: boolean
+  contentType?: string
 
-  careProviderReference?: string
-
-  content?: Array<string>
-
-  coverageType?: string
-
-  decisionReference?: string
-
-  end?: number
-
-  inTreatment?: boolean
-
-  ioRequestReference?: string
-
-  paragraph?: string
-
-  quantityUnit?: string
-
-  quantityValue?: number
-
-  refusalJustification?: { [key: string]: string }
-
-  responseType?: string
-
-  restStrength?: number
-
-  restStrengthUnit?: string
-
-  restUnitNumber?: number
-
-  start?: number
-
-  strength?: number
-
-  strengthUnit?: string
-
-  timestamp?: number
-
-  unitNumber?: number
+  value?: Array<string>
 }
