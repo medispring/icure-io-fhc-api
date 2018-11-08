@@ -157,7 +157,6 @@ export class fhcDmgcontrollerApi {
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
-    oa: string,
     messageNames: Array<string>
   ): Promise<models.DmgsList | any> {
     let _body = null
@@ -171,8 +170,7 @@ export class fhcDmgcontrollerApi {
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
-      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
-      (oa ? "&oa=" + oa : "")
+      (hcpLastName ? "&hcpLastName=" + hcpLastName : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -250,7 +248,7 @@ export class fhcDmgcontrollerApi {
     hcpLastName: string,
     oa?: string,
     requestDate?: number
-  ): Promise<boolean | any> {
+  ): Promise<models.GenAsyncResponse | any> {
     let _body = null
 
     const _url =
@@ -272,7 +270,7 @@ export class fhcDmgcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
-      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .then(doc => new models.GenAsyncResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   registerDoctorUsingPOST(

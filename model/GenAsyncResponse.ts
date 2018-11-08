@@ -24,49 +24,15 @@
 
 import * as models from "./models"
 
-export class AgreementTransaction {
+export class GenAsyncResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as AgreementTransaction, json)
+    Object.assign(this as GenAsyncResponse, json)
   }
-  accepted?: boolean
+  commonOutput?: models.CommonOutput
 
-  careProviderReference?: string
+  mycarenetConversation?: models.MycarenetConversation
 
-  content?: Array<string>
+  result?: boolean
 
-  coverageType?: string
-
-  decisionReference?: string
-
-  end?: number
-
-  inTreatment?: boolean
-
-  ioRequestReference?: string
-
-  paragraph?: string
-
-  quantityUnit?: string
-
-  quantityValue?: number
-
-  refusalJustification?: { [key: string]: string }
-
-  responseType?: string
-
-  restStrength?: number
-
-  restStrengthUnit?: string
-
-  restUnitNumber?: number
-
-  start?: number
-
-  strength?: number
-
-  strengthUnit?: string
-
-  timestamp?: number
-
-  unitNumber?: number
+  tack?: models.TAck
 }
