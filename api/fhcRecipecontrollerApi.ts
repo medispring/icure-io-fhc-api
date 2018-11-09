@@ -197,7 +197,7 @@ export class fhcRecipecontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("DELETE", _url, headers, _body)
-      .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
+      .then(doc => true)
       .catch(err => this.handleError(err))
   }
   sendNotificationUsingPOST(
@@ -235,7 +235,7 @@ export class fhcRecipecontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
-      .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
+      .then(doc => true)
       .catch(err => this.handleError(err))
   }
   updateFeedbackFlagUsingPUT(
@@ -270,7 +270,7 @@ export class fhcRecipecontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("PUT", _url, headers, _body)
-      .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
+      .then(doc => true)
       .catch(err => this.handleError(err))
   }
 }
