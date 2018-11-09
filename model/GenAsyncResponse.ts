@@ -24,32 +24,15 @@
 
 import * as models from "./models"
 
-export class Invoice {
+export class GenAsyncResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as Invoice, json)
+    Object.assign(this as GenAsyncResponse, json)
   }
-  hospitalisedPatient?: boolean
+  commonOutput?: models.CommonOutput
 
-  ignorePrescriptionDate?: boolean
+  mycarenetConversation?: models.MycarenetConversation
 
-  invoiceNumber?: number
+  result?: boolean
 
-  invoiceRef?: string
-
-  ioCode?: string
-
-  items?: Array<models.InvoiceItem>
-
-  patient?: models.Patient
-
-  reason?: Invoice.ReasonEnum
-}
-export namespace Invoice {
-  export enum ReasonEnum {
-    Chimiotherapy = <any>"Chimiotherapy",
-    ProfessionalDisease = <any>"ProfessionalDisease",
-    WorkAccident = <any>"WorkAccident",
-    Accident = <any>"Accident",
-    Other = <any>"Other"
-  }
+  tack?: models.TAck
 }
