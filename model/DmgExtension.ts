@@ -28,6 +28,8 @@ export class DmgExtension {
   constructor(json: JSON | any) {
     Object.assign(this as DmgExtension, json)
   }
+  appliesTo?: string
+
   birthday?: Date
 
   claim?: string

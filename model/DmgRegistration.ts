@@ -28,6 +28,8 @@ export class DmgRegistration {
   constructor(json: JSON | any) {
     Object.assign(this as DmgRegistration, json)
   }
+  appliesTo?: string
+
   commonOutput?: models.CommonOutput
 
   complete?: boolean

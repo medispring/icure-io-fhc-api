@@ -28,6 +28,8 @@ export class DmgInscription {
   constructor(json: JSON | any) {
     Object.assign(this as DmgInscription, json)
   }
+  appliesTo?: string
+
   birthday?: Date
 
   commonOutput?: models.CommonOutput

@@ -28,6 +28,8 @@ export class DmgClosure {
   constructor(json: JSON | any) {
     Object.assign(this as DmgClosure, json)
   }
+  appliesTo?: string
+
   beginOfNewDmg?: Date
 
   birthday?: Date
