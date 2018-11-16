@@ -427,7 +427,7 @@ export class fhcHubcontrollerApi {
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
-      .concat(new XHR.Header("Content-Type", "application/json"))
+      .concat(new XHR.Header("Content-Type", "application/xml"))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
