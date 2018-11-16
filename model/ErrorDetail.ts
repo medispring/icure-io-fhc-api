@@ -67,4 +67,14 @@ export class ErrorDetail {
   reserve?: string
 
   sendingId?: number
+
+  zone114?: string
+
+  zone115?: string
+
+  zone116?: string
+
+  zone117?: string
+
+  zone118?: string
 }

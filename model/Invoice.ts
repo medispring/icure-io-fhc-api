@@ -30,6 +30,8 @@ export class Invoice {
   }
   hospitalisedPatient?: boolean
 
+  ignorePrescriptionDate?: boolean
+
   invoiceNumber?: number
 
   invoiceRef?: string

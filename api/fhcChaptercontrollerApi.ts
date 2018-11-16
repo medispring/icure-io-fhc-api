@@ -105,7 +105,7 @@ export class fhcChaptercontrollerApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    decisionReference: string,
+    decisionReference?: string,
     iorequestReference?: string
   ): Promise<models.AgreementResponse | any> {
     let _body = null
@@ -349,8 +349,8 @@ export class fhcChaptercontrollerApi {
     requestType: string,
     civicsVersion: string,
     paragraph: string,
-    verses: string,
     appendices: Array<models.Appendix>,
+    verses?: string,
     incomplete?: boolean,
     start?: number,
     end?: number,

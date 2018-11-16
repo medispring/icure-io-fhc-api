@@ -38,7 +38,7 @@ export class AgreementTransaction {
 
   decisionReference?: string
 
-  end?: Date
+  end?: number
 
   inTreatment?: boolean
 
@@ -60,7 +60,7 @@ export class AgreementTransaction {
 
   restUnitNumber?: number
 
-  start?: Date
+  start?: number
 
   strength?: number
 
