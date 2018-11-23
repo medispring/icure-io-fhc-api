@@ -28,9 +28,13 @@ export class EfactSendResponse {
   constructor(json: JSON | any) {
     Object.assign(this as EfactSendResponse, json)
   }
+  commonOutput?: models.CommonOutput
+
   detail?: string
 
   inputReference?: string
+
+  mycarenetConversation?: models.MycarenetConversation
 
   records?: Array<models.Record>
 

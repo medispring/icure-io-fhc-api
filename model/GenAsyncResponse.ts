@@ -24,47 +24,15 @@
 
 import * as models from "./models"
 
-export class DmgConsultation {
+export class GenAsyncResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as GenAsyncResponse, json)
   }
-  appliesTo?: string
-
-  birthday?: number
-
   commonOutput?: models.CommonOutput
-
-  complete?: boolean
-
-  deceased?: number
-
-  errors?: Array<models.MycarenetError>
-
-  firstName?: string
-
-  from?: number
-
-  hcParty?: models.HcpartyType
-
-  inss?: string
-
-  io?: string
-
-  lastName?: string
-
-  mutuality?: string
 
   mycarenetConversation?: models.MycarenetConversation
 
-  payment?: boolean
+  result?: boolean
 
-  reference?: string
-
-  regNrWithMut?: string
-
-  sex?: string
-
-  to?: number
-
-  valueHash?: string
+  tack?: models.TAck
 }

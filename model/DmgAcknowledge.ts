@@ -28,6 +28,8 @@ export class DmgAcknowledge {
   constructor(json: JSON | any) {
     Object.assign(this as DmgAcknowledge, json)
   }
+  appliesTo?: string
+
   commonOutput?: models.CommonOutput
 
   complete?: boolean

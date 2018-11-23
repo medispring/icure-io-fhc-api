@@ -30,6 +30,8 @@ export class DmgsList {
   }
   acks?: Array<models.DmgAcknowledge>
 
+  appliesTo?: string
+
   closures?: Array<models.DmgClosure>
 
   commonOutput?: models.CommonOutput

@@ -1,3 +1,4 @@
+export * from "./Base64Binary"
 export * from "./AcknowledgeType"
 export * from "./AddedDocumentPreview"
 export * from "./Address"

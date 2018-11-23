@@ -28,6 +28,8 @@ export class DmgNotification {
   constructor(json: JSON | any) {
     Object.assign(this as DmgNotification, json)
   }
+  appliesTo?: string
+
   commonOutput?: models.CommonOutput
 
   complete?: boolean
