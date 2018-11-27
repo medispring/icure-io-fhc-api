@@ -43,6 +43,8 @@ export class Invoice {
   patient?: models.Patient
 
   reason?: Invoice.ReasonEnum
+
+  creditNote?: boolean
 }
 export namespace Invoice {
   export enum ReasonEnum {
