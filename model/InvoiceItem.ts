@@ -32,6 +32,8 @@ export class InvoiceItem {
 
   dateCode?: number
 
+  derogationMaxNumber?: InvoiceItem.DerogationMaxNumberEnum
+
   doctorIdentificationNumber?: string
 
   doctorSupplement?: number
@@ -69,6 +71,13 @@ export class InvoiceItem {
   units?: number
 }
 export namespace InvoiceItem {
+  export enum DerogationMaxNumberEnum {
+    Other = <any>"Other",
+    DerogationMaxNumber = <any>"DerogationMaxNumber",
+    OtherPrescription = <any>"OtherPrescription",
+    SecondPrestationOfDay = <any>"SecondPrestationOfDay",
+    ThirdAndNextPrestationOfDay = <any>"ThirdAndNextPrestationOfDay"
+  }
   export enum PercentNormEnum {
     None = <any>"None",
     SurgicalAid1 = <any>"SurgicalAid1",
