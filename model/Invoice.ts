@@ -28,11 +28,11 @@ export class Invoice {
   constructor(json: JSON | any) {
     Object.assign(this as Invoice, json)
   }
-  correctedBatchSendNumber?: number
+  relatedBatchSendNumber?: number
 
-  correctedInvoiceIoCode?: string
+  relatedInvoiceIoCode?: string
 
-  correctedInvoiceNumber?: number
+  relatedInvoiceNumber?: number
 
   creditNote?: boolean
 
