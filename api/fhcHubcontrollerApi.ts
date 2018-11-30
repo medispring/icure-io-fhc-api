@@ -199,6 +199,100 @@ export class fhcHubcontrollerApi {
       .then(doc => (doc.body as Array<JSON>).map(it => new models.TherapeuticLink(it)))
       .catch(err => this.handleError(err))
   }
+  getTransactionMessageUsingGET(
+    endpoint: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpLastName: string,
+    hcpFirstName: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpZip: string,
+    ssin: string,
+    sv: string,
+    sl: string,
+    id: string,
+    hubPackageId?: string,
+    breakTheGlassReason?: string
+  ): Promise<models.Kmehrmessage | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/hub/t/{ssin}/{sv}/{sl}/kmehr"
+        .replace("{ssin}", ssin + "")
+        .replace("{sv}", sv + "")
+        .replace("{sl}", sl + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (endpoint ? "&endpoint=" + endpoint : "") +
+      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
+      (hcpZip ? "&hcpZip=" + hcpZip : "") +
+      (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
+      (id ? "&id=" + id : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.Kmehrmessage(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+  getTransactionSetMessageUsingGET(
+    endpoint: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpLastName: string,
+    hcpFirstName: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpZip: string,
+    ssin: string,
+    sv: string,
+    sl: string,
+    id: string,
+    hubPackageId?: string,
+    breakTheGlassReason?: string
+  ): Promise<models.Kmehrmessage | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/hub/ts/{ssin}/{sv}/{sl}/kmehr"
+        .replace("{ssin}", ssin + "")
+        .replace("{sv}", sv + "")
+        .replace("{sl}", sl + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (endpoint ? "&endpoint=" + endpoint : "") +
+      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
+      (hcpZip ? "&hcpZip=" + hcpZip : "") +
+      (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
+      (id ? "&id=" + id : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.Kmehrmessage(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   getTransactionSetUsingGET(
     endpoint: string,
     xFHCKeystoreId: string,
