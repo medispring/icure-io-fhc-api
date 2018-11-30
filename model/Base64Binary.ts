@@ -24,41 +24,11 @@
 
 import * as models from "./models"
 
-export class Invoice {
+export class Base64Binary {
   constructor(json: JSON | any) {
-    Object.assign(this as Invoice, json)
+    Object.assign(this as Base64Binary, json)
   }
+  contentType?: string
 
-  relatedBatchSendNumber?: number
-
-  relatedInvoiceIoCode?: string
-
-  relatedInvoiceNumber?: number
-
-  creditNote?: boolean
-
-  hospitalisedPatient?: boolean
-
-  ignorePrescriptionDate?: boolean
-
-  invoiceNumber?: number
-
-  invoiceRef?: string
-
-  ioCode?: string
-
-  items?: Array<models.InvoiceItem>
-
-  patient?: models.Patient
-
-  reason?: Invoice.ReasonEnum
-}
-export namespace Invoice {
-  export enum ReasonEnum {
-    Chimiotherapy = <any>"Chimiotherapy",
-    ProfessionalDisease = <any>"ProfessionalDisease",
-    WorkAccident = <any>"WorkAccident",
-    Accident = <any>"Accident",
-    Other = <any>"Other"
-  }
+  value?: Array<string>
 }
