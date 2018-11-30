@@ -15,5 +15,5 @@
     "baseUrl": "./",
     "types": []
   },
-  "include": ["index.ts", "api/*", "model/*"]
+  "include": ["index.ts", "fhcApi.ts", "api/*", "model/*"]
 }
