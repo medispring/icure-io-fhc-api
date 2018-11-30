@@ -52,6 +52,9 @@ export class fhcEattestcontrollerApi {
     hcpFirstName: string,
     hcpLastName: string,
     hcpCbe: string,
+    patientFirstName: string,
+    patientLastName: string,
+    patientGender: string,
     attest: models.Eattest,
     date?: number
   ): Promise<models.SendAttestResult | any> {
@@ -68,6 +71,9 @@ export class fhcEattestcontrollerApi {
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpCbe ? "&hcpCbe=" + hcpCbe : "") +
+      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
+      (patientLastName ? "&patientLastName=" + patientLastName : "") +
+      (patientGender ? "&patientGender=" + patientGender : "") +
       (date ? "&date=" + date : "")
     let headers = this.headers
     headers = headers
@@ -90,6 +96,9 @@ export class fhcEattestcontrollerApi {
     hcpFirstName: string,
     hcpLastName: string,
     hcpCbe: string,
+    patientFirstName: string,
+    patientLastName: string,
+    patientGender: string,
     attest: models.Eattest,
     date?: number
   ): Promise<models.SendAttestResultWithResponse | any> {
@@ -106,6 +115,9 @@ export class fhcEattestcontrollerApi {
       (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
       (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
       (hcpCbe ? "&hcpCbe=" + hcpCbe : "") +
+      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
+      (patientLastName ? "&patientLastName=" + patientLastName : "") +
+      (patientGender ? "&patientGender=" + patientGender : "") +
       (date ? "&date=" + date : "")
     let headers = this.headers
     headers = headers

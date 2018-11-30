@@ -226,7 +226,7 @@ export class fhcChaptercontrollerApi {
     verseSeq: number,
     docSeq: number,
     language: string
-  ): Promise<any | Boolean> {
+  ): Promise<ArrayBuffer | any> {
     let _body = null
 
     const _url =
@@ -244,7 +244,7 @@ export class fhcChaptercontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => (doc.contentType.startsWith("application/octet-stream") ? doc.body : true))
+      .then(doc => doc.body)
       .catch(err => this.handleError(err))
   }
   getAddedDocumentsUsingGET(
