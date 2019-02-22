@@ -24,29 +24,9 @@
 
 import * as models from "./models"
 
-export class InvoiceSender {
+export class ReciperouteType {
   constructor(json: JSON | any) {
-    Object.assign(this as InvoiceSender, json)
+    Object.assign(this as ReciperouteType, json)
   }
-  bce?: number
-
-  bic?: string
-
-  conventionCode?: number
-
-  firstName?: string
-
-  iban?: string
-
-  lastName?: string
-
-  medicalHouse?: boolean
-
-  nihii?: number
-
-  phoneNumber?: number
-
-  specialist?: boolean
-
-  ssin?: string
+  cd?: models.CDDRUGROUTE
 }

@@ -24,29 +24,29 @@
 
 import * as models from "./models"
 
-export class InvoiceSender {
+export class RecipeheaderType {
   constructor(json: JSON | any) {
-    Object.assign(this as InvoiceSender, json)
+    Object.assign(this as RecipeheaderType, json)
   }
-  bce?: number
+  acknowledgment?: models.AcknowledgmentType
 
-  bic?: string
+  confidentiality?: models.ConfidentialityType
 
-  conventionCode?: number
+  date?: models.XMLGregorianCalendar
 
-  firstName?: string
+  ids?: Array<models.IDKMEHR>
 
-  iban?: string
+  lnks?: Array<models.LnkType>
 
-  lastName?: string
+  recipients?: Array<models.RecipientType>
 
-  medicalHouse?: boolean
+  sender?: models.SenderType
 
-  nihii?: number
+  standard?: models.StandardType
 
-  phoneNumber?: number
+  texts?: Array<models.TextType>
 
-  specialist?: boolean
+  time?: models.XMLGregorianCalendar
 
-  ssin?: string
+  urgency?: models.UrgencyType
 }

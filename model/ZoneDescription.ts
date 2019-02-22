@@ -36,6 +36,8 @@ export class ZoneDescription {
 
   position?: number
 
+  property?: string
+
   type?: ZoneDescription.TypeEnum
 
   value?: string

@@ -24,29 +24,19 @@
 
 import * as models from "./models"
 
-export class InvoiceSender {
+export class RecipefrequencyType {
   constructor(json: JSON | any) {
-    Object.assign(this as InvoiceSender, json)
+    Object.assign(this as RecipefrequencyType, json)
   }
-  bce?: number
+  decimal?: number
 
-  bic?: string
+  denominator?: models.Denominator
 
-  conventionCode?: number
+  nominator?: models.Nominator
 
-  firstName?: string
+  periodicity?: models.PeriodicityType
 
-  iban?: string
+  text?: models.TextType
 
-  lastName?: string
-
-  medicalHouse?: boolean
-
-  nihii?: number
-
-  phoneNumber?: number
-
-  specialist?: boolean
-
-  ssin?: string
+  unit?: models.UnitType
 }

@@ -48,9 +48,13 @@ export class Invoice {
 
   relatedBatchSendNumber?: number
 
+  relatedBatchYearMonth?: number
+
   relatedInvoiceIoCode?: string
 
   relatedInvoiceNumber?: number
+
+  startOfCoveragePeriod?: number
 }
 export namespace Invoice {
   export enum ReasonEnum {

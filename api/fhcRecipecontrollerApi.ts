@@ -91,6 +91,38 @@ export class fhcRecipecontrollerApi {
       .then(doc => new models.Code(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
+  getPrescriptionMessageUsingGET(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    hcpQuality: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpName: string,
+    xFHCPassPhrase: string,
+    rid: string
+  ): Promise<models.Kmehrmessage | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/recipe/prescription/{rid}".replace("{rid}", rid + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hcpName ? "&hcpName=" + hcpName : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.Kmehrmessage(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   getPrescriptionUsingGET(rid: string): Promise<models.PrescriptionFullWithFeedback | any> {
     let _body = null
 
@@ -133,6 +165,39 @@ export class fhcRecipecontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.Feedback(it)))
+      .catch(err => this.handleError(err))
+  }
+  listOpenPrescriptionsByPatientUsingGET(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    hcpQuality: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpName: string,
+    patientId: string,
+    xFHCPassPhrase: string
+  ): Promise<Array<models.Prescription> | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/recipe/patient" +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hcpName ? "&hcpName=" + hcpName : "") +
+      (patientId ? "&patientId=" + patientId : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => (doc.body as Array<JSON>).map(it => new models.Prescription(it)))
       .catch(err => this.handleError(err))
   }
   listOpenPrescriptionsUsingGET(

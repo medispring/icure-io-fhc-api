@@ -24,29 +24,28 @@
 
 import * as models from "./models"
 
-export class InvoiceSender {
+export class RecipeCDHEADING {
   constructor(json: JSON | any) {
-    Object.assign(this as InvoiceSender, json)
+    Object.assign(this as RecipeCDHEADING, json)
   }
-  bce?: number
+  dn?: string
 
-  bic?: string
+  l?: string
 
-  conventionCode?: number
+  s?: RecipeCDHEADING.SEnum
 
-  firstName?: string
+  sl?: string
 
-  iban?: string
+  sv?: string
 
-  lastName?: string
-
-  medicalHouse?: boolean
-
-  nihii?: number
-
-  phoneNumber?: number
-
-  specialist?: boolean
-
-  ssin?: string
+  value?: string
+}
+export namespace RecipeCDHEADING {
+  export enum SEnum {
+    CDHEADING = <any>"CD_HEADING",
+    CDHEADINGLAB = <any>"CD_HEADING_LAB",
+    CDSITE = <any>"CD_SITE",
+    LOCAL = <any>"LOCAL",
+    CDHEADINGREG = <any>"CD_HEADING_REG"
+  }
 }

@@ -32,6 +32,8 @@ export class InvoicesBatch {
 
   fileRef?: string
 
+  invoiceContent?: number
+
   invoices?: Array<models.Invoice>
 
   invoicingMonth?: number
@@ -39,6 +41,8 @@ export class InvoicesBatch {
   invoicingYear?: number
 
   ioFederationCode?: string
+
+  magneticInvoice?: boolean
 
   numericalRef?: number
 

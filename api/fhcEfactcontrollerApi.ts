@@ -139,6 +139,21 @@ export class fhcEfactcontrollerApi {
       .then(doc => (doc.body as Array<JSON>).map(it => new models.EfactMessage(it)))
       .catch(err => this.handleError(err))
   }
+  makeFlatFileCoreUsingPOST(
+    batch: models.InvoicesBatch
+  ): Promise<models.FlatFileWithMetadata | any> {
+    let _body = null
+    _body = batch
+
+    const _url = this.host + "/efact/flatcore" + "?ts=" + new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => new models.FlatFileWithMetadata(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   makeFlatFileTestUsingPOST(batch: models.InvoicesBatch): Promise<string | any> {
     let _body = null
     _body = batch

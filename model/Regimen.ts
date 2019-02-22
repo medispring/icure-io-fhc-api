@@ -28,5 +28,5 @@ export class Regimen {
   constructor(json: JSON | any) {
     Object.assign(this as Regimen, json)
   }
-  daynumbersAndQuantitiesAndDates?: Array<models.JAXBElementobject>
+  daynumbersAndQuantitiesAndDaytimes?: Array<any>
 }

@@ -24,29 +24,23 @@
 
 import * as models from "./models"
 
-export class InvoiceSender {
+export class RecipeCDINNCLUSTER {
   constructor(json: JSON | any) {
-    Object.assign(this as InvoiceSender, json)
+    Object.assign(this as RecipeCDINNCLUSTER, json)
   }
-  bce?: number
+  dn?: string
 
-  bic?: string
+  l?: string
 
-  conventionCode?: number
+  s?: RecipeCDINNCLUSTER.SEnum
 
-  firstName?: string
+  sv?: string
 
-  iban?: string
-
-  lastName?: string
-
-  medicalHouse?: boolean
-
-  nihii?: number
-
-  phoneNumber?: number
-
-  specialist?: boolean
-
-  ssin?: string
+  value?: string
+}
+export namespace RecipeCDINNCLUSTER {
+  export enum SEnum {
+    INNCLUSTER = <any>"CD_INNCLUSTER",
+    VMPGROUP = <any>"CD_VMPGROUP"
+  }
 }

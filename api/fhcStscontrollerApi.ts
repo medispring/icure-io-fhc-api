@@ -86,7 +86,8 @@ export class fhcStscontrollerApi {
     xFHCPassPhrase: string,
     ssin: string,
     xFHCKeystoreId: string,
-    isMedicalHouse?: boolean
+    isMedicalHouse?: boolean,
+    isGuardPost?: boolean
   ): Promise<models.SamlTokenResult | any> {
     let _body = null
 
@@ -96,7 +97,8 @@ export class fhcStscontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (ssin ? "&ssin=" + ssin : "") +
-      (isMedicalHouse ? "&isMedicalHouse=" + isMedicalHouse : "")
+      (isMedicalHouse ? "&isMedicalHouse=" + isMedicalHouse : "") +
+      (isGuardPost ? "&isGuardPost=" + isGuardPost : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")

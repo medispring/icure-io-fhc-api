@@ -19,7 +19,7 @@
     "typescript": "^2.9.2"
   },
   "scripts": {
-    "gen": "java -classpath swagger-codegen-cli.jar io.swagger.codegen.SwaggerCodegen generate -i https://fhcacc.icure.cloud/v2/api-docs -l typescript --additional-properties classPrefix=fhc -o ./",
+    "gen": "java -classpath swagger-codegen-cli.jar io.swagger.codegen.SwaggerCodegen generate -i https://fhcprd.icure.cloud/v2/api-docs -l typescript --additional-properties classPrefix=fhc -o ./",
     "genloc": "java -classpath swagger-codegen-cli.jar io.swagger.codegen.SwaggerCodegen generate -i http://127.0.0.1:8090/v2/api-docs -l typescript --additional-properties classPrefix=fhc -o ./",
     "test": "mocha --require ts-node/register --watch-extensions ts 'test/**/*.ts'",
     "install": "tsc",

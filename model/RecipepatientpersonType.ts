@@ -24,29 +24,43 @@
 
 import * as models from "./models"
 
-export class InvoiceSender {
+export class RecipepatientpersonType {
   constructor(json: JSON | any) {
-    Object.assign(this as InvoiceSender, json)
+    Object.assign(this as RecipepatientpersonType, json)
   }
-  bce?: number
+  addresses?: Array<models.AddressType>
 
-  bic?: string
+  birthdate?: models.DateType
 
-  conventionCode?: number
+  birthlocation?: models.AddressTypeBase
 
-  firstName?: string
+  civilstate?: models.Civilstate
 
-  iban?: string
+  deathdate?: models.DateType
 
-  lastName?: string
+  deathlocation?: models.AddressTypeBase
 
-  medicalHouse?: boolean
+  familyname?: string
 
-  nihii?: number
+  firstnames?: Array<string>
 
-  phoneNumber?: number
+  ids?: Array<models.IDPATIENT>
 
-  specialist?: boolean
+  insurancymembership?: models.MemberinsuranceType
 
-  ssin?: string
+  insurancystatus?: models.InsuranceType
+
+  nationality?: models.Nationality
+
+  profession?: models.ProfessionType
+
+  recorddatetime?: models.XMLGregorianCalendar
+
+  sex?: models.SexType
+
+  telecoms?: Array<models.TelecomType>
+
+  texts?: Array<models.TextType>
+
+  usuallanguage?: string
 }

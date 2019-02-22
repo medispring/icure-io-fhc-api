@@ -24,29 +24,19 @@
 
 import * as models from "./models"
 
-export class InvoiceSender {
+export class FlatFileMetadata {
   constructor(json: JSON | any) {
-    Object.assign(this as InvoiceSender, json)
+    Object.assign(this as FlatFileMetadata, json)
   }
-  bce?: number
+  amount?: number
 
-  bic?: string
+  amountPerOAMap?: { [key: string]: Array<number> }
 
-  conventionCode?: number
+  codes?: Array<number>
 
-  firstName?: string
+  codesPerOAMap?: { [key: string]: Array<number> }
 
-  iban?: string
+  recordsCount?: number
 
-  lastName?: string
-
-  medicalHouse?: boolean
-
-  nihii?: number
-
-  phoneNumber?: number
-
-  specialist?: boolean
-
-  ssin?: string
+  recordsCountPerOAMap?: { [key: string]: Array<number> }
 }

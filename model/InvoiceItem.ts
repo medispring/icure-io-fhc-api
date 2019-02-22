@@ -40,6 +40,8 @@ export class InvoiceItem {
 
   eidItem?: models.EIDItem
 
+  endDateCode?: number
+
   gnotionNihii?: string
 
   insuranceRef?: string
