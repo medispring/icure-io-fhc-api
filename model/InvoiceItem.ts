@@ -48,6 +48,8 @@ export class InvoiceItem {
 
   insuranceRefDate?: number
 
+  internshipNihii?: string
+
   invoiceRef?: string
 
   override3rdPayerCode?: number

@@ -30,15 +30,15 @@ export class InsuranceType {
   }
   approvalnumber?: string
 
-  begindate?: Date
+  begindate?: models.XMLGregorianCalendar
 
-  begindatepayment?: Date
+  begindatepayment?: models.XMLGregorianCalendar
 
   cg1?: string
 
   cg2?: string
 
-  enddate?: Date
+  enddate?: models.XMLGregorianCalendar
 
   id?: models.IDINSURANCE
 
