@@ -30,9 +30,9 @@ export class Personalpart {
   }
   cd?: models.CDCARENETPERSONALPART
 
-  date?: Date
+  date?: models.XMLGregorianCalendar
 
   id?: models.IDKMEHR
 
-  time?: Date
+  time?: models.XMLGregorianCalendar
 }

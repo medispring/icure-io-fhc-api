@@ -28,13 +28,5 @@ export class Posology {
   constructor(json: JSON | any) {
     Object.assign(this as Posology, json)
   }
-  high?: number
-
-  low?: number
-
-  takes?: models.Takes
-
   text?: models.TextType
-
-  unit?: models.AdministrationunitType
 }

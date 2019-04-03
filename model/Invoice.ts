@@ -30,9 +30,13 @@ export class Invoice {
   }
   creditNote?: boolean
 
+  gnotionNihii?: string
+
   hospitalisedPatient?: boolean
 
   ignorePrescriptionDate?: boolean
+
+  internshipNihii?: string
 
   invoiceNumber?: number
 
