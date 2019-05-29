@@ -24,13 +24,29 @@
 
 import * as models from "./models"
 
-export class TherapeuticLinkMessageDto {
+export class CDACCESSRIGHT {
   constructor(json: JSON | any) {
-    Object.assign(this as TherapeuticLinkMessageDto, json)
+    Object.assign(this as CDACCESSRIGHT, json)
   }
-  complete?: boolean
+  dn?: string
 
-  errors?: Array<models.ErrorDto>
+  l?: string
 
-  therapeuticLinks?: Array<models.TherapeuticLinkDto>
+  s?: CDACCESSRIGHT.SEnum
+
+  sl?: string
+
+  sv?: string
+
+  value?: CDACCESSRIGHT.ValueEnum
+}
+export namespace CDACCESSRIGHT {
+  export enum SEnum {
+    CDACCESSRIGHT = <any>"CD_ACCESSRIGHT",
+    LOCAL = <any>"LOCAL"
+  }
+  export enum ValueEnum {
+    ALLOW = <any>"ALLOW",
+    DISALLOW = <any>"DISALLOW"
+  }
 }

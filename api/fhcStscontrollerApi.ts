@@ -68,6 +68,26 @@ export class fhcStscontrollerApi {
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
+  getKeystoreInfoUsingGET(
+    keystoreId: string,
+    xFHCPassPhrase: string
+  ): Promise<models.CertificateInfo | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/sts/keystore/{keystoreId}/info".replace("{keystoreId}", keystoreId + "") +
+      "?ts=" +
+      new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.CertificateInfo(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   registerTokenUsingPOST(token: string, xFHCTokenId: string): Promise<any | Boolean> {
     let _body = null
     _body = token

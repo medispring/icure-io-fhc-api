@@ -24,13 +24,17 @@
 
 import * as models from "./models"
 
-export class TherapeuticLinkMessageDto {
+export class CertificateInfo {
   constructor(json: JSON | any) {
-    Object.assign(this as TherapeuticLinkMessageDto, json)
+    Object.assign(this as CertificateInfo, json)
   }
-  complete?: boolean
+  application?: string
 
-  errors?: Array<models.ErrorDto>
+  id?: string
 
-  therapeuticLinks?: Array<models.TherapeuticLinkDto>
+  owner?: string
+
+  type?: string
+
+  validity?: number
 }

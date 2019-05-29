@@ -24,13 +24,13 @@
 
 import * as models from "./models"
 
-export class TherapeuticLinkMessageDto {
+export class GetAccessRightResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as TherapeuticLinkMessageDto, json)
+    Object.assign(this as GetAccessRightResponse, json)
   }
-  complete?: boolean
+  accessrightlist?: models.AccessRightListType
 
-  errors?: Array<models.ErrorDto>
+  acknowledge?: models.AcknowledgeType
 
-  therapeuticLinks?: Array<models.TherapeuticLinkDto>
+  response?: models.ResponseType
 }

@@ -24,13 +24,17 @@
 
 import * as models from "./models"
 
-export class TherapeuticLinkMessageDto {
+export class TransactionWithSpecificTime {
   constructor(json: JSON | any) {
-    Object.assign(this as TherapeuticLinkMessageDto, json)
+    Object.assign(this as TransactionWithSpecificTime, json)
   }
-  complete?: boolean
+  author?: models.AuthorType
 
-  errors?: Array<models.ErrorDto>
+  cds?: Array<models.CDTRANSACTION>
 
-  therapeuticLinks?: Array<models.TherapeuticLinkDto>
+  date?: Date
+
+  ids?: Array<models.IDKMEHR>
+
+  time?: Date
 }

@@ -24,13 +24,9 @@
 
 import * as models from "./models"
 
-export class TherapeuticLinkMessageDto {
+export class PatientIdType {
   constructor(json: JSON | any) {
-    Object.assign(this as TherapeuticLinkMessageDto, json)
+    Object.assign(this as PatientIdType, json)
   }
-  complete?: boolean
-
-  errors?: Array<models.ErrorDto>
-
-  therapeuticLinks?: Array<models.TherapeuticLinkDto>
+  ids?: Array<models.IDPATIENT>
 }

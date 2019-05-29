@@ -80,7 +80,7 @@ export class fhcTherlinkcontrollerApi {
     endDate?: Date,
     type?: string,
     sign?: boolean
-  ): Promise<Array<models.TherapeuticLinkMessageDto> | any> {
+  ): Promise<models.TherapeuticLinkMessageDto | any> {
     let _body = null
 
     const _url =
@@ -109,7 +109,7 @@ export class fhcTherlinkcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => (doc.body as Array<JSON>).map(it => new models.TherapeuticLinkMessageDto(it)))
+      .then(doc => new models.TherapeuticLinkMessageDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getAllTherapeuticLinksWithQueryLinkUsingPOST(
@@ -118,7 +118,7 @@ export class fhcTherlinkcontrollerApi {
     xFHCPassPhrase: string,
     queryLink: models.TherapeuticLinkDto,
     sign?: boolean
-  ): Promise<Array<models.TherapeuticLinkMessageDto> | any> {
+  ): Promise<models.TherapeuticLinkMessageDto | any> {
     let _body = null
     _body = queryLink
 
@@ -132,7 +132,7 @@ export class fhcTherlinkcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
-      .then(doc => (doc.body as Array<JSON>).map(it => new models.TherapeuticLinkMessageDto(it)))
+      .then(doc => new models.TherapeuticLinkMessageDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   registerTherapeuticLinkUsingPOST1(
