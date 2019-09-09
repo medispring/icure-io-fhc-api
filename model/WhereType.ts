@@ -24,17 +24,13 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class WhereType {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as WhereType, json)
   }
-  author?: models.AuthorDto
+  country?: models.CountryType
 
-  hcparty?: models.HcPartyIdDto
+  descriptions?: Array<models.LocalisedString>
 
-  hubId?: string
-
-  revokedate?: number
-
-  signdate?: number
+  municipality?: models.MunicipalityType
 }

@@ -24,17 +24,26 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class CDEMPLOYMENTSITUATION {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as CDEMPLOYMENTSITUATION, json)
   }
-  author?: models.AuthorDto
+  dn?: string
 
-  hcparty?: models.HcPartyIdDto
+  l?: string
 
-  hubId?: string
+  s?: string
 
-  revokedate?: number
+  sl?: string
 
-  signdate?: number
+  sv?: string
+
+  value?: CDEMPLOYMENTSITUATION.ValueEnum
+}
+export namespace CDEMPLOYMENTSITUATION {
+  export enum ValueEnum {
+    SELFEMPLOYED = <any>"SELFEMPLOYED",
+    EMPLOYED = <any>"EMPLOYED",
+    CIVILSERVANT = <any>"CIVILSERVANT"
+  }
 }

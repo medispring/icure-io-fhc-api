@@ -24,17 +24,13 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class HasTherapeuticLinkMessage {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as HasTherapeuticLinkMessage, json)
   }
-  author?: models.AuthorDto
+  complete?: boolean
 
-  hcparty?: models.HcPartyIdDto
+  errors?: Array<models.Error>
 
-  hubId?: string
-
-  revokedate?: number
-
-  signdate?: number
+  result?: boolean
 }

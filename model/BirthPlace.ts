@@ -24,17 +24,13 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class BirthPlace {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as BirthPlace, json)
   }
-  author?: models.AuthorDto
+  cityCode?: string
 
-  hcparty?: models.HcPartyIdDto
+  cityName?: string
 
-  hubId?: string
-
-  revokedate?: number
-
-  signdate?: number
+  countryCode?: string
 }

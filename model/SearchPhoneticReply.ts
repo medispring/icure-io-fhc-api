@@ -24,17 +24,15 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class SearchPhoneticReply {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as SearchPhoneticReply, json)
   }
-  author?: models.AuthorDto
+  errorInformations?: Array<models.ErrorType>
 
-  hcparty?: models.HcPartyIdDto
+  id?: string
 
-  hubId?: string
+  persons?: Array<models.PersonType>
 
-  revokedate?: number
-
-  signdate?: number
+  status?: models.Status
 }

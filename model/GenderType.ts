@@ -24,17 +24,28 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class GenderType {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as GenderType, json)
   }
-  author?: models.AuthorDto
+  genderCode?: string
 
-  hcparty?: models.HcPartyIdDto
+  modificationDate?: string
 
-  hubId?: string
+  origin?: GenderType.OriginEnum
 
-  revokedate?: number
+  startDate?: Date
 
-  signdate?: number
+  value?: GenderType.ValueEnum
+}
+export namespace GenderType {
+  export enum OriginEnum {
+    BCSSKSZ = <any>"BCSS_KSZ",
+    RNRR = <any>"RN_RR"
+  }
+  export enum ValueEnum {
+    MALE = <any>"MALE",
+    FEMALE = <any>"FEMALE",
+    UNKNOWN = <any>"UNKNOWN"
+  }
 }

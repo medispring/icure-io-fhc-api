@@ -24,17 +24,19 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class CivilStateResponseType {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as CivilStateResponseType, json)
   }
-  author?: models.AuthorDto
+  civilStateCode?: string
 
-  hcparty?: models.HcPartyIdDto
+  civilStateDescriptions?: Array<models.NameType>
 
-  hubId?: string
+  endDate?: Date
 
-  revokedate?: number
+  location?: models.WhereResponseType
 
-  signdate?: number
+  partner?: models.PartnerType
+
+  startDate?: Date
 }

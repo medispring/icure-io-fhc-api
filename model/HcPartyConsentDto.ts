@@ -24,9 +24,9 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class HcPartyConsentDto {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as HcPartyConsentDto, json)
   }
   author?: models.AuthorDto
 

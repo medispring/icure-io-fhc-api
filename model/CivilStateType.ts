@@ -24,17 +24,25 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class CivilStateType {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as CivilStateType, json)
   }
-  author?: models.AuthorDto
+  code?: number
 
-  hcparty?: models.HcPartyIdDto
+  descriptions?: Array<models.LocalisedString>
 
-  hubId?: string
+  localisation?: models.WhereType
 
-  revokedate?: number
+  modificationDate?: string
 
-  signdate?: number
+  origin?: CivilStateType.OriginEnum
+
+  partner?: models.InhabitantType
+}
+export namespace CivilStateType {
+  export enum OriginEnum {
+    BCSSKSZ = <any>"BCSS_KSZ",
+    RNRR = <any>"RN_RR"
+  }
 }

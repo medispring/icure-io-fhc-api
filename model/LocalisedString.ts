@@ -24,17 +24,20 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class LocalisedString {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as LocalisedString, json)
   }
-  author?: models.AuthorDto
+  lang?: LocalisedString.LangEnum
 
-  hcparty?: models.HcPartyIdDto
-
-  hubId?: string
-
-  revokedate?: number
-
-  signdate?: number
+  value?: string
+}
+export namespace LocalisedString {
+  export enum LangEnum {
+    FR = <any>"FR",
+    NL = <any>"NL",
+    EN = <any>"EN",
+    DE = <any>"DE",
+    NA = <any>"NA"
+  }
 }

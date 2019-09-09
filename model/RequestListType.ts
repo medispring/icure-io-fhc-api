@@ -24,17 +24,21 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class RequestListType {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as RequestListType, json)
   }
-  author?: models.AuthorDto
+  author?: models.AuthorType
 
-  hcparty?: models.HcPartyIdDto
+  breaktheglass?: string
 
-  hubId?: string
+  date?: Date
 
-  revokedate?: number
+  id?: models.IDKMEHR
 
-  signdate?: number
+  maxrows?: number
+
+  paginationinfo?: models.Paginationrequestinfo
+
+  time?: Date
 }

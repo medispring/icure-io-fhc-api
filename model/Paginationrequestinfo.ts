@@ -24,17 +24,9 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class Paginationrequestinfo {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as Paginationrequestinfo, json)
   }
-  author?: models.AuthorDto
-
-  hcparty?: models.HcPartyIdDto
-
-  hubId?: string
-
-  revokedate?: number
-
-  signdate?: number
+  index?: number
 }

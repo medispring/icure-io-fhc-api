@@ -24,17 +24,25 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class CDEXTERNALSOURCE {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as CDEXTERNALSOURCE, json)
   }
-  author?: models.AuthorDto
+  dn?: string
 
-  hcparty?: models.HcPartyIdDto
+  l?: string
 
-  hubId?: string
+  s?: CDEXTERNALSOURCE.SEnum
 
-  revokedate?: number
+  sl?: string
 
-  signdate?: number
+  sv?: string
+
+  value?: string
+}
+export namespace CDEXTERNALSOURCE {
+  export enum SEnum {
+    CDEXTERNALSOURCE = <any>"CD_EXTERNALSOURCE",
+    LOCAL = <any>"LOCAL"
+  }
 }

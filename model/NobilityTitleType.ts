@@ -24,17 +24,11 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class NobilityTitleType {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as NobilityTitleType, json)
   }
-  author?: models.AuthorDto
+  nobilityTitleCode?: string
 
-  hcparty?: models.HcPartyIdDto
-
-  hubId?: string
-
-  revokedate?: number
-
-  signdate?: number
+  nobilityTitleDescriptions?: Array<models.NameType>
 }

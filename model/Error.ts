@@ -24,17 +24,17 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class Error {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as Error, json)
   }
-  author?: models.AuthorDto
+  code?: string
 
-  hcparty?: models.HcPartyIdDto
+  codeDescription?: { [key: string]: string }
 
-  hubId?: string
+  descr?: string
 
-  revokedate?: number
+  url?: string
 
-  signdate?: number
+  zone?: string
 }

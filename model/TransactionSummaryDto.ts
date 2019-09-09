@@ -24,17 +24,27 @@
 
 import * as models from "./models"
 
-export class HcPartyConsent {
+export class TransactionSummaryDto {
   constructor(json: JSON | any) {
-    Object.assign(this as HcPartyConsent, json)
+    Object.assign(this as TransactionSummaryDto, json)
   }
   author?: models.AuthorDto
 
-  hcparty?: models.HcPartyIdDto
+  authorsList?: string
 
-  hubId?: string
+  cds?: Array<models.KmehrCd>
 
-  revokedate?: number
+  date?: number
 
-  signdate?: number
+  desc?: string
+
+  ids?: Array<models.KmehrId>
+
+  iscomplete?: boolean
+
+  isvalidated?: boolean
+
+  recorddatetime?: number
+
+  time?: number
 }
