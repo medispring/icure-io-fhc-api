@@ -46,6 +46,7 @@ export namespace CDINCAPACITY {
     SCHOOL = <any>"SCHOOL",
     SCHOOLSPORTS = <any>"SCHOOLSPORTS",
     TRAVEL = <any>"TRAVEL",
-    VOTE = <any>"VOTE"
+    VOTE = <any>"VOTE",
+    HEAVYPHYSICALACTIVITY = <any>"HEAVYPHYSICALACTIVITY"
   }
 }

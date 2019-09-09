@@ -107,7 +107,8 @@ export class fhcStscontrollerApi {
     ssin: string,
     xFHCKeystoreId: string,
     isMedicalHouse?: boolean,
-    isGuardPost?: boolean
+    isGuardPost?: boolean,
+    xFHCTokenId?: string
   ): Promise<models.SamlTokenResult | any> {
     let _body = null
 
@@ -125,6 +126,7 @@ export class fhcStscontrollerApi {
       .concat(new XHR.Header("Content-Type", "application/json"))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.SamlTokenResult(doc.body as JSON))
       .catch(err => this.handleError(err))

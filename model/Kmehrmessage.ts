@@ -28,15 +28,7 @@ export class Kmehrmessage {
   constructor(json: JSON | any) {
     Object.assign(this as Kmehrmessage, json)
   }
-  base64EncryptedData?: models.Base64EncryptedDataType
+  folder?: models.RecipefolderType
 
-  confidentiality?: models.ConfidentialityType
-
-  encryptedData?: models.EncryptedType
-
-  folders?: Array<models.FolderType>
-
-  header?: models.HeaderType
-
-  signature?: models.JAXBElementSignature
+  header?: models.RecipeheaderType
 }

@@ -30,7 +30,7 @@ export class GetPatientAuditTrailResponse {
   }
   acknowledge?: models.AcknowledgeType
 
-  response?: models.ResponseType
+  response?: models.ResponseListType
 
   transactionaccesslist?: models.TransactionAccessListType
 }

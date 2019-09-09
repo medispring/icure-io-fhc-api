@@ -30,7 +30,7 @@ export class MedicinalProductType {
   }
   deliveredcds?: Array<models.CDDRUGCNK>
 
-  deliveredname?: any
+  deliveredname?: string
 
   intendedcds?: Array<models.CDDRUGCNK>
 

@@ -96,7 +96,7 @@ export class fhcHubcontrollerApi {
     hcpSsin: string,
     hcpZip: string,
     hubPackageId?: string
-  ): Promise<models.HcPartyConsent | any> {
+  ): Promise<models.HcPartyConsentDto | any> {
     let _body = null
 
     const _url =
@@ -118,7 +118,7 @@ export class fhcHubcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => new models.HcPartyConsent(doc.body as JSON))
+      .then(doc => new models.HcPartyConsentDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getPatientAuditTrailUsingGET(
@@ -505,7 +505,7 @@ export class fhcHubcontrollerApi {
     authorSsin?: string,
     isGlobal?: boolean,
     breakTheGlassReason?: string
-  ): Promise<Array<models.TransactionSummary> | any> {
+  ): Promise<Array<models.TransactionSummaryDto> | any> {
     let _body = null
 
     const _url =
@@ -534,7 +534,7 @@ export class fhcHubcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => (doc.body as Array<JSON>).map(it => new models.TransactionSummary(it)))
+      .then(doc => (doc.body as Array<JSON>).map(it => new models.TransactionSummaryDto(it)))
       .catch(err => this.handleError(err))
   }
   putAccessRightUsingPOST(
@@ -693,7 +693,7 @@ export class fhcHubcontrollerApi {
     message: string,
     hubPackageId?: string,
     hubApplication?: string
-  ): Promise<models.TransactionIdType | any> {
+  ): Promise<models.PutTransactionResponseDto | any> {
     let _body = null
     _body = message
 
@@ -720,7 +720,7 @@ export class fhcHubcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
-      .then(doc => new models.TransactionIdType(doc.body as JSON))
+      .then(doc => new models.PutTransactionResponseDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   registerPatientConsentUsingPOST1(

@@ -34,6 +34,10 @@ export class HeaderType {
 
   date?: Date
 
+  expirationdate?: Date
+
+  externalsource?: models.Externalsource
+
   ids?: Array<models.IDKMEHR>
 
   lnks?: Array<models.LnkType>

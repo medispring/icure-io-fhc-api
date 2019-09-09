@@ -135,6 +135,53 @@ export class fhcTherlinkcontrollerApi {
       .then(doc => new models.TherapeuticLinkMessageDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
+  hasTherapeuticLinkUsingGET(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpFirstName: string,
+    hcpLastName: string,
+    patientSsin: string,
+    patientFirstName: string,
+    patientLastName: string,
+    eidCardNumber?: string,
+    isiCardNumber?: string,
+    startDate?: Date,
+    endDate?: Date,
+    type?: string
+  ): Promise<models.HasTherapeuticLinkMessage | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/therlink/check/{patientSsin}/{hcpNihii}"
+        .replace("{hcpNihii}", hcpNihii + "")
+        .replace("{patientSsin}", patientSsin + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
+      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
+      (patientLastName ? "&patientLastName=" + patientLastName : "") +
+      (eidCardNumber ? "&eidCardNumber=" + eidCardNumber : "") +
+      (isiCardNumber ? "&isiCardNumber=" + isiCardNumber : "") +
+      (startDate ? "&startDate=" + startDate : "") +
+      (endDate ? "&endDate=" + endDate : "") +
+      (type ? "&type=" + type : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.HasTherapeuticLinkMessage(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   registerTherapeuticLinkUsingPOST1(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
