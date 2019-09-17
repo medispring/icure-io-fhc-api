@@ -1,6 +1,6 @@
 {
   "name": "fhc-api",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "description": "Typescript version of Freehealth Connector standalone API client",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
