@@ -42,6 +42,28 @@ export class fhcCryptocontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
+  decryptFileUsingPOST(
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
+    encryptedData: any
+  ): Promise<Array<string> | any> {
+    let _body = null
+    encryptedData &&
+      (_body = _body || new FormData()).append(
+        "encryptedData",
+        new Blob(encryptedData, { type: "application/octet-stream" })
+      )
+    const _url = this.host + "/crypto/decryptFile" + "?ts=" + new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "multipart/form-data"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => (doc.body as Array<JSON>).map(it => JSON.parse(JSON.stringify(it))))
+      .catch(err => this.handleError(err))
+  }
   decryptUsingPOST(
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
@@ -54,7 +76,39 @@ export class fhcCryptocontrollerApi {
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
-      .concat(new XHR.Header("Content-Type", "application/json"))
+      .concat(new XHR.Header("Content-Type", "application/octet-stream"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => (doc.body as Array<JSON>).map(it => JSON.parse(JSON.stringify(it))))
+      .catch(err => this.handleError(err))
+  }
+  encryptFileUsingPOST(
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
+    identifier: string,
+    id: string,
+    plainData: any,
+    applicationId?: string
+  ): Promise<Array<string> | any> {
+    let _body = null
+    plainData &&
+      (_body = _body || new FormData()).append(
+        "plainData",
+        new Blob(plainData, { type: "application/octet-stream" })
+      )
+    const _url =
+      this.host +
+      "/crypto/encryptFile/{identifier}/{id}"
+        .replace("{identifier}", identifier + "")
+        .replace("{id}", id + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (applicationId ? "&applicationId=" + applicationId : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "multipart/form-data"))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
@@ -66,24 +120,24 @@ export class fhcCryptocontrollerApi {
     xFHCPassPhrase: string,
     identifier: string,
     id: string,
-    applicationId: string,
-    plainData: string
+    plainData: string,
+    applicationId?: string
   ): Promise<Array<string> | any> {
     let _body = null
     _body = plainData
 
     const _url =
       this.host +
-      "/crypto/encrypt/{identifier}/{id}/{applicationId}"
+      "/crypto/encrypt/{identifier}/{id}"
         .replace("{identifier}", identifier + "")
-        .replace("{id}", id + "")
-        .replace("{applicationId}", applicationId + "") +
+        .replace("{id}", id + "") +
       "?ts=" +
-      new Date().getTime()
+      new Date().getTime() +
+      (applicationId ? "&applicationId=" + applicationId : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
-      .concat(new XHR.Header("Content-Type", "application/json"))
+      .concat(new XHR.Header("Content-Type", "application/octet-stream"))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)

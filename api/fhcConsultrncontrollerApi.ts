@@ -42,6 +42,30 @@ export class fhcConsultrncontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
+  historyUsingGET(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    ssin: string
+  ): Promise<models.ConsultCurrentSsinResponse | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/consultrn/history/{ssin}".replace("{ssin}", ssin + "") +
+      "?ts=" +
+      new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.ConsultCurrentSsinResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   identifyUsingGET(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
@@ -95,7 +119,7 @@ export class fhcConsultrncontrollerApi {
     gender?: string,
     tolerance?: number,
     limit?: number
-  ): Promise<models.SearchPhoneticReply | any> {
+  ): Promise<models.SearchPhoneticReplyDto | any> {
     let _body = null
 
     const _url =
@@ -118,7 +142,7 @@ export class fhcConsultrncontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => new models.SearchPhoneticReply(doc.body as JSON))
+      .then(doc => new models.SearchPhoneticReplyDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 }
