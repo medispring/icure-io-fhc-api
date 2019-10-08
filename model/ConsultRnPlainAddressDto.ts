@@ -24,21 +24,11 @@
 
 import * as models from "./models"
 
-export class ConsultRnPersonDto {
+export class ConsultRnPlainAddressDto {
   constructor(json: JSON | any) {
-    Object.assign(this as ConsultRnPersonDto, json)
+    Object.assign(this as ConsultRnPlainAddressDto, json)
   }
-  modificationDate?: string
+  address?: string
 
-  origin?: ConsultRnPersonDto.OriginEnum
-
-  personData?: models.ConsultRnPersonDataDto
-
-  ssin?: models.EncodedSSINType
-}
-export namespace ConsultRnPersonDto {
-  export enum OriginEnum {
-    BCSSKSZ = <any>"BCSS_KSZ",
-    RNRR = <any>"RN_RR"
-  }
+  country?: models.CountryType
 }

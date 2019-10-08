@@ -24,21 +24,21 @@
 
 import * as models from "./models"
 
-export class ConsultRnPersonDto {
+export class ConsultRnPersonDataDto {
   constructor(json: JSON | any) {
-    Object.assign(this as ConsultRnPersonDto, json)
+    Object.assign(this as ConsultRnPersonDataDto, json)
   }
-  modificationDate?: string
+  address?: models.ConsultRnAddressDto
 
-  origin?: ConsultRnPersonDto.OriginEnum
+  birth?: models.BirthDeceaseType
 
-  personData?: models.ConsultRnPersonDataDto
+  civilstate?: models.CivilStateType
 
-  ssin?: models.EncodedSSINType
-}
-export namespace ConsultRnPersonDto {
-  export enum OriginEnum {
-    BCSSKSZ = <any>"BCSS_KSZ",
-    RNRR = <any>"RN_RR"
-  }
+  decease?: models.BirthDeceaseType
+
+  gender?: models.GenderType
+
+  name?: models.NameType
+
+  nationality?: models.NationalityType
 }
