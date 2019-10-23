@@ -44,6 +44,8 @@ export class EattestCode {
 
   location?: models.EattestHcParty
 
+  locationService?: number
+
   norm?: number
 
   quantity?: number
@@ -55,6 +57,8 @@ export class EattestCode {
   relativeService?: string
 
   requestor?: models.EattestRequestor
+
+  requestorNorm?: number
 
   riziv?: string
 }

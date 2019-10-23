@@ -71,7 +71,7 @@ export class fhcConsultrncontrollerApi {
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     ssin: string
-  ): Promise<models.SearchBySSINReply | any> {
+  ): Promise<models.SearchBySSINReplyDto | any> {
     let _body = null
 
     const _url =
@@ -84,7 +84,7 @@ export class fhcConsultrncontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => new models.SearchBySSINReply(doc.body as JSON))
+      .then(doc => new models.SearchBySSINReplyDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   registerPersonUsingPOST(
@@ -92,7 +92,7 @@ export class fhcConsultrncontrollerApi {
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     mid: models.PersonMid
-  ): Promise<models.RegisterPersonResponse | any> {
+  ): Promise<models.RegisterPersonResponseDto | any> {
     let _body = null
     _body = mid
 
@@ -105,7 +105,7 @@ export class fhcConsultrncontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
-      .then(doc => new models.RegisterPersonResponse(doc.body as JSON))
+      .then(doc => new models.RegisterPersonResponseDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   searchUsingGET(

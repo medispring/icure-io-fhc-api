@@ -24,21 +24,11 @@
 
 import * as models from "./models"
 
-export class EattestCardReading {
+export class DimensionDto {
   constructor(json: JSON | any) {
-    Object.assign(this as EattestCardReading, json)
+    Object.assign(this as DimensionDto, json)
   }
-  date?: number
+  id?: string
 
-  inputType?: number
-
-  manualInputReason?: number
-
-  mediaType?: number
-
-  serial?: string
-
-  time?: number
-
-  vignetteReason?: number
+  value?: string
 }

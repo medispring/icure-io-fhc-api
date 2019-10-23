@@ -112,6 +112,7 @@ export class fhcEattestvcontrollerApi {
     patientLastName: string,
     patientGender: string,
     attest: models.Eattest,
+    treatmentReason?: string,
     date?: number,
     traineeSupervisorSsin?: string,
     traineeSupervisorNihii?: string,
@@ -137,6 +138,7 @@ export class fhcEattestvcontrollerApi {
       (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
       (patientLastName ? "&patientLastName=" + patientLastName : "") +
       (patientGender ? "&patientGender=" + patientGender : "") +
+      (treatmentReason ? "&treatmentReason=" + treatmentReason : "") +
       (date ? "&date=" + date : "") +
       (traineeSupervisorSsin ? "&traineeSupervisorSsin=" + traineeSupervisorSsin : "") +
       (traineeSupervisorNihii ? "&traineeSupervisorNihii=" + traineeSupervisorNihii : "") +
@@ -172,6 +174,7 @@ export class fhcEattestvcontrollerApi {
     patientLastName: string,
     patientGender: string,
     attest: models.Eattest,
+    treatmentReason?: string,
     date?: number,
     traineeSupervisorSsin?: string,
     traineeSupervisorNihii?: string,
@@ -197,6 +200,7 @@ export class fhcEattestvcontrollerApi {
       (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
       (patientLastName ? "&patientLastName=" + patientLastName : "") +
       (patientGender ? "&patientGender=" + patientGender : "") +
+      (treatmentReason ? "&treatmentReason=" + treatmentReason : "") +
       (date ? "&date=" + date : "") +
       (traineeSupervisorSsin ? "&traineeSupervisorSsin=" + traineeSupervisorSsin : "") +
       (traineeSupervisorNihii ? "&traineeSupervisorNihii=" + traineeSupervisorNihii : "") +

@@ -24,21 +24,11 @@
 
 import * as models from "./models"
 
-export class EattestCardReading {
+export class RevokePatientConsentResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as EattestCardReading, json)
+    Object.assign(this as RevokePatientConsentResponse, json)
   }
-  date?: number
+  acknowledge?: models.AcknowledgeType
 
-  inputType?: number
-
-  manualInputReason?: number
-
-  mediaType?: number
-
-  serial?: string
-
-  time?: number
-
-  vignetteReason?: number
+  response?: models.ResponseType
 }

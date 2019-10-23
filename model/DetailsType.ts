@@ -24,21 +24,9 @@
 
 import * as models from "./models"
 
-export class EattestCardReading {
+export class DetailsType {
   constructor(json: JSON | any) {
-    Object.assign(this as EattestCardReading, json)
+    Object.assign(this as DetailsType, json)
   }
-  date?: number
-
-  inputType?: number
-
-  manualInputReason?: number
-
-  mediaType?: number
-
-  serial?: string
-
-  time?: number
-
-  vignetteReason?: number
+  details?: Array<models.DetailType>
 }

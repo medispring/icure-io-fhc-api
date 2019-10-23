@@ -24,21 +24,19 @@
 
 import * as models from "./models"
 
-export class EattestCardReading {
+export class RegisterPersonResponseDto {
   constructor(json: JSON | any) {
-    Object.assign(this as EattestCardReading, json)
+    Object.assign(this as RegisterPersonResponseDto, json)
   }
-  date?: number
+  businessAnomalies?: Array<models.BusinessAnomalyType>
 
-  inputType?: number
+  id?: string
 
-  manualInputReason?: number
+  inResponseTo?: string
 
-  mediaType?: number
+  issueInstant?: Date
 
-  serial?: string
+  result?: models.ResultType
 
-  time?: number
-
-  vignetteReason?: number
+  status?: models.Status
 }

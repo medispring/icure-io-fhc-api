@@ -24,21 +24,15 @@
 
 import * as models from "./models"
 
-export class EattestCardReading {
+export class SearchBySSINReplyDto {
   constructor(json: JSON | any) {
-    Object.assign(this as EattestCardReading, json)
+    Object.assign(this as SearchBySSINReplyDto, json)
   }
-  date?: number
+  errorInformations?: Array<models.ErrorType>
 
-  inputType?: number
+  id?: string
 
-  manualInputReason?: number
+  person?: models.ConsultRnPersonDto
 
-  mediaType?: number
-
-  serial?: string
-
-  time?: number
-
-  vignetteReason?: number
+  status?: models.StatusDto
 }

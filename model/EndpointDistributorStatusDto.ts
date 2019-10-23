@@ -24,21 +24,11 @@
 
 import * as models from "./models"
 
-export class EattestCardReading {
+export class EndpointDistributorStatusDto {
   constructor(json: JSON | any) {
-    Object.assign(this as EattestCardReading, json)
+    Object.assign(this as EndpointDistributorStatusDto, json)
   }
-  date?: number
+  bcpMode?: boolean
 
-  inputType?: number
-
-  manualInputReason?: number
-
-  mediaType?: number
-
-  serial?: string
-
-  time?: number
-
-  vignetteReason?: number
+  mustPoll?: boolean
 }

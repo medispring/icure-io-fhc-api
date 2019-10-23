@@ -42,7 +42,7 @@ export class fhcMemberdatacontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
-  getGeneralInsurabilityByMembershipUsingGET1(
+  getMemberDataByMembershipUsingGET(
     io: string,
     ioMembership: string,
     xFHCTokenId: string,
@@ -55,7 +55,7 @@ export class fhcMemberdatacontrollerApi {
     date?: number,
     endDate?: number,
     hospitalized?: boolean
-  ): Promise<Array<models.Assertion> | any> {
+  ): Promise<models.MemberDataResponse | any> {
     let _body = null
 
     const _url =
@@ -80,7 +80,7 @@ export class fhcMemberdatacontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => (doc.body as Array<JSON>).map(it => new models.Assertion(it)))
+      .then(doc => new models.MemberDataResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getMemberDataUsingGET(
@@ -95,7 +95,7 @@ export class fhcMemberdatacontrollerApi {
     date?: number,
     endDate?: number,
     hospitalized?: boolean
-  ): Promise<Array<models.Assertion> | any> {
+  ): Promise<models.MemberDataResponse | any> {
     let _body = null
 
     const _url =
@@ -118,7 +118,90 @@ export class fhcMemberdatacontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("GET", _url, headers, _body)
-      .then(doc => (doc.body as Array<JSON>).map(it => new models.Assertion(it)))
+      .then(doc => new models.MemberDataResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+  queryMemberDataByMembershipUsingPOST(
+    io: string,
+    ioMembership: string,
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpName: string,
+    facets: Array<models.FacetDto>,
+    hcpQuality?: string,
+    date?: number,
+    endDate?: number,
+    hospitalized?: boolean
+  ): Promise<models.MemberDataResponse | any> {
+    let _body = null
+    _body = facets
+
+    const _url =
+      this.host +
+      "/mda/{io}/{ioMembership}"
+        .replace("{io}", io + "")
+        .replace("{ioMembership}", ioMembership + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hcpName ? "&hcpName=" + hcpName : "") +
+      (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
+      (date ? "&date=" + date : "") +
+      (endDate ? "&endDate=" + endDate : "") +
+      (hospitalized ? "&hospitalized=" + hospitalized : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => new models.MemberDataResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+  queryMemberDataUsingPOST(
+    ssin: string,
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpName: string,
+    facets: Array<models.FacetDto>,
+    hcpQuality?: string,
+    date?: number,
+    endDate?: number,
+    hospitalized?: boolean
+  ): Promise<models.MemberDataResponse | any> {
+    let _body = null
+    _body = facets
+
+    const _url =
+      this.host +
+      "/mda/{ssin}".replace("{ssin}", ssin + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hcpName ? "&hcpName=" + hcpName : "") +
+      (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
+      (date ? "&date=" + date : "") +
+      (endDate ? "&endDate=" + endDate : "") +
+      (hospitalized ? "&hospitalized=" + hospitalized : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => new models.MemberDataResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 }

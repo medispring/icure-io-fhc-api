@@ -72,6 +72,8 @@ export class InvoiceItem {
 
   timeOfDay?: InvoiceItem.TimeOfDayEnum
 
+  transplantationCode?: InvoiceItem.TransplantationCodeEnum
+
   units?: number
 }
 export namespace InvoiceItem {
@@ -112,5 +114,10 @@ export namespace InvoiceItem {
     Weekend = <any>"Weekend",
     Bankholiday = <any>"Bankholiday",
     Urgent = <any>"Urgent"
+  }
+  export enum TransplantationCodeEnum {
+    None = <any>"None",
+    RefersToRecipient = <any>"RefersToRecipient",
+    RefersToDonor = <any>"RefersToDonor"
   }
 }

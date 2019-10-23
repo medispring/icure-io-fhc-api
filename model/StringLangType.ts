@@ -24,21 +24,11 @@
 
 import * as models from "./models"
 
-export class EattestCardReading {
+export class StringLangType {
   constructor(json: JSON | any) {
-    Object.assign(this as EattestCardReading, json)
+    Object.assign(this as StringLangType, json)
   }
-  date?: number
+  lang?: string
 
-  inputType?: number
-
-  manualInputReason?: number
-
-  mediaType?: number
-
-  serial?: string
-
-  time?: number
-
-  vignetteReason?: number
+  value?: string
 }

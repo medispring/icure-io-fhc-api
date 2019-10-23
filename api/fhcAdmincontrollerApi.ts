@@ -42,6 +42,18 @@ export class fhcAdmincontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
+  bcpStatusUsingGET(): Promise<models.EndpointDistributorStatusDto | any> {
+    let _body = null
+
+    const _url = this.host + "/admin/bcp" + "?ts=" + new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.EndpointDistributorStatusDto(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   loglevelUsingPOST(loglevel: string, _package: string): Promise<string | any> {
     let _body = null
 
@@ -57,6 +69,18 @@ export class fhcAdmincontrollerApi {
       .concat(new XHR.Header("Content-Type", "application/json"))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
+  updateBcpStatusUsingPOST(): Promise<any | Boolean> {
+    let _body = null
+
+    const _url = this.host + "/admin/bcp" + "?ts=" + new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => true)
       .catch(err => this.handleError(err))
   }
 }

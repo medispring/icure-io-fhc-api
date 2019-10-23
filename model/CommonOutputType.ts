@@ -24,21 +24,13 @@
 
 import * as models from "./models"
 
-export class EattestCardReading {
+export class CommonOutputType {
   constructor(json: JSON | any) {
-    Object.assign(this as EattestCardReading, json)
+    Object.assign(this as CommonOutputType, json)
   }
-  date?: number
+  inputReference?: string
 
-  inputType?: number
+  nipreference?: string
 
-  manualInputReason?: number
-
-  mediaType?: number
-
-  serial?: string
-
-  time?: number
-
-  vignetteReason?: number
+  outputReference?: string
 }

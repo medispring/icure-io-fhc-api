@@ -42,6 +42,19 @@ export class fhcHubcontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
+  convertKmehrXMLtoJSONUsingPOST(message: string): Promise<models.Kmehrmessage | any> {
+    let _body = null
+    _body = message
+
+    const _url = this.host + "/hub/convertKmehrXMLtoJSON" + "?ts=" + new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/xml"))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => new models.Kmehrmessage(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   getAccessRightUsingGET(
     endpoint: string,
     xFHCKeystoreId: string,
@@ -735,7 +748,8 @@ export class fhcHubcontrollerApi {
     hcpZip: string,
     patientSsin: string,
     hubPackageId?: string,
-    patientEidCardNumber?: string
+    patientEidCardNumber?: string,
+    patientIsiCardNumber?: string
   ): Promise<models.PutPatientConsentResponse | any> {
     let _body = null
 
@@ -751,7 +765,8 @@ export class fhcHubcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
-      (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "")
+      (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "") +
+      (patientIsiCardNumber ? "&patientIsiCardNumber=" + patientIsiCardNumber : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -775,7 +790,8 @@ export class fhcHubcontrollerApi {
     hcpZip: string,
     patientSsin: string,
     hubPackageId?: string,
-    patientEidCardNumber?: string
+    patientEidCardNumber?: string,
+    patientIsiCardNumber?: string
   ): Promise<models.PutTherapeuticLinkResponse | any> {
     let _body = null
 
@@ -792,7 +808,8 @@ export class fhcHubcontrollerApi {
       (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
-      (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "")
+      (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "") +
+      (patientIsiCardNumber ? "&patientIsiCardNumber=" + patientIsiCardNumber : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -849,6 +866,91 @@ export class fhcHubcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => new models.RevokeAccessRightResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+  revokePatientConsentUsingDELETE(
+    endpoint: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpLastName: string,
+    hcpFirstName: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpZip: string,
+    patientSsin: string,
+    hubPackageId?: string,
+    patientEidCardNumber?: string,
+    patientIsiCardNumber?: string
+  ): Promise<models.RevokePatientConsentResponse | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/hub/consent/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (endpoint ? "&endpoint=" + endpoint : "") +
+      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
+      (hcpZip ? "&hcpZip=" + hcpZip : "") +
+      (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "") +
+      (patientIsiCardNumber ? "&patientIsiCardNumber=" + patientIsiCardNumber : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("DELETE", _url, headers, _body)
+      .then(doc => new models.RevokePatientConsentResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+  revokeTherapeuticLinkUsingDELETE(
+    endpoint: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpLastName: string,
+    hcpFirstName: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpZip: string,
+    patientSsin: string,
+    hubPackageId?: string,
+    patientEidCardNumber?: string,
+    patientIsiCardNumber?: string
+  ): Promise<models.RevokeTherapeuticLinkResponse | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/hub/therlink/{hcpNihii}/{patientSsin}"
+        .replace("{hcpNihii}", hcpNihii + "")
+        .replace("{patientSsin}", patientSsin + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (endpoint ? "&endpoint=" + endpoint : "") +
+      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
+      (hcpZip ? "&hcpZip=" + hcpZip : "") +
+      (patientEidCardNumber ? "&patientEidCardNumber=" + patientEidCardNumber : "") +
+      (patientIsiCardNumber ? "&patientIsiCardNumber=" + patientIsiCardNumber : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("DELETE", _url, headers, _body)
+      .then(doc => new models.RevokeTherapeuticLinkResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   revokeTransactionUsingDELETE(
