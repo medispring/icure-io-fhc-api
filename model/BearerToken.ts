@@ -24,19 +24,9 @@
 
 import * as models from "./models"
 
-export class BoxInfo {
+export class BearerToken {
   constructor(json: JSON | any) {
-    Object.assign(this as BoxInfo, json)
+    Object.assign(this as BearerToken, json)
   }
-  boxId?: string
-
-  currentSize?: number
-
-  error?: models.Error
-
-  maxSize?: number
-
-  nbrMessagesInStandBy?: number
-
-  quality?: string
+  token?: string
 }

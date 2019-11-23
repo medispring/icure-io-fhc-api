@@ -61,4 +61,20 @@ export class EattestCode {
   requestorNorm?: number
 
   riziv?: string
+
+  side?: EattestCode.SideEnum
+
+  transplantationCode?: EattestCode.TransplantationCodeEnum
+}
+export namespace EattestCode {
+  export enum SideEnum {
+    None = <any>"None",
+    Left = <any>"Left",
+    Right = <any>"Right"
+  }
+  export enum TransplantationCodeEnum {
+    None = <any>"None",
+    RefersToRecipient = <any>"RefersToRecipient",
+    RefersToDonor = <any>"RefersToDonor"
+  }
 }

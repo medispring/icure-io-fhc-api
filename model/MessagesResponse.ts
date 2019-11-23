@@ -24,19 +24,11 @@
 
 import * as models from "./models"
 
-export class BoxInfo {
+export class MessagesResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as BoxInfo, json)
+    Object.assign(this as MessagesResponse, json)
   }
-  boxId?: string
-
-  currentSize?: number
-
   error?: models.Error
 
-  maxSize?: number
-
-  nbrMessagesInStandBy?: number
-
-  quality?: string
+  messages?: Array<models.Message>
 }

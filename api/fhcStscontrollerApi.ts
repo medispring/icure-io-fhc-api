@@ -68,6 +68,31 @@ export class fhcStscontrollerApi {
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
+  getBearerTokenUsingGET(
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    ssin: string,
+    xFHCKeystoreId: string
+  ): Promise<models.BearerToken | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/sts/token/bearer" +
+      "?ts=" +
+      new Date().getTime() +
+      (ssin ? "&ssin=" + ssin : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    return XHR.sendCommand("GET", _url, headers, _body)
+      .then(doc => new models.BearerToken(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   getKeystoreInfoUsingGET(
     keystoreId: string,
     xFHCPassPhrase: string

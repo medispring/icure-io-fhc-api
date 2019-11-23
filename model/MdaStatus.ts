@@ -24,19 +24,11 @@
 
 import * as models from "./models"
 
-export class BoxInfo {
+export class MdaStatus {
   constructor(json: JSON | any) {
-    Object.assign(this as BoxInfo, json)
+    Object.assign(this as MdaStatus, json)
   }
-  boxId?: string
+  code1?: string
 
-  currentSize?: number
-
-  error?: models.Error
-
-  maxSize?: number
-
-  nbrMessagesInStandBy?: number
-
-  quality?: string
+  code2?: string
 }

@@ -199,7 +199,8 @@ export class fhcTherlinkcontrollerApi {
     end?: Date,
     therLinkType?: string,
     comment?: string,
-    sign?: boolean
+    sign?: boolean,
+    proofType?: string
   ): Promise<models.TherapeuticLinkMessageDto | any> {
     let _body = null
 
@@ -221,7 +222,8 @@ export class fhcTherlinkcontrollerApi {
       (end ? "&end=" + end : "") +
       (therLinkType ? "&therLinkType=" + therLinkType : "") +
       (comment ? "&comment=" + comment : "") +
-      (sign ? "&sign=" + sign : "")
+      (sign ? "&sign=" + sign : "") +
+      (proofType ? "&proofType=" + proofType : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -250,7 +252,8 @@ export class fhcTherlinkcontrollerApi {
     end?: Date,
     therLinkType?: string,
     comment?: string,
-    sign?: boolean
+    sign?: boolean,
+    proofType?: string
   ): Promise<models.TherapeuticLinkMessageDto | any> {
     let _body = null
 
@@ -272,7 +275,8 @@ export class fhcTherlinkcontrollerApi {
       (end ? "&end=" + end : "") +
       (therLinkType ? "&therLinkType=" + therLinkType : "") +
       (comment ? "&comment=" + comment : "") +
-      (sign ? "&sign=" + sign : "")
+      (sign ? "&sign=" + sign : "") +
+      (proofType ? "&proofType=" + proofType : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -289,13 +293,19 @@ export class fhcTherlinkcontrollerApi {
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     therLink: models.TherapeuticLinkDto,
-    sign?: boolean
+    sign?: boolean,
+    proofType?: string
   ): Promise<models.TherapeuticLinkMessageDto | any> {
     let _body = null
     _body = therLink
 
     const _url =
-      this.host + "/therlink/revoke" + "?ts=" + new Date().getTime() + (sign ? "&sign=" + sign : "")
+      this.host +
+      "/therlink/revoke" +
+      "?ts=" +
+      new Date().getTime() +
+      (sign ? "&sign=" + sign : "") +
+      (proofType ? "&proofType=" + proofType : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")

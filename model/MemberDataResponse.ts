@@ -38,5 +38,5 @@ export class MemberDataResponse {
 
   mycarenetConversation?: models.MycarenetConversation
 
-  status?: models.Status
+  status?: models.MdaStatus
 }
