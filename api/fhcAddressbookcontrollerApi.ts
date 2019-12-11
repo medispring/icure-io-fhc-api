@@ -73,6 +73,7 @@ export class fhcAddressbookcontrollerApi {
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     ssin: string,
+    quality?: string,
     language?: string
   ): Promise<models.HealthcareParty | any> {
     let _body = null
@@ -82,6 +83,7 @@ export class fhcAddressbookcontrollerApi {
       "/ab/hcp/ssin/{ssin}".replace("{ssin}", ssin + "") +
       "?ts=" +
       new Date().getTime() +
+      (quality ? "&quality=" + quality : "") +
       (language ? "&language=" + language : "")
     let headers = this.headers
     headers = headers

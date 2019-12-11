@@ -42,6 +42,62 @@ export class fhcEattestvcontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
+  cancelAttestWithResponseUsingDELETE(
+    patientSsin: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpFirstName: string,
+    hcpLastName: string,
+    hcpCbe: string,
+    patientFirstName: string,
+    patientLastName: string,
+    patientGender: string,
+    eAttestRef: string,
+    reason: string,
+    date?: number,
+    traineeSupervisorSsin?: string,
+    traineeSupervisorNihii?: string,
+    traineeSupervisorFirstName?: string,
+    traineeSupervisorLastName?: string
+  ): Promise<models.SendAttestResultWithResponse | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/eattestv2/send/{patientSsin}/verbose".replace("{patientSsin}", patientSsin + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
+      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (hcpCbe ? "&hcpCbe=" + hcpCbe : "") +
+      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
+      (patientLastName ? "&patientLastName=" + patientLastName : "") +
+      (patientGender ? "&patientGender=" + patientGender : "") +
+      (date ? "&date=" + date : "") +
+      (traineeSupervisorSsin ? "&traineeSupervisorSsin=" + traineeSupervisorSsin : "") +
+      (traineeSupervisorNihii ? "&traineeSupervisorNihii=" + traineeSupervisorNihii : "") +
+      (traineeSupervisorFirstName
+        ? "&traineeSupervisorFirstName=" + traineeSupervisorFirstName
+        : "") +
+      (traineeSupervisorLastName ? "&traineeSupervisorLastName=" + traineeSupervisorLastName : "") +
+      (eAttestRef ? "&eAttestRef=" + eAttestRef : "") +
+      (reason ? "&reason=" + reason : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("DELETE", _url, headers, _body)
+      .then(doc => new models.SendAttestResultWithResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   cancelAttestUsingDELETE(
     patientSsin: string,
     xFHCKeystoreId: string,

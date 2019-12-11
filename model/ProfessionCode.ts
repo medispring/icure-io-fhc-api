@@ -24,60 +24,13 @@
 
 import * as models from "./models"
 
-export class HealthcareParty {
+export class ProfessionCode {
   constructor(json: JSON | any) {
-    Object.assign(this as HealthcareParty, json)
+    Object.assign(this as ProfessionCode, json)
   }
-  addresses?: Array<models.Address>
-
-  bankAccount?: string
-
-  bic?: string
-
-  cbe?: string
-
-  civility?: string
-
-  companyName?: string
-
-  ehealthBoxes?: Array<models.EHealthBoxType>
-
-  ehp?: string
-
-  firstName?: string
-
-  gender?: HealthcareParty.GenderEnum
-
-  invoiceHeader?: string
-
-  languages?: Array<string>
-
-  lastName?: string
-
-  name?: string
-
-  nihii?: string
-
-  professionCodes?: Array<models.ProfessionCode>
-
-  proxyBankAccount?: string
-
-  proxyBic?: string
-
-  speciality?: string
-
-  ssin?: string
+  authenticSource?: string
 
   type?: string
-}
-export namespace HealthcareParty {
-  export enum GenderEnum {
-    M = <any>"M",
-    F = <any>"F",
-    I = <any>"I",
-    C = <any>"C",
-    Y = <any>"Y",
-    X = <any>"X",
-    U = <any>"U"
-  }
+
+  value?: string
 }
