@@ -28,10 +28,6 @@ export class Status {
   constructor(json: JSON | any) {
     Object.assign(this as Status, json)
   }
-  code?: string
-
-  messages?: Array<models.LocalisedString>
-
   statusCode?: models.StatusCode
 
   statusDetail?: models.StatusDetail

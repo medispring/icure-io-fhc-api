@@ -119,11 +119,20 @@ export class fhcStscontrollerApi {
       .then(doc => new models.CertificateInfo(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  registerTokenUsingPOST(token: string, xFHCTokenId: string): Promise<any | Boolean> {
+  registerTokenUsingPOST(
+    token: string,
+    xFHCTokenId: string,
+    quality?: string
+  ): Promise<any | Boolean> {
     let _body = null
     _body = token
 
-    const _url = this.host + "/sts/token" + "?ts=" + new Date().getTime()
+    const _url =
+      this.host +
+      "/sts/token" +
+      "?ts=" +
+      new Date().getTime() +
+      (quality ? "&quality=" + quality : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -137,9 +146,36 @@ export class fhcStscontrollerApi {
     xFHCPassPhrase: string,
     ssin: string,
     xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    quality: string
+  ): Promise<models.SamlTokenResult | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/sts/token/{quality}".replace("{quality}", quality + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (ssin ? "&ssin=" + ssin : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+      .then(doc => new models.SamlTokenResult(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+  requestTokenUsingGET1(
+    xFHCPassPhrase: string,
+    ssin: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
     isMedicalHouse?: boolean,
     isGuardPost?: boolean,
-    xFHCTokenId?: string
+    isSortingCenter?: boolean
   ): Promise<models.SamlTokenResult | any> {
     let _body = null
 
@@ -150,15 +186,16 @@ export class fhcStscontrollerApi {
       new Date().getTime() +
       (ssin ? "&ssin=" + ssin : "") +
       (isMedicalHouse ? "&isMedicalHouse=" + isMedicalHouse : "") +
-      (isGuardPost ? "&isGuardPost=" + isGuardPost : "")
+      (isGuardPost ? "&isGuardPost=" + isGuardPost : "") +
+      (isSortingCenter ? "&isSortingCenter=" + isSortingCenter : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.SamlTokenResult(doc.body as JSON))
       .catch(err => this.handleError(err))
   }

@@ -99,6 +99,7 @@ export namespace Patient {
     Divorced = <any>"divorced",
     Widower = <any>"widower",
     Complicated = <any>"complicated",
+    Separated = <any>"separated",
     Unknown = <any>"unknown"
   }
 }
