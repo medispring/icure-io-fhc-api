@@ -25,10 +25,11 @@
 import { XHR } from "./XHR"
 import * as models from "../model/models"
 
-export class fhcEhboxvcontrollerApi {
+export class fhcEhboxV3ControllerApi {
   host: string
   headers: Array<XHR.Header>
   fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
+
   constructor(
     host: string,
     headers: any,
@@ -43,9 +44,8 @@ export class fhcEhboxvcontrollerApi {
     this.headers = h
   }
 
-  handleError(e: XHR.Data) {
-    if (e.status == 401) throw Error("auth-failed")
-    else throw Error("api-error" + e.status)
+  handleError(e: XHR.XHRError) {
+    throw e
   }
 
   deleteMessagesUsingPOST1(
@@ -67,9 +67,9 @@ export class fhcEhboxvcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.MessageOperationResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -94,9 +94,9 @@ export class fhcEhboxvcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.MessageResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -123,9 +123,9 @@ export class fhcEhboxvcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.MessageResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -142,9 +142,9 @@ export class fhcEhboxvcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.BoxInfo(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -168,9 +168,9 @@ export class fhcEhboxvcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.MessagesResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -196,9 +196,9 @@ export class fhcEhboxvcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.MessagesResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -225,9 +225,9 @@ export class fhcEhboxvcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.MessageOperationResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -256,9 +256,9 @@ export class fhcEhboxvcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.MessageOperationResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -287,9 +287,9 @@ export class fhcEhboxvcontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.MessageOperationResponse(doc.body as JSON))
       .catch(err => this.handleError(err))

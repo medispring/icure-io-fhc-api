@@ -30,7 +30,7 @@ export class HasTherapeuticLinkMessage {
   }
   complete?: boolean
 
-  errors?: Array<models.Error>
+  errors?: Array<models.ErrorDto>
 
   result?: boolean
 }

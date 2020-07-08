@@ -25,10 +25,11 @@
 import { XHR } from "./XHR"
 import * as models from "../model/models"
 
-export class fhcConsultrncontrollerApi {
+export class fhcConsultrnControllerApi {
   host: string
   headers: Array<XHR.Header>
   fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
+
   constructor(
     host: string,
     headers: any,
@@ -43,9 +44,8 @@ export class fhcConsultrncontrollerApi {
     this.headers = h
   }
 
-  handleError(e: XHR.Data) {
-    if (e.status == 401) throw Error("auth-failed")
-    else throw Error("api-error" + e.status)
+  handleError(e: XHR.XHRError) {
+    throw e
   }
 
   historyUsingGET(
@@ -65,9 +65,9 @@ export class fhcConsultrncontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.ConsultCurrentSsinResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -86,9 +86,9 @@ export class fhcConsultrncontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.SearchBySSINReplyDto(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -107,9 +107,9 @@ export class fhcConsultrncontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.RegisterPersonResponseDto(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -144,9 +144,9 @@ export class fhcConsultrncontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.SearchPhoneticReplyDto(doc.body as JSON))
       .catch(err => this.handleError(err))

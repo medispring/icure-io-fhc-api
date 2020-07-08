@@ -24,29 +24,21 @@
 
 import * as models from "./models"
 
-export class PrescriptionRequest {
+export class EndSubscriptionResultWithResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as PrescriptionRequest, json)
+    Object.assign(this as EndSubscriptionResultWithResponse, json)
   }
-  deliveryDate?: number
+  commonOutput?: models.CommonOutput
 
-  executorId?: string
+  errors?: Array<models.MycarenetError>
 
-  expirationDate?: number
+  kmehrMessage?: Array<string>
 
-  feedback?: boolean
+  mycarenetConversation?: models.MycarenetConversation
 
-  hcp?: models.HealthcareParty
+  reference?: string
 
-  medications?: Array<models.Medication>
+  subscriptionsEndDate?: number
 
-  notification?: string
-
-  patient?: models.Patient
-
-  prescriptionType?: string
-
-  samVersion?: string
-
-  vision?: string
+  xades?: Array<string>
 }

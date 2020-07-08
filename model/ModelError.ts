@@ -24,29 +24,17 @@
 
 import * as models from "./models"
 
-export class PrescriptionRequest {
+export class ModelError {
   constructor(json: JSON | any) {
-    Object.assign(this as PrescriptionRequest, json)
+    Object.assign(this as ModelError, json)
   }
-  deliveryDate?: number
+  code?: string
 
-  executorId?: string
+  codeDescription?: { [key: string]: string }
 
-  expirationDate?: number
+  descr?: string
 
-  feedback?: boolean
+  url?: string
 
-  hcp?: models.HealthcareParty
-
-  medications?: Array<models.Medication>
-
-  notification?: string
-
-  patient?: models.Patient
-
-  prescriptionType?: string
-
-  samVersion?: string
-
-  vision?: string
+  zone?: string
 }

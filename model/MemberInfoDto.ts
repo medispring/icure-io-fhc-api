@@ -24,29 +24,13 @@
 
 import * as models from "./models"
 
-export class PrescriptionRequest {
+export class MemberInfoDto {
   constructor(json: JSON | any) {
-    Object.assign(this as PrescriptionRequest, json)
+    Object.assign(this as MemberInfoDto, json)
   }
-  deliveryDate?: number
+  hospitalized?: boolean
 
-  executorId?: string
+  ioMembership?: string
 
-  expirationDate?: number
-
-  feedback?: boolean
-
-  hcp?: models.HealthcareParty
-
-  medications?: Array<models.Medication>
-
-  notification?: string
-
-  patient?: models.Patient
-
-  prescriptionType?: string
-
-  samVersion?: string
-
-  vision?: string
+  ssin?: string
 }

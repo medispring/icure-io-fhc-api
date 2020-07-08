@@ -37,4 +37,6 @@ export class Substanceproduct {
   intendedcds?: Array<models.Code>
 
   intendedname?: string
+
+  samId?: string
 }

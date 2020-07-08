@@ -25,10 +25,11 @@
 import { XHR } from "./XHR"
 import * as models from "../model/models"
 
-export class fhcEfactcontrollerApi {
+export class fhcEfactControllerApi {
   host: string
   headers: Array<XHR.Header>
   fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
+
   constructor(
     host: string,
     headers: any,
@@ -43,9 +44,8 @@ export class fhcEfactcontrollerApi {
     this.headers = h
   }
 
-  handleError(e: XHR.Data) {
-    if (e.status == 401) throw Error("auth-failed")
-    else throw Error("api-error" + e.status)
+  handleError(e: XHR.XHRError) {
+    throw e
   }
 
   confirmAcksUsingPUT(
@@ -56,8 +56,7 @@ export class fhcEfactcontrollerApi {
     ssin: string,
     firstName: string,
     lastName: string,
-    valueHashes: Array<string>,
-    isGuardPost?: boolean
+    valueHashes: Array<string>
   ): Promise<boolean | any> {
     let _body = null
     _body = valueHashes
@@ -69,15 +68,14 @@ export class fhcEfactcontrollerApi {
       new Date().getTime() +
       (ssin ? "&ssin=" + ssin : "") +
       (firstName ? "&firstName=" + firstName : "") +
-      (lastName ? "&lastName=" + lastName : "") +
-      (isGuardPost ? "&isGuardPost=" + isGuardPost : "")
+      (lastName ? "&lastName=" + lastName : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("PUT", _url, headers, _body, this.fetchImpl)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
@@ -90,8 +88,7 @@ export class fhcEfactcontrollerApi {
     ssin: string,
     firstName: string,
     lastName: string,
-    valueHashes: Array<string>,
-    isGuardPost?: boolean
+    valueHashes: Array<string>
   ): Promise<boolean | any> {
     let _body = null
     _body = valueHashes
@@ -103,15 +100,14 @@ export class fhcEfactcontrollerApi {
       new Date().getTime() +
       (ssin ? "&ssin=" + ssin : "") +
       (firstName ? "&firstName=" + firstName : "") +
-      (lastName ? "&lastName=" + lastName : "") +
-      (isGuardPost ? "&isGuardPost=" + isGuardPost : "")
+      (lastName ? "&lastName=" + lastName : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("PUT", _url, headers, _body, this.fetchImpl)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
@@ -125,8 +121,7 @@ export class fhcEfactcontrollerApi {
     ssin: string,
     firstName: string,
     lastName: string,
-    limit: number,
-    isGuardPost: boolean
+    limit: number
   ): Promise<Array<models.EfactMessage> | any> {
     let _body = null
 
@@ -140,15 +135,14 @@ export class fhcEfactcontrollerApi {
       (ssin ? "&ssin=" + ssin : "") +
       (firstName ? "&firstName=" + firstName : "") +
       (lastName ? "&lastName=" + lastName : "") +
-      (limit ? "&limit=" + limit : "") +
-      (isGuardPost ? "&isGuardPost=" + isGuardPost : "")
+      (limit ? "&limit=" + limit : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.EfactMessage(it)))
       .catch(err => this.handleError(err))
@@ -198,25 +192,19 @@ export class fhcEfactcontrollerApi {
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
-    batch: models.InvoicesBatch,
-    isGuardPost?: boolean
+    batch: models.InvoicesBatch
   ): Promise<models.EfactSendResponse | any> {
     let _body = null
     _body = batch
 
-    const _url =
-      this.host +
-      "/efact/batch" +
-      "?ts=" +
-      new Date().getTime() +
-      (isGuardPost ? "&isGuardPost=" + isGuardPost : "")
+    const _url = this.host + "/efact/batch" + "?ts=" + new Date().getTime()
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new models.EfactSendResponse(doc.body as JSON))
       .catch(err => this.handleError(err))

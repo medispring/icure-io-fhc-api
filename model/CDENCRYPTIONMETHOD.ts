@@ -40,7 +40,7 @@ export class CDENCRYPTIONMETHOD {
 }
 export namespace CDENCRYPTIONMETHOD {
   export enum SEnum {
-    METHOD = <any>"CD_ENCRYPTION_METHOD"
+    CDENCRYPTIONMETHOD = <any>"CD_ENCRYPTION_METHOD"
   }
   export enum ValueEnum {
     CMS = <any>"CMS"

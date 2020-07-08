@@ -32,7 +32,7 @@ export class BoxInfo {
 
   currentSize?: number
 
-  error?: models.Error
+  error?: models.ErrorDto
 
   maxSize?: number
 

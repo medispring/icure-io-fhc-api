@@ -25,7 +25,7 @@
 import { XHR } from "./XHR"
 import * as models from "../model/models"
 
-export class fhcConsentControllerApi {
+export class fhcMhmControllerApi {
   host: string
   headers: Array<XHR.Header>
   fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
@@ -48,71 +48,36 @@ export class fhcConsentControllerApi {
     throw e
   }
 
-  getPatientConsentUsingGET(
+  cancelSubscriptionUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
-    hcpFirstName: string,
-    hcpLastName: string,
-    patientSsin: string,
-    patientFirstName: string,
-    patientLastName: string
-  ): Promise<models.ConsentMessageDto | any> {
-    let _body = null
-
-    const _url =
-      this.host +
-      "/consent/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
-      "?ts=" +
-      new Date().getTime() +
-      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
-      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
-      (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
-      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
-      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
-      (patientLastName ? "&patientLastName=" + patientLastName : "")
-    let headers = this.headers
-    headers = headers
-      .filter(h => h.header !== "Content-Type")
-      .concat(new XHR.Header("Content-Type", "application/json"))
-    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
-    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
-    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
-      .then(doc => new models.ConsentMessageDto(doc.body as JSON))
-      .catch(err => this.handleError(err))
-  }
-  registerPatientConsentUsingPOST(
-    xFHCKeystoreId: string,
-    xFHCTokenId: string,
-    xFHCPassPhrase: string,
-    hcpNihii: string,
-    hcpSsin: string,
-    hcpFirstName: string,
-    hcpLastName: string,
-    patientSsin: string,
+    hcpName: string,
     patientFirstName: string,
     patientLastName: string,
-    eidCardNumber?: string,
-    isiCardNumber?: string
-  ): Promise<models.ConsentMessageDto | any> {
+    patientGender: string,
+    reference: string,
+    patientSsin?: string,
+    io?: string,
+    ioMembership?: string
+  ): Promise<models.CancelSubscriptionResultWithResponse | any> {
     let _body = null
 
     const _url =
       this.host +
-      "/consent/{patientSsin}".replace("{patientSsin}", patientSsin + "") +
+      "/mhm/cancelSubscription" +
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
-      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
-      (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
-      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
+      (hcpName ? "&hcpName=" + hcpName : "") +
+      (patientSsin ? "&patientSsin=" + patientSsin : "") +
       (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
       (patientLastName ? "&patientLastName=" + patientLastName : "") +
-      (eidCardNumber ? "&eidCardNumber=" + eidCardNumber : "") +
-      (isiCardNumber ? "&isiCardNumber=" + isiCardNumber : "")
+      (patientGender ? "&patientGender=" + patientGender : "") +
+      (io ? "&io=" + io : "") +
+      (ioMembership ? "&ioMembership=" + ioMembership : "") +
+      (reference ? "&reference=" + reference : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -121,35 +86,45 @@ export class fhcConsentControllerApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => new models.ConsentMessageDto(doc.body as JSON))
+      .then(doc => new models.CancelSubscriptionResultWithResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  revokePatientConsentUsingPOST(
+  notifySubscriptionClosureUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
-    hcpFirstName: string,
-    hcpLastName: string,
-    existingConsent: models.ConsentTypeDto,
-    eidCardNumber?: string,
-    isiCardNumber?: string
-  ): Promise<models.ConsentMessageDto | any> {
+    hcpName: string,
+    patientFirstName: string,
+    patientLastName: string,
+    patientGender: string,
+    reference: string,
+    endDate: number,
+    reason: string,
+    decisionType: string,
+    patientSsin?: string,
+    io?: string,
+    ioMembership?: string
+  ): Promise<models.EndSubscriptionResultWithResponse | any> {
     let _body = null
-    _body = existingConsent
 
     const _url =
       this.host +
-      "/consent/revoke/{patientSsin}" +
+      "/mhm/notifySubscriptionClosure" +
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
-      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
-      (hcpFirstName ? "&hcpFirstName=" + hcpFirstName : "") +
-      (hcpLastName ? "&hcpLastName=" + hcpLastName : "") +
-      (eidCardNumber ? "&eidCardNumber=" + eidCardNumber : "") +
-      (isiCardNumber ? "&isiCardNumber=" + isiCardNumber : "")
+      (hcpName ? "&hcpName=" + hcpName : "") +
+      (patientSsin ? "&patientSsin=" + patientSsin : "") +
+      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
+      (patientLastName ? "&patientLastName=" + patientLastName : "") +
+      (patientGender ? "&patientGender=" + patientGender : "") +
+      (io ? "&io=" + io : "") +
+      (ioMembership ? "&ioMembership=" + ioMembership : "") +
+      (reference ? "&reference=" + reference : "") +
+      (endDate ? "&endDate=" + endDate : "") +
+      (reason ? "&reason=" + reason : "") +
+      (decisionType ? "&decisionType=" + decisionType : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -158,7 +133,56 @@ export class fhcConsentControllerApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => new models.ConsentMessageDto(doc.body as JSON))
+      .then(doc => new models.EndSubscriptionResultWithResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+  sendSubscriptionUsingPOST(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpName: string,
+    patientFirstName: string,
+    patientLastName: string,
+    patientGender: string,
+    startDate: number,
+    isTrial: boolean,
+    signatureType: string,
+    isRecovery: boolean,
+    isTestForNotify: boolean,
+    patientSsin?: string,
+    io?: string,
+    ioMembership?: string
+  ): Promise<models.StartSubscriptionResultWithResponse | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/mhm/sendSubscription" +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpName ? "&hcpName=" + hcpName : "") +
+      (patientSsin ? "&patientSsin=" + patientSsin : "") +
+      (patientFirstName ? "&patientFirstName=" + patientFirstName : "") +
+      (patientLastName ? "&patientLastName=" + patientLastName : "") +
+      (patientGender ? "&patientGender=" + patientGender : "") +
+      (io ? "&io=" + io : "") +
+      (ioMembership ? "&ioMembership=" + ioMembership : "") +
+      (startDate ? "&startDate=" + startDate : "") +
+      (isTrial ? "&isTrial=" + isTrial : "") +
+      (signatureType ? "&signatureType=" + signatureType : "") +
+      (isRecovery ? "&isRecovery=" + isRecovery : "") +
+      (isTestForNotify ? "&isTestForNotify=" + isTestForNotify : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+      .then(doc => new models.StartSubscriptionResultWithResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 }
