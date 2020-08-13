@@ -1,6 +1,6 @@
 {
-  "name": "fhc-api",
-  "version": "1.0.60",
+  "name": "@taktik/fhc-api",
+  "version": "0.3.0",
   "description": "Typescript version of Freehealth Connector standalone API client",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
