@@ -9,13 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { WhereResponseType } from "./WhereResponseType"
 
-export class BirthResponseType {
+export class MemberDataAck {
   constructor(json: JSON | any) {
-    Object.assign(this as BirthResponseType, json)
+    Object.assign(this as MemberDataAck, json)
   }
 
-  birthDate?: string
-  birthPlace?: WhereResponseType
+  date?: Date
+  major?: string
+  message?: string
+  minor?: string
 }

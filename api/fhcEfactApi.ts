@@ -34,7 +34,7 @@ export class fhcEfactApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -59,7 +59,7 @@ export class fhcEfactApi {
     firstName: string,
     lastName: string,
     body?: Array<string>
-  ): Promise<boolean | any> {
+  ): Promise<boolean> {
     let _body = null
     _body = body
 
@@ -104,7 +104,7 @@ export class fhcEfactApi {
     firstName: string,
     lastName: string,
     body?: Array<string>
-  ): Promise<boolean | any> {
+  ): Promise<boolean> {
     let _body = null
     _body = body
 
@@ -151,7 +151,7 @@ export class fhcEfactApi {
     firstName: string,
     lastName: string,
     limit: number
-  ): Promise<Array<EfactMessage> | any> {
+  ): Promise<Array<EfactMessage>> {
     let _body = null
 
     const _url =
@@ -177,7 +177,7 @@ export class fhcEfactApi {
    * @summary makeFlatFileCore
    * @param body batch
    */
-  makeFlatFileCoreUsingPOST(body?: InvoicesBatch): Promise<FlatFileWithMetadata | any> {
+  makeFlatFileCoreUsingPOST(body?: InvoicesBatch): Promise<FlatFileWithMetadata> {
     let _body = null
     _body = body
 
@@ -196,7 +196,7 @@ export class fhcEfactApi {
    * @summary makeFlatFileTest
    * @param body batch
    */
-  makeFlatFileTestUsingPOST(body?: InvoicesBatch): Promise<string | any> {
+  makeFlatFileTestUsingPOST(body?: InvoicesBatch): Promise<string> {
     let _body = null
     _body = body
 
@@ -215,7 +215,7 @@ export class fhcEfactApi {
    * @summary makeFlatFile
    * @param body batch
    */
-  makeFlatFileUsingPOST(body?: InvoicesBatch): Promise<string | any> {
+  makeFlatFileUsingPOST(body?: InvoicesBatch): Promise<string> {
     let _body = null
     _body = body
 
@@ -242,7 +242,7 @@ export class fhcEfactApi {
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     body?: InvoicesBatch
-  ): Promise<EfactSendResponse | any> {
+  ): Promise<EfactSendResponse> {
     let _body = null
     _body = body
 

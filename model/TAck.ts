@@ -22,5 +22,5 @@ export class TAck {
   resultMajor?: string
   resultMessage?: string
   resultMinor?: string
-  value?: Array<string>
+  value?: ArrayBuffer
 }

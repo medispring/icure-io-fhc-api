@@ -33,93 +33,8 @@ export class fhcEattestV2Api {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
-  }
-
-  /**
-   *
-   * @summary cancelAttesWithResponse
-   * @param patientSsin patientSsin
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpFirstName hcpFirstName
-   * @param hcpLastName hcpLastName
-   * @param hcpCbe hcpCbe
-   * @param patientFirstName patientFirstName
-   * @param patientLastName patientLastName
-   * @param patientGender patientGender
-   * @param date date
-   * @param traineeSupervisorSsin traineeSupervisorSsin
-   * @param traineeSupervisorNihii traineeSupervisorNihii
-   * @param traineeSupervisorFirstName traineeSupervisorFirstName
-   * @param traineeSupervisorLastName traineeSupervisorLastName
-   * @param eAttestRef eAttestRef
-   * @param reason reason
-   */
-  cancelAttesWithResponseUsingDELETE(
-    patientSsin: string,
-    xFHCKeystoreId: string,
-    xFHCTokenId: string,
-    xFHCPassPhrase: string,
-    hcpNihii: string,
-    hcpSsin: string,
-    hcpFirstName: string,
-    hcpLastName: string,
-    hcpCbe: string,
-    patientFirstName: string,
-    patientLastName: string,
-    patientGender: string,
-    date?: number,
-    traineeSupervisorSsin?: string,
-    traineeSupervisorNihii?: string,
-    traineeSupervisorFirstName?: string,
-    traineeSupervisorLastName?: string,
-    eAttestRef: string,
-    reason: string
-  ): Promise<SendAttestResultWithResponse | any> {
-    let _body = null
-
-    const _url =
-      this.host +
-      `/eattestv2/send/${encodeURIComponent(String(patientSsin))}/verbose` +
-      "?ts=" +
-      new Date().getTime() +
-      (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
-      (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
-      (hcpCbe ? "&hcpCbe=" + encodeURIComponent(String(hcpCbe)) : "") +
-      (patientFirstName
-        ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
-        : "") +
-      (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
-      (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (date ? "&date=" + encodeURIComponent(String(date)) : "") +
-      (traineeSupervisorSsin
-        ? "&traineeSupervisorSsin=" + encodeURIComponent(String(traineeSupervisorSsin))
-        : "") +
-      (traineeSupervisorNihii
-        ? "&traineeSupervisorNihii=" + encodeURIComponent(String(traineeSupervisorNihii))
-        : "") +
-      (traineeSupervisorFirstName
-        ? "&traineeSupervisorFirstName=" + encodeURIComponent(String(traineeSupervisorFirstName))
-        : "") +
-      (traineeSupervisorLastName
-        ? "&traineeSupervisorLastName=" + encodeURIComponent(String(traineeSupervisorLastName))
-        : "") +
-      (eAttestRef ? "&eAttestRef=" + encodeURIComponent(String(eAttestRef)) : "") +
-      (reason ? "&reason=" + encodeURIComponent(String(reason)) : "")
-    let headers = this.headers
-    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
-    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
-    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
-    return XHR.sendCommand("DELETE", _url, headers, _body, this.fetchImpl)
-      .then(doc => new SendAttestResultWithResponse(doc.body as JSON))
-      .catch(err => this.handleError(err))
   }
 
   /**
@@ -137,13 +52,13 @@ export class fhcEattestV2Api {
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
+   * @param eAttestRef eAttestRef
+   * @param reason reason
    * @param date date
    * @param traineeSupervisorSsin traineeSupervisorSsin
    * @param traineeSupervisorNihii traineeSupervisorNihii
    * @param traineeSupervisorFirstName traineeSupervisorFirstName
    * @param traineeSupervisorLastName traineeSupervisorLastName
-   * @param eAttestRef eAttestRef
-   * @param reason reason
    */
   cancelAttestUsingDELETE(
     patientSsin: string,
@@ -158,14 +73,14 @@ export class fhcEattestV2Api {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
+    eAttestRef: string,
+    reason: string,
     date?: number,
     traineeSupervisorSsin?: string,
     traineeSupervisorNihii?: string,
     traineeSupervisorFirstName?: string,
-    traineeSupervisorLastName?: string,
-    eAttestRef: string,
-    reason: string
-  ): Promise<SendAttestResult | any> {
+    traineeSupervisorLastName?: string
+  ): Promise<SendAttestResult> {
     let _body = null
 
     const _url =
@@ -183,6 +98,8 @@ export class fhcEattestV2Api {
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
+      (eAttestRef ? "&eAttestRef=" + encodeURIComponent(String(eAttestRef)) : "") +
+      (reason ? "&reason=" + encodeURIComponent(String(reason)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
       (traineeSupervisorSsin
         ? "&traineeSupervisorSsin=" + encodeURIComponent(String(traineeSupervisorSsin))
@@ -195,15 +112,98 @@ export class fhcEattestV2Api {
         : "") +
       (traineeSupervisorLastName
         ? "&traineeSupervisorLastName=" + encodeURIComponent(String(traineeSupervisorLastName))
-        : "") +
-      (eAttestRef ? "&eAttestRef=" + encodeURIComponent(String(eAttestRef)) : "") +
-      (reason ? "&reason=" + encodeURIComponent(String(reason)) : "")
+        : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("DELETE", _url, headers, _body, this.fetchImpl)
       .then(doc => new SendAttestResult(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary cancelAttestWithResponse
+   * @param patientSsin patientSsin
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param hcpNihii hcpNihii
+   * @param hcpSsin hcpSsin
+   * @param hcpFirstName hcpFirstName
+   * @param hcpLastName hcpLastName
+   * @param hcpCbe hcpCbe
+   * @param patientFirstName patientFirstName
+   * @param patientLastName patientLastName
+   * @param patientGender patientGender
+   * @param eAttestRef eAttestRef
+   * @param reason reason
+   * @param date date
+   * @param traineeSupervisorSsin traineeSupervisorSsin
+   * @param traineeSupervisorNihii traineeSupervisorNihii
+   * @param traineeSupervisorFirstName traineeSupervisorFirstName
+   * @param traineeSupervisorLastName traineeSupervisorLastName
+   */
+  cancelAttestWithResponseUsingDELETE(
+    patientSsin: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpFirstName: string,
+    hcpLastName: string,
+    hcpCbe: string,
+    patientFirstName: string,
+    patientLastName: string,
+    patientGender: string,
+    eAttestRef: string,
+    reason: string,
+    date?: number,
+    traineeSupervisorSsin?: string,
+    traineeSupervisorNihii?: string,
+    traineeSupervisorFirstName?: string,
+    traineeSupervisorLastName?: string
+  ): Promise<SendAttestResultWithResponse> {
+    let _body = null
+
+    const _url =
+      this.host +
+      `/eattestv2/send/${encodeURIComponent(String(patientSsin))}/verbose` +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
+      (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
+      (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
+      (hcpCbe ? "&hcpCbe=" + encodeURIComponent(String(hcpCbe)) : "") +
+      (patientFirstName
+        ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
+        : "") +
+      (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
+      (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
+      (eAttestRef ? "&eAttestRef=" + encodeURIComponent(String(eAttestRef)) : "") +
+      (reason ? "&reason=" + encodeURIComponent(String(reason)) : "") +
+      (date ? "&date=" + encodeURIComponent(String(date)) : "") +
+      (traineeSupervisorSsin
+        ? "&traineeSupervisorSsin=" + encodeURIComponent(String(traineeSupervisorSsin))
+        : "") +
+      (traineeSupervisorNihii
+        ? "&traineeSupervisorNihii=" + encodeURIComponent(String(traineeSupervisorNihii))
+        : "") +
+      (traineeSupervisorFirstName
+        ? "&traineeSupervisorFirstName=" + encodeURIComponent(String(traineeSupervisorFirstName))
+        : "") +
+      (traineeSupervisorLastName
+        ? "&traineeSupervisorLastName=" + encodeURIComponent(String(traineeSupervisorLastName))
+        : "")
+    let headers = this.headers
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("DELETE", _url, headers, _body, this.fetchImpl)
+      .then(doc => new SendAttestResultWithResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
@@ -256,7 +256,7 @@ export class fhcEattestV2Api {
     guardPostSsin?: string,
     guardPostName?: string,
     body?: Eattest
-  ): Promise<SendAttestResult | any> {
+  ): Promise<SendAttestResult> {
     let _body = null
     _body = body
 
@@ -353,7 +353,7 @@ export class fhcEattestV2Api {
     guardPostSsin?: string,
     guardPostName?: string,
     body?: Eattest
-  ): Promise<SendAttestResultWithResponse | any> {
+  ): Promise<SendAttestResultWithResponse> {
     let _body = null
     _body = body
 

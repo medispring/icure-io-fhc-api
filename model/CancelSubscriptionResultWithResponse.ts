@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { CommonOutput } from "./CommonOutput"
+import { FaultType } from "./FaultType"
 import { MycarenetConversation } from "./MycarenetConversation"
 import { MycarenetError } from "./MycarenetError"
 
@@ -21,8 +22,9 @@ export class CancelSubscriptionResultWithResponse {
   commonOutput?: CommonOutput
   decisionReference?: string
   errors?: Array<MycarenetError>
-  kmehrMessage?: Array<string>
+  genericErrors?: Array<FaultType>
+  kmehrMessage?: ArrayBuffer
   mycarenetConversation?: MycarenetConversation
   subscriptionsCancelDate?: number
-  xades?: Array<string>
+  xades?: ArrayBuffer
 }

@@ -33,7 +33,7 @@ export class fhcEattestApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -84,7 +84,7 @@ export class fhcEattestApi {
     guardPostSsin?: string,
     guardPostName?: string,
     body?: Eattest
-  ): Promise<SendAttestResult | any> {
+  ): Promise<SendAttestResult> {
     let _body = null
     _body = body
 
@@ -178,7 +178,7 @@ export class fhcEattestApi {
     guardPostSsin?: string,
     guardPostName?: string,
     body?: Eattest
-  ): Promise<SendAttestResultWithResponse | any> {
+  ): Promise<SendAttestResultWithResponse> {
     let _body = null
     _body = body
 

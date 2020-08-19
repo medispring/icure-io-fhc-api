@@ -21,7 +21,7 @@ export class AgreementResponse {
 
   acknowledged?: boolean
   commonOutput?: CommonOutput
-  content?: Array<string>
+  content?: ArrayBuffer
   errors?: Array<MycarenetError>
   mycarenetConversation?: MycarenetConversation
   transactions?: Array<AgreementTransaction>

@@ -23,7 +23,7 @@ export class SendAttestResultWithResponse {
   attest?: Eattest
   commonOutput?: CommonOutput
   invoicingNumber?: string
-  kmehrMessage?: Array<string>
+  kmehrMessage?: ArrayBuffer
   mycarenetConversation?: MycarenetConversation
-  xades?: Array<string>
+  xades?: ArrayBuffer
 }

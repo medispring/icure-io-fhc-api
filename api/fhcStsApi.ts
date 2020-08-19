@@ -34,7 +34,7 @@ export class fhcStsApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -43,7 +43,7 @@ export class fhcStsApi {
    * @summary checkKeystoreExist
    * @param xFHCKeystoreId X-FHC-keystoreId
    */
-  checkKeystoreExistUsingGET(xFHCKeystoreId: string): Promise<boolean | any> {
+  checkKeystoreExistUsingGET(xFHCKeystoreId: string): Promise<boolean> {
     let _body = null
 
     const _url = this.host + `/sts/keystore/check` + "?ts=" + new Date().getTime()
@@ -59,7 +59,7 @@ export class fhcStsApi {
    * @summary checkTokenValid
    * @param xFHCTokenId X-FHC-tokenId
    */
-  checkTokenValidUsingGET(xFHCTokenId: string): Promise<boolean | any> {
+  checkTokenValidUsingGET(xFHCTokenId: string): Promise<boolean> {
     let _body = null
 
     const _url = this.host + `/sts/token/check` + "?ts=" + new Date().getTime()
@@ -83,7 +83,7 @@ export class fhcStsApi {
     xFHCPassPhrase: string,
     ssin: string,
     xFHCKeystoreId: string
-  ): Promise<BearerToken | any> {
+  ): Promise<BearerToken> {
     let _body = null
 
     const _url =
@@ -107,10 +107,7 @@ export class fhcStsApi {
    * @param keystoreId keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
    */
-  getKeystoreInfoUsingGET(
-    keystoreId: string,
-    xFHCPassPhrase: string
-  ): Promise<CertificateInfo | any> {
+  getKeystoreInfoUsingGET(keystoreId: string, xFHCPassPhrase: string): Promise<CertificateInfo> {
     let _body = null
 
     const _url =
@@ -129,12 +126,12 @@ export class fhcStsApi {
    *
    * @summary registerToken
    * @param body token
-   * @param quality quality
    * @param xFHCTokenId X-FHC-tokenId
+   * @param quality quality
    */
   registerTokenUsingPOST(
-    quality?: string,
     xFHCTokenId: string,
+    quality?: string,
     body?: string
   ): Promise<any | Boolean> {
     let _body = null
@@ -171,7 +168,7 @@ export class fhcStsApi {
     xFHCKeystoreId: string,
     quality: string,
     xFHCTokenId?: string
-  ): Promise<SamlTokenResult | any> {
+  ): Promise<SamlTokenResult> {
     let _body = null
 
     const _url =
@@ -208,7 +205,7 @@ export class fhcStsApi {
     isGuardPost?: boolean,
     isSortingCenter?: boolean,
     xFHCTokenId?: string
-  ): Promise<SamlTokenResult | any> {
+  ): Promise<SamlTokenResult> {
     let _body = null
 
     const _url =
@@ -234,12 +231,12 @@ export class fhcStsApi {
    * @summary uploadKeystore
    * @param file
    */
-  uploadKeystoreUsingPOST(file: ArrayBuffer): Promise<UUIDType | any> {
+  uploadKeystoreUsingPOST(file: ArrayBuffer): Promise<UUIDType> {
     let _body = null
     file &&
       (_body = _body || new FormData()).append(
         "file",
-        new Blob(file, { type: "application/octet-stream" })
+        new Blob([file], { type: "application/octet-stream" })
       )
     const _url = this.host + `/sts/keystore` + "?ts=" + new Date().getTime()
     let headers = this.headers

@@ -18,7 +18,7 @@ export class Reference {
   }
 
   digestMethod?: DigestMethod
-  digestValue?: Array<string>
+  digestValue?: ArrayBuffer
   id?: string
   transforms?: Transforms
   type?: string

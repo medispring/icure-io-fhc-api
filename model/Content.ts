@@ -24,5 +24,5 @@ export class Content {
   n?: number
   p?: Medication
   s?: string
-  x?: Array<string>
+  x?: ArrayBuffer
 }

@@ -16,7 +16,7 @@ export class Document {
     Object.assign(this as Document, json)
   }
 
-  content?: Array<string>
+  content?: ArrayBuffer
   filename?: string
   mimeType?: string
   signing?: SigningValue

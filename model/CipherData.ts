@@ -17,5 +17,5 @@ export class CipherData {
   }
 
   cipherReference?: CipherReference
-  cipherValue?: Array<string>
+  cipherValue?: ArrayBuffer
 }

@@ -33,7 +33,7 @@ export class fhcTherLinkApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -50,7 +50,7 @@ export class fhcTherLinkApi {
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     body?: TherapeuticLinkDto
-  ): Promise<TherapeuticLinkDto | any> {
+  ): Promise<TherapeuticLinkDto> {
     let _body = null
     _body = body
 
@@ -104,7 +104,7 @@ export class fhcTherLinkApi {
     endDate?: Date,
     type?: string,
     sign?: boolean
-  ): Promise<TherapeuticLinkMessageDto | any> {
+  ): Promise<TherapeuticLinkMessageDto> {
     let _body = null
 
     const _url =
@@ -151,7 +151,7 @@ export class fhcTherLinkApi {
     xFHCPassPhrase: string,
     sign?: boolean,
     body?: TherapeuticLinkDto
-  ): Promise<TherapeuticLinkMessageDto | any> {
+  ): Promise<TherapeuticLinkMessageDto> {
     let _body = null
     _body = body
 
@@ -208,7 +208,7 @@ export class fhcTherLinkApi {
     startDate?: Date,
     endDate?: Date,
     type?: string
-  ): Promise<HasTherapeuticLinkMessage | any> {
+  ): Promise<HasTherapeuticLinkMessage> {
     let _body = null
 
     const _url =
@@ -280,7 +280,7 @@ export class fhcTherLinkApi {
     comment?: string,
     sign?: boolean,
     proofType?: string
-  ): Promise<TherapeuticLinkMessageDto | any> {
+  ): Promise<TherapeuticLinkMessageDto> {
     let _body = null
 
     const _url =
@@ -355,7 +355,7 @@ export class fhcTherLinkApi {
     comment?: string,
     sign?: boolean,
     proofType?: string
-  ): Promise<TherapeuticLinkMessageDto | any> {
+  ): Promise<TherapeuticLinkMessageDto> {
     let _body = null
 
     const _url =
@@ -406,7 +406,7 @@ export class fhcTherLinkApi {
     sign?: boolean,
     proofType?: string,
     body?: TherapeuticLinkDto
-  ): Promise<TherapeuticLinkMessageDto | any> {
+  ): Promise<TherapeuticLinkMessageDto> {
     let _body = null
     _body = body
 

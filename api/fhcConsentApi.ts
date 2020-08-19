@@ -32,7 +32,7 @@ export class fhcConsentApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -61,7 +61,7 @@ export class fhcConsentApi {
     patientSsin: string,
     patientFirstName: string,
     patientLastName: string
-  ): Promise<ConsentMessageDto | any> {
+  ): Promise<ConsentMessageDto> {
     let _body = null
 
     const _url =
@@ -115,7 +115,7 @@ export class fhcConsentApi {
     patientLastName: string,
     eidCardNumber?: string,
     isiCardNumber?: string
-  ): Promise<ConsentMessageDto | any> {
+  ): Promise<ConsentMessageDto> {
     let _body = null
 
     const _url =
@@ -167,13 +167,13 @@ export class fhcConsentApi {
     eidCardNumber?: string,
     isiCardNumber?: string,
     body?: ConsentTypeDto
-  ): Promise<ConsentMessageDto | any> {
+  ): Promise<ConsentMessageDto> {
     let _body = null
     _body = body
 
     const _url =
       this.host +
-      `/consent/revoke/${encodeURIComponent(String(patientSsin))}` +
+      `/consent/revoke` +
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +

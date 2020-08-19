@@ -11,8 +11,6 @@
  */
 import { XHR } from "./XHR"
 import { AltKeystoresList } from "../model/AltKeystoresList"
-import { BoxInfo } from "../model/BoxInfo"
-import { DocumentMessage } from "../model/DocumentMessage"
 import { Message } from "../model/Message"
 
 export class fhcEhboxApi {
@@ -34,7 +32,7 @@ export class fhcEhboxApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -53,7 +51,7 @@ export class fhcEhboxApi {
     xFHCPassPhrase: string,
     source: string,
     body?: Array<string>
-  ): Promise<boolean | any> {
+  ): Promise<boolean> {
     let _body = null
     _body = body
 
@@ -89,7 +87,7 @@ export class fhcEhboxApi {
     xFHCPassPhrase: string,
     boxId: string,
     messageId: string
-  ): Promise<Message | any> {
+  ): Promise<Message> {
     let _body = null
 
     const _url =
@@ -123,7 +121,7 @@ export class fhcEhboxApi {
     boxId: string,
     messageId: string,
     body?: AltKeystoresList
-  ): Promise<Message | any> {
+  ): Promise<Message> {
     let _body = null
     _body = body
 
@@ -146,30 +144,6 @@ export class fhcEhboxApi {
 
   /**
    *
-   * @summary getInfos
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   */
-  getInfosUsingGET(
-    xFHCKeystoreId: string,
-    xFHCTokenId: string,
-    xFHCPassPhrase: string
-  ): Promise<BoxInfo | any> {
-    let _body = null
-
-    const _url = this.host + `/ehbox` + "?ts=" + new Date().getTime()
-    let headers = this.headers
-    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
-    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
-    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
-      .then(doc => new BoxInfo(doc.body as JSON))
-      .catch(err => this.handleError(err))
-  }
-
-  /**
-   *
    * @summary loadMessages
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCTokenId X-FHC-tokenId
@@ -183,7 +157,7 @@ export class fhcEhboxApi {
     xFHCPassPhrase: string,
     boxId: string,
     limit: number
-  ): Promise<Array<Message> | any> {
+  ): Promise<Array<Message>> {
     let _body = null
 
     const _url =
@@ -218,7 +192,7 @@ export class fhcEhboxApi {
     boxId: string,
     limit: number,
     body?: AltKeystoresList
-  ): Promise<Array<Message> | any> {
+  ): Promise<Array<Message>> {
     let _body = null
     _body = body
 
@@ -257,7 +231,7 @@ export class fhcEhboxApi {
     source: string,
     destination: string,
     body?: Array<string>
-  ): Promise<boolean | any> {
+  ): Promise<boolean> {
     let _body = null
     _body = body
 
@@ -268,53 +242,6 @@ export class fhcEhboxApi {
       )}` +
       "?ts=" +
       new Date().getTime()
-    let headers = this.headers
-    headers = headers
-      .filter(h => h.header !== "Content-Type")
-      .concat(new XHR.Header("Content-Type", "application/json"))
-    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
-    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
-    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
-    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => JSON.parse(JSON.stringify(doc.body)))
-      .catch(err => this.handleError(err))
-  }
-
-  /**
-   *
-   * @summary sendMessage
-   * @param body message
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param publicationReceipt publicationReceipt
-   * @param receptionReceipt receptionReceipt
-   * @param readReceipt readReceipt
-   */
-  sendMessageUsingPOST(
-    xFHCKeystoreId: string,
-    xFHCTokenId: string,
-    xFHCPassPhrase: string,
-    publicationReceipt: boolean,
-    receptionReceipt: boolean,
-    readReceipt: boolean,
-    body?: DocumentMessage
-  ): Promise<boolean | any> {
-    let _body = null
-    _body = body
-
-    const _url =
-      this.host +
-      `/ehbox` +
-      "?ts=" +
-      new Date().getTime() +
-      (publicationReceipt
-        ? "&publicationReceipt=" + encodeURIComponent(String(publicationReceipt))
-        : "") +
-      (receptionReceipt
-        ? "&receptionReceipt=" + encodeURIComponent(String(receptionReceipt))
-        : "") +
-      (readReceipt ? "&readReceipt=" + encodeURIComponent(String(readReceipt)) : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")

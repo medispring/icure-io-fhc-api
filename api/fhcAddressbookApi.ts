@@ -31,7 +31,7 @@ export class fhcAddressbookApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -50,7 +50,7 @@ export class fhcAddressbookApi {
     xFHCPassPhrase: string,
     nihii: string,
     language?: string
-  ): Promise<HealthcareParty | any> {
+  ): Promise<HealthcareParty> {
     let _body = null
 
     const _url =
@@ -85,7 +85,7 @@ export class fhcAddressbookApi {
     ssin: string,
     quality?: string,
     language?: string
-  ): Promise<HealthcareParty | any> {
+  ): Promise<HealthcareParty> {
     let _body = null
 
     const _url =
@@ -119,7 +119,7 @@ export class fhcAddressbookApi {
     xFHCPassPhrase: string,
     cbe: string,
     language?: string
-  ): Promise<HealthcareParty | any> {
+  ): Promise<HealthcareParty> {
     let _body = null
 
     const _url =
@@ -152,7 +152,7 @@ export class fhcAddressbookApi {
     xFHCPassPhrase: string,
     ehp: string,
     language?: string
-  ): Promise<HealthcareParty | any> {
+  ): Promise<HealthcareParty> {
     let _body = null
 
     const _url =
@@ -185,7 +185,7 @@ export class fhcAddressbookApi {
     xFHCPassPhrase: string,
     nihii: string,
     language?: string
-  ): Promise<HealthcareParty | any> {
+  ): Promise<HealthcareParty> {
     let _body = null
 
     const _url =
@@ -220,7 +220,7 @@ export class fhcAddressbookApi {
     lastName: string,
     firstName?: string,
     type?: string
-  ): Promise<Array<HealthcareParty> | any> {
+  ): Promise<Array<HealthcareParty>> {
     let _body = null
 
     const _url =
@@ -254,7 +254,7 @@ export class fhcAddressbookApi {
     xFHCPassPhrase: string,
     name: string,
     type?: string
-  ): Promise<Array<HealthcareParty> | any> {
+  ): Promise<Array<HealthcareParty>> {
     let _body = null
 
     const _url =

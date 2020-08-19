@@ -31,7 +31,7 @@ export class fhcAdminApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -39,7 +39,7 @@ export class fhcAdminApi {
    *
    * @summary bcpStatus
    */
-  bcpStatusUsingGET(): Promise<EndpointDistributorStatusDto | any> {
+  bcpStatusUsingGET(): Promise<EndpointDistributorStatusDto> {
     let _body = null
 
     const _url = this.host + `/admin/bcp` + "?ts=" + new Date().getTime()
@@ -55,7 +55,7 @@ export class fhcAdminApi {
    * @param loglevel loglevel
    * @param _package package
    */
-  loglevelUsingPOST(loglevel: string, _package: string): Promise<string | any> {
+  loglevelUsingPOST(loglevel: string, _package: string): Promise<string> {
     let _body = null
 
     const _url =

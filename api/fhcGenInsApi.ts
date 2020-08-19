@@ -31,7 +31,7 @@ export class fhcGenInsApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -64,7 +64,7 @@ export class fhcGenInsApi {
     date?: number,
     endDate?: number,
     hospitalized?: boolean
-  ): Promise<InsurabilityInfoDto | any> {
+  ): Promise<InsurabilityInfoDto> {
     let _body = null
 
     const _url =
@@ -115,7 +115,7 @@ export class fhcGenInsApi {
     date?: number,
     endDate?: number,
     hospitalized?: boolean
-  ): Promise<InsurabilityInfoDto | any> {
+  ): Promise<InsurabilityInfoDto> {
     let _body = null
 
     const _url =

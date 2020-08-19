@@ -16,5 +16,5 @@ export class SignatureValue {
   }
 
   id?: string
-  value?: Array<string>
+  value?: ArrayBuffer
 }

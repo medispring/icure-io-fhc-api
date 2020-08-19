@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 import { XHR } from "./XHR"
-import { DmgConsultation } from "../model/DmgConsultation"
 import { DmgNotification } from "../model/DmgNotification"
 import { DmgRegistration } from "../model/DmgRegistration"
 import { DmgsList } from "../model/DmgsList"
@@ -35,7 +34,7 @@ export class fhcDmgApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -60,7 +59,7 @@ export class fhcDmgApi {
     hcpFirstName: string,
     hcpLastName: string,
     body?: Array<string>
-  ): Promise<boolean | any> {
+  ): Promise<boolean> {
     let _body = null
     _body = body
 
@@ -106,7 +105,7 @@ export class fhcDmgApi {
     hcpFirstName: string,
     hcpLastName: string,
     body?: Array<string>
-  ): Promise<boolean | any> {
+  ): Promise<boolean> {
     let _body = null
     _body = body
 
@@ -133,61 +132,6 @@ export class fhcDmgApi {
 
   /**
    *
-   * @summary consultDmg
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpFirstName hcpFirstName
-   * @param hcpLastName hcpLastName
-   * @param patientSsin patientSsin
-   * @param patientGender patientGender
-   * @param oa oa
-   * @param regNrWithMut regNrWithMut
-   * @param requestDate requestDate
-   */
-  consultDmgUsingGET(
-    xFHCKeystoreId: string,
-    xFHCTokenId: string,
-    xFHCPassPhrase: string,
-    hcpNihii: string,
-    hcpSsin: string,
-    hcpFirstName: string,
-    hcpLastName: string,
-    patientSsin?: string,
-    patientGender?: string,
-    oa?: string,
-    regNrWithMut?: string,
-    requestDate?: number
-  ): Promise<DmgConsultation | any> {
-    let _body = null
-
-    const _url =
-      this.host +
-      `/gmd` +
-      "?ts=" +
-      new Date().getTime() +
-      (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
-      (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
-      (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
-      (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (oa ? "&oa=" + encodeURIComponent(String(oa)) : "") +
-      (regNrWithMut ? "&regNrWithMut=" + encodeURIComponent(String(regNrWithMut)) : "") +
-      (requestDate ? "&requestDate=" + encodeURIComponent(String(requestDate)) : "")
-    let headers = this.headers
-    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
-    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
-    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
-      .then(doc => new DmgConsultation(doc.body as JSON))
-      .catch(err => this.handleError(err))
-  }
-
-  /**
-   *
    * @summary getDmgMessages
    * @param body messageNames
    * @param xFHCKeystoreId X-FHC-keystoreId
@@ -207,7 +151,7 @@ export class fhcDmgApi {
     hcpFirstName: string,
     hcpLastName: string,
     body?: Array<string>
-  ): Promise<DmgsList | any> {
+  ): Promise<DmgsList> {
     let _body = null
     _body = body
 
@@ -242,13 +186,13 @@ export class fhcDmgApi {
    * @param hcpSsin hcpSsin
    * @param hcpFirstName hcpFirstName
    * @param hcpLastName hcpLastName
+   * @param nomenclature nomenclature
    * @param patientSsin patientSsin
    * @param oa oa
    * @param regNrWithMut regNrWithMut
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
-   * @param nomenclature nomenclature
    * @param requestDate requestDate
    * @param traineeSupervisorSsin traineeSupervisorSsin
    * @param traineeSupervisorNihii traineeSupervisorNihii
@@ -263,19 +207,19 @@ export class fhcDmgApi {
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
+    nomenclature: string,
     patientSsin?: string,
     oa?: string,
     regNrWithMut?: string,
     patientFirstName?: string,
     patientLastName?: string,
     patientGender?: string,
-    nomenclature: string,
     requestDate?: number,
     traineeSupervisorSsin?: string,
     traineeSupervisorNihii?: string,
     traineeSupervisorFirstName?: string,
     traineeSupervisorLastName?: string
-  ): Promise<DmgNotification | any> {
+  ): Promise<DmgNotification> {
     let _body = null
 
     const _url =
@@ -340,7 +284,7 @@ export class fhcDmgApi {
     hcpLastName: string,
     oa?: string,
     requestDate?: number
-  ): Promise<GenAsyncResponse | any> {
+  ): Promise<GenAsyncResponse> {
     let _body = null
 
     const _url =
@@ -388,7 +332,7 @@ export class fhcDmgApi {
     oa: string,
     bic: string,
     iban: string
-  ): Promise<DmgRegistration | any> {
+  ): Promise<DmgRegistration> {
     let _body = null
 
     const _url =

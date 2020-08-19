@@ -31,7 +31,7 @@ export class fhcTarificationApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -76,7 +76,7 @@ export class fhcTarificationApi {
     guardPostNihii?: string,
     guardPostSsin?: string,
     body?: Array<string>
-  ): Promise<TarificationConsultationResult | any> {
+  ): Promise<TarificationConsultationResult> {
     let _body = null
     _body = body
 

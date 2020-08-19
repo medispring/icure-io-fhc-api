@@ -30,13 +30,13 @@ export class fhcCryptoApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
   /**
    *
-   * @summary decryptFile
+   * @summary Decrypt data
    * @param encryptedData
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
@@ -45,12 +45,12 @@ export class fhcCryptoApi {
     encryptedData: ArrayBuffer,
     xFHCKeystoreId: string,
     xFHCPassPhrase: string
-  ): Promise<Array<string> | any> {
+  ): Promise<ArrayBuffer> {
     let _body = null
     encryptedData &&
       (_body = _body || new FormData()).append(
         "encryptedData",
-        new Blob(encryptedData, { type: "application/octet-stream" })
+        new Blob([encryptedData], { type: "application/octet-stream" })
       )
     const _url = this.host + `/crypto/decryptFile` + "?ts=" + new Date().getTime()
     let headers = this.headers
@@ -60,13 +60,13 @@ export class fhcCryptoApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => (doc.body as Array<JSON>).map(it => JSON.parse(JSON.stringify(it))))
+      .then(doc => doc.body)
       .catch(err => this.handleError(err))
   }
 
   /**
    *
-   * @summary decrypt
+   * @summary Decrypt data
    * @param body encryptedData
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
@@ -75,7 +75,7 @@ export class fhcCryptoApi {
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     body?: string
-  ): Promise<Array<string> | any> {
+  ): Promise<ArrayBuffer> {
     let _body = null
     _body = body
 
@@ -87,13 +87,13 @@ export class fhcCryptoApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => (doc.body as Array<JSON>).map(it => JSON.parse(JSON.stringify(it))))
+      .then(doc => doc.body)
       .catch(err => this.handleError(err))
   }
 
   /**
    *
-   * @summary encryptFile
+   * @summary Encrypt data
    * @param plainData
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
@@ -108,12 +108,12 @@ export class fhcCryptoApi {
     identifier: string,
     id: string,
     applicationId?: string
-  ): Promise<Array<string> | any> {
+  ): Promise<ArrayBuffer> {
     let _body = null
     plainData &&
       (_body = _body || new FormData()).append(
         "plainData",
-        new Blob(plainData, { type: "application/octet-stream" })
+        new Blob([plainData], { type: "application/octet-stream" })
       )
     const _url =
       this.host +
@@ -130,13 +130,13 @@ export class fhcCryptoApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => (doc.body as Array<JSON>).map(it => JSON.parse(JSON.stringify(it))))
+      .then(doc => doc.body)
       .catch(err => this.handleError(err))
   }
 
   /**
    *
-   * @summary encrypt
+   * @summary Encrypt data
    * @param body plainData
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
@@ -151,7 +151,7 @@ export class fhcCryptoApi {
     id: string,
     applicationId?: string,
     body?: string
-  ): Promise<Array<string> | any> {
+  ): Promise<ArrayBuffer> {
     let _body = null
     _body = body
 
@@ -170,7 +170,7 @@ export class fhcCryptoApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => (doc.body as Array<JSON>).map(it => JSON.parse(JSON.stringify(it))))
+      .then(doc => doc.body)
       .catch(err => this.handleError(err))
   }
 }

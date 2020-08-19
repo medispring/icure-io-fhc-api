@@ -9,21 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CommonOutput } from "./CommonOutput"
+import { FaultType } from "./FaultType"
+import { MemberDataAck } from "./MemberDataAck"
+import { MemberDataMessage } from "./MemberDataMessage"
 import { MycarenetConversation } from "./MycarenetConversation"
-import { Record } from "./Record"
-import { TAck } from "./TAck"
 
-export class EfactSendResponse {
+export class MemberDataList {
   constructor(json: JSON | any) {
-    Object.assign(this as EfactSendResponse, json)
+    Object.assign(this as MemberDataList, json)
   }
 
-  commonOutput?: CommonOutput
-  detail?: string
-  inputReference?: string
+  acks?: Array<MemberDataAck>
+  date?: Date
+  genericErrors?: Array<FaultType>
+  memberDataMessageList?: Array<MemberDataMessage>
   mycarenetConversation?: MycarenetConversation
-  records?: Array<Record>
-  success?: boolean
-  tack?: TAck
 }

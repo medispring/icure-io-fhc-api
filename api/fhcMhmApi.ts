@@ -33,7 +33,7 @@ export class fhcMhmApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -45,13 +45,13 @@ export class fhcMhmApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
    * @param hcpName hcpName
-   * @param patientSsin patientSsin
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
+   * @param reference reference
+   * @param patientSsin patientSsin
    * @param io io
    * @param ioMembership ioMembership
-   * @param reference reference
    */
   cancelSubscriptionUsingPOST(
     xFHCKeystoreId: string,
@@ -59,14 +59,14 @@ export class fhcMhmApi {
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
-    patientSsin?: string,
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
+    reference: string,
+    patientSsin?: string,
     io?: string,
-    ioMembership?: string,
-    reference: string
-  ): Promise<CancelSubscriptionResultWithResponse | any> {
+    ioMembership?: string
+  ): Promise<CancelSubscriptionResultWithResponse> {
     let _body = null
 
     const _url =
@@ -76,15 +76,15 @@ export class fhcMhmApi {
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
-      (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
+      (reference ? "&reference=" + encodeURIComponent(String(reference)) : "") +
+      (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
       (io ? "&io=" + encodeURIComponent(String(io)) : "") +
-      (ioMembership ? "&ioMembership=" + encodeURIComponent(String(ioMembership)) : "") +
-      (reference ? "&reference=" + encodeURIComponent(String(reference)) : "")
+      (ioMembership ? "&ioMembership=" + encodeURIComponent(String(ioMembership)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -102,16 +102,16 @@ export class fhcMhmApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
    * @param hcpName hcpName
-   * @param patientSsin patientSsin
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
-   * @param io io
-   * @param ioMembership ioMembership
    * @param reference reference
    * @param endDate endDate
    * @param reason reason
    * @param decisionType decisionType
+   * @param patientSsin patientSsin
+   * @param io io
+   * @param ioMembership ioMembership
    */
   notifySubscriptionClosureUsingPOST(
     xFHCKeystoreId: string,
@@ -119,17 +119,17 @@ export class fhcMhmApi {
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
-    patientSsin?: string,
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    io?: string,
-    ioMembership?: string,
     reference: string,
     endDate: number,
     reason: string,
-    decisionType: string
-  ): Promise<EndSubscriptionResultWithResponse | any> {
+    decisionType: string,
+    patientSsin?: string,
+    io?: string,
+    ioMembership?: string
+  ): Promise<EndSubscriptionResultWithResponse> {
     let _body = null
 
     const _url =
@@ -139,18 +139,18 @@ export class fhcMhmApi {
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
-      (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (io ? "&io=" + encodeURIComponent(String(io)) : "") +
-      (ioMembership ? "&ioMembership=" + encodeURIComponent(String(ioMembership)) : "") +
       (reference ? "&reference=" + encodeURIComponent(String(reference)) : "") +
       (endDate ? "&endDate=" + encodeURIComponent(String(endDate)) : "") +
       (reason ? "&reason=" + encodeURIComponent(String(reason)) : "") +
-      (decisionType ? "&decisionType=" + encodeURIComponent(String(decisionType)) : "")
+      (decisionType ? "&decisionType=" + encodeURIComponent(String(decisionType)) : "") +
+      (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
+      (io ? "&io=" + encodeURIComponent(String(io)) : "") +
+      (ioMembership ? "&ioMembership=" + encodeURIComponent(String(ioMembership)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -168,15 +168,15 @@ export class fhcMhmApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
    * @param hcpName hcpName
-   * @param patientSsin patientSsin
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
-   * @param io io
-   * @param ioMembership ioMembership
    * @param startDate startDate
    * @param isTrial isTrial
    * @param signatureType signatureType
+   * @param patientSsin patientSsin
+   * @param io io
+   * @param ioMembership ioMembership
    * @param isRecovery isRecovery
    * @param isTestForNotify isTestForNotify
    */
@@ -186,18 +186,18 @@ export class fhcMhmApi {
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
-    patientSsin?: string,
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    io?: string,
-    ioMembership?: string,
     startDate: number,
     isTrial: boolean,
     signatureType: string,
-    isRecovery: boolean,
-    isTestForNotify: boolean
-  ): Promise<StartSubscriptionResultWithResponse | any> {
+    patientSsin?: string,
+    io?: string,
+    ioMembership?: string,
+    isRecovery?: boolean,
+    isTestForNotify?: boolean
+  ): Promise<StartSubscriptionResultWithResponse> {
     let _body = null
 
     const _url =
@@ -207,17 +207,17 @@ export class fhcMhmApi {
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
-      (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (io ? "&io=" + encodeURIComponent(String(io)) : "") +
-      (ioMembership ? "&ioMembership=" + encodeURIComponent(String(ioMembership)) : "") +
       (startDate ? "&startDate=" + encodeURIComponent(String(startDate)) : "") +
       (isTrial ? "&isTrial=" + encodeURIComponent(String(isTrial)) : "") +
       (signatureType ? "&signatureType=" + encodeURIComponent(String(signatureType)) : "") +
+      (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
+      (io ? "&io=" + encodeURIComponent(String(io)) : "") +
+      (ioMembership ? "&ioMembership=" + encodeURIComponent(String(ioMembership)) : "") +
       (isRecovery ? "&isRecovery=" + encodeURIComponent(String(isRecovery)) : "") +
       (isTestForNotify ? "&isTestForNotify=" + encodeURIComponent(String(isTestForNotify)) : "")
     let headers = this.headers

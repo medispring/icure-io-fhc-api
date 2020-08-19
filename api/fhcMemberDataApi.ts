@@ -13,6 +13,7 @@ import { XHR } from "./XHR"
 import { FacetDto } from "../model/FacetDto"
 import { GenAsyncResponse } from "../model/GenAsyncResponse"
 import { MemberDataBatchRequestDto } from "../model/MemberDataBatchRequestDto"
+import { MemberDataList } from "../model/MemberDataList"
 import { MemberDataResponse } from "../model/MemberDataResponse"
 
 export class fhcMemberDataApi {
@@ -34,8 +35,88 @@ export class fhcMemberDataApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
+  }
+
+  /**
+   *
+   * @summary confirmMemberDataAcksAsync
+   * @param body mdaAcksHashes
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param hcpNihii hcpNihii
+   * @param hcpName hcpName
+   */
+  confirmMemberDataAcksAsyncUsingPOST(
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpName: string,
+    body?: Array<string>
+  ): Promise<boolean> {
+    let _body = null
+    _body = body
+
+    const _url =
+      this.host +
+      `/mda/async/confirm/acks` +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
+      (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary confirmMemberDataMessagesAsync
+   * @param body mdaMessagesReference
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param hcpNihii hcpNihii
+   * @param hcpName hcpName
+   */
+  confirmMemberDataMessagesAsyncUsingPOST(
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpName: string,
+    body?: Array<string>
+  ): Promise<boolean> {
+    let _body = null
+    _body = body
+
+    const _url =
+      this.host +
+      `/mda/async/confirm/messages` +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
+      (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
   }
 
   /**
@@ -69,7 +150,7 @@ export class fhcMemberDataApi {
     endDate?: number,
     hospitalized?: boolean,
     requestType?: string
-  ): Promise<MemberDataResponse | any> {
+  ): Promise<MemberDataResponse> {
     let _body = null
 
     const _url =
@@ -96,24 +177,22 @@ export class fhcMemberDataApi {
 
   /**
    *
-   * @summary getMemberDataMessage
+   * @summary getMemberDataMessageAsync
    * @param xFHCTokenId X-FHC-tokenId
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
    * @param hcpName hcpName
    * @param messageNames messageNames
    */
-  getMemberDataMessageUsingPOST(
+  getMemberDataMessageAsyncUsingPOST(
     xFHCTokenId: string,
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
     hcpName: string,
     messageNames: Array<string>
-  ): Promise<any | Boolean> {
+  ): Promise<MemberDataList> {
     let _body = null
 
     const _url =
@@ -122,7 +201,6 @@ export class fhcMemberDataApi {
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
       (messageNames ? "&messageNames=" + encodeURIComponent(String(messageNames)) : "")
     let headers = this.headers
@@ -130,7 +208,7 @@ export class fhcMemberDataApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => true)
+      .then(doc => new MemberDataList(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
@@ -163,7 +241,7 @@ export class fhcMemberDataApi {
     endDate?: number,
     hospitalized?: boolean,
     requestType?: string
-  ): Promise<MemberDataResponse | any> {
+  ): Promise<MemberDataResponse> {
     let _body = null
 
     const _url =
@@ -221,7 +299,7 @@ export class fhcMemberDataApi {
     hospitalized?: boolean,
     requestType?: string,
     body?: Array<FacetDto>
-  ): Promise<MemberDataResponse | any> {
+  ): Promise<MemberDataResponse> {
     let _body = null
     _body = body
 
@@ -281,7 +359,7 @@ export class fhcMemberDataApi {
     hospitalized?: boolean,
     requestType?: string,
     body?: Array<FacetDto>
-  ): Promise<MemberDataResponse | any> {
+  ): Promise<MemberDataResponse> {
     let _body = null
     _body = body
 
@@ -312,46 +390,41 @@ export class fhcMemberDataApi {
 
   /**
    *
-   * @summary sendMemberDataRequest
+   * @summary sendMemberDataRequestAsync
    * @param body mdaRequest
    * @param xFHCTokenId X-FHC-tokenId
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
    * @param hcpName hcpName
    * @param hcpQuality hcpQuality
    * @param date date
    * @param endDate endDate
    * @param hospitalized hospitalized
    * @param requestType requestType
-   * @param io io
    */
-  sendMemberDataRequestUsingPOST(
+  sendMemberDataRequestAsyncUsingPOST(
     xFHCTokenId: string,
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
     hcpName: string,
     hcpQuality?: string,
     date?: number,
     endDate?: number,
     hospitalized?: boolean,
     requestType?: string,
-    io: string,
     body?: MemberDataBatchRequestDto
-  ): Promise<GenAsyncResponse | any> {
+  ): Promise<GenAsyncResponse> {
     let _body = null
     _body = body
 
     const _url =
       this.host +
-      `/mda/async/request/${encodeURIComponent(String(io))}` +
+      `/mda/async/request` +
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +

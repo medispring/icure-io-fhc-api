@@ -16,5 +16,5 @@ export class Base64EncryptedValueType {
   }
 
   encoding?: string
-  value?: Array<string>
+  value?: ArrayBuffer
 }

@@ -10,33 +10,22 @@
  * Do not edit the class manually.
  */
 import { CommonOutput } from "./CommonOutput"
-import { HcpartyType } from "./HcpartyType"
-import { MycarenetConversation } from "./MycarenetConversation"
+import { FaultType } from "./FaultType"
+import { MemberDataBatchResponse } from "./MemberDataBatchResponse"
 import { MycarenetError } from "./MycarenetError"
 
-export class DmgConsultation {
+export class MemberDataMessage {
   constructor(json: JSON | any) {
-    Object.assign(this as DmgConsultation, json)
+    Object.assign(this as MemberDataMessage, json)
   }
 
   appliesTo?: string
-  birthday?: number
   commonOutput?: CommonOutput
   complete?: boolean
-  deceased?: number
   errors?: Array<MycarenetError>
-  firstName?: string
-  from?: number
-  hcParty?: HcpartyType
-  inss?: string
+  genericErrors?: Array<FaultType>
   io?: string
-  lastName?: string
-  mutuality?: string
-  mycarenetConversation?: MycarenetConversation
-  payment?: boolean
+  memberDataResponse?: Array<MemberDataBatchResponse>
   reference?: string
-  regNrWithMut?: string
-  sex?: string
-  to?: number
   valueHash?: string
 }

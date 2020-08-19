@@ -19,7 +19,7 @@ export class LnkType {
   size?: string
   type?: LnkType.TypeEnum
   url?: string
-  value?: Array<string>
+  value?: ArrayBuffer
 }
 export namespace LnkType {
   export type MediatypeEnum =

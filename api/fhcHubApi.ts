@@ -46,7 +46,7 @@ export class fhcHubApi {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -55,7 +55,7 @@ export class fhcHubApi {
    * @summary convertKmehrXMLtoJSON
    * @param body message
    */
-  convertKmehrXMLtoJSONUsingPOST(body?: string): Promise<Kmehrmessage | any> {
+  convertKmehrXMLtoJSONUsingPOST(body?: string): Promise<Kmehrmessage> {
     let _body = null
     _body = body
 
@@ -100,7 +100,7 @@ export class fhcHubApi {
     sl: string,
     value: string,
     hubPackageId?: string
-  ): Promise<GetAccessRightResponse | any> {
+  ): Promise<GetAccessRightResponse> {
     let _body = null
 
     const _url =
@@ -152,7 +152,7 @@ export class fhcHubApi {
     hcpSsin: string,
     hcpZip: string,
     hubPackageId?: string
-  ): Promise<HcPartyConsentDto | any> {
+  ): Promise<HcPartyConsentDto> {
     let _body = null
 
     const _url =
@@ -186,8 +186,8 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
+   * @param hubPackageId hubPackageId
    * @param from from
    * @param to to
    * @param authorNihii authorNihii
@@ -208,8 +208,8 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
     hubPackageId?: string,
-    hcpZip?: string,
     from?: number,
     to?: number,
     authorNihii?: string,
@@ -220,7 +220,7 @@ export class fhcHubApi {
     sv?: string,
     sl?: string,
     id?: string
-  ): Promise<GetPatientAuditTrailResponse | any> {
+  ): Promise<GetPatientAuditTrailResponse> {
     let _body = null
 
     const _url =
@@ -233,8 +233,8 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (from ? "&from=" + encodeURIComponent(String(from)) : "") +
       (to ? "&to=" + encodeURIComponent(String(to)) : "") +
       (authorNihii ? "&authorNihii=" + encodeURIComponent(String(authorNihii)) : "") +
@@ -267,9 +267,9 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
    */
   getPatientConsentUsingGET1(
     endpoint: string,
@@ -280,10 +280,10 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
-    hubPackageId?: string,
-    hcpZip?: string,
-    patientSsin?: string
-  ): Promise<Consent | any> {
+    hcpZip: string,
+    patientSsin: string,
+    hubPackageId?: string
+  ): Promise<Consent> {
     let _body = null
 
     const _url =
@@ -296,8 +296,8 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
-      (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "")
+      (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -318,9 +318,9 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
    */
   getPatientUsingGET(
     endpoint: string,
@@ -331,10 +331,10 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
-    hubPackageId?: string,
-    hcpZip?: string,
-    patientSsin?: string
-  ): Promise<Patient | any> {
+    hcpZip: string,
+    patientSsin: string,
+    hubPackageId?: string
+  ): Promise<Patient> {
     let _body = null
 
     const _url =
@@ -347,8 +347,8 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
-      (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "")
+      (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -369,9 +369,9 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
    * @param therLinkType therLinkType
    * @param from from
    * @param to to
@@ -385,13 +385,13 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    patientSsin: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    patientSsin?: string,
     therLinkType?: string,
     from?: Date,
     to?: Date
-  ): Promise<TherapeuticLinkMessageDto | any> {
+  ): Promise<TherapeuticLinkMessageDto> {
     let _body = null
 
     const _url =
@@ -405,8 +405,8 @@ export class fhcHubApi {
       (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (therLinkType ? "&therLinkType=" + encodeURIComponent(String(therLinkType)) : "") +
       (from ? "&from=" + encodeURIComponent(String(from)) : "") +
       (to ? "&to=" + encodeURIComponent(String(to)) : "")
@@ -430,15 +430,15 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
-   * @param breakTheGlassReason breakTheGlassReason
-   * @param externalHubId externalHubId
-   * @param externalHubName externalHubName
    * @param ssin ssin
    * @param sv sv
    * @param sl sl
    * @param id id
+   * @param hubPackageId hubPackageId
+   * @param breakTheGlassReason breakTheGlassReason
+   * @param externalHubId externalHubId
+   * @param externalHubName externalHubName
    */
   getTransactionMessageUsingGET(
     endpoint: string,
@@ -449,16 +449,16 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    ssin: string,
+    sv: string,
+    sl: string,
+    id: string,
     hubPackageId?: string,
-    hcpZip?: string,
     breakTheGlassReason?: string,
     externalHubId?: string,
-    externalHubName?: string,
-    ssin?: string,
-    sv?: string,
-    sl?: string,
-    id?: string
-  ): Promise<Kmehrmessage | any> {
+    externalHubName?: string
+  ): Promise<Kmehrmessage> {
     let _body = null
 
     const _url =
@@ -473,14 +473,14 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (id ? "&id=" + encodeURIComponent(String(id)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
         : "") +
       (externalHubId ? "&externalHubId=" + encodeURIComponent(String(externalHubId)) : "") +
-      (externalHubName ? "&externalHubName=" + encodeURIComponent(String(externalHubName)) : "") +
-      (id ? "&id=" + encodeURIComponent(String(id)) : "")
+      (externalHubName ? "&externalHubName=" + encodeURIComponent(String(externalHubName)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -501,13 +501,13 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
-   * @param breakTheGlassReason breakTheGlassReason
    * @param ssin ssin
    * @param sv sv
    * @param sl sl
    * @param id id
+   * @param hubPackageId hubPackageId
+   * @param breakTheGlassReason breakTheGlassReason
    */
   getTransactionSetMessageUsingGET(
     endpoint: string,
@@ -518,14 +518,14 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    ssin: string,
+    sv: string,
+    sl: string,
+    id: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    breakTheGlassReason?: string,
-    ssin?: string,
-    sv?: string,
-    sl?: string,
-    id?: string
-  ): Promise<Kmehrmessage | any> {
+    breakTheGlassReason?: string
+  ): Promise<Kmehrmessage> {
     let _body = null
 
     const _url =
@@ -540,12 +540,12 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (id ? "&id=" + encodeURIComponent(String(id)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
-        : "") +
-      (id ? "&id=" + encodeURIComponent(String(id)) : "")
+        : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -566,13 +566,13 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
-   * @param breakTheGlassReason breakTheGlassReason
    * @param ssin ssin
    * @param sv sv
    * @param sl sl
    * @param id id
+   * @param hubPackageId hubPackageId
+   * @param breakTheGlassReason breakTheGlassReason
    */
   getTransactionSetUsingGET(
     endpoint: string,
@@ -583,14 +583,14 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    ssin: string,
+    sv: string,
+    sl: string,
+    id: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    breakTheGlassReason?: string,
-    ssin?: string,
-    sv?: string,
-    sl?: string,
-    id?: string
-  ): Promise<Kmehrmessage | any> {
+    breakTheGlassReason?: string
+  ): Promise<Kmehrmessage> {
     let _body = null
 
     const _url =
@@ -605,12 +605,12 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (id ? "&id=" + encodeURIComponent(String(id)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
-        : "") +
-      (id ? "&id=" + encodeURIComponent(String(id)) : "")
+        : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -631,15 +631,15 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
-   * @param breakTheGlassReason breakTheGlassReason
-   * @param externalHubId externalHubId
-   * @param externalHubName externalHubName
    * @param ssin ssin
    * @param sv sv
    * @param sl sl
    * @param id id
+   * @param hubPackageId hubPackageId
+   * @param breakTheGlassReason breakTheGlassReason
+   * @param externalHubId externalHubId
+   * @param externalHubName externalHubName
    */
   getTransactionUsingGET(
     endpoint: string,
@@ -650,16 +650,16 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    ssin: string,
+    sv: string,
+    sl: string,
+    id: string,
     hubPackageId?: string,
-    hcpZip?: string,
     breakTheGlassReason?: string,
     externalHubId?: string,
-    externalHubName?: string,
-    ssin?: string,
-    sv?: string,
-    sl?: string,
-    id?: string
-  ): Promise<Kmehrmessage | any> {
+    externalHubName?: string
+  ): Promise<Kmehrmessage> {
     let _body = null
 
     const _url =
@@ -674,14 +674,14 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (id ? "&id=" + encodeURIComponent(String(id)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
         : "") +
       (externalHubId ? "&externalHubId=" + encodeURIComponent(String(externalHubId)) : "") +
-      (externalHubName ? "&externalHubName=" + encodeURIComponent(String(externalHubName)) : "") +
-      (id ? "&id=" + encodeURIComponent(String(id)) : "")
+      (externalHubName ? "&externalHubName=" + encodeURIComponent(String(externalHubName)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -702,9 +702,9 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
    * @param from from
    * @param to to
    * @param authorNihii authorNihii
@@ -721,16 +721,16 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    patientSsin: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    patientSsin?: string,
     from?: number,
     to?: number,
     authorNihii?: string,
     authorSsin?: string,
     isGlobal?: boolean,
     breakTheGlassReason?: string
-  ): Promise<Array<TransactionSummaryDto> | any> {
+  ): Promise<Array<TransactionSummaryDto>> {
     let _body = null
 
     const _url =
@@ -743,8 +743,8 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (from ? "&from=" + encodeURIComponent(String(from)) : "") +
       (to ? "&to=" + encodeURIComponent(String(to)) : "") +
       (authorNihii ? "&authorNihii=" + encodeURIComponent(String(authorNihii)) : "") +
@@ -777,9 +777,9 @@ export class fhcHubApi {
    * @param sv sv
    * @param sl sl
    * @param value value
+   * @param accessRight accessRight
    * @param accessNihii accessNihii
    * @param accessSsin accessSsin
-   * @param accessRight accessRight
    * @param hubPackageId hubPackageId
    */
   putAccessRightUsingPOST(
@@ -795,11 +795,11 @@ export class fhcHubApi {
     sv: string,
     sl: string,
     value: string,
+    accessRight: string,
     accessNihii?: string,
     accessSsin?: string,
-    accessRight?: string,
     hubPackageId?: string
-  ): Promise<PutAccessRightResponse | any> {
+  ): Promise<PutAccessRightResponse> {
     let _body = null
 
     const _url =
@@ -816,9 +816,9 @@ export class fhcHubApi {
       (sv ? "&sv=" + encodeURIComponent(String(sv)) : "") +
       (sl ? "&sl=" + encodeURIComponent(String(sl)) : "") +
       (value ? "&value=" + encodeURIComponent(String(value)) : "") +
+      (accessRight ? "&accessRight=" + encodeURIComponent(String(accessRight)) : "") +
       (accessNihii ? "&accessNihii=" + encodeURIComponent(String(accessNihii)) : "") +
       (accessSsin ? "&accessSsin=" + encodeURIComponent(String(accessSsin)) : "") +
-      (accessRight ? "&accessRight=" + encodeURIComponent(String(accessRight)) : "") +
       (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
@@ -840,13 +840,13 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param patientSsin patientSsin
    * @param firstName firstName
    * @param lastName lastName
    * @param gender gender
    * @param dateOfBirth dateOfBirth
+   * @param hubPackageId hubPackageId
    */
   putPatientUsingPOST(
     endpoint: string,
@@ -857,14 +857,14 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
-    hubPackageId?: string,
-    hcpZip?: string,
-    patientSsin?: string,
-    firstName?: string,
-    lastName?: string,
-    gender?: string,
-    dateOfBirth?: number
-  ): Promise<Patient | any> {
+    hcpZip: string,
+    patientSsin: string,
+    firstName: string,
+    lastName: string,
+    gender: string,
+    dateOfBirth: number,
+    hubPackageId?: string
+  ): Promise<Patient> {
     let _body = null
 
     const _url =
@@ -879,11 +879,11 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
       (firstName ? "&firstName=" + encodeURIComponent(String(firstName)) : "") +
       (gender ? "&gender=" + encodeURIComponent(String(gender)) : "") +
-      (dateOfBirth ? "&dateOfBirth=" + encodeURIComponent(String(dateOfBirth)) : "")
+      (dateOfBirth ? "&dateOfBirth=" + encodeURIComponent(String(dateOfBirth)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -905,11 +905,11 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param hubId hubId
-   * @param hubApplication hubApplication
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
+   * @param hubApplication hubApplication
    */
   putTransactionSetUsingPOST(
     endpoint: string,
@@ -920,13 +920,13 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    hubId: number,
+    patientSsin: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    hubId?: number,
     hubApplication?: string,
-    patientSsin?: string,
     body?: string
-  ): Promise<PutTransactionSetResponse | any> {
+  ): Promise<PutTransactionSetResponse> {
     let _body = null
     _body = body
 
@@ -940,8 +940,8 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hubApplication ? "&hubApplication=" + encodeURIComponent(String(hubApplication)) : "")
     let headers = this.headers
     headers = headers
@@ -967,11 +967,11 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param hubId hubId
-   * @param hubApplication hubApplication
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
+   * @param hubApplication hubApplication
    */
   putTransactionUsingPOST(
     endpoint: string,
@@ -982,13 +982,13 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    hubId: number,
+    patientSsin: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    hubId?: number,
     hubApplication?: string,
-    patientSsin?: string,
     body?: string
-  ): Promise<PutTransactionResponseDto | any> {
+  ): Promise<PutTransactionResponseDto> {
     let _body = null
     _body = body
 
@@ -1002,8 +1002,8 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hubApplication ? "&hubApplication=" + encodeURIComponent(String(hubApplication)) : "")
     let headers = this.headers
     headers = headers
@@ -1028,9 +1028,9 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
    * @param patientEidCardNumber patientEidCardNumber
    * @param patientIsiCardNumber patientIsiCardNumber
    */
@@ -1043,12 +1043,12 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    patientSsin: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    patientSsin?: string,
     patientEidCardNumber?: string,
     patientIsiCardNumber?: string
-  ): Promise<PutPatientConsentResponse | any> {
+  ): Promise<PutPatientConsentResponse> {
     let _body = null
 
     const _url =
@@ -1061,8 +1061,8 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (patientEidCardNumber
         ? "&patientEidCardNumber=" + encodeURIComponent(String(patientEidCardNumber))
         : "") +
@@ -1089,9 +1089,9 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
    * @param patientEidCardNumber patientEidCardNumber
    * @param patientIsiCardNumber patientIsiCardNumber
    */
@@ -1104,12 +1104,12 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    patientSsin: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    patientSsin?: string,
     patientEidCardNumber?: string,
     patientIsiCardNumber?: string
-  ): Promise<PutTherapeuticLinkResponse | any> {
+  ): Promise<PutTherapeuticLinkResponse> {
     let _body = null
 
     const _url =
@@ -1123,8 +1123,8 @@ export class fhcHubApi {
       (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (patientEidCardNumber
         ? "&patientEidCardNumber=" + encodeURIComponent(String(patientEidCardNumber))
         : "") +
@@ -1175,7 +1175,7 @@ export class fhcHubApi {
     accessNihii?: string,
     accessSsin?: string,
     hubPackageId?: string
-  ): Promise<RevokeAccessRightResponse | any> {
+  ): Promise<RevokeAccessRightResponse> {
     let _body = null
 
     const _url =
@@ -1215,9 +1215,9 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
    * @param patientEidCardNumber patientEidCardNumber
    * @param patientIsiCardNumber patientIsiCardNumber
    */
@@ -1230,12 +1230,12 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    patientSsin: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    patientSsin?: string,
     patientEidCardNumber?: string,
     patientIsiCardNumber?: string
-  ): Promise<RevokePatientConsentResponse | any> {
+  ): Promise<RevokePatientConsentResponse> {
     let _body = null
 
     const _url =
@@ -1248,8 +1248,8 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (patientEidCardNumber
         ? "&patientEidCardNumber=" + encodeURIComponent(String(patientEidCardNumber))
         : "") +
@@ -1276,9 +1276,9 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
    * @param patientSsin patientSsin
+   * @param hubPackageId hubPackageId
    * @param patientEidCardNumber patientEidCardNumber
    * @param patientIsiCardNumber patientIsiCardNumber
    */
@@ -1291,12 +1291,12 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    patientSsin: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    patientSsin?: string,
     patientEidCardNumber?: string,
     patientIsiCardNumber?: string
-  ): Promise<RevokeTherapeuticLinkResponse | any> {
+  ): Promise<RevokeTherapeuticLinkResponse> {
     let _body = null
 
     const _url =
@@ -1310,8 +1310,8 @@ export class fhcHubApi {
       (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (patientEidCardNumber
         ? "&patientEidCardNumber=" + encodeURIComponent(String(patientEidCardNumber))
         : "") +
@@ -1338,13 +1338,13 @@ export class fhcHubApi {
    * @param hcpFirstName hcpFirstName
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
-   * @param hubPackageId hubPackageId
    * @param hcpZip hcpZip
-   * @param breakTheGlassReason breakTheGlassReason
    * @param ssin ssin
    * @param sv sv
    * @param sl sl
    * @param id id
+   * @param hubPackageId hubPackageId
+   * @param breakTheGlassReason breakTheGlassReason
    */
   revokeTransactionUsingDELETE(
     endpoint: string,
@@ -1355,14 +1355,14 @@ export class fhcHubApi {
     hcpFirstName: string,
     hcpNihii: string,
     hcpSsin: string,
+    hcpZip: string,
+    ssin: string,
+    sv: string,
+    sl: string,
+    id: string,
     hubPackageId?: string,
-    hcpZip?: string,
-    breakTheGlassReason?: string,
-    ssin?: string,
-    sv?: string,
-    sl?: string,
-    id?: string
-  ): Promise<string | any> {
+    breakTheGlassReason?: string
+  ): Promise<string> {
     let _body = null
 
     const _url =
@@ -1377,12 +1377,12 @@ export class fhcHubApi {
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (hcpZip ? "&hcpZip=" + encodeURIComponent(String(hcpZip)) : "") +
+      (id ? "&id=" + encodeURIComponent(String(id)) : "") +
+      (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
-        : "") +
-      (id ? "&id=" + encodeURIComponent(String(id)) : "")
+        : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))

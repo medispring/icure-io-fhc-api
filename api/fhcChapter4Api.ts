@@ -36,7 +36,7 @@ export class fhcChapter4Api {
     this.headers = h
   }
 
-  handleError(e: XHR.XHRError) {
+  handleError(e: XHR.XHRError): never {
     throw e
   }
 
@@ -79,7 +79,7 @@ export class fhcChapter4Api {
     start?: number,
     end?: number,
     reference?: string
-  ): Promise<AgreementResponse | any> {
+  ): Promise<AgreementResponse> {
     let _body = null
 
     const _url =
@@ -146,7 +146,7 @@ export class fhcChapter4Api {
     patientGender: string,
     decisionReference?: string,
     iorequestReference?: string
-  ): Promise<AgreementResponse | any> {
+  ): Promise<AgreementResponse> {
     let _body = null
 
     const _url =
@@ -212,7 +212,7 @@ export class fhcChapter4Api {
     patientLastName: string,
     patientGender: string,
     decisionReference: string
-  ): Promise<AgreementResponse | any> {
+  ): Promise<AgreementResponse> {
     let _body = null
 
     const _url =
@@ -250,10 +250,7 @@ export class fhcChapter4Api {
    * @param searchString searchString
    * @param language language
    */
-  findParagraphsUsingGET(
-    searchString: string,
-    language: string
-  ): Promise<Array<ParagraphPreview> | any> {
+  findParagraphsUsingGET(searchString: string, language: string): Promise<Array<ParagraphPreview>> {
     let _body = null
 
     const _url =
@@ -275,10 +272,7 @@ export class fhcChapter4Api {
    * @param cnk cnk
    * @param language language
    */
-  findParagraphsWithCnkUsingGET(
-    cnk: number,
-    language: string
-  ): Promise<Array<ParagraphPreview> | any> {
+  findParagraphsWithCnkUsingGET(cnk: number, language: string): Promise<Array<ParagraphPreview>> {
     let _body = null
 
     const _url =
@@ -336,7 +330,7 @@ export class fhcChapter4Api {
   getAddedDocumentsUsingGET(
     chapterName: string,
     paragraphName: string
-  ): Promise<Array<AddedDocumentPreview> | any> {
+  ): Promise<Array<AddedDocumentPreview>> {
     let _body = null
 
     const _url =
@@ -361,7 +355,7 @@ export class fhcChapter4Api {
   getMppsForParagraphUsingGET(
     chapterName: string,
     paragraphName: string
-  ): Promise<Array<MppPreview> | any> {
+  ): Promise<Array<MppPreview>> {
     let _body = null
 
     const _url =
@@ -383,10 +377,7 @@ export class fhcChapter4Api {
    * @param chapterName chapterName
    * @param paragraphName paragraphName
    */
-  getParagraphInfosUsingGET(
-    chapterName: string,
-    paragraphName: string
-  ): Promise<ParagraphInfos | any> {
+  getParagraphInfosUsingGET(chapterName: string, paragraphName: string): Promise<ParagraphInfos> {
     let _body = null
 
     const _url =
@@ -413,7 +404,7 @@ export class fhcChapter4Api {
     chapterName: string,
     paragraphName: string,
     language: string
-  ): Promise<Array<string> | any> {
+  ): Promise<Array<string>> {
     let _body = null
 
     const _url =
@@ -478,7 +469,7 @@ export class fhcChapter4Api {
     decisionReference?: string,
     ioRequestReference?: string,
     body?: Array<Appendix>
-  ): Promise<AgreementResponse | any> {
+  ): Promise<AgreementResponse> {
     let _body = null
     _body = body
 

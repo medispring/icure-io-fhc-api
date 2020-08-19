@@ -17,7 +17,7 @@ export class AgreementTransaction {
 
   accepted?: boolean
   careProviderReference?: string
-  content?: Array<string>
+  content?: ArrayBuffer
   coverageType?: string
   decisionReference?: string
   end?: number

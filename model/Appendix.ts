@@ -15,7 +15,7 @@ export class Appendix {
     Object.assign(this as Appendix, json)
   }
 
-  data?: Array<string>
+  data?: ArrayBuffer
   documentSeq?: number
   mimeType?: string
   path?: string
