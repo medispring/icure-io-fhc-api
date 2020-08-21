@@ -165,7 +165,7 @@ export class fhcDmgApi {
 
     const _url =
       this.host +
-      `/gmd/consult` +
+      `/gmd` +
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
