@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { XHR } from "./XHR"
+import { DmgConsultation } from "../model/DmgConsultation"
 import { DmgNotification } from "../model/DmgNotification"
 import { DmgRegistration } from "../model/DmgRegistration"
 import { DmgsList } from "../model/DmgsList"
@@ -127,6 +128,61 @@ export class fhcDmgApi {
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary Consult dmg status
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param hcpNihii hcpNihii
+   * @param hcpSsin hcpSsin
+   * @param hcpFirstName hcpFirstName
+   * @param hcpLastName hcpLastName
+   * @param patientSsin patientSsin
+   * @param patientGender patientGender
+   * @param oa oa
+   * @param regNrWithMut regNrWithMut
+   * @param requestDate requestDate
+   */
+  consultDmgUsingGET(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpFirstName: string,
+    hcpLastName: string,
+    patientSsin?: string,
+    patientGender?: string,
+    oa?: string,
+    regNrWithMut?: string,
+    requestDate?: number
+  ): Promise<DmgConsultation> {
+    let _body = null
+
+    const _url =
+      this.host +
+      `/gmd/consult` +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
+      (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
+      (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
+      (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
+      (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
+      (oa ? "&oa=" + encodeURIComponent(String(oa)) : "") +
+      (regNrWithMut ? "&regNrWithMut=" + encodeURIComponent(String(regNrWithMut)) : "") +
+      (requestDate ? "&requestDate=" + encodeURIComponent(String(requestDate)) : "")
+    let headers = this.headers
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+      .then(doc => new DmgConsultation(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
