@@ -231,13 +231,14 @@ export class fhcStsApi {
    * @summary uploadKeystore
    * @param file
    */
-  uploadKeystoreUsingPOST(file: ArrayBuffer): Promise<UUIDType> {
+  uploadKeystoreUsingPOST(file: ArrayBuffer | any[]): Promise<UUIDType> {
     let _body = null
-    file &&
-      (_body = _body || new FormData()).append(
-        "file",
-        new Blob([file], { type: "application/octet-stream" })
-      )
+    if (file && !_body) {
+      const parts = Array.isArray(file) ? (file as any[]) : [file as ArrayBuffer]
+      const _blob = new Blob(parts, { type: "application/octet-stream" })
+      _body = new FormData().append("file", _blob)
+    }
+
     const _url = this.host + `/sts/keystore` + "?ts=" + new Date().getTime()
     let headers = this.headers
     headers = headers

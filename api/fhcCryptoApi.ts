@@ -42,16 +42,19 @@ export class fhcCryptoApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    */
   decryptFileUsingPOST(
-    encryptedData: ArrayBuffer,
+    encryptedData: ArrayBuffer | any[],
     xFHCKeystoreId: string,
     xFHCPassPhrase: string
   ): Promise<ArrayBuffer> {
     let _body = null
-    encryptedData &&
-      (_body = _body || new FormData()).append(
-        "encryptedData",
-        new Blob([encryptedData], { type: "application/octet-stream" })
-      )
+    if (encryptedData && !_body) {
+      const parts = Array.isArray(encryptedData)
+        ? (encryptedData as any[])
+        : [encryptedData as ArrayBuffer]
+      const _blob = new Blob(parts, { type: "application/octet-stream" })
+      _body = new FormData().append("encryptedData", _blob)
+    }
+
     const _url = this.host + `/crypto/decryptFile` + "?ts=" + new Date().getTime()
     let headers = this.headers
     headers = headers
@@ -102,7 +105,7 @@ export class fhcCryptoApi {
    * @param applicationId applicationId
    */
   encryptFileUsingPOST(
-    plainData: ArrayBuffer,
+    plainData: ArrayBuffer | any[],
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     identifier: string,
@@ -110,11 +113,12 @@ export class fhcCryptoApi {
     applicationId?: string
   ): Promise<ArrayBuffer> {
     let _body = null
-    plainData &&
-      (_body = _body || new FormData()).append(
-        "plainData",
-        new Blob([plainData], { type: "application/octet-stream" })
-      )
+    if (plainData && !_body) {
+      const parts = Array.isArray(plainData) ? (plainData as any[]) : [plainData as ArrayBuffer]
+      const _blob = new Blob(parts, { type: "application/octet-stream" })
+      _body = new FormData().append("plainData", _blob)
+    }
+
     const _url =
       this.host +
       `/crypto/encryptFile/${encodeURIComponent(String(identifier))}/${encodeURIComponent(
