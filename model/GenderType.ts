@@ -15,8 +15,10 @@ export class GenderType {
     Object.assign(this as GenderType, json)
   }
 
+  genderCode?: string
   modificationDate?: string
   origin?: GenderType.OriginEnum
+  startDate?: Date
   value?: GenderType.ValueEnum
 }
 export namespace GenderType {

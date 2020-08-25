@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { LocalisedString } from "./LocalisedString"
+import { NameType } from "./NameType"
 
 export class NationalityType {
   constructor(json: JSON | any) {
@@ -17,9 +18,13 @@ export class NationalityType {
   }
 
   descriptions?: Array<LocalisedString>
+  endDate?: Date
   insCode?: number
   modificationDate?: string
+  nationalityCode?: string
+  nationalityDescriptions?: Array<NameType>
   origin?: NationalityType.OriginEnum
+  startDate?: Date
 }
 export namespace NationalityType {
   export type OriginEnum = "BCSS_KSZ" | "RN_RR"

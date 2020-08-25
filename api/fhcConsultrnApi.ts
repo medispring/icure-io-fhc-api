@@ -11,6 +11,8 @@
  */
 import { XHR } from "./XHR"
 import { ConsultCurrentSsinResponse } from "../model/ConsultCurrentSsinResponse"
+import { PersonMid } from "../model/PersonMid"
+import { RegisterPersonResponseDto } from "../model/RegisterPersonResponseDto"
 import { SearchBySSINReplyDto } from "../model/SearchBySSINReplyDto"
 import { SearchPhoneticReplyDto } from "../model/SearchPhoneticReplyDto"
 
@@ -91,6 +93,36 @@ export class fhcConsultrnApi {
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new SearchBySSINReplyDto(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary registerPerson
+   * @param body mid
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   */
+  registerPersonUsingPOST(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    body?: PersonMid
+  ): Promise<RegisterPersonResponseDto> {
+    let _body = null
+    _body = body
+
+    const _url = this.host + `/consultrn` + "?ts=" + new Date().getTime()
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+      .then(doc => new RegisterPersonResponseDto(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 

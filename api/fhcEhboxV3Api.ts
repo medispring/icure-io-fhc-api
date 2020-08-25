@@ -11,6 +11,7 @@
  */
 import { XHR } from "./XHR"
 import { AltKeystoresList } from "../model/AltKeystoresList"
+import { BoxInfo } from "../model/BoxInfo"
 import { DocumentMessage } from "../model/DocumentMessage"
 import { MessageOperationResponse } from "../model/MessageOperationResponse"
 import { MessageResponse } from "../model/MessageResponse"
@@ -142,6 +143,30 @@ export class fhcEhboxV3Api {
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new MessageResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary getInfos
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   */
+  getInfosUsingGET1(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string
+  ): Promise<BoxInfo> {
+    let _body = null
+
+    const _url = this.host + `/ehboxV3` + "?ts=" + new Date().getTime()
+    let headers = this.headers
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+      .then(doc => new BoxInfo(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
@@ -283,6 +308,53 @@ export class fhcEhboxV3Api {
     const _url =
       this.host +
       `/ehboxV3/2ebox` +
+      "?ts=" +
+      new Date().getTime() +
+      (publicationReceipt
+        ? "&publicationReceipt=" + encodeURIComponent(String(publicationReceipt))
+        : "") +
+      (receptionReceipt
+        ? "&receptionReceipt=" + encodeURIComponent(String(receptionReceipt))
+        : "") +
+      (readReceipt ? "&readReceipt=" + encodeURIComponent(String(readReceipt)) : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+      .then(doc => new MessageOperationResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary sendMessage
+   * @param body message
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param publicationReceipt publicationReceipt
+   * @param receptionReceipt receptionReceipt
+   * @param readReceipt readReceipt
+   */
+  sendMessageUsingPOST1(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    publicationReceipt: boolean,
+    receptionReceipt: boolean,
+    readReceipt: boolean,
+    body?: DocumentMessage
+  ): Promise<MessageOperationResponse> {
+    let _body = null
+    _body = body
+
+    const _url =
+      this.host +
+      `/ehboxV3` +
       "?ts=" +
       new Date().getTime() +
       (publicationReceipt

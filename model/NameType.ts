@@ -16,10 +16,12 @@ export class NameType {
   }
 
   first?: string
+  lang?: string
   last?: string
   middle?: string
   modificationDate?: string
   origin?: NameType.OriginEnum
+  value?: string
 }
 export namespace NameType {
   export type OriginEnum = "BCSS_KSZ" | "RN_RR"
