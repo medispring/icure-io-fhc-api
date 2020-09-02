@@ -236,7 +236,8 @@ export class fhcStsApi {
     if (file && !_body) {
       const parts = Array.isArray(file) ? (file as any[]) : [file as ArrayBuffer]
       const _blob = new Blob(parts, { type: "application/octet-stream" })
-      _body = new FormData().append("file", _blob)
+      _body = new FormData()
+      _body.append("file", _blob)
     }
 
     const _url = this.host + `/sts/keystore` + "?ts=" + new Date().getTime()

@@ -25,8 +25,13 @@ export class PrescriptionRequest {
   hcp?: HealthcareParty
   medications?: Array<Medication>
   notification?: string
+  packageName?: string
+  packageVersion?: string
   patient?: Patient
   prescriptionType?: string
   samVersion?: string
+  vendorEmail?: string
+  vendorName?: string
+  vendorPhone?: string
   vision?: string
 }

@@ -52,7 +52,8 @@ export class fhcCryptoApi {
         ? (encryptedData as any[])
         : [encryptedData as ArrayBuffer]
       const _blob = new Blob(parts, { type: "application/octet-stream" })
-      _body = new FormData().append("encryptedData", _blob)
+      _body = new FormData()
+      _body.append("encryptedData", _blob)
     }
 
     const _url = this.host + `/crypto/decryptFile` + "?ts=" + new Date().getTime()
@@ -116,7 +117,8 @@ export class fhcCryptoApi {
     if (plainData && !_body) {
       const parts = Array.isArray(plainData) ? (plainData as any[]) : [plainData as ArrayBuffer]
       const _blob = new Blob(parts, { type: "application/octet-stream" })
-      _body = new FormData().append("plainData", _blob)
+      _body = new FormData()
+      _body.append("plainData", _blob)
     }
 
     const _url =
