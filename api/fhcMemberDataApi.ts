@@ -128,8 +128,8 @@ export class fhcMemberDataApi {
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param hcpSsin hcpSsin
    * @param hcpQuality hcpQuality
    * @param date date
    * @param endDate endDate
@@ -143,8 +143,8 @@ export class fhcMemberDataApi {
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
     hcpName: string,
+    hcpSsin?: string,
     hcpQuality?: string,
     date?: number,
     endDate?: number,
@@ -159,8 +159,8 @@ export class fhcMemberDataApi {
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
       (endDate ? "&endDate=" + encodeURIComponent(String(endDate)) : "") +
@@ -220,8 +220,8 @@ export class fhcMemberDataApi {
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param hcpSsin hcpSsin
    * @param hcpQuality hcpQuality
    * @param date date
    * @param endDate endDate
@@ -234,8 +234,8 @@ export class fhcMemberDataApi {
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
     hcpName: string,
+    hcpSsin?: string,
     hcpQuality?: string,
     date?: number,
     endDate?: number,
@@ -250,8 +250,8 @@ export class fhcMemberDataApi {
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
       (endDate ? "&endDate=" + encodeURIComponent(String(endDate)) : "") +
@@ -276,8 +276,8 @@ export class fhcMemberDataApi {
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param hcpSsin hcpSsin
    * @param hcpQuality hcpQuality
    * @param date date
    * @param endDate endDate
@@ -291,8 +291,8 @@ export class fhcMemberDataApi {
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
     hcpName: string,
+    hcpSsin?: string,
     hcpQuality?: string,
     date?: number,
     endDate?: number,
@@ -309,8 +309,8 @@ export class fhcMemberDataApi {
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
       (endDate ? "&endDate=" + encodeURIComponent(String(endDate)) : "") +
@@ -337,8 +337,8 @@ export class fhcMemberDataApi {
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param hcpSsin hcpSsin
    * @param hcpQuality hcpQuality
    * @param date date
    * @param endDate endDate
@@ -351,8 +351,8 @@ export class fhcMemberDataApi {
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
     hcpName: string,
+    hcpSsin?: string,
     hcpQuality?: string,
     date?: number,
     endDate?: number,
@@ -369,8 +369,8 @@ export class fhcMemberDataApi {
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
       (endDate ? "&endDate=" + encodeURIComponent(String(endDate)) : "") +
