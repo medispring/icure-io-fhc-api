@@ -110,7 +110,11 @@ export namespace XHR {
           ? {
               body:
                 (!contentType || contentType.data) === "application/json"
-                  ? JSON.stringify(data)
+                  ? JSON.stringify(data, (k, v) => {
+                      return v instanceof ArrayBuffer || v instanceof Uint8Array
+                        ? btoa(new Uint8Array(v).reduce((d, b) => d + String.fromCharCode(b), ""))
+                        : v
+                    })
                   : data
             }
           : {}
