@@ -11,6 +11,8 @@
  */
 import { CivilStateResponseType } from "./CivilStateResponseType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CivilStatesResponseType {
   constructor(json: JSON | any) {
     Object.assign(this as CivilStatesResponseType, json)

@@ -10,9 +10,15 @@
  * Do not edit the class manually.
  */
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Base64EncryptedValueType {
   constructor(json: JSON | any) {
-    Object.assign(this as Base64EncryptedValueType, json)
+    Object.assign(
+      this as Base64EncryptedValueType,
+      json,
+      json.value ? { value: decodeBase64(json.value) } : {}
+    )
   }
 
   encoding?: string

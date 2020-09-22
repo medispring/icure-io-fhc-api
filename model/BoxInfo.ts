@@ -11,6 +11,8 @@
  */
 import { ErrorDto } from "./ErrorDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class BoxInfo {
   constructor(json: JSON | any) {
     Object.assign(this as BoxInfo, json)

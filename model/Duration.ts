@@ -11,6 +11,8 @@
  */
 import { Code } from "./Code"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Duration {
   constructor(json: JSON | any) {
     Object.assign(this as Duration, json)

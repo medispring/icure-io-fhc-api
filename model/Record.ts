@@ -13,6 +13,8 @@ import { ErrorDetail } from "./ErrorDetail"
 import { RecordOrSegmentDescription } from "./RecordOrSegmentDescription"
 import { Zone } from "./Zone"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Record {
   constructor(json: JSON | any) {
     Object.assign(this as Record, json)

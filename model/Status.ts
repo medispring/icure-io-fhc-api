@@ -12,6 +12,8 @@
 import { StatusCode } from "./StatusCode"
 import { StatusDetail } from "./StatusDetail"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Status {
   constructor(json: JSON | any) {
     Object.assign(this as Status, json)

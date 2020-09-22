@@ -11,6 +11,8 @@
  */
 import { CDLIFECYCLE } from "./CDLIFECYCLE"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipelifecycleType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipelifecycleType, json)

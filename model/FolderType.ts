@@ -16,6 +16,8 @@ import { PersonType } from "./PersonType"
 import { TextType } from "./TextType"
 import { TransactionType } from "./TransactionType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class FolderType {
   constructor(json: JSON | any) {
     Object.assign(this as FolderType, json)

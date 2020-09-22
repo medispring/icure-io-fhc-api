@@ -14,6 +14,8 @@ import { MemberDataAck } from "./MemberDataAck"
 import { MemberDataMessage } from "./MemberDataMessage"
 import { MycarenetConversation } from "./MycarenetConversation"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MemberDataList {
   constructor(json: JSON | any) {
     Object.assign(this as MemberDataList, json)

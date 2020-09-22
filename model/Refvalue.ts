@@ -13,6 +13,8 @@ import { MaxrefType } from "./MaxrefType"
 import { MinrefType } from "./MinrefType"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Refvalue {
   constructor(json: JSON | any) {
     Object.assign(this as Refvalue, json)

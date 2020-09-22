@@ -11,6 +11,8 @@
  */
 import { CountryType } from "./CountryType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ConsultRnPlainAddressDto {
   constructor(json: JSON | any) {
     Object.assign(this as ConsultRnPlainAddressDto, json)

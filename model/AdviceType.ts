@@ -11,6 +11,8 @@
  */
 import { Serializable } from "./Serializable"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AdviceType {
   constructor(json: JSON | any) {
     Object.assign(this as AdviceType, json)

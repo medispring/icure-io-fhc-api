@@ -11,6 +11,8 @@
  */
 import { CDLIFECYCLE } from "./CDLIFECYCLE"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class LifecycleType {
   constructor(json: JSON | any) {
     Object.assign(this as LifecycleType, json)

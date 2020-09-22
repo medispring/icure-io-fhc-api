@@ -12,6 +12,8 @@
 import { AuthorDto } from "./AuthorDto"
 import { HcPartyIdDto } from "./HcPartyIdDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class HcPartyConsentDto {
   constructor(json: JSON | any) {
     Object.assign(this as HcPartyConsentDto, json)

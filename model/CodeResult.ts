@@ -11,6 +11,8 @@
  */
 import { Payment } from "./Payment"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CodeResult {
   constructor(json: JSON | any) {
     Object.assign(this as CodeResult, json)

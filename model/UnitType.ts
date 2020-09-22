@@ -11,6 +11,8 @@
  */
 import { CDUNIT } from "./CDUNIT"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class UnitType {
   constructor(json: JSON | any) {
     Object.assign(this as UnitType, json)

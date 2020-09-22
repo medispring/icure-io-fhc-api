@@ -12,6 +12,8 @@
 import { ConsultRnPlainAddressDto } from "./ConsultRnPlainAddressDto"
 import { StandardAddressType } from "./StandardAddressType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ConsultRnAddressDto {
   constructor(json: JSON | any) {
     Object.assign(this as ConsultRnAddressDto, json)

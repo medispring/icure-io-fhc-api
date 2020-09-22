@@ -13,6 +13,8 @@ import { CDERROR } from "./CDERROR"
 import { IDKMEHR } from "./IDKMEHR"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ErrorType {
   constructor(json: JSON | any) {
     Object.assign(this as ErrorType, json)

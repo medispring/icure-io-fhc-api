@@ -12,6 +12,8 @@
 import { Address } from "./Address"
 import { BirthPlace } from "./BirthPlace"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PersonMid {
   constructor(json: JSON | any) {
     Object.assign(this as PersonMid, json)

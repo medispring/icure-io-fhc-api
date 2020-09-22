@@ -13,6 +13,8 @@ import { HealthcareParty } from "./HealthcareParty"
 import { Medication } from "./Medication"
 import { Patient } from "./Patient"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PrescriptionRequest {
   constructor(json: JSON | any) {
     Object.assign(this as PrescriptionRequest, json)

@@ -11,6 +11,8 @@
  */
 import { Code } from "./Code"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class KmehrQuantity {
   constructor(json: JSON | any) {
     Object.assign(this as KmehrQuantity, json)

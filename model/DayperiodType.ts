@@ -11,6 +11,8 @@
  */
 import { CDDAYPERIOD } from "./CDDAYPERIOD"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class DayperiodType {
   constructor(json: JSON | any) {
     Object.assign(this as DayperiodType, json)

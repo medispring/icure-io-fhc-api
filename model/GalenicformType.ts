@@ -12,6 +12,8 @@
 import { CDGALENICFORM } from "./CDGALENICFORM"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class GalenicformType {
   constructor(json: JSON | any) {
     Object.assign(this as GalenicformType, json)

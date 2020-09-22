@@ -16,6 +16,8 @@ import { RouteType } from "./RouteType"
 import { StrengthType } from "./StrengthType"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MedicationType {
   constructor(json: JSON | any) {
     Object.assign(this as MedicationType, json)

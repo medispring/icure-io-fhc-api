@@ -12,6 +12,8 @@
 import { QName } from "./QName"
 import { ReferenceType } from "./ReferenceType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class JAXBElementReferenceType {
   constructor(json: JSON | any) {
     Object.assign(this as JAXBElementReferenceType, json)

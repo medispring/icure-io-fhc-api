@@ -11,6 +11,8 @@
  */
 import { EncryptionProperty } from "./EncryptionProperty"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class EncryptionProperties {
   constructor(json: JSON | any) {
     Object.assign(this as EncryptionProperties, json)

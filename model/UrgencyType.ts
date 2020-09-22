@@ -11,6 +11,8 @@
  */
 import { CDURGENCY } from "./CDURGENCY"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class UrgencyType {
   constructor(json: JSON | any) {
     Object.assign(this as UrgencyType, json)

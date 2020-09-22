@@ -11,6 +11,8 @@
  */
 import { CDPERIODICITY } from "./CDPERIODICITY"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PeriodicityType {
   constructor(json: JSON | any) {
     Object.assign(this as PeriodicityType, json)

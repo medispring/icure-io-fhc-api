@@ -14,6 +14,8 @@ import { CDHCPARTY } from "./CDHCPARTY"
 import { IDHCPARTY } from "./IDHCPARTY"
 import { TelecomType } from "./TelecomType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class HcpartyType {
   constructor(json: JSON | any) {
     Object.assign(this as HcpartyType, json)

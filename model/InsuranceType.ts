@@ -14,6 +14,8 @@ import { Personalpart } from "./Personalpart"
 import { Thirdpayercontract } from "./Thirdpayercontract"
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class InsuranceType {
   constructor(json: JSON | any) {
     Object.assign(this as InsuranceType, json)

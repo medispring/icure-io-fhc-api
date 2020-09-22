@@ -11,6 +11,8 @@
  */
 import { TimequantityType } from "./TimequantityType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Nominator {
   constructor(json: JSON | any) {
     Object.assign(this as Nominator, json)

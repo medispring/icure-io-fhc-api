@@ -11,6 +11,8 @@
  */
 import { Feedback } from "./Feedback"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PrescriptionFullWithFeedback {
   constructor(json: JSON | any) {
     Object.assign(this as PrescriptionFullWithFeedback, json)

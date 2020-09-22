@@ -12,9 +12,15 @@
 import { DigestMethod } from "./DigestMethod"
 import { Transforms } from "./Transforms"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Reference {
   constructor(json: JSON | any) {
-    Object.assign(this as Reference, json)
+    Object.assign(
+      this as Reference,
+      json,
+      json.digestValue ? { digestValue: decodeBase64(json.digestValue) } : {}
+    )
   }
 
   digestMethod?: DigestMethod

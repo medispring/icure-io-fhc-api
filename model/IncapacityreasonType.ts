@@ -11,6 +11,8 @@
  */
 import { CDINCAPACITYREASON } from "./CDINCAPACITYREASON"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class IncapacityreasonType {
   constructor(json: JSON | any) {
     Object.assign(this as IncapacityreasonType, json)

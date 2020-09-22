@@ -11,6 +11,8 @@
  */
 import { CDFORMULARY } from "./CDFORMULARY"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class FormularyreferenceType {
   constructor(json: JSON | any) {
     Object.assign(this as FormularyreferenceType, json)

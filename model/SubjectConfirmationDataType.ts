@@ -11,6 +11,8 @@
  */
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SubjectConfirmationDataType {
   constructor(json: JSON | any) {
     Object.assign(this as SubjectConfirmationDataType, json)

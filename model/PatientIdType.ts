@@ -11,6 +11,8 @@
  */
 import { IDPATIENT } from "./IDPATIENT"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PatientIdType {
   constructor(json: JSON | any) {
     Object.assign(this as PatientIdType, json)

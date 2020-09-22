@@ -11,6 +11,8 @@
  */
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MinrefType {
   constructor(json: JSON | any) {
     Object.assign(this as MinrefType, json)

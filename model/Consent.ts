@@ -13,6 +13,8 @@ import { AuthorWithPatientDto } from "./AuthorWithPatientDto"
 import { KmehrCd } from "./KmehrCd"
 import { PatientId } from "./PatientId"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Consent {
   constructor(json: JSON | any) {
     Object.assign(this as Consent, json)

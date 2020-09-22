@@ -13,6 +13,8 @@ import { RecipeCDHEADING } from "./RecipeCDHEADING"
 import { RecipebasicIDKMEHR } from "./RecipebasicIDKMEHR"
 import { RecipeitemType } from "./RecipeitemType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipetransactionheadingType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipetransactionheadingType, json)

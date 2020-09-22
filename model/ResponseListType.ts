@@ -14,6 +14,8 @@ import { IDKMEHR } from "./IDKMEHR"
 import { Paginationresponseinfo } from "./Paginationresponseinfo"
 import { RequestListType } from "./RequestListType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ResponseListType {
   constructor(json: JSON | any) {
     Object.assign(this as ResponseListType, json)

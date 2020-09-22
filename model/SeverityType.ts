@@ -11,6 +11,8 @@
  */
 import { CDSEVERITY } from "./CDSEVERITY"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SeverityType {
   constructor(json: JSON | any) {
     Object.assign(this as SeverityType, json)

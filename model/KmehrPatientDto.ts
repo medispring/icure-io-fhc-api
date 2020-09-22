@@ -11,6 +11,8 @@
  */
 import { IDPATIENT } from "./IDPATIENT"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class KmehrPatientDto {
   constructor(json: JSON | any) {
     Object.assign(this as KmehrPatientDto, json)

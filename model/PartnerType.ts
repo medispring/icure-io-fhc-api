@@ -11,6 +11,8 @@
  */
 import { PersonNameResponseType } from "./PersonNameResponseType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PartnerType {
   constructor(json: JSON | any) {
     Object.assign(this as PartnerType, json)

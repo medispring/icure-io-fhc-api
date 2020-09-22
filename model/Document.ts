@@ -11,9 +11,15 @@
  */
 import { SigningValue } from "./SigningValue"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Document {
   constructor(json: JSON | any) {
-    Object.assign(this as Document, json)
+    Object.assign(
+      this as Document,
+      json,
+      json.content ? { content: decodeBase64(json.content) } : {}
+    )
   }
 
   content?: ArrayBuffer

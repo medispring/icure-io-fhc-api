@@ -11,6 +11,8 @@
  */
 import { NameType } from "./NameType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class NobilityTitleType {
   constructor(json: JSON | any) {
     Object.assign(this as NobilityTitleType, json)

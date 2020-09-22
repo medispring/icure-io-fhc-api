@@ -10,9 +10,15 @@
  * Do not edit the class manually.
  */
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SignatureValue {
   constructor(json: JSON | any) {
-    Object.assign(this as SignatureValue, json)
+    Object.assign(
+      this as SignatureValue,
+      json,
+      json.value ? { value: decodeBase64(json.value) } : {}
+    )
   }
 
   id?: string

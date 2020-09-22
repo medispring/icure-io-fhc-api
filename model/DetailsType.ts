@@ -11,6 +11,8 @@
  */
 import { DetailType } from "./DetailType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class DetailsType {
   constructor(json: JSON | any) {
     Object.assign(this as DetailsType, json)

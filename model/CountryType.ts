@@ -11,6 +11,8 @@
  */
 import { CDCOUNTRY } from "./CDCOUNTRY"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CountryType {
   constructor(json: JSON | any) {
     Object.assign(this as CountryType, json)

@@ -14,9 +14,16 @@ import { FaultType } from "./FaultType"
 import { MycarenetConversation } from "./MycarenetConversation"
 import { MycarenetError } from "./MycarenetError"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class StartSubscriptionResultWithResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as StartSubscriptionResultWithResponse, json)
+    Object.assign(
+      this as StartSubscriptionResultWithResponse,
+      json,
+      json.kmehrMessage ? { kmehrMessage: decodeBase64(json.kmehrMessage) } : {},
+      json.xades ? { xades: decodeBase64(json.xades) } : {}
+    )
   }
 
   commonOutput?: CommonOutput

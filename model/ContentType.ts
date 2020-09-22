@@ -30,6 +30,8 @@ import { TextType } from "./TextType"
 import { UnitType } from "./UnitType"
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ContentType {
   constructor(json: JSON | any) {
     Object.assign(this as ContentType, json)

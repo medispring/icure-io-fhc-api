@@ -12,6 +12,8 @@
 import { CDTELECOM } from "./CDTELECOM"
 import { IDKMEHR } from "./IDKMEHR"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TelecomType {
   constructor(json: JSON | any) {
     Object.assign(this as TelecomType, json)

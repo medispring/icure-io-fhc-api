@@ -36,6 +36,8 @@ import { TemporalityType } from "./TemporalityType"
 import { TextType } from "./TextType"
 import { UrgencyType } from "./UrgencyType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ItemType {
   constructor(json: JSON | any) {
     Object.assign(this as ItemType, json)

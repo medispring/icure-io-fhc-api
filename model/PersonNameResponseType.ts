@@ -11,6 +11,8 @@
  */
 import { MiddleNameType } from "./MiddleNameType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PersonNameResponseType {
   constructor(json: JSON | any) {
     Object.assign(this as PersonNameResponseType, json)

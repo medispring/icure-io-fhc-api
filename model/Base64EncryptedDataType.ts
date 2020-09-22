@@ -12,6 +12,8 @@
 import { Base64EncryptedValueType } from "./Base64EncryptedValueType"
 import { CDENCRYPTIONMETHOD } from "./CDENCRYPTIONMETHOD"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Base64EncryptedDataType {
   constructor(json: JSON | any) {
     Object.assign(this as Base64EncryptedDataType, json)

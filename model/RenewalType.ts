@@ -12,6 +12,8 @@
 import { DurationType } from "./DurationType"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RenewalType {
   constructor(json: JSON | any) {
     Object.assign(this as RenewalType, json)

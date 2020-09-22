@@ -11,6 +11,8 @@
  */
 import { CDACKNOWLEDGMENT } from "./CDACKNOWLEDGMENT"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AcknowledgmentType {
   constructor(json: JSON | any) {
     Object.assign(this as AcknowledgmentType, json)

@@ -12,6 +12,8 @@
 import { GalenicForm } from "./GalenicForm"
 import { KmehrQuantity } from "./KmehrQuantity"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CompoundPrescription {
   constructor(json: JSON | any) {
     Object.assign(this as CompoundPrescription, json)

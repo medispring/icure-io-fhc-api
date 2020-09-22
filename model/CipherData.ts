@@ -11,9 +11,15 @@
  */
 import { CipherReference } from "./CipherReference"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CipherData {
   constructor(json: JSON | any) {
-    Object.assign(this as CipherData, json)
+    Object.assign(
+      this as CipherData,
+      json,
+      json.cipherValue ? { cipherValue: decodeBase64(json.cipherValue) } : {}
+    )
   }
 
   cipherReference?: CipherReference

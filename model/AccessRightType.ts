@@ -13,6 +13,8 @@ import { CDACCESSRIGHT } from "./CDACCESSRIGHT"
 import { HcpartyType } from "./HcpartyType"
 import { TransactionIdType } from "./TransactionIdType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AccessRightType {
   constructor(json: JSON | any) {
     Object.assign(this as AccessRightType, json)

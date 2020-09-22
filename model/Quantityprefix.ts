@@ -11,6 +11,8 @@
  */
 import { CDQUANTITYPREFIX } from "./CDQUANTITYPREFIX"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Quantityprefix {
   constructor(json: JSON | any) {
     Object.assign(this as Quantityprefix, json)

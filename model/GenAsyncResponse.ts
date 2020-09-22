@@ -13,6 +13,8 @@ import { CommonOutput } from "./CommonOutput"
 import { MycarenetConversation } from "./MycarenetConversation"
 import { TAck } from "./TAck"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class GenAsyncResponse {
   constructor(json: JSON | any) {
     Object.assign(this as GenAsyncResponse, json)

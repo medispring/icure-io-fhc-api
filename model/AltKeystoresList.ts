@@ -11,6 +11,8 @@
  */
 import { AltKeystore } from "./AltKeystore"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AltKeystoresList {
   constructor(json: JSON | any) {
     Object.assign(this as AltKeystoresList, json)

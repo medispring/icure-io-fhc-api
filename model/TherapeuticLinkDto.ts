@@ -12,6 +12,8 @@
 import { HcPartyDto } from "./HcPartyDto"
 import { KmehrPatientDto } from "./KmehrPatientDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TherapeuticLinkDto {
   constructor(json: JSON | any) {
     Object.assign(this as TherapeuticLinkDto, json)

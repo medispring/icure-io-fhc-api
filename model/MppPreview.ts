@@ -11,6 +11,8 @@
  */
 import { MppId } from "./MppId"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MppPreview {
   constructor(json: JSON | any) {
     Object.assign(this as MppPreview, json)

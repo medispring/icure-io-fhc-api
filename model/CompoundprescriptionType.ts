@@ -15,6 +15,8 @@ import { GalenicformType } from "./GalenicformType"
 import { QuantityType } from "./QuantityType"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CompoundprescriptionType {
   constructor(json: JSON | any) {
     Object.assign(this as CompoundprescriptionType, json)

@@ -13,6 +13,8 @@ import { CountryType } from "./CountryType"
 import { MunicipalityType } from "./MunicipalityType"
 import { StreetType } from "./StreetType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class StandardAddressType {
   constructor(json: JSON | any) {
     Object.assign(this as StandardAddressType, json)

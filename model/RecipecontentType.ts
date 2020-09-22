@@ -13,6 +13,8 @@ import { RecipecompoundprescriptionType } from "./RecipecompoundprescriptionType
 import { RecipemedicinalProductType } from "./RecipemedicinalProductType"
 import { Substanceproduct } from "./Substanceproduct"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipecontentType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipecontentType, json)

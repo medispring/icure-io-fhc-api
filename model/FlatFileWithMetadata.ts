@@ -11,6 +11,8 @@
  */
 import { FlatFileMetadata } from "./FlatFileMetadata"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class FlatFileWithMetadata {
   constructor(json: JSON | any) {
     Object.assign(this as FlatFileWithMetadata, json)

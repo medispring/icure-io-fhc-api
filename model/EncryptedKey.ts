@@ -15,6 +15,8 @@ import { EncryptionProperties } from "./EncryptionProperties"
 import { KeyInfo } from "./KeyInfo"
 import { ReferenceList } from "./ReferenceList"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class EncryptedKey {
   constructor(json: JSON | any) {
     Object.assign(this as EncryptedKey, json)

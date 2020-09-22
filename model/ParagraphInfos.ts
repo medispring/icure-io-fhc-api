@@ -11,6 +11,8 @@
  */
 import { VerseInfos } from "./VerseInfos"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ParagraphInfos {
   constructor(json: JSON | any) {
     Object.assign(this as ParagraphInfos, json)

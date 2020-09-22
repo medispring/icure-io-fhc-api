@@ -25,6 +25,8 @@ import { Regimen } from "./Regimen"
 import { TextType } from "./TextType"
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipeitemType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipeitemType, json)

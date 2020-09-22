@@ -11,6 +11,8 @@
  */
 import { CDADMINISTRATIONUNIT } from "./CDADMINISTRATIONUNIT"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AdministrationunitType {
   constructor(json: JSON | any) {
     Object.assign(this as AdministrationunitType, json)

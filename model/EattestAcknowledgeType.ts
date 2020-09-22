@@ -11,6 +11,8 @@
  */
 import { MycarenetError } from "./MycarenetError"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class EattestAcknowledgeType {
   constructor(json: JSON | any) {
     Object.assign(this as EattestAcknowledgeType, json)

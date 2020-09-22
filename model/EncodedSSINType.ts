@@ -10,6 +10,8 @@
  * Do not edit the class manually.
  */
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class EncodedSSINType {
   constructor(json: JSON | any) {
     Object.assign(this as EncodedSSINType, json)

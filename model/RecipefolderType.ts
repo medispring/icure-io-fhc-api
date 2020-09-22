@@ -13,6 +13,8 @@ import { RecipebasicIDKMEHR } from "./RecipebasicIDKMEHR"
 import { RecipepatientpersonType } from "./RecipepatientpersonType"
 import { RecipetransactionType } from "./RecipetransactionType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipefolderType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipefolderType, json)

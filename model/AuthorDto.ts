@@ -11,6 +11,8 @@
  */
 import { HcPartyDto } from "./HcPartyDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AuthorDto {
   constructor(json: JSON | any) {
     Object.assign(this as AuthorDto, json)

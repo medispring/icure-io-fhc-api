@@ -14,6 +14,8 @@ import { MycarenetConversation } from "./MycarenetConversation"
 import { Record } from "./Record"
 import { TAck } from "./TAck"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class EfactSendResponse {
   constructor(json: JSON | any) {
     Object.assign(this as EfactSendResponse, json)

@@ -14,6 +14,8 @@ import { FaultType } from "./FaultType"
 import { MdaStatus } from "./MdaStatus"
 import { MycarenetError } from "./MycarenetError"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MemberDataBatchResponse {
   constructor(json: JSON | any) {
     Object.assign(this as MemberDataBatchResponse, json)

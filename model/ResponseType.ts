@@ -13,6 +13,8 @@ import { AuthorType } from "./AuthorType"
 import { IDKMEHR } from "./IDKMEHR"
 import { RequestType } from "./RequestType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ResponseType {
   constructor(json: JSON | any) {
     Object.assign(this as ResponseType, json)

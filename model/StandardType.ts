@@ -12,6 +12,8 @@
 import { CDSTANDARD } from "./CDSTANDARD"
 import { Specialisation } from "./Specialisation"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class StandardType {
   constructor(json: JSON | any) {
     Object.assign(this as StandardType, json)

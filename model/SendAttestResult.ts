@@ -14,6 +14,8 @@ import { Eattest } from "./Eattest"
 import { EattestAcknowledgeType } from "./EattestAcknowledgeType"
 import { MycarenetConversation } from "./MycarenetConversation"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SendAttestResult {
   constructor(json: JSON | any) {
     Object.assign(this as SendAttestResult, json)

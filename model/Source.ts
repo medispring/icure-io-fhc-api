@@ -11,6 +11,8 @@
  */
 import { CDEXTERNALSOURCE } from "./CDEXTERNALSOURCE"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Source {
   constructor(json: JSON | any) {
     Object.assign(this as Source, json)

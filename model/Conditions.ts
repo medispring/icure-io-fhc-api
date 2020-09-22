@@ -12,6 +12,8 @@
 import { ConditionAbstractType } from "./ConditionAbstractType"
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Conditions {
   constructor(json: JSON | any) {
     Object.assign(this as Conditions, json)

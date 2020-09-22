@@ -11,6 +11,8 @@
  */
 import { NameType } from "./NameType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TemporaryAddressType {
   constructor(json: JSON | any) {
     Object.assign(this as TemporaryAddressType, json)

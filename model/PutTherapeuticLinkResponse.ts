@@ -12,6 +12,8 @@
 import { AcknowledgeType } from "./AcknowledgeType"
 import { ResponseType } from "./ResponseType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PutTherapeuticLinkResponse {
   constructor(json: JSON | any) {
     Object.assign(this as PutTherapeuticLinkResponse, json)

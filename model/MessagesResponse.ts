@@ -11,6 +11,8 @@
  */
 import { Message } from "./Message"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MessagesResponse {
   constructor(json: JSON | any) {
     Object.assign(this as MessagesResponse, json)

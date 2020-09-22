@@ -12,6 +12,8 @@
 import { FacetDto } from "./FacetDto"
 import { MemberInfoDto } from "./MemberInfoDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MemberDataBatchRequestDto {
   constructor(json: JSON | any) {
     Object.assign(this as MemberDataBatchRequestDto, json)

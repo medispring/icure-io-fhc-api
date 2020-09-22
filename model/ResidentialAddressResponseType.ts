@@ -11,6 +11,8 @@
  */
 import { NameType } from "./NameType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ResidentialAddressResponseType {
   constructor(json: JSON | any) {
     Object.assign(this as ResidentialAddressResponseType, json)

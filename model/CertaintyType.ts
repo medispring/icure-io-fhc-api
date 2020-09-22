@@ -11,6 +11,8 @@
  */
 import { CDCERTAINTY } from "./CDCERTAINTY"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CertaintyType {
   constructor(json: JSON | any) {
     Object.assign(this as CertaintyType, json)

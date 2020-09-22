@@ -11,6 +11,8 @@
  */
 import { CDSEX } from "./CDSEX"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SexType {
   constructor(json: JSON | any) {
     Object.assign(this as SexType, json)

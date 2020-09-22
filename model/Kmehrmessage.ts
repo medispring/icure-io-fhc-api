@@ -12,6 +12,8 @@
 import { RecipefolderType } from "./RecipefolderType"
 import { RecipeheaderType } from "./RecipeheaderType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Kmehrmessage {
   constructor(json: JSON | any) {
     Object.assign(this as Kmehrmessage, json)

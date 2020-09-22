@@ -22,6 +22,8 @@ import { SexType } from "./SexType"
 import { TelecomType } from "./TelecomType"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PersonType {
   constructor(json: JSON | any) {
     Object.assign(this as PersonType, json)

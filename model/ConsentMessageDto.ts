@@ -12,6 +12,8 @@
 import { ConsentTypeDto } from "./ConsentTypeDto"
 import { ErrorDto } from "./ErrorDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ConsentMessageDto {
   constructor(json: JSON | any) {
     Object.assign(this as ConsentMessageDto, json)

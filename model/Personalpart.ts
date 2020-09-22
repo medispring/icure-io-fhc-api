@@ -13,6 +13,8 @@ import { CDCARENETPERSONALPART } from "./CDCARENETPERSONALPART"
 import { IDKMEHR } from "./IDKMEHR"
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Personalpart {
   constructor(json: JSON | any) {
     Object.assign(this as Personalpart, json)

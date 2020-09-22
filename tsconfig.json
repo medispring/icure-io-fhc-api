@@ -14,7 +14,8 @@
     "outDir": "./dist",
     "strict": true,
     "baseUrl": "./",
-    "types": []
+    "types": ["node"],
+    "typeRoots": ["../node_modules/@types"]
   },
   "include": ["index.ts", "fhcApi.ts", "api/*", "model/*"]
 }

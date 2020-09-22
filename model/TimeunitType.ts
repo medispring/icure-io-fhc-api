@@ -11,6 +11,8 @@
  */
 import { CDTIMEUNIT } from "./CDTIMEUNIT"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TimeunitType {
   constructor(json: JSON | any) {
     Object.assign(this as TimeunitType, json)

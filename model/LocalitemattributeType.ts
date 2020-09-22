@@ -13,6 +13,8 @@ import { ContentlocalitemattributeType } from "./ContentlocalitemattributeType"
 import { IDKMEHR } from "./IDKMEHR"
 import { LOCAL } from "./LOCAL"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class LocalitemattributeType {
   constructor(json: JSON | any) {
     Object.assign(this as LocalitemattributeType, json)

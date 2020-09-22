@@ -13,6 +13,8 @@ import { ConsultRnPersonDto } from "./ConsultRnPersonDto"
 import { ErrorType } from "./ErrorType"
 import { StatusDto } from "./StatusDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SearchBySSINReplyDto {
   constructor(json: JSON | any) {
     Object.assign(this as SearchBySSINReplyDto, json)

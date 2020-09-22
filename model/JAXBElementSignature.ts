@@ -12,6 +12,8 @@
 import { QName } from "./QName"
 import { Signature } from "./Signature"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class JAXBElementSignature {
   constructor(json: JSON | any) {
     Object.assign(this as JAXBElementSignature, json)

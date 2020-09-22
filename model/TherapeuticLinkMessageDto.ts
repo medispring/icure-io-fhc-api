@@ -12,6 +12,8 @@
 import { ErrorDto } from "./ErrorDto"
 import { TherapeuticLinkDto } from "./TherapeuticLinkDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TherapeuticLinkMessageDto {
   constructor(json: JSON | any) {
     Object.assign(this as TherapeuticLinkMessageDto, json)

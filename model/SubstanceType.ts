@@ -11,6 +11,8 @@
  */
 import { CDSUBSTANCE } from "./CDSUBSTANCE"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SubstanceType {
   constructor(json: JSON | any) {
     Object.assign(this as SubstanceType, json)

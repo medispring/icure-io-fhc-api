@@ -11,6 +11,8 @@
  */
 import { CDMESSAGE } from "./CDMESSAGE"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Specialisation {
   constructor(json: JSON | any) {
     Object.assign(this as Specialisation, json)

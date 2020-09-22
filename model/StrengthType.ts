@@ -11,6 +11,8 @@
  */
 import { UnitType } from "./UnitType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class StrengthType {
   constructor(json: JSON | any) {
     Object.assign(this as StrengthType, json)

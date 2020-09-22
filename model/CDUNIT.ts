@@ -10,6 +10,8 @@
  * Do not edit the class manually.
  */
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CDUNIT {
   constructor(json: JSON | any) {
     Object.assign(this as CDUNIT, json)

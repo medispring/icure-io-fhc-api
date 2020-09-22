@@ -14,6 +14,8 @@ import { EncryptedElementType } from "./EncryptedElementType"
 import { NameIDType } from "./NameIDType"
 import { SubjectConfirmation } from "./SubjectConfirmation"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Subject {
   constructor(json: JSON | any) {
     Object.assign(this as Subject, json)

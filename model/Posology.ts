@@ -11,6 +11,8 @@
  */
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Posology {
   constructor(json: JSON | any) {
     Object.assign(this as Posology, json)

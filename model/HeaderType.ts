@@ -20,6 +20,8 @@ import { StandardType } from "./StandardType"
 import { TextType } from "./TextType"
 import { UrgencyType } from "./UrgencyType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class HeaderType {
   constructor(json: JSON | any) {
     Object.assign(this as HeaderType, json)

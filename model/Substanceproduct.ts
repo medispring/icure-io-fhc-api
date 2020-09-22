@@ -12,6 +12,8 @@
 import { Code } from "./Code"
 import { RecipeCDINNCLUSTER } from "./RecipeCDINNCLUSTER"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Substanceproduct {
   constructor(json: JSON | any) {
     Object.assign(this as Substanceproduct, json)

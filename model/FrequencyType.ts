@@ -15,6 +15,8 @@ import { PeriodicityType } from "./PeriodicityType"
 import { TextType } from "./TextType"
 import { UnitType } from "./UnitType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class FrequencyType {
   constructor(json: JSON | any) {
     Object.assign(this as FrequencyType, json)

@@ -11,6 +11,8 @@
  */
 import { IDINSURANCE } from "./IDINSURANCE"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MemberinsuranceType {
   constructor(json: JSON | any) {
     Object.assign(this as MemberinsuranceType, json)

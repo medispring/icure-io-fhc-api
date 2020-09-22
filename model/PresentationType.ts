@@ -11,6 +11,8 @@
  */
 import { CDDRUGPRESENTATION } from "./CDDRUGPRESENTATION"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PresentationType {
   constructor(json: JSON | any) {
     Object.assign(this as PresentationType, json)

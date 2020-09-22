@@ -11,6 +11,8 @@
  */
 import { CDDRUGCNK } from "./CDDRUGCNK"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MedicinalProductType {
   constructor(json: JSON | any) {
     Object.assign(this as MedicinalProductType, json)

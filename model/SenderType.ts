@@ -11,6 +11,8 @@
  */
 import { HcpartyType } from "./HcpartyType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SenderType {
   constructor(json: JSON | any) {
     Object.assign(this as SenderType, json)

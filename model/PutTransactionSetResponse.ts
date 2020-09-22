@@ -13,6 +13,8 @@ import { AcknowledgeType } from "./AcknowledgeType"
 import { ResponseType } from "./ResponseType"
 import { TransactionIdType } from "./TransactionIdType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PutTransactionSetResponse {
   constructor(json: JSON | any) {
     Object.assign(this as PutTransactionSetResponse, json)

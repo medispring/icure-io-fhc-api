@@ -11,6 +11,8 @@
  */
 import { CDDRUGROUTE } from "./CDDRUGROUTE"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ReciperouteType {
   constructor(json: JSON | any) {
     Object.assign(this as ReciperouteType, json)

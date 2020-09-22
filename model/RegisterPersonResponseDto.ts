@@ -13,6 +13,8 @@ import { BusinessAnomalyType } from "./BusinessAnomalyType"
 import { ResultType } from "./ResultType"
 import { Status } from "./Status"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RegisterPersonResponseDto {
   constructor(json: JSON | any) {
     Object.assign(this as RegisterPersonResponseDto, json)

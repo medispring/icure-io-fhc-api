@@ -11,6 +11,8 @@
  */
 import { Serializable } from "./Serializable"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipecompoundprescriptionType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipecompoundprescriptionType, json)

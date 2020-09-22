@@ -12,6 +12,8 @@
 import { SsinStatusType } from "./SsinStatusType"
 import { Status } from "./Status"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ConsultCurrentSsinResponse {
   constructor(json: JSON | any) {
     Object.assign(this as ConsultCurrentSsinResponse, json)

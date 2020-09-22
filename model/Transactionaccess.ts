@@ -13,6 +13,8 @@ import { HcpartyType } from "./HcpartyType"
 import { PatientIdType } from "./PatientIdType"
 import { TransactionWithSpecificTime } from "./TransactionWithSpecificTime"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Transactionaccess {
   constructor(json: JSON | any) {
     Object.assign(this as Transactionaccess, json)

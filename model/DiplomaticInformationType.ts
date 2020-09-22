@@ -12,6 +12,8 @@
 import { DiplomaticPostType } from "./DiplomaticPostType"
 import { TemporaryAddressType } from "./TemporaryAddressType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class DiplomaticInformationType {
   constructor(json: JSON | any) {
     Object.assign(this as DiplomaticInformationType, json)

@@ -10,6 +10,8 @@
  * Do not edit the class manually.
  */
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CDACKNOWLEDGMENT {
   constructor(json: JSON | any) {
     Object.assign(this as CDACKNOWLEDGMENT, json)

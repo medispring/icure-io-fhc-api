@@ -11,6 +11,8 @@
  */
 import { Transactionaccess } from "./Transactionaccess"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TransactionAccessListType {
   constructor(json: JSON | any) {
     Object.assign(this as TransactionAccessListType, json)

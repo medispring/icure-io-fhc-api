@@ -13,6 +13,8 @@ import { AddressType } from "./AddressType"
 import { CDEBIRTHPLACE } from "./CDEBIRTHPLACE"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class LocationBirthPlaceType {
   constructor(json: JSON | any) {
     Object.assign(this as LocationBirthPlaceType, json)

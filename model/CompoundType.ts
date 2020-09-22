@@ -15,6 +15,8 @@ import { QuantityType } from "./QuantityType"
 import { Quantityprefix } from "./Quantityprefix"
 import { SubstanceType } from "./SubstanceType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CompoundType {
   constructor(json: JSON | any) {
     Object.assign(this as CompoundType, json)

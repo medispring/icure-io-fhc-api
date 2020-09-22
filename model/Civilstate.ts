@@ -11,6 +11,8 @@
  */
 import { CDCIVILSTATE } from "./CDCIVILSTATE"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Civilstate {
   constructor(json: JSON | any) {
     Object.assign(this as Civilstate, json)

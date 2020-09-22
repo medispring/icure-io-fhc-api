@@ -14,6 +14,8 @@ import { CountryType } from "./CountryType"
 import { IDKMEHR } from "./IDKMEHR"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AddressTypeBase {
   constructor(json: JSON | any) {
     Object.assign(this as AddressTypeBase, json)

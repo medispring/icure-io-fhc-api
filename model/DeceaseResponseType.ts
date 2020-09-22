@@ -11,6 +11,8 @@
  */
 import { WhereResponseType } from "./WhereResponseType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class DeceaseResponseType {
   constructor(json: JSON | any) {
     Object.assign(this as DeceaseResponseType, json)

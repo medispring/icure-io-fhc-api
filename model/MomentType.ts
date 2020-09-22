@@ -12,6 +12,8 @@
 import { TextType } from "./TextType"
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class MomentType {
   constructor(json: JSON | any) {
     Object.assign(this as MomentType, json)

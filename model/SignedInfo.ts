@@ -13,6 +13,8 @@ import { CanonicalizationMethod } from "./CanonicalizationMethod"
 import { Reference } from "./Reference"
 import { SignatureMethod } from "./SignatureMethod"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SignedInfo {
   constructor(json: JSON | any) {
     Object.assign(this as SignedInfo, json)

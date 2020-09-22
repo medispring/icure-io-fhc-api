@@ -14,6 +14,8 @@ import { Code } from "./Code"
 import { FinancialInstitutionInformation } from "./FinancialInstitutionInformation"
 import { Insurability } from "./Insurability"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Patient {
   constructor(json: JSON | any) {
     Object.assign(this as Patient, json)

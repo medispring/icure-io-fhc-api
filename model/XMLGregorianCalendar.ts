@@ -11,6 +11,8 @@
  */
 import { QName } from "./QName"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class XMLGregorianCalendar {
   constructor(json: JSON | any) {
     Object.assign(this as XMLGregorianCalendar, json)

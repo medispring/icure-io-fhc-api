@@ -17,6 +17,8 @@ import { MycarenetConversation } from "./MycarenetConversation"
 import { MycarenetError } from "./MycarenetError"
 import { TransferDto } from "./TransferDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class InsurabilityInfoDto {
   constructor(json: JSON | any) {
     Object.assign(this as InsurabilityInfoDto, json)

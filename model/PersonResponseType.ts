@@ -18,6 +18,8 @@ import { NationalitiesType } from "./NationalitiesType"
 import { NobilityTitleType } from "./NobilityTitleType"
 import { PersonNameResponseType } from "./PersonNameResponseType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PersonResponseType {
   constructor(json: JSON | any) {
     Object.assign(this as PersonResponseType, json)

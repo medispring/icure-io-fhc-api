@@ -12,6 +12,8 @@
 import { HcPartyDto } from "./HcPartyDto"
 import { PatientId } from "./PatientId"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AuthorWithPatientDto {
   constructor(json: JSON | any) {
     Object.assign(this as AuthorWithPatientDto, json)

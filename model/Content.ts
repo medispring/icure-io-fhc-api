@@ -12,9 +12,11 @@
 import { Measure } from "./Measure"
 import { Medication } from "./Medication"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Content {
   constructor(json: JSON | any) {
-    Object.assign(this as Content, json)
+    Object.assign(this as Content, json, json.x ? { x: decodeBase64(json.x) } : {})
   }
 
   b?: boolean

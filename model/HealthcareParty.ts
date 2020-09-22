@@ -13,6 +13,8 @@ import { Address } from "./Address"
 import { EHealthBoxType } from "./EHealthBoxType"
 import { ProfessionCode } from "./ProfessionCode"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class HealthcareParty {
   constructor(json: JSON | any) {
     Object.assign(this as HealthcareParty, json)

@@ -11,6 +11,8 @@
  */
 import { CDTEMPORALITY } from "./CDTEMPORALITY"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipetemporalityType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipetemporalityType, json)

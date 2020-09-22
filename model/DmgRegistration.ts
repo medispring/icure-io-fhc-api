@@ -13,6 +13,8 @@ import { CommonOutput } from "./CommonOutput"
 import { MycarenetConversation } from "./MycarenetConversation"
 import { MycarenetError } from "./MycarenetError"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class DmgRegistration {
   constructor(json: JSON | any) {
     Object.assign(this as DmgRegistration, json)

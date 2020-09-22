@@ -11,6 +11,8 @@
  */
 import { IdentifierType } from "./IdentifierType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Addressee {
   constructor(json: JSON | any) {
     Object.assign(this as Addressee, json)

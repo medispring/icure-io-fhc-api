@@ -11,6 +11,8 @@
  */
 import { EattestCode } from "./EattestCode"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Eattest {
   constructor(json: JSON | any) {
     Object.assign(this as Eattest, json)

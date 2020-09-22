@@ -11,6 +11,8 @@
  */
 import { Source } from "./Source"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Externalsource {
   constructor(json: JSON | any) {
     Object.assign(this as Externalsource, json)

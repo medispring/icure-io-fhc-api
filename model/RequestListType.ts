@@ -13,6 +13,8 @@ import { AuthorType } from "./AuthorType"
 import { IDKMEHR } from "./IDKMEHR"
 import { Paginationrequestinfo } from "./Paginationrequestinfo"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RequestListType {
   constructor(json: JSON | any) {
     Object.assign(this as RequestListType, json)

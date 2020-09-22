@@ -11,6 +11,8 @@
  */
 import { RecipedurationType } from "./RecipedurationType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ReciperenewalType {
   constructor(json: JSON | any) {
     Object.assign(this as ReciperenewalType, json)

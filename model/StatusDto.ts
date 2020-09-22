@@ -11,6 +11,8 @@
  */
 import { LocalisedString } from "./LocalisedString"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class StatusDto {
   constructor(json: JSON | any) {
     Object.assign(this as StatusDto, json)

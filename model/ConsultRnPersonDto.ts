@@ -12,6 +12,8 @@
 import { ConsultRnPersonDataDto } from "./ConsultRnPersonDataDto"
 import { EncodedSSINType } from "./EncodedSSINType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ConsultRnPersonDto {
   constructor(json: JSON | any) {
     Object.assign(this as ConsultRnPersonDto, json)

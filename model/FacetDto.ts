@@ -11,6 +11,8 @@
  */
 import { DimensionDto } from "./DimensionDto"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class FacetDto {
   constructor(json: JSON | any) {
     Object.assign(this as FacetDto, json)

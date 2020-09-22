@@ -12,6 +12,8 @@
 import { EncryptedData } from "./EncryptedData"
 import { EncryptedKey } from "./EncryptedKey"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class EncryptedElementType {
   constructor(json: JSON | any) {
     Object.assign(this as EncryptedElementType, json)

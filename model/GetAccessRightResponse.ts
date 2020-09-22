@@ -13,6 +13,8 @@ import { AccessRightListType } from "./AccessRightListType"
 import { AcknowledgeType } from "./AcknowledgeType"
 import { ResponseType } from "./ResponseType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class GetAccessRightResponse {
   constructor(json: JSON | any) {
     Object.assign(this as GetAccessRightResponse, json)

@@ -11,6 +11,8 @@
  */
 import { TransformsType } from "./TransformsType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CipherReference {
   constructor(json: JSON | any) {
     Object.assign(this as CipherReference, json)

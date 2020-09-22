@@ -13,6 +13,8 @@ import { AcknowledgeType } from "./AcknowledgeType"
 import { ResponseListType } from "./ResponseListType"
 import { TransactionAccessListType } from "./TransactionAccessListType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class GetPatientAuditTrailResponse {
   constructor(json: JSON | any) {
     Object.assign(this as GetPatientAuditTrailResponse, json)

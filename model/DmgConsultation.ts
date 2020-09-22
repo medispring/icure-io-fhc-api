@@ -14,6 +14,8 @@ import { HcpartyType } from "./HcpartyType"
 import { MycarenetConversation } from "./MycarenetConversation"
 import { MycarenetError } from "./MycarenetError"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class DmgConsultation {
   constructor(json: JSON | any) {
     Object.assign(this as DmgConsultation, json)

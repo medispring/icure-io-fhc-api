@@ -18,6 +18,8 @@ import { Medicinalproduct } from "./Medicinalproduct"
 import { RegimenItem } from "./RegimenItem"
 import { Substanceproduct } from "./Substanceproduct"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Medication {
   constructor(json: JSON | any) {
     Object.assign(this as Medication, json)

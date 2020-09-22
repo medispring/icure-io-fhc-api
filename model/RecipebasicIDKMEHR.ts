@@ -10,6 +10,8 @@
  * Do not edit the class manually.
  */
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipebasicIDKMEHR {
   constructor(json: JSON | any) {
     Object.assign(this as RecipebasicIDKMEHR, json)

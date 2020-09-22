@@ -12,6 +12,8 @@
 import { ExistingPersonsType } from "./ExistingPersonsType"
 import { PersonResponseType } from "./PersonResponseType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ResultType {
   constructor(json: JSON | any) {
     Object.assign(this as ResultType, json)

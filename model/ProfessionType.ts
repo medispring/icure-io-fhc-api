@@ -12,6 +12,8 @@
 import { IDPROFESSION } from "./IDPROFESSION"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ProfessionType {
   constructor(json: JSON | any) {
     Object.assign(this as ProfessionType, json)

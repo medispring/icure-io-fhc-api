@@ -12,6 +12,8 @@
 import { CDREFSCOPE } from "./CDREFSCOPE"
 import { Refvalue } from "./Refvalue"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RefscopeType {
   constructor(json: JSON | any) {
     Object.assign(this as RefscopeType, json)

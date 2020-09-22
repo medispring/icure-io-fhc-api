@@ -14,9 +14,16 @@ import { Eattest } from "./Eattest"
 import { EattestAcknowledgeType } from "./EattestAcknowledgeType"
 import { MycarenetConversation } from "./MycarenetConversation"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class SendAttestResultWithResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as SendAttestResultWithResponse, json)
+    Object.assign(
+      this as SendAttestResultWithResponse,
+      json,
+      json.kmehrMessage ? { kmehrMessage: decodeBase64(json.kmehrMessage) } : {},
+      json.xades ? { xades: decodeBase64(json.xades) } : {}
+    )
   }
 
   acknowledge?: EattestAcknowledgeType

@@ -17,6 +17,8 @@ import { StatementAbstractType } from "./StatementAbstractType"
 import { Subject } from "./Subject"
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Assertion {
   constructor(json: JSON | any) {
     Object.assign(this as Assertion, json)

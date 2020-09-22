@@ -11,6 +11,8 @@
  */
 import { Transform } from "./Transform"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TransformsType {
   constructor(json: JSON | any) {
     Object.assign(this as TransformsType, json)

@@ -11,6 +11,8 @@
  */
 import { CDCARENETTHIRDPAYERCONTRACT } from "./CDCARENETTHIRDPAYERCONTRACT"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Thirdpayercontract {
   constructor(json: JSON | any) {
     Object.assign(this as Thirdpayercontract, json)

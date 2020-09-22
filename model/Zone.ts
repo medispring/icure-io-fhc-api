@@ -11,6 +11,8 @@
  */
 import { ZoneDescription } from "./ZoneDescription"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Zone {
   constructor(json: JSON | any) {
     Object.assign(this as Zone, json)

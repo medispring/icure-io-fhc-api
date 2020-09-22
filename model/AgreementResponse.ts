@@ -14,9 +14,15 @@ import { CommonOutput } from "./CommonOutput"
 import { MycarenetConversation } from "./MycarenetConversation"
 import { MycarenetError } from "./MycarenetError"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AgreementResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as AgreementResponse, json)
+    Object.assign(
+      this as AgreementResponse,
+      json,
+      json.content ? { content: decodeBase64(json.content) } : {}
+    )
   }
 
   acknowledged?: boolean

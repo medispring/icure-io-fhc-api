@@ -14,6 +14,8 @@ import { FCMINType } from "./FCMINType"
 import { RRMAXType } from "./RRMAXType"
 import { RRMINType } from "./RRMINType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class HolterType {
   constructor(json: JSON | any) {
     Object.assign(this as HolterType, json)

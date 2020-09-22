@@ -11,6 +11,8 @@
  */
 import { WhereType } from "./WhereType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class BirthDeceaseType {
   constructor(json: JSON | any) {
     Object.assign(this as BirthDeceaseType, json)

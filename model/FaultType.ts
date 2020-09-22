@@ -12,6 +12,8 @@
 import { DetailsType } from "./DetailsType"
 import { StringLangType } from "./StringLangType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class FaultType {
   constructor(json: JSON | any) {
     Object.assign(this as FaultType, json)

@@ -13,6 +13,8 @@ import { AuthorType } from "./AuthorType"
 import { CDTRANSACTION } from "./CDTRANSACTION"
 import { IDKMEHR } from "./IDKMEHR"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TransactionWithSpecificTime {
   constructor(json: JSON | any) {
     Object.assign(this as TransactionWithSpecificTime, json)

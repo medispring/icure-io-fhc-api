@@ -11,6 +11,8 @@
  */
 import { HcpartyType } from "./HcpartyType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipeauthorType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipeauthorType, json)

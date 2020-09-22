@@ -13,6 +13,8 @@ import { KeyInfo } from "./KeyInfo"
 import { SignatureValue } from "./SignatureValue"
 import { SignedInfo } from "./SignedInfo"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Signature {
   constructor(json: JSON | any) {
     Object.assign(this as Signature, json)

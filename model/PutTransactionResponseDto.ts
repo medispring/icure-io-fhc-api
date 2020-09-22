@@ -12,6 +12,8 @@
 import { ErrorDto } from "./ErrorDto"
 import { IDKMEHR } from "./IDKMEHR"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PutTransactionResponseDto {
   constructor(json: JSON | any) {
     Object.assign(this as PutTransactionResponseDto, json)

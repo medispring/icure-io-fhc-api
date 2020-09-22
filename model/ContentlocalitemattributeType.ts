@@ -16,6 +16,8 @@ import { PersonType } from "./PersonType"
 import { TextType } from "./TextType"
 import { UnitType } from "./UnitType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ContentlocalitemattributeType {
   constructor(json: JSON | any) {
     Object.assign(this as ContentlocalitemattributeType, json)

@@ -11,6 +11,8 @@
  */
 import { UnitType } from "./UnitType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipequantityType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipequantityType, json)

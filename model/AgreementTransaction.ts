@@ -10,9 +10,15 @@
  * Do not edit the class manually.
  */
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class AgreementTransaction {
   constructor(json: JSON | any) {
-    Object.assign(this as AgreementTransaction, json)
+    Object.assign(
+      this as AgreementTransaction,
+      json,
+      json.content ? { content: decodeBase64(json.content) } : {}
+    )
   }
 
   accepted?: boolean

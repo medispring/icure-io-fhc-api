@@ -10,9 +10,11 @@
  * Do not edit the class manually.
  */
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class LnkType {
   constructor(json: JSON | any) {
-    Object.assign(this as LnkType, json)
+    Object.assign(this as LnkType, json, json.value ? { value: decodeBase64(json.value) } : {})
   }
 
   mediatype?: LnkType.MediatypeEnum

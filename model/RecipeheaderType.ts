@@ -20,6 +20,8 @@ import { TextType } from "./TextType"
 import { UrgencyType } from "./UrgencyType"
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipeheaderType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipeheaderType, json)

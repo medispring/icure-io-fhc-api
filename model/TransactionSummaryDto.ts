@@ -13,6 +13,8 @@ import { AuthorDto } from "./AuthorDto"
 import { KmehrCd } from "./KmehrCd"
 import { KmehrId } from "./KmehrId"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TransactionSummaryDto {
   constructor(json: JSON | any) {
     Object.assign(this as TransactionSummaryDto, json)

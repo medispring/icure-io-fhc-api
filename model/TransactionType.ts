@@ -19,6 +19,8 @@ import { LnkType } from "./LnkType"
 import { TextType } from "./TextType"
 import { TextWithLayoutType } from "./TextWithLayoutType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class TransactionType {
   constructor(json: JSON | any) {
     Object.assign(this as TransactionType, json)

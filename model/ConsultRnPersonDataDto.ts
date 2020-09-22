@@ -16,6 +16,8 @@ import { GenderType } from "./GenderType"
 import { NameType } from "./NameType"
 import { NationalityType } from "./NationalityType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class ConsultRnPersonDataDto {
   constructor(json: JSON | any) {
     Object.assign(this as ConsultRnPersonDataDto, json)

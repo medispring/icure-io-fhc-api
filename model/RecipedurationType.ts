@@ -11,6 +11,8 @@
  */
 import { TimeunitType } from "./TimeunitType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecipedurationType {
   constructor(json: JSON | any) {
     Object.assign(this as RecipedurationType, json)

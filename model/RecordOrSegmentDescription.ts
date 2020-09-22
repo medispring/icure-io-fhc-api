@@ -11,6 +11,8 @@
  */
 import { ZoneDescription } from "./ZoneDescription"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class RecordOrSegmentDescription {
   constructor(json: JSON | any) {
     Object.assign(this as RecordOrSegmentDescription, json)

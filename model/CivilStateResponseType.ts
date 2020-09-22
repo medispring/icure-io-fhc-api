@@ -13,6 +13,8 @@ import { NameType } from "./NameType"
 import { PartnerType } from "./PartnerType"
 import { WhereResponseType } from "./WhereResponseType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CivilStateResponseType {
   constructor(json: JSON | any) {
     Object.assign(this as CivilStateResponseType, json)

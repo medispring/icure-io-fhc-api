@@ -16,6 +16,8 @@ import { ItemType } from "./ItemType"
 import { LnkType } from "./LnkType"
 import { TextType } from "./TextType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class HeadingType {
   constructor(json: JSON | any) {
     Object.assign(this as HeadingType, json)

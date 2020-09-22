@@ -11,6 +11,8 @@
  */
 import { CDUNIT } from "./CDUNIT"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class PackageType {
   constructor(json: JSON | any) {
     Object.assign(this as PackageType, json)

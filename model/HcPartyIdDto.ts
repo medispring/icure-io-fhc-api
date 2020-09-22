@@ -11,6 +11,8 @@
  */
 import { KmehrId } from "./KmehrId"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class HcPartyIdDto {
   constructor(json: JSON | any) {
     Object.assign(this as HcPartyIdDto, json)

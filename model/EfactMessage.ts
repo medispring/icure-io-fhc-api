@@ -13,6 +13,8 @@ import { CommonOutput } from "./CommonOutput"
 import { Record } from "./Record"
 import { TAck } from "./TAck"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class EfactMessage {
   constructor(json: JSON | any) {
     Object.assign(this as EfactMessage, json)

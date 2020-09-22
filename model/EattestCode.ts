@@ -13,6 +13,8 @@ import { EattestCardReading } from "./EattestCardReading"
 import { EattestHcParty } from "./EattestHcParty"
 import { EattestRequestor } from "./EattestRequestor"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class EattestCode {
   constructor(json: JSON | any) {
     Object.assign(this as EattestCode, json)

@@ -10,9 +10,11 @@
  * Do not edit the class manually.
  */
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Appendix {
   constructor(json: JSON | any) {
-    Object.assign(this as Appendix, json)
+    Object.assign(this as Appendix, json, json.data ? { data: decodeBase64(json.data) } : {})
   }
 
   data?: ArrayBuffer

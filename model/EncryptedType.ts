@@ -14,6 +14,8 @@ import { EncryptionMethodType } from "./EncryptionMethodType"
 import { EncryptionProperties } from "./EncryptionProperties"
 import { KeyInfo } from "./KeyInfo"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class EncryptedType {
   constructor(json: JSON | any) {
     Object.assign(this as EncryptedType, json)

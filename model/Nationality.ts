@@ -11,6 +11,8 @@
  */
 import { CDCOUNTRY } from "./CDCOUNTRY"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class Nationality {
   constructor(json: JSON | any) {
     Object.assign(this as Nationality, json)

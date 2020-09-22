@@ -11,6 +11,8 @@
  */
 import { QName } from "./QName"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class JAXBElementobject {
   constructor(json: JSON | any) {
     Object.assign(this as JAXBElementobject, json)

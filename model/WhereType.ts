@@ -13,6 +13,8 @@ import { CountryType } from "./CountryType"
 import { LocalisedString } from "./LocalisedString"
 import { MunicipalityType } from "./MunicipalityType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class WhereType {
   constructor(json: JSON | any) {
     Object.assign(this as WhereType, json)

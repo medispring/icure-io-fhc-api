@@ -13,6 +13,8 @@ import { InhabitantType } from "./InhabitantType"
 import { LocalisedString } from "./LocalisedString"
 import { WhereType } from "./WhereType"
 
+import { decodeBase64 } from "./ModelHelper"
+
 export class CivilStateType {
   constructor(json: JSON | any) {
     Object.assign(this as CivilStateType, json)
