@@ -100,8 +100,8 @@ export class fhcTherLinkApi {
     patientLastName: string,
     eidCardNumber?: string,
     isiCardNumber?: string,
-    startDate?: Date,
-    endDate?: Date,
+    startDate?: number,
+    endDate?: number,
     type?: string,
     sign?: boolean
   ): Promise<TherapeuticLinkMessageDto> {
@@ -205,8 +205,8 @@ export class fhcTherLinkApi {
     patientLastName: string,
     eidCardNumber?: string,
     isiCardNumber?: string,
-    startDate?: Date,
-    endDate?: Date,
+    startDate?: number,
+    endDate?: number,
     type?: string
   ): Promise<HasTherapeuticLinkMessage> {
     let _body = null
@@ -274,8 +274,8 @@ export class fhcTherLinkApi {
     patientLastName: string,
     eidCardNumber?: string,
     isiCardNumber?: string,
-    start?: Date,
-    end?: Date,
+    start?: number,
+    end?: number,
     therLinkType?: string,
     comment?: string,
     sign?: boolean,
@@ -349,8 +349,8 @@ export class fhcTherLinkApi {
     patientLastName: string,
     eidCardNumber?: string,
     isiCardNumber?: string,
-    start?: Date,
-    end?: Date,
+    start?: number,
+    end?: number,
     therLinkType?: string,
     comment?: string,
     sign?: boolean,

@@ -389,8 +389,8 @@ export class fhcHubApi {
     patientSsin: string,
     hubPackageId?: string,
     therLinkType?: string,
-    from?: Date,
-    to?: Date
+    from?: number,
+    to?: number
   ): Promise<TherapeuticLinkMessageDto> {
     let _body = null
 
@@ -1094,6 +1094,8 @@ export class fhcHubApi {
    * @param hubPackageId hubPackageId
    * @param patientEidCardNumber patientEidCardNumber
    * @param patientIsiCardNumber patientIsiCardNumber
+   * @param from from
+   * @param to to
    */
   registerTherapeuticLinkUsingPOST(
     endpoint: string,
@@ -1108,7 +1110,9 @@ export class fhcHubApi {
     patientSsin: string,
     hubPackageId?: string,
     patientEidCardNumber?: string,
-    patientIsiCardNumber?: string
+    patientIsiCardNumber?: string,
+    from?: number,
+    to?: number
   ): Promise<PutTherapeuticLinkResponse> {
     let _body = null
 
@@ -1130,7 +1134,9 @@ export class fhcHubApi {
         : "") +
       (patientIsiCardNumber
         ? "&patientIsiCardNumber=" + encodeURIComponent(String(patientIsiCardNumber))
-        : "")
+        : "") +
+      (from ? "&from=" + encodeURIComponent(String(from)) : "") +
+      (to ? "&to=" + encodeURIComponent(String(to)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
