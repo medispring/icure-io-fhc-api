@@ -1,10 +1,14 @@
 {
-  "name": "@taktik/fhc-api",
+  "name": "@icure/be-fhc-api",
   "version": "0.3.7",
   "description": "Typescript version of Freehealth Connector standalone API client",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "dependencies": {},
+  "dependencies": {
+    "@icure/api": "^4.0.1",
+    "@types/lodash": "^4.14.165",
+    "lodash": "^4.17.20"
+  },
   "devDependencies": {
     "@types/chai": "^4.1.4",
     "@types/form-data": "^2.2.1",
