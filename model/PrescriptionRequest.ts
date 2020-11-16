@@ -42,11 +42,21 @@ export class PrescriptionRequest {
 
   notification?: string
 
+  packageName?: string
+
+  packageVersion?: string
+
   patient?: models.Patient
 
   prescriptionType?: string
 
   samVersion?: string
+
+  vendorEmail?: string
+
+  vendorName?: string
+
+  vendorPhone?: string
 
   vision?: string
 }

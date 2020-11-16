@@ -28,7 +28,7 @@ export class MessageResponse {
   constructor(json: JSON | any) {
     Object.assign(this as MessageResponse, json)
   }
-  error?: models.ErrorDto
+  error?: models.Error
 
   message?: models.Message
 }

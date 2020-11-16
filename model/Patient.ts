@@ -96,10 +96,14 @@ export namespace Patient {
     Single = <any>"single",
     InCouple = <any>"in_couple",
     Married = <any>"married",
+    Separated = <any>"separated",
     Divorced = <any>"divorced",
+    Divorcing = <any>"divorcing",
+    Widowed = <any>"widowed",
     Widower = <any>"widower",
     Complicated = <any>"complicated",
-    Separated = <any>"separated",
-    Unknown = <any>"unknown"
+    Unknown = <any>"unknown",
+    Contract = <any>"contract",
+    Other = <any>"other"
   }
 }
