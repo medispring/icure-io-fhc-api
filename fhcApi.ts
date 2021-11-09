@@ -18,3 +18,6 @@ export * from "./api/fhcRecipeApi"
 export * from "./api/fhcStsApi"
 export * from "./api/fhcTarificationApi"
 export * from "./api/fhcTherLinkApi"
+
+export * from "./x-api/message-x-api"
+export * from "./x-api/utils/efact-util"
