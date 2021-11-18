@@ -337,19 +337,19 @@ export class MessageXApi {
           this.patientApi
             .filterByWithUser(
               user,
-              undefined,
-              undefined,
-              1000,
-              0,
-              undefined,
-              false,
               new FilterChainPatient({
                 filter: new AbstractFilterPatient({
                   $type: "PatientByHcPartyAndSsinsFilter",
                   healthcarePartyId: user.healthcarePartyId,
                   ssins: ssins
                 })
-              })
+              }),
+              undefined,
+              undefined,
+              1000,
+              0,
+              undefined,
+              false
             )
             .then((pats: PaginatedListPatient) =>
               this.patientApi.bulkUpdatePatients(
