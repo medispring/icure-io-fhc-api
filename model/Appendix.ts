@@ -17,9 +17,9 @@ export class Appendix {
     Object.assign(this as Appendix, json, json.data ? { data: decodeBase64(json.data) } : {})
   }
 
-  data?: ArrayBuffer
+  verseSeq?: number
   documentSeq?: number
+  data?: ArrayBuffer
   mimeType?: string
   path?: string
-  verseSeq?: number
 }

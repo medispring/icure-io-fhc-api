@@ -17,7 +17,9 @@ export class BirthPlace {
     Object.assign(this as BirthPlace, json)
   }
 
+  countryCode?: number
+  countryIsoCode?: string
   cityCode?: string
   cityName?: string
-  countryCode?: string
+  countryName?: string
 }

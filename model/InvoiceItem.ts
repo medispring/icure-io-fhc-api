@@ -36,6 +36,7 @@ export class InvoiceItem {
   personalInterventionCoveredByThirdPartyCode?: number
   prescriberNihii?: string
   prescriberNorm?: InvoiceItem.PrescriberNormEnum
+  prescriptionDate?: number
   reimbursedAmount?: number
   relatedCode?: number
   sideCode?: InvoiceItem.SideCodeEnum

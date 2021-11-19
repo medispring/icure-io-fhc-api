@@ -64,19 +64,27 @@ export namespace Patient {
     | "single"
     | "in_couple"
     | "married"
+    | "separated"
     | "divorced"
+    | "divorcing"
+    | "widowed"
     | "widower"
     | "complicated"
-    | "separated"
     | "unknown"
+    | "contract"
+    | "other"
   export const PersonalStatusEnum = {
     Single: "single" as PersonalStatusEnum,
     InCouple: "in_couple" as PersonalStatusEnum,
     Married: "married" as PersonalStatusEnum,
+    Separated: "separated" as PersonalStatusEnum,
     Divorced: "divorced" as PersonalStatusEnum,
+    Divorcing: "divorcing" as PersonalStatusEnum,
+    Widowed: "widowed" as PersonalStatusEnum,
     Widower: "widower" as PersonalStatusEnum,
     Complicated: "complicated" as PersonalStatusEnum,
-    Separated: "separated" as PersonalStatusEnum,
-    Unknown: "unknown" as PersonalStatusEnum
+    Unknown: "unknown" as PersonalStatusEnum,
+    Contract: "contract" as PersonalStatusEnum,
+    Other: "other" as PersonalStatusEnum
   }
 }

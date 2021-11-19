@@ -17,6 +17,7 @@ export class MycarenetConversation {
     Object.assign(this as MycarenetConversation, json)
   }
 
+  decryptedResponseContent?: Array<string>
   soapRequest?: string
   soapResponse?: string
   transactionRequest?: string

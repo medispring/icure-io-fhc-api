@@ -9,8 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { RecipefolderType } from "./RecipefolderType"
-import { RecipeheaderType } from "./RecipeheaderType"
+import { Base64EncryptedDataType } from "./Base64EncryptedDataType"
+import { ConfidentialityType } from "./ConfidentialityType"
+import { EncryptedType } from "./EncryptedType"
+import { FolderType } from "./FolderType"
+import { HeaderType } from "./HeaderType"
+import { JAXBElementSignature } from "./JAXBElementSignature"
 
 import { decodeBase64 } from "./ModelHelper"
 
@@ -19,6 +23,10 @@ export class Kmehrmessage {
     Object.assign(this as Kmehrmessage, json)
   }
 
-  folder?: RecipefolderType
-  header?: RecipeheaderType
+  base64EncryptedData?: Base64EncryptedDataType
+  confidentiality?: ConfidentialityType
+  encryptedData?: EncryptedType
+  folders?: Array<FolderType>
+  header?: HeaderType
+  signature?: JAXBElementSignature
 }

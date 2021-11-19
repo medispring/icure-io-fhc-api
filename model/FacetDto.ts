@@ -18,6 +18,6 @@ export class FacetDto {
     Object.assign(this as FacetDto, json)
   }
 
-  dimensions?: Array<DimensionDto>
   id?: string
+  dimensions?: Array<DimensionDto>
 }

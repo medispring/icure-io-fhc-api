@@ -22,5 +22,6 @@ export class Prescription {
   feedbackAllowed?: boolean
   notificationWasSent?: boolean
   patientId?: string
+  requestXml?: string
   rid?: string
 }
