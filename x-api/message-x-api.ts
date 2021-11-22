@@ -10,7 +10,6 @@ import {
   IccInvoiceXApi,
   IccMessageXApi,
   IccPatientXApi,
-  IccReceiptXApi,
   Insurance,
   Invoice,
   ListOfIds,
@@ -62,6 +61,7 @@ import {
   File920900Data
 } from "./utils/efact-parser"
 import { fhcEfactApi } from "../api/fhcEfactApi"
+import { ReceiptXApi } from "./receipt-x-api"
 
 interface StructError {
   itemId: string | null
@@ -81,7 +81,7 @@ export class MessageXApi {
   private crypto: IccCryptoXApi
   private insuranceApi: IccInsuranceApi
   private entityReferenceApi: IccEntityrefApi
-  private receiptXApi: IccReceiptXApi
+  private receiptXApi: ReceiptXApi
   private invoiceXApi: IccInvoiceXApi
   private documentXApi: IccDocumentXApi
   private patientApi: IccPatientXApi
@@ -92,7 +92,7 @@ export class MessageXApi {
     documentXApi: IccDocumentXApi,
     insuranceApi: IccInsuranceApi,
     entityReferenceApi: IccEntityrefApi,
-    receiptXApi: IccReceiptXApi,
+    fhcReceiptXApi: ReceiptXApi,
     invoiceXApi: IccInvoiceXApi,
     patientApi: IccPatientXApi
   ) {
@@ -100,7 +100,7 @@ export class MessageXApi {
     this.documentXApi = documentXApi
     this.insuranceApi = insuranceApi
     this.entityReferenceApi = entityReferenceApi
-    this.receiptXApi = receiptXApi
+    this.receiptXApi = fhcReceiptXApi
     this.invoiceXApi = invoiceXApi
     this.patientApi = patientApi
     this.crypto = crypto
@@ -571,7 +571,7 @@ export class MessageXApi {
         }
         const parentMessage: Message = msgsForHcp[0]
 
-        return this.receiptXApi
+        return this.receiptXApi.iccApi
           .createReceipt(
             new Receipt({
               documentId: parentMessage.id,
@@ -582,8 +582,8 @@ export class MessageXApi {
               ]
             })
           )
-          .then(rcpt =>
-            this.receiptXApi.setReceiptAttachment(rcpt.id!, "tack", "", <any>(
+          .then((rcpt: Receipt) =>
+            this.receiptXApi.iccApi.setReceiptAttachment(rcpt.id!, "tack", "", <any>(
               ua2ab(string2ua(JSON.stringify(efactMessage)))
             ))
           )
@@ -1155,7 +1155,7 @@ export class MessageXApi {
         ])
       )
       .then(() =>
-        this.receiptXApi.logReceipt(
+        this.receiptXApi.iccApi.logReceipt(
           user,
           msg.id!!,
           [
