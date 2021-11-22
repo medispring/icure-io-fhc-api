@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PersonNameResponseType } from "./PersonNameResponseType"
+import { MinimalNameInfoType } from "./MinimalNameInfoType"
 
 import { decodeBase64 } from "./ModelHelper"
 
@@ -18,8 +18,7 @@ export class PartnerType {
     Object.assign(this as PartnerType, json)
   }
 
-  partnerBirthDate?: string
-  partnerName?: PersonNameResponseType
-  partnerReference?: string
+  partnerFictionalIdentificationNumber?: string
+  partnerName?: MinimalNameInfoType
   partnerSsin?: string
 }

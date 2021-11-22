@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { NameType } from "./NameType"
+import { LocalizedDescriptionType } from "./LocalizedDescriptionType"
 
 import { decodeBase64 } from "./ModelHelper"
 
@@ -18,8 +18,9 @@ export class DiplomaticPostType {
     Object.assign(this as DiplomaticPostType, json)
   }
 
-  countryCode?: string
-  countryNames?: Array<NameType>
-  diplomaticPostCode?: string
-  diplomaticPostNames?: Array<NameType>
+  countryCode?: number
+  countryIsoCode?: string
+  countryNames?: Array<LocalizedDescriptionType>
+  diplomaticPostCode?: number
+  diplomaticPostNames?: Array<LocalizedDescriptionType>
 }

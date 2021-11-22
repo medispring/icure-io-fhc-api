@@ -9,8 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Posology } from "./Posology"
 import { RecipeCDITEM } from "./RecipeCDITEM"
+import { RecipePosology } from "./RecipePosology"
+import { RecipeRegimen } from "./RecipeRegimen"
 import { RecipebasicIDKMEHR } from "./RecipebasicIDKMEHR"
 import { RecipecontentType } from "./RecipecontentType"
 import { RecipedurationType } from "./RecipedurationType"
@@ -21,7 +22,6 @@ import { RecipequantityType } from "./RecipequantityType"
 import { ReciperenewalType } from "./ReciperenewalType"
 import { ReciperouteType } from "./ReciperouteType"
 import { RecipetemporalityType } from "./RecipetemporalityType"
-import { Regimen } from "./Regimen"
 import { TextType } from "./TextType"
 import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
@@ -44,9 +44,9 @@ export class RecipeitemType {
   instructionforreimbursement?: TextType
   issubstitutionallowed?: boolean
   lifecycle?: RecipelifecycleType
-  posology?: Posology
+  posology?: RecipePosology
   quantity?: RecipequantityType
-  regimen?: Regimen
+  regimen?: RecipeRegimen
   renewal?: ReciperenewalType
   route?: ReciperouteType
   temporality?: RecipetemporalityType

@@ -13,6 +13,7 @@ import { XHR } from "./XHR"
 import { BearerToken } from "../model/BearerToken"
 import { CertificateInfo } from "../model/CertificateInfo"
 import { SamlTokenResult } from "../model/SamlTokenResult"
+import { TokenResponse } from "../model/TokenResponse"
 import { UUIDType } from "../model/UUIDType"
 
 export class fhcStsApi {
@@ -119,6 +120,38 @@ export class fhcStsApi {
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new CertificateInfo(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary getOauth2Token
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param cbe cbe
+   * @param kid kid
+   */
+  getOauth2TokenUsingGET(
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    xFHCKeystoreId: string,
+    cbe: string,
+    kid: string
+  ): Promise<TokenResponse> {
+    let _body = null
+
+    const _url =
+      this.host +
+      `/sts/token/oauth2/${encodeURIComponent(String(cbe))}/${encodeURIComponent(String(kid))}` +
+      "?ts=" +
+      new Date().getTime()
+    let headers = this.headers
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+      .then(doc => new TokenResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 

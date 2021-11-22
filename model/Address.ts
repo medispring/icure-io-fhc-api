@@ -19,12 +19,12 @@ export class Address {
   }
 
   addressType?: Address.AddressTypeEnum
+  street?: string
+  houseNumber?: string
+  postboxNumber?: string
+  postalCode?: string
   city?: string
   country?: string
-  houseNumber?: string
-  postalCode?: string
-  postboxNumber?: string
-  street?: string
   telecoms?: Array<Telecom>
 }
 export namespace Address {
@@ -36,6 +36,10 @@ export namespace Address {
     | "clinic"
     | "hq"
     | "other"
+    | "diplomatic"
+    | "reference"
+    | "postal"
+    | "temporary"
   export const AddressTypeEnum = {
     Home: "home" as AddressTypeEnum,
     Work: "work" as AddressTypeEnum,
@@ -43,6 +47,10 @@ export namespace Address {
     Hospital: "hospital" as AddressTypeEnum,
     Clinic: "clinic" as AddressTypeEnum,
     Hq: "hq" as AddressTypeEnum,
-    Other: "other" as AddressTypeEnum
+    Other: "other" as AddressTypeEnum,
+    Diplomatic: "diplomatic" as AddressTypeEnum,
+    Reference: "reference" as AddressTypeEnum,
+    Postal: "postal" as AddressTypeEnum,
+    Temporary: "temporary" as AddressTypeEnum
   }
 }

@@ -508,6 +508,8 @@ export class fhcHubApi {
    * @param id id
    * @param hubPackageId hubPackageId
    * @param breakTheGlassReason breakTheGlassReason
+   * @param externalHubId externalHubId
+   * @param externalHubName externalHubName
    */
   getTransactionSetMessageUsingGET(
     endpoint: string,
@@ -524,7 +526,9 @@ export class fhcHubApi {
     sl: string,
     id: string,
     hubPackageId?: string,
-    breakTheGlassReason?: string
+    breakTheGlassReason?: string,
+    externalHubId?: string,
+    externalHubName?: string
   ): Promise<Kmehrmessage> {
     let _body = null
 
@@ -545,7 +549,9 @@ export class fhcHubApi {
       (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
-        : "")
+        : "") +
+      (externalHubId ? "&externalHubId=" + encodeURIComponent(String(externalHubId)) : "") +
+      (externalHubName ? "&externalHubName=" + encodeURIComponent(String(externalHubName)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -573,6 +579,8 @@ export class fhcHubApi {
    * @param id id
    * @param hubPackageId hubPackageId
    * @param breakTheGlassReason breakTheGlassReason
+   * @param externalHubId externalHubId
+   * @param externalHubName externalHubName
    */
   getTransactionSetUsingGET(
     endpoint: string,
@@ -589,7 +597,9 @@ export class fhcHubApi {
     sl: string,
     id: string,
     hubPackageId?: string,
-    breakTheGlassReason?: string
+    breakTheGlassReason?: string,
+    externalHubId?: string,
+    externalHubName?: string
   ): Promise<Kmehrmessage> {
     let _body = null
 
@@ -610,7 +620,9 @@ export class fhcHubApi {
       (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
-        : "")
+        : "") +
+      (externalHubId ? "&externalHubId=" + encodeURIComponent(String(externalHubId)) : "") +
+      (externalHubName ? "&externalHubName=" + encodeURIComponent(String(externalHubName)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
