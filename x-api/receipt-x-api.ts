@@ -1,4 +1,4 @@
-import { IccReceiptXApi, string2ua, ua2ab, User } from "@icure/api"
+import { IccReceiptXApi, Receipt, string2ua, ua2ab, User } from "@icure/api"
 
 import * as _ from "lodash"
 import * as moment from "moment"
@@ -14,10 +14,10 @@ import {
 } from "../model/models"
 
 export class ReceiptXApi {
-  private api: IccReceiptXApi
+  public iccApi: IccReceiptXApi
 
   constructor(api: IccReceiptXApi) {
-    this.api = api
+    this.iccApi = api
   }
 
   /**
@@ -39,7 +39,7 @@ export class ReceiptXApi {
     subcat: string,
     refs: Array<string> = []
   ) {
-    return this.api
+    return this.iccApi
       .newInstance(user, {
         category: cat,
         subCategory: subcat,
@@ -58,14 +58,18 @@ export class ReceiptXApi {
           ["date:" + moment().format("YYYYMMDDHHmmss")]
         )
       })
-      .then(rcpt => this.api.createReceipt(rcpt))
-      .then(rcpt =>
-        this.api.setReceiptAttachment(
-          rcpt.id,
-          "soapConversation",
-          undefined,
-          ua2ab(string2ua(JSON.stringify(object.mycarenetConversation)))
-        )
-      )
+      .then((rcpt: Receipt) => this.iccApi.createReceipt(rcpt))
+      .then((rcpt: Receipt) => {
+        if (!rcpt.id) {
+          throw new Error(`Receipt has no id: ${rcpt}`)
+        } else {
+          return this.iccApi.setReceiptAttachment(
+            rcpt.id,
+            "soapConversation",
+            undefined,
+            ua2ab(string2ua(JSON.stringify(object.mycarenetConversation)))
+          )
+        }
+      })
   }
 }
