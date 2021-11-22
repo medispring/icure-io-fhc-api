@@ -1,5 +1,5 @@
-import { Patient } from "../../icc-api/model/models"
-import { Patient as EfactPatient } from "fhc-api"
+import { Patient } from "@icure/api"
+import { Patient as EfactPatient } from "../../model/models"
 import * as _ from "lodash"
 
 export function toPatient(patient: Patient): EfactPatient {
