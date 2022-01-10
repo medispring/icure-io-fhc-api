@@ -10,7 +10,6 @@ import {
   IccInvoiceXApi,
   IccMessageXApi,
   IccPatientXApi,
-  IccReceiptXApi,
   Insurance,
   Invoice,
   ListOfIds,
@@ -19,6 +18,8 @@ import {
   PatientHealthCareParty,
   Receipt,
   ReferralPeriod,
+  string2ua,
+  ua2ab,
   User
 } from "@icure/api"
 
@@ -60,6 +61,7 @@ import {
   File920900Data
 } from "./utils/efact-parser"
 import { fhcEfactApi } from "../api/fhcEfactApi"
+import { ReceiptXApi } from "./receipt-x-api"
 
 interface StructError {
   itemId: string | null
@@ -79,7 +81,7 @@ export class MessageXApi {
   private crypto: IccCryptoXApi
   private insuranceApi: IccInsuranceApi
   private entityReferenceApi: IccEntityrefApi
-  private receiptXApi: IccReceiptXApi
+  private receiptXApi: ReceiptXApi
   private invoiceXApi: IccInvoiceXApi
   private documentXApi: IccDocumentXApi
   private patientApi: IccPatientXApi
@@ -90,7 +92,7 @@ export class MessageXApi {
     documentXApi: IccDocumentXApi,
     insuranceApi: IccInsuranceApi,
     entityReferenceApi: IccEntityrefApi,
-    receiptXApi: IccReceiptXApi,
+    fhcReceiptXApi: ReceiptXApi,
     invoiceXApi: IccInvoiceXApi,
     patientApi: IccPatientXApi
   ) {
@@ -98,7 +100,7 @@ export class MessageXApi {
     this.documentXApi = documentXApi
     this.insuranceApi = insuranceApi
     this.entityReferenceApi = entityReferenceApi
-    this.receiptXApi = receiptXApi
+    this.receiptXApi = fhcReceiptXApi
     this.invoiceXApi = invoiceXApi
     this.patientApi = patientApi
     this.crypto = crypto
@@ -137,7 +139,7 @@ export class MessageXApi {
             this.documentXApi.setDocumentAttachment(
               doc.id!!,
               undefined /*TODO provide keys for encryption*/,
-              <any>utils.ua2ArrayBuffer(utils.text2ua(JSON.stringify(req)))
+              <any>ua2ab(string2ua(JSON.stringify(req)))
             )
           )
           .then(() => msg)
@@ -335,19 +337,19 @@ export class MessageXApi {
           this.patientApi
             .filterByWithUser(
               user,
-              undefined,
-              undefined,
-              1000,
-              0,
-              undefined,
-              false,
               new FilterChainPatient({
                 filter: new AbstractFilterPatient({
                   $type: "PatientByHcPartyAndSsinsFilter",
                   healthcarePartyId: user.healthcarePartyId,
                   ssins: ssins
                 })
-              })
+              }),
+              undefined,
+              undefined,
+              1000,
+              0,
+              undefined,
+              false
             )
             .then((pats: PaginatedListPatient) =>
               this.patientApi.bulkUpdatePatients(
@@ -456,7 +458,7 @@ export class MessageXApi {
             docXApi.setDocumentAttachment(
               doc.id!!,
               undefined /*TODO provide keys for encryption*/,
-              <any>utils.ua2ArrayBuffer(utils.text2ua(JSON.stringify(dmgMessage)))
+              <any>ua2ab(string2ua(JSON.stringify(dmgMessage)))
             )
           )
           .then(() => msg)
@@ -569,7 +571,7 @@ export class MessageXApi {
         }
         const parentMessage: Message = msgsForHcp[0]
 
-        return this.receiptXApi
+        return this.receiptXApi.iccApi
           .createReceipt(
             new Receipt({
               documentId: parentMessage.id,
@@ -580,9 +582,9 @@ export class MessageXApi {
               ]
             })
           )
-          .then(rcpt =>
-            this.receiptXApi.setReceiptAttachment(rcpt.id!, "tack", "", <any>(
-              utils.ua2ArrayBuffer(utils.text2ua(JSON.stringify(efactMessage)))
+          .then((rcpt: Receipt) =>
+            this.receiptXApi.iccApi.setReceiptAttachment(rcpt.id!, "tack", "", <any>(
+              ua2ab(string2ua(JSON.stringify(efactMessage)))
             ))
           )
           .then(() => {
@@ -773,17 +775,17 @@ export class MessageXApi {
                   this.documentXApi.setDocumentAttachment(
                     doc.id!!,
                     undefined /*TODO provide keys for encryption*/,
-                    <any>utils.ua2ArrayBuffer(utils.text2ua(efactMessage.detail!!))
+                    <any>ua2ab(string2ua(efactMessage.detail!!))
                   ),
                   this.documentXApi.setDocumentAttachment(
                     jsonDoc.id!!,
                     undefined /*TODO provide keys for encryption*/,
-                    <any>utils.ua2ArrayBuffer(utils.text2ua(JSON.stringify(efactMessage)))
+                    <any>ua2ab(string2ua(JSON.stringify(efactMessage)))
                   ),
                   this.documentXApi.setDocumentAttachment(
                     jsonParsedDoc.id!!,
                     undefined /*TODO provide keys for encryption*/,
-                    <any>utils.ua2ArrayBuffer(utils.text2ua(JSON.stringify(parsedRecords)))
+                    <any>ua2ab(string2ua(JSON.stringify(parsedRecords)))
                   )
                 ])
               )
@@ -1143,17 +1145,17 @@ export class MessageXApi {
           this.documentXApi.setDocumentAttachment(
             jsonDoc.id!!,
             undefined /*TODO provide keys for encryption*/,
-            <any>utils.ua2ArrayBuffer(utils.text2ua(JSON.stringify(res.records!!)))
+            <any>ua2ab(string2ua(JSON.stringify(res.records!!)))
           ),
           this.documentXApi.setDocumentAttachment(
             doc.id!!,
             undefined /*TODO provide keys for encryption*/,
-            <any>utils.ua2ArrayBuffer(utils.text2ua(res.detail!!))
+            <any>ua2ab(string2ua(res.detail!!))
           )
         ])
       )
       .then(() =>
-        this.receiptXApi.logReceipt(
+        this.receiptXApi.iccApi.logReceipt(
           user,
           msg.id!!,
           [
@@ -1162,7 +1164,7 @@ export class MessageXApi {
             res.tack!!.reference!!
           ],
           "tack",
-          utils.ua2ArrayBuffer(utils.text2ua(JSON.stringify(res.tack)))
+          ua2ab(string2ua(JSON.stringify(res.tack)))
         )
       )
   }

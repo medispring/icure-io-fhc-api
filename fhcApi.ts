@@ -20,3 +20,10 @@ export * from "./api/fhcStsApi"
 export * from "./api/fhcTarificationApi"
 export * from "./api/fhcTherLinkApi"
 export * from "./api/fhcVaccinnetApi"
+
+export * from "./x-api/message-x-api"
+export * from "./x-api/receipt-x-api"
+import * as efactUtil from "./x-api/utils/efact-util"
+export { efactUtil }
+import * as efactParser from "./x-api/utils/efact-parser"
+export { efactParser }

@@ -1,4 +1,4 @@
-import { parseNumber, formatNumber, isValidNumber } from "libphonenumber-js"
+import { parseNumber, formatNumber, isValidNumber, ParsedNumber } from "libphonenumber-js"
 
 import * as moment from "moment"
 import * as _ from "lodash"
@@ -86,11 +86,10 @@ export function phoneNumberValidate(phoneNumber: string): boolean {
 
 export function phoneNumberFormat(phoneNumber: string): string {
   const parsedPhoneNumber = parseNumber(phoneNumber, DEFAULT_COUNTRY)
-  if (_.isEmpty(parsedPhoneNumber)) {
-    // The number is not valid, so we leave the input string as-is.
-    return phoneNumber
-  }
-  return formatNumber(parsedPhoneNumber, "International")
+  // If the number is not valid, we leave the input string as-is.
+  return _.isEmpty(parsedPhoneNumber)
+    ? phoneNumber
+    : formatNumber(parsedPhoneNumber as ParsedNumber, "International")
 }
 
 /**
