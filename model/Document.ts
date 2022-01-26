@@ -22,10 +22,10 @@ export class Document {
     )
   }
 
+  title?: string
   content?: ArrayBuffer
+  textContent?: string
   filename?: string
   mimeType?: string
   signing?: SigningValue
-  textContent?: string
-  title?: string
 }

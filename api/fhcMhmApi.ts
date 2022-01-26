@@ -172,8 +172,8 @@ export class fhcMhmApi {
    * @param patientLastName patientLastName
    * @param patientGender patientGender
    * @param startDate startDate
-   * @param isTrial isTrial
    * @param signatureType signatureType
+   * @param isTrial isTrial
    * @param patientSsin patientSsin
    * @param io io
    * @param ioMembership ioMembership
@@ -190,8 +190,8 @@ export class fhcMhmApi {
     patientLastName: string,
     patientGender: string,
     startDate: number,
-    isTrial: boolean,
     signatureType: string,
+    isTrial?: boolean,
     patientSsin?: string,
     io?: string,
     ioMembership?: string,
@@ -213,8 +213,8 @@ export class fhcMhmApi {
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
       (startDate ? "&startDate=" + encodeURIComponent(String(startDate)) : "") +
-      (isTrial ? "&isTrial=" + encodeURIComponent(String(isTrial)) : "") +
       (signatureType ? "&signatureType=" + encodeURIComponent(String(signatureType)) : "") +
+      (isTrial ? "&isTrial=" + encodeURIComponent(String(isTrial)) : "") +
       (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
       (io ? "&io=" + encodeURIComponent(String(io)) : "") +
       (ioMembership ? "&ioMembership=" + encodeURIComponent(String(ioMembership)) : "") +

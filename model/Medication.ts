@@ -25,26 +25,26 @@ export class Medication {
     Object.assign(this as Medication, json)
   }
 
-  batch?: string
-  beginMoment?: number
-  commentForDelivery?: string
   compoundPrescription?: string
   compoundPrescriptionV2?: CompoundPrescription
-  duration?: Duration
-  endMoment?: number
-  instructionForPatient?: string
-  instructionsForReimbursement?: Medication.InstructionsForReimbursementEnum
-  intakeRoute?: Code
-  knownUsage?: boolean
+  substanceProduct?: Substanceproduct
   medicinalProduct?: Medicinalproduct
   numberOfPackages?: number
-  options?: { [key: string]: Content }
-  recipeInstructionForPatient?: string
+  batch?: string
+  commentForDelivery?: string
+  beginMoment?: number
+  endMoment?: number
+  temporality?: Code
+  duration?: Duration
+  knownUsage?: boolean
   regimen?: Array<RegimenItem>
   renewal?: MedicationRenewal
-  substanceProduct?: Substanceproduct
+  intakeRoute?: Code
+  instructionForPatient?: string
+  instructionsForReimbursement?: Medication.InstructionsForReimbursementEnum
   substitutionAllowed?: boolean
-  temporality?: Code
+  recipeInstructionForPatient?: string
+  options?: { [key: string]: Content }
 }
 export namespace Medication {
   export type InstructionsForReimbursementEnum =

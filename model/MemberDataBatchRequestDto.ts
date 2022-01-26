@@ -19,6 +19,6 @@ export class MemberDataBatchRequestDto {
     Object.assign(this as MemberDataBatchRequestDto, json)
   }
 
-  facets?: Array<FacetDto>
   members?: Array<MemberInfoDto>
+  facets?: Array<FacetDto>
 }

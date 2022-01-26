@@ -583,9 +583,12 @@ export class MessageXApi {
             })
           )
           .then((rcpt: Receipt) =>
-            this.receiptXApi.iccApi.setReceiptAttachment(rcpt.id!, "tack", "", <any>(
-              ua2ab(string2ua(JSON.stringify(efactMessage)))
-            ))
+            this.receiptXApi.iccApi.setReceiptAttachment(
+              rcpt.id!,
+              "tack",
+              "",
+              <any>ua2ab(string2ua(JSON.stringify(efactMessage)))
+            )
           )
           .then(() => {
             parentMessage.status = parentMessage.status!! | (1 << 8) /*STATUS_SUBMITTED*/
@@ -627,14 +630,14 @@ export class MessageXApi {
           messageType === "920098"
             ? new EfactMessage920098Reader(efactMessage)
             : messageType === "920099"
-              ? new EfactMessage920099Reader(efactMessage)
-              : messageType === "920900"
-                ? new EfactMessage920900Reader(efactMessage)
-                : messageType === "920999"
-                  ? new EfactMessage920999Reader(efactMessage)
-                  : messageType === "931000"
-                    ? new EfactMessage931000Reader(efactMessage)
-                    : null
+            ? new EfactMessage920099Reader(efactMessage)
+            : messageType === "920900"
+            ? new EfactMessage920900Reader(efactMessage)
+            : messageType === "920999"
+            ? new EfactMessage920999Reader(efactMessage)
+            : messageType === "931000"
+            ? new EfactMessage931000Reader(efactMessage)
+            : null
 
         if (!parser) {
           throw Error(`Unsupported message type ${messageType}`)
@@ -789,11 +792,10 @@ export class MessageXApi {
                   )
                 ])
               )
-              .then(
-                () =>
-                  ["920999", "920099", "920900"].includes(messageType)
-                    ? this.invoiceXApi.getInvoices(new ListOfIds({ ids: parentMessage.invoiceIds }))
-                    : Promise.resolve([])
+              .then(() =>
+                ["920999", "920099", "920900"].includes(messageType)
+                  ? this.invoiceXApi.getInvoices(new ListOfIds({ ids: parentMessage.invoiceIds }))
+                  : Promise.resolve([])
               )
               .then((invoices: Array<Invoice>) => {
                 // RejectAll if "920999", "920099"

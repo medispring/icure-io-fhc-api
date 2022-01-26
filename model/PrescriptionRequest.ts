@@ -20,20 +20,20 @@ export class PrescriptionRequest {
     Object.assign(this as PrescriptionRequest, json)
   }
 
-  deliveryDate?: number
-  executorId?: string
-  expirationDate?: number
-  feedback?: boolean
+  patient?: Patient
   hcp?: HealthcareParty
+  feedback?: boolean
   medications?: Array<Medication>
+  prescriptionType?: string
   notification?: string
+  samVersion?: string
+  executorId?: string
+  deliveryDate?: number
+  expirationDate?: number
+  vendorName?: string
   packageName?: string
   packageVersion?: string
-  patient?: Patient
-  prescriptionType?: string
-  samVersion?: string
   vendorEmail?: string
-  vendorName?: string
   vendorPhone?: string
   vision?: string
 }

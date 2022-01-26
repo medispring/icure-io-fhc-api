@@ -17,9 +17,9 @@ export class MemberInfoDto {
     Object.assign(this as MemberInfoDto, json)
   }
 
-  hospitalized?: boolean
+  ssin?: string
   io?: string
   ioMembership?: string
-  ssin?: string
+  hospitalized?: boolean
   uniqId?: string
 }

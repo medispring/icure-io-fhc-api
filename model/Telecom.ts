@@ -17,8 +17,8 @@ export class Telecom {
     Object.assign(this as Telecom, json)
   }
 
-  telecomNumber?: string
   telecomType?: Telecom.TelecomTypeEnum
+  telecomNumber?: string
 }
 export namespace Telecom {
   export type TelecomTypeEnum =

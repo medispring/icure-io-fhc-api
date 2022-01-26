@@ -19,11 +19,11 @@ export class PersonMid {
     Object.assign(this as PersonMid, json)
   }
 
-  birthPlace?: BirthPlace
-  dateOfBirth?: number
-  firstName?: string
-  gender?: string
   lastName?: string
+  firstName?: string
   nationalityCode?: string
+  dateOfBirth?: number
+  gender?: string
+  birthPlace?: BirthPlace
   residentialAddress?: Address
 }

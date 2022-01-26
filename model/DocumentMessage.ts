@@ -19,29 +19,29 @@ export class DocumentMessage {
     Object.assign(this as DocumentMessage, json)
   }
 
-  annex?: Array<Document>
-  annexList?: Array<Document>
-  copyMailTo?: Array<string>
-  customMetas?: { [key: string]: string }
-  destinations?: Array<Addressee>
-  document?: Document
-  documentTitle?: string
-  encrypted?: boolean
-  expirationDateTime?: number
-  freeInformationTableRows?: { [key: string]: string }
-  freeInformationTableTitle?: string
-  freeText?: string
-  hasAnnex?: boolean
-  hasFreeInformations?: boolean
   id?: string
-  important?: boolean
-  mandatee?: Addressee
-  patientInss?: string
-  publicationDateTime?: number
   publicationId?: string
   sender?: Addressee
-  size?: string
+  mandatee?: Addressee
+  destinations?: Array<Addressee>
+  important?: boolean
+  encrypted?: boolean
   usePublicationReceipt?: boolean
-  useReadReceipt?: boolean
   useReceivedReceipt?: boolean
+  useReadReceipt?: boolean
+  hasAnnex?: boolean
+  hasFreeInformations?: boolean
+  publicationDateTime?: number
+  expirationDateTime?: number
+  size?: string
+  customMetas?: { [key: string]: string }
+  document?: Document
+  freeText?: string
+  freeInformationTableTitle?: string
+  freeInformationTableRows?: { [key: string]: string }
+  patientInss?: string
+  annex?: Array<Document>
+  copyMailTo?: Array<string>
+  documentTitle?: string
+  annexList?: Array<Document>
 }

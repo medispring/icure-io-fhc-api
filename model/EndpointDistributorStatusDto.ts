@@ -17,6 +17,8 @@ export class EndpointDistributorStatusDto {
     Object.assign(this as EndpointDistributorStatusDto, json)
   }
 
+  active?: { [key: string]: string }
   bcpMode?: boolean
+  _default?: { [key: string]: string }
   mustPoll?: boolean
 }

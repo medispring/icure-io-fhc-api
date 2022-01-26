@@ -17,7 +17,6 @@ export class Code {
     Object.assign(this as Code, json)
   }
 
-  code?: string
   data?: string
   label?: { [key: string]: string }
   level?: number
@@ -25,5 +24,6 @@ export class Code {
   regions?: Array<string>
   searchTerms?: { [key: string]: Array<string> }
   type?: string
+  code?: string
   version?: string
 }

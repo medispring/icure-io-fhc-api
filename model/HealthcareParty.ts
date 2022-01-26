@@ -20,27 +20,27 @@ export class HealthcareParty {
     Object.assign(this as HealthcareParty, json)
   }
 
-  addresses?: Array<Address>
-  bankAccount?: string
-  bic?: string
-  cbe?: string
-  civility?: string
-  companyName?: string
-  ehealthBoxes?: Array<EHealthBoxType>
-  ehp?: string
+  name?: string
+  lastName?: string
   firstName?: string
   gender?: HealthcareParty.GenderEnum
-  invoiceHeader?: string
-  languages?: Array<string>
-  lastName?: string
-  name?: string
-  nihii?: string
-  professionCodes?: Array<ProfessionCode>
+  civility?: string
+  speciality?: string
+  companyName?: string
+  bankAccount?: string
+  bic?: string
   proxyBankAccount?: string
   proxyBic?: string
-  speciality?: string
-  ssin?: string
+  invoiceHeader?: string
   type?: string
+  cbe?: string
+  ehp?: string
+  nihii?: string
+  ssin?: string
+  addresses?: Array<Address>
+  languages?: Array<string>
+  professionCodes?: Array<ProfessionCode>
+  ehealthBoxes?: Array<EHealthBoxType>
 }
 export namespace HealthcareParty {
   export type GenderEnum = "M" | "F" | "I" | "C" | "Y" | "X" | "U"
