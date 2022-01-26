@@ -58,11 +58,11 @@ export class fhcRecipeApi {
   createPrescriptionUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    xFHCPassPhrase: string,
     body?: PrescriptionRequest
   ): Promise<Prescription> {
     let _body = null
@@ -104,11 +104,11 @@ export class fhcRecipeApi {
   createPrescriptionV4UsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    xFHCPassPhrase: string,
     body?: PrescriptionRequest
   ): Promise<Prescription> {
     let _body = null
@@ -166,11 +166,11 @@ export class fhcRecipeApi {
   getPrescriptionMessageUsingGET(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    xFHCPassPhrase: string,
     rid: string
   ): Promise<RecipeKmehrmessageType> {
     let _body = null
@@ -256,11 +256,11 @@ export class fhcRecipeApi {
   listFeedbacksUsingGET(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
-    hcpName: string,
-    xFHCPassPhrase: string
+    hcpName: string
   ): Promise<Array<Feedback>> {
     let _body = null
 
@@ -297,12 +297,12 @@ export class fhcRecipeApi {
   listOpenPrescriptionsByPatientUsingGET(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    patientId: string,
-    xFHCPassPhrase: string
+    patientId: string
   ): Promise<Array<Prescription>> {
     let _body = null
 
@@ -341,11 +341,11 @@ export class fhcRecipeApi {
   revokePrescriptionUsingDELETE(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    xFHCPassPhrase: string,
     rid: string,
     reason: string
   ): Promise<any | Boolean> {
@@ -388,11 +388,11 @@ export class fhcRecipeApi {
   sendNotificationUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    xFHCPassPhrase: string,
     patientId: string,
     executorId: string,
     rid: string,
@@ -470,11 +470,11 @@ export class fhcRecipeApi {
   updateFeedbackFlagUsingPUT(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
     hcpSsin: string,
     hcpName: string,
-    xFHCPassPhrase: string,
     rid: string,
     feedbackFlag: boolean
   ): Promise<any | Boolean> {
