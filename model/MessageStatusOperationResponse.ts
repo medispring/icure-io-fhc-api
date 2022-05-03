@@ -9,15 +9,17 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Acknowledgement } from "./Acknowledgement"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class MessageOperationResponse {
+export class MessageStatusOperationResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as MessageOperationResponse, json)
+    Object.assign(this as MessageStatusOperationResponse, json)
   }
 
+  acks?: Array<Acknowledgement>
   error?: Error
-  success?: boolean
   messageId?: string
+  success?: boolean
 }

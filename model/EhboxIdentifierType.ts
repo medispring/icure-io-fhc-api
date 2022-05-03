@@ -9,15 +9,18 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { User } from "./User"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class MessageOperationResponse {
+export class EhboxIdentifierType {
   constructor(json: JSON | any) {
-    Object.assign(this as MessageOperationResponse, json)
+    Object.assign(this as EhboxIdentifierType, json)
   }
 
-  error?: Error
-  success?: boolean
-  messageId?: string
+  id?: string
+  quality?: string
+  subType?: string
+  type?: string
+  user?: User
 }
