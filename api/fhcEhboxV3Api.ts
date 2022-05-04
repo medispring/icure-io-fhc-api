@@ -15,6 +15,7 @@ import { BoxInfo } from "../model/BoxInfo"
 import { DocumentMessage } from "../model/DocumentMessage"
 import { MessageOperationResponse } from "../model/MessageOperationResponse"
 import { MessageResponse } from "../model/MessageResponse"
+import { MessageStatusOperationResponse } from "../model/MessageStatusOperationResponse"
 import { MessagesResponse } from "../model/MessagesResponse"
 
 export class fhcEhboxV3Api {
@@ -167,6 +168,36 @@ export class fhcEhboxV3Api {
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new BoxInfo(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary getMessageAckStatus
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param messageId messageId
+   */
+  getMessageAckStatusUsingGET(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    messageId: string
+  ): Promise<MessageStatusOperationResponse> {
+    let _body = null
+
+    const _url =
+      this.host +
+      `/ehboxV3/${encodeURIComponent(String(messageId))}/status/acks` +
+      "?ts=" +
+      new Date().getTime()
+    let headers = this.headers
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+      .then(doc => new MessageStatusOperationResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 

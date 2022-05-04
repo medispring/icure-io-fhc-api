@@ -12,12 +12,12 @@
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class MessageOperationResponse {
+export class User {
   constructor(json: JSON | any) {
-    Object.assign(this as MessageOperationResponse, json)
+    Object.assign(this as User, json)
   }
 
-  error?: Error
-  success?: boolean
-  messageId?: string
+  firstName?: string
+  lastName?: string
+  value?: string
 }
