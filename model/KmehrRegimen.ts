@@ -9,16 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Mapstringstring } from "./Mapstringstring"
+import { JAXBElementobject } from "./JAXBElementobject"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class DaasResponse {
+export class KmehrRegimen {
   constructor(json: JSON | any) {
-    Object.assign(this as DaasResponse, json)
+    Object.assign(this as KmehrRegimen, json)
   }
 
-  context?: { [key: string]: string }
-  destinations?: Array<Mapstringstring>
-  status?: string
+  daynumbersAndQuantitiesAndDates?: Array<JAXBElementobject>
 }

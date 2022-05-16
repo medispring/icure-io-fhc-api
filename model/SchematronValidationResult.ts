@@ -9,16 +9,18 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Mapstringstring } from "./Mapstringstring"
+import { SchematronOutput } from "./SchematronOutput"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class DaasResponse {
+export class SchematronValidationResult {
   constructor(json: JSON | any) {
-    Object.assign(this as DaasResponse, json)
+    Object.assign(this as SchematronValidationResult, json)
   }
 
-  context?: { [key: string]: string }
-  destinations?: Array<Mapstringstring>
-  status?: string
+  failedMessages?: Array<string>
+  reportMessages?: Array<string>
+  svrl?: SchematronOutput
+  svrlasString?: string
+  valid?: boolean
 }

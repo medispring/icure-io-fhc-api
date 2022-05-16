@@ -9,16 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Mapstringstring } from "./Mapstringstring"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class DaasResponse {
+export class ActivePattern {
   constructor(json: JSON | any) {
-    Object.assign(this as DaasResponse, json)
+    Object.assign(this as ActivePattern, json)
   }
 
-  context?: { [key: string]: string }
-  destinations?: Array<Mapstringstring>
-  status?: string
+  document?: string
+  id?: string
+  name?: string
+  role?: string
 }

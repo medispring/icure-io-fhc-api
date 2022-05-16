@@ -20,13 +20,13 @@ import { DurationType } from "./DurationType"
 import { Feedback } from "./Feedback"
 import { FrequencyType } from "./FrequencyType"
 import { IDKMEHR } from "./IDKMEHR"
+import { KmehrRegimen } from "./KmehrRegimen"
 import { LifecycleType } from "./LifecycleType"
 import { LnkType } from "./LnkType"
 import { LocalitemattributeType } from "./LocalitemattributeType"
 import { MomentType } from "./MomentType"
 import { Posology } from "./Posology"
 import { QuantityType } from "./QuantityType"
-import { Regimen } from "./Regimen"
 import { RenewalType } from "./RenewalType"
 import { RouteType } from "./RouteType"
 import { SeverityType } from "./SeverityType"
@@ -71,7 +71,7 @@ export class ItemType {
   posology?: Posology
   quantity?: QuantityType
   recorddatetime?: Date
-  regimen?: Regimen
+  regimen?: KmehrRegimen
   renewal?: RenewalType
   route?: RouteType
   severity?: SeverityType

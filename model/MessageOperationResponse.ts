@@ -18,6 +18,6 @@ export class MessageOperationResponse {
   }
 
   error?: Error
-  success?: boolean
   messageId?: string
+  success?: boolean
 }

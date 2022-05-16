@@ -35,7 +35,6 @@ import {
   uuidBase36Half
 } from "./utils/efact-util"
 import { timeEncode } from "./utils/formatting-util"
-import { utils } from "@icure/api/icc-x-api/crypto/utils"
 import {
   DmgClosure,
   DmgExtension,
