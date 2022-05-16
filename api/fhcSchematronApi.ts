@@ -42,7 +42,7 @@ export class fhcSchematronApi {
    * @param xFHCTokenId X-FHC-tokenId
    * @param schema schema
    */
-  getDinRoutingInfoUsingPOST(
+  validateUsingShematron(
     xFHCTokenId: string,
     schema: string,
     body?: string
