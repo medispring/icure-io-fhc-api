@@ -1,3 +1,5 @@
 export * from "./fhcApi"
 export * from "./model/models"
+export * from "./x-api/message-x-api"
+export * from "./x-api/receipt-x-api"
 export { XHR } from "./api/XHR"
