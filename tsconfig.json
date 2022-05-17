@@ -17,5 +17,5 @@
     "types": ["node"],
     "typeRoots": ["../node_modules/@types"]
   },
-  "include": ["index.ts", "fhcApi.ts", "api/*", "model/*", "x-api/*"]
+  "include": ["index.ts", "fhcApi.ts", "api/*", "model/*", "x-api/**.ts"]
 }
