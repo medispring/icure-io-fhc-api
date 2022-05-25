@@ -226,9 +226,29 @@ export function toInvoiceBatch(
             )
 
             const now = new Date()
-            const invoiceDate = toMoment(invoicesWithPatient[0].invoice.invoiceDate!!)
-            const invoicingMonth = invoiceDate!!.month() + 1
-            const invoicingYear = invoiceDate!!.year()
+            const invoiceDates = _.groupBy(
+              invoicesWithPatient.map(inv => (inv?.invoice?.invoiceDate ?? 100001).toString().substring(0, 6) + "01")
+            )
+            //The invoiceMonth/Year of the batch must be equal to the most recent month/year of the invoices that has the highest count within the batch.
+            //From the INAMI Rules: (https://www.riziv.fgov.be/SiteCollectionDocuments/instructions_facturation_electronique_2021.pdf page 213)
+            // In deze zone bedoelt men de maand waarin het merendeel der prestaties, die op deze factuur staan,
+            // werden verricht. Deze maand kan verschillend zijn van de maand waarin de factuur werd opgemaakt
+            //Examples:
+            //A. 10 invoices 02/2020, 10 invoices 03/2020, 5 invoices 04/2020 --> 03/2020
+            //B. 10 invoices 02/2020;  9 invoices 03/2020, 5 invoices 04/2020 --> 02/2020
+            let dateCounts: any[] = []
+            _.forOwn(invoiceDates, function(val, key) {
+              dateCounts.push({ date: key, count: val.length })
+            })
+            const invoiceDate = toMoment(
+              _.get(
+                _.head(_.orderBy(dateCounts, ["count", "date"], ["desc", "desc"])),
+                "date",
+                invoicesWithPatient[0].invoice.invoiceDate!!
+              )
+            )
+            const invoicingMonth = !!invoiceDate ? invoiceDate.month() + 1 : 0
+            const invoicingYear = !!invoiceDate ? invoiceDate.year() : 0
 
             // The OA 500, matches the monthYear (zone 300) to check the batch sending number
             // Use sending year to prevent duplicate sending number in case of invoices made
@@ -315,14 +335,13 @@ function toInvoiceItem(
   const invoiceItem = new InvoiceItem({})
   invoiceItem.codeNomenclature = Number(invoicingCode.tarificationId!!.split("|")[1])
   invoiceItem.dateCode = dateEncode(toMoment(invoicingCode.dateCode!!)!!.toDate())
-  invoiceItem.endDateCode =
-    invoiceItem.codeNomenclature === 109594
-      ? dateEncode(toMoment(invoicingCode.dateCode!!)!!.toDate())
-      : dateEncode(
-          toMoment(invoicingCode.dateCode!!)!!
-            .endOf("month")
-            .toDate()
-        )
+  // Only applies to flatrate invoicing (https://medispring.atlassian.net/wiki/spaces/EN/pages/2536013825/Behavior+of+diabetes+pre-care+pathways+flatrate+invoicing)
+  if(flatrateInvoice) {
+    invoiceItem.endDateCode =
+      invoiceItem.codeNomenclature === 109594 // Diabetes pre-care pathways
+        ? dateEncode(toMoment(invoicingCode.dateCode!!)!!.toDate())
+        : dateEncode(toMoment(invoicingCode.dateCode!!)!!.endOf("month").toDate())
+  }
   invoiceItem.doctorIdentificationNumber = nihiiHealthcareProvider
   invoiceItem.doctorSupplement = Number(((invoicingCode.doctorSupplement || 0) * 100).toFixed(0))
   if (invoicingCode.eidReadingHour && invoicingCode.eidReadingValue) {
@@ -341,10 +360,11 @@ function toInvoiceItem(
 
   invoiceItem.override3rdPayerCode = invoicingCode.override3rdPayerCode
   invoiceItem.patientFee = Number(((invoicingCode.patientIntervention || 0) * 100).toFixed(0))
-  invoiceItem.percentNorm = InvoiceItem.PercentNormEnum.None
+  invoiceItem.percentNorm = getPercentNorm(invoicingCode.percentNorm || 0)
   invoiceItem.personalInterventionCoveredByThirdPartyCode =
     invoicingCode.cancelPatientInterventionReason
   invoiceItem.prescriberNihii = invoicingCode.prescriberNihii
+  invoiceItem.prescriptionDate = invoicingCode.prescriptionDate
   invoiceItem.prescriberNorm = getPrescriberNorm(invoicingCode.prescriberNorm || 0)
   invoiceItem.reimbursedAmount = Number(((invoicingCode.reimbursement || 0) * 100).toFixed(0))
   invoiceItem.relatedCode = Number(invoicingCode.relatedCode || 0)
@@ -355,6 +375,26 @@ function toInvoiceItem(
   invoiceItem.internshipNihii = invoice.internshipNihii
 
   return invoiceItem
+}
+
+function getPercentNorm(norm: number) {
+  return norm === 0
+    ? InvoiceItem.PercentNormEnum.None
+    : norm === 1
+    ? InvoiceItem.PercentNormEnum.SurgicalAid1
+    : norm === 2
+    ? InvoiceItem.PercentNormEnum.SurgicalAid2
+    : norm === 3
+    ? InvoiceItem.PercentNormEnum.ReducedFee
+    : norm === 4
+    ? InvoiceItem.PercentNormEnum.Ah1n1
+    : norm === 5
+    ? InvoiceItem.PercentNormEnum.HalfPriceSecondAct
+    : norm === 6
+    ? InvoiceItem.PercentNormEnum.InvoiceException
+    : norm === 7
+    ? InvoiceItem.PercentNormEnum.ForInformation
+    : InvoiceItem.PercentNormEnum.None
 }
 
 function getSideCode(code: number) {

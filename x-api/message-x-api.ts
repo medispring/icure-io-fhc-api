@@ -573,6 +573,7 @@ export class MessageXApi {
         return this.receiptXApi.iccApi
           .createReceipt(
             new Receipt({
+              id: this.crypto.randomUuid(),
               documentId: parentMessage.id,
               references: [
                 `mycarenet:efact:inputReference:${ref}`,
