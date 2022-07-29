@@ -322,6 +322,13 @@ function toInvoice(
   if (flatrateInvoice) {
     efactInvoice.startOfCoveragePeriod = invoice.invoicingCodes!![0].contractDate
   }
+
+  if(invoice?.locationNihii){
+    efactInvoice.locationNihii = invoice?.locationNihii;
+    efactInvoice.locationService = invoice?.locationService;
+    efactInvoice.admissionDate = invoice?.admissionDate;
+  }
+
   return efactInvoice
 }
 
