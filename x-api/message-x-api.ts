@@ -515,7 +515,7 @@ export class MessageXApi {
   }
 
   extractErrors(parsedRecords: any): string[] {
-    const errors: ErrorDetail[] = (parsedRecords.et10 && parsedRecords.et10.errorDetail
+    const errors: ErrorDetail[] = (parsedRecords.et10 && parsedRecords.et10.errorDetail && !this.isRseError(parsedRecords.et10.errorDetail)
       ? [parsedRecords.et10.errorDetail]
       : []
     )
@@ -523,25 +523,48 @@ export class MessageXApi {
         _.flatMap(parsedRecords.records as ET20_80Data[], r => {
           const errors: Array<ErrorDetail> = []
 
-          if (r.et20 && r.et20.errorDetail) {
+          if (r.et20 && r.et20.errorDetail && !this.isRseError(r.et20.errorDetail)) {
             errors.push(r.et20.errorDetail)
           }
           _.each(r.items, i => {
-            if (i.et50 && i.et50.errorDetail) errors.push(i.et50.errorDetail)
-            if (i.et51 && i.et51.errorDetail) errors.push(i.et51.errorDetail)
-            if (i.et52 && i.et52.errorDetail) errors.push(i.et52.errorDetail)
+            if (i.et50 && i.et50.errorDetail && !this.isRseError(i.et50.errorDetail)) errors.push(i.et50.errorDetail)
+            if (i.et51 && i.et51.errorDetail && !this.isRseError(i.et51.errorDetail)) errors.push(i.et51.errorDetail)
+            if (i.et52 && i.et52.errorDetail && !this.isRseError(i.et52.errorDetail)) errors.push(i.et52.errorDetail)
           })
-          if (r.et80 && r.et80.errorDetail) {
+          if (r.et80 && r.et80.errorDetail && !this.isRseError(r.et80.errorDetail)) {
             errors.push(r.et80.errorDetail)
           }
           return errors
         })
       )
       .concat(
-        parsedRecords.et90 && parsedRecords.et90.errorDetail ? [parsedRecords.et90.errorDetail] : []
+        parsedRecords.et90 && parsedRecords.et90.errorDetail && !this.isRseError(parsedRecords.et90.errorDetail) ? [parsedRecords.et90.errorDetail] : []
       )
 
     return _.compact(_.map(errors, error => this.extractErrorMessage(error)))
+  }
+
+  isRseError(errorDetail: ErrorDetail): boolean {
+    const rse = ["R", "S", "E"]
+    if (
+      errorDetail?.rejectionLetter1 &&
+      errorDetail?.rejectionLetter1 !== " " &&
+      !rse.includes(errorDetail?.rejectionLetter1)
+    )
+      return false
+    if (
+      errorDetail?.rejectionLetter2 &&
+      errorDetail?.rejectionLetter2 !== " " &&
+      !rse.includes(errorDetail?.rejectionLetter2)
+    )
+      return false
+    if (
+      errorDetail?.rejectionLetter3 &&
+      errorDetail?.rejectionLetter3 !== " " &&
+      !rse.includes(errorDetail?.rejectionLetter3)
+    )
+      return false
+    return true
   }
 
   processTack(user: User, hcp: HealthcareParty, efactMessage: EfactMessage): Promise<Receipt> {
@@ -826,6 +849,11 @@ export class MessageXApi {
                         .compact()
                         .join("; ") || undefined
 
+                    // check if it has a not rse error
+                    const hasANotRseError: boolean = invoicingErrors.some(
+                      (it) => it.itemId === ic.id && !this.isRseError(it.error)
+                    )
+
                     const record50: ET50Data | false =
                       messageType === "920900" &&
                       _.compact(
@@ -844,7 +872,7 @@ export class MessageXApi {
                       _.get(record50, "errorDetail.zone114") &&
                       Number(record50.errorDetail!!.zone114)
 
-                    if (rejectAll || codeError) {
+                    if (rejectAll || (codeError && hasANotRseError)) {
                       ic.accepted = false
                       ic.canceled = true
                       ic.pending = false
@@ -906,7 +934,7 @@ export class MessageXApi {
                       ic.canceled = false
                       ic.pending = false
                       ic.resent = false
-                      ic.error = undefined
+                      ic.error = codeError ?? undefined
                       ic.paid = zone114amount
                         ? Number((zone114amount / 100).toFixed(2))
                         : ic.reimbursement
