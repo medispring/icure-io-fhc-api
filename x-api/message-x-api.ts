@@ -515,21 +515,20 @@ export class MessageXApi {
   }
 
   extractErrors(parsedRecords: any, oa: string): string[] {
-    const errors: ErrorDetail[] = (
-      parsedRecords.et10 &&
-      parsedRecords.et10.errorDetail &&
-      this.isBlockingError(parsedRecords.et10.errorDetail, oa)
-        ? [parsedRecords.et10.errorDetail]
-        : []
+    const errors: ErrorDetail[] = (parsedRecords.et10 &&
+    parsedRecords.et10.errorDetail &&
+    this.isBlockingError(parsedRecords.et10.errorDetail, oa)
+      ? [parsedRecords.et10.errorDetail]
+      : []
     )
       .concat(
-        _.flatMap(parsedRecords.records as ET20_80Data[], (r) => {
+        _.flatMap(parsedRecords.records as ET20_80Data[], r => {
           const errors: Array<ErrorDetail> = []
 
           if (r.et20 && r.et20.errorDetail && this.isBlockingError(r.et20.errorDetail, oa)) {
             errors.push(r.et20.errorDetail)
           }
-          _.each(r.items, (i) => {
+          _.each(r.items, i => {
             if (i.et50 && i.et50.errorDetail && this.isBlockingError(i.et50.errorDetail, oa))
               errors.push(i.et50.errorDetail)
             if (i.et51 && i.et51.errorDetail && this.isBlockingError(i.et51.errorDetail, oa))
@@ -545,13 +544,13 @@ export class MessageXApi {
       )
       .concat(
         parsedRecords.et90 &&
-        parsedRecords.et90.errorDetail &&
-        this.isBlockingError(parsedRecords.et90.errorDetail, oa)
+          parsedRecords.et90.errorDetail &&
+          this.isBlockingError(parsedRecords.et90.errorDetail, oa)
           ? [parsedRecords.et90.errorDetail]
           : []
       )
 
-    return _.compact(_.map(errors, (error) => this.extractErrorMessage(error)))
+    return _.compact(_.map(errors, error => this.extractErrorMessage(error)))
   }
 
   isBlockingError(errorDetail: ErrorDetail, oa: string): boolean {
@@ -568,12 +567,16 @@ export class MessageXApi {
       "600": ["500524"],
       "700": [],
       "800": [],
-      "900": [],
+      "900": []
     }
 
-    return lineNumbersToVerify.some((lineNumber) => {
-      const rejectionLetter = `${errorDetail?.["rejectionLetter" + lineNumber] || ""}`.trim()
-      const rejectionCode = `${errorDetail?.["rejectionCode" + lineNumber] || ""}`.trim()
+    return lineNumbersToVerify.some(lineNumber => {
+      const rejectionLetter = `${(errorDetail as { [key: string]: string } | undefined)?.[
+        "rejectionLetter" + lineNumber
+      ] || ""}`.trim()
+      const rejectionCode = `${(errorDetail as { [key: string]: string } | undefined)?.[
+        "rejectionCode" + lineNumber
+      ] || ""}`.trim()
       if (!rejectionLetter) return false
 
       return (
@@ -701,7 +704,7 @@ export class MessageXApi {
           throw new Error(`Cannot match parent with fileReference for file with ref ${ref}`)
         }
 
-        const errors = this.extractErrors(parsedRecords,oa)
+        const errors = this.extractErrors(parsedRecords, oa)
         const statuses =
           (["920999", "920099"].includes(messageType) ? 1 << 17 /*STATUS_FULL_ERROR*/ : 0) |
           (["920900"].includes(messageType) && errors.length
@@ -871,21 +874,24 @@ export class MessageXApi {
 
                     // check if it has a blocking error
                     const hasBlockingError: boolean = invoicingErrors.some(
-                      (it) => it.itemId === ic.id && this.isBlockingError(it.error, oa)
+                      it => it.itemId === ic.id && this.isBlockingError(it.error, oa)
                     )
 
-                    const record50: ET50Data | false =
-                      messageType === "920900" &&
-                      _.compact(
-                        _.flatMap((parsedRecords as File920900Data).records, r =>
-                          r.items!!.map(
-                            i =>
-                              _.get(i, "et50.itemReference") &&
-                              decodeBase36Uuid(i.et50!!.itemReference.trim()) === ic.id &&
-                              i.et50
-                          )
-                        )
-                      )[0]
+                    const record50: ET50Data | undefined =
+                      messageType === "920900"
+                        ? _.compact(
+                            _.flatMap(
+                              (parsedRecords as File920900Data).records,
+                              r =>
+                                r.items!!.map(
+                                  i =>
+                                    _.get(i, "et50.itemReference") &&
+                                    decodeBase36Uuid(i.et50!!.itemReference.trim()) === ic.id &&
+                                    i.et50
+                                ) as ET50Data[]
+                            )
+                          )[0]
+                        : undefined
 
                     const zone114amount =
                       record50 &&
