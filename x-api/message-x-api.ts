@@ -514,57 +514,73 @@ export class MessageXApi {
       : undefined
   }
 
-  extractErrors(parsedRecords: any): string[] {
-    const errors: ErrorDetail[] = (parsedRecords.et10 && parsedRecords.et10.errorDetail && !this.isRseError(parsedRecords.et10.errorDetail)
-      ? [parsedRecords.et10.errorDetail]
-      : []
+  extractErrors(parsedRecords: any, oa: string): string[] {
+    const errors: ErrorDetail[] = (
+      parsedRecords.et10 &&
+      parsedRecords.et10.errorDetail &&
+      this.isBlockingError(parsedRecords.et10.errorDetail, oa)
+        ? [parsedRecords.et10.errorDetail]
+        : []
     )
       .concat(
-        _.flatMap(parsedRecords.records as ET20_80Data[], r => {
+        _.flatMap(parsedRecords.records as ET20_80Data[], (r) => {
           const errors: Array<ErrorDetail> = []
 
-          if (r.et20 && r.et20.errorDetail && !this.isRseError(r.et20.errorDetail)) {
+          if (r.et20 && r.et20.errorDetail && this.isBlockingError(r.et20.errorDetail, oa)) {
             errors.push(r.et20.errorDetail)
           }
-          _.each(r.items, i => {
-            if (i.et50 && i.et50.errorDetail && !this.isRseError(i.et50.errorDetail)) errors.push(i.et50.errorDetail)
-            if (i.et51 && i.et51.errorDetail && !this.isRseError(i.et51.errorDetail)) errors.push(i.et51.errorDetail)
-            if (i.et52 && i.et52.errorDetail && !this.isRseError(i.et52.errorDetail)) errors.push(i.et52.errorDetail)
+          _.each(r.items, (i) => {
+            if (i.et50 && i.et50.errorDetail && this.isBlockingError(i.et50.errorDetail, oa))
+              errors.push(i.et50.errorDetail)
+            if (i.et51 && i.et51.errorDetail && this.isBlockingError(i.et51.errorDetail, oa))
+              errors.push(i.et51.errorDetail)
+            if (i.et52 && i.et52.errorDetail && this.isBlockingError(i.et52.errorDetail, oa))
+              errors.push(i.et52.errorDetail)
           })
-          if (r.et80 && r.et80.errorDetail && !this.isRseError(r.et80.errorDetail)) {
+          if (r.et80 && r.et80.errorDetail && this.isBlockingError(r.et80.errorDetail, oa)) {
             errors.push(r.et80.errorDetail)
           }
           return errors
         })
       )
       .concat(
-        parsedRecords.et90 && parsedRecords.et90.errorDetail && !this.isRseError(parsedRecords.et90.errorDetail) ? [parsedRecords.et90.errorDetail] : []
+        parsedRecords.et90 &&
+        parsedRecords.et90.errorDetail &&
+        this.isBlockingError(parsedRecords.et90.errorDetail, oa)
+          ? [parsedRecords.et90.errorDetail]
+          : []
       )
 
-    return _.compact(_.map(errors, error => this.extractErrorMessage(error)))
+    return _.compact(_.map(errors, (error) => this.extractErrorMessage(error)))
   }
 
-  isRseError(errorDetail: ErrorDetail): boolean {
-    const rse = ["R", "S", "E"]
-    if (
-      errorDetail?.rejectionLetter1 &&
-      errorDetail?.rejectionLetter1 !== " " &&
-      !rse.includes(errorDetail?.rejectionLetter1)
-    )
-      return false
-    if (
-      errorDetail?.rejectionLetter2 &&
-      errorDetail?.rejectionLetter2 !== " " &&
-      !rse.includes(errorDetail?.rejectionLetter2)
-    )
-      return false
-    if (
-      errorDetail?.rejectionLetter3 &&
-      errorDetail?.rejectionLetter3 !== " " &&
-      !rse.includes(errorDetail?.rejectionLetter3)
-    )
-      return false
-    return true
+  isBlockingError(errorDetail: ErrorDetail, oa: string): boolean {
+    //check : https://medispring.atlassian.net/browse/MS-7967
+    const lineNumbersToVerify = ["1", "2", "3"]
+    const nonBlockingErrorLetters = ["E"]
+    const nonBlockingErrorCodesByOa: { [key: string]: string[] } = {
+      "100": [],
+      "200": [],
+      "300": [],
+      "306": [],
+      "400": [],
+      "500": [],
+      "600": ["500524"],
+      "700": [],
+      "800": [],
+      "900": [],
+    }
+
+    return lineNumbersToVerify.some((lineNumber) => {
+      const rejectionLetter = `${errorDetail?.["rejectionLetter" + lineNumber] || ""}`.trim()
+      const rejectionCode = `${errorDetail?.["rejectionCode" + lineNumber] || ""}`.trim()
+      if (!rejectionLetter) return false
+
+      return (
+        !nonBlockingErrorLetters.includes(rejectionLetter) &&
+        !(nonBlockingErrorCodesByOa[oa] || []).includes(rejectionCode)
+      )
+    })
   }
 
   processTack(user: User, hcp: HealthcareParty, efactMessage: EfactMessage): Promise<Receipt> {
@@ -634,6 +650,10 @@ export class MessageXApi {
     invoicePrefix?: string,
     invoicePrefixer?: (invoice: Invoice, hcpId: string) => Promise<string>
   ): Promise<{ message: Message; invoices: Array<Invoice> }> {
+    const oa: string = (efactMessage.message?.[0]?.zones || [])
+      ?.find((z: any) => z.zoneDescription?.zones?.contains("204"))
+      ?.value.toString()
+      .substring(8, 11)
     const ref = efactMessage.commonOutput!!.inputReference
       ? Number(efactMessage.commonOutput!!.inputReference) % 10000000000
       : Number(efactMessage.commonOutput!!.outputReference!!.replace(/\D+/g, "")) % 10000000000
@@ -681,7 +701,7 @@ export class MessageXApi {
           throw new Error(`Cannot match parent with fileReference for file with ref ${ref}`)
         }
 
-        const errors = this.extractErrors(parsedRecords)
+        const errors = this.extractErrors(parsedRecords,oa)
         const statuses =
           (["920999", "920099"].includes(messageType) ? 1 << 17 /*STATUS_FULL_ERROR*/ : 0) |
           (["920900"].includes(messageType) && errors.length
@@ -849,9 +869,9 @@ export class MessageXApi {
                         .compact()
                         .join("; ") || undefined
 
-                    // check if it has a not rse error
-                    const hasANotRseError: boolean = invoicingErrors.some(
-                      (it) => it.itemId === ic.id && !this.isRseError(it.error)
+                    // check if it has a blocking error
+                    const hasBlockingError: boolean = invoicingErrors.some(
+                      (it) => it.itemId === ic.id && this.isBlockingError(it.error, oa)
                     )
 
                     const record50: ET50Data | false =
@@ -872,7 +892,7 @@ export class MessageXApi {
                       _.get(record50, "errorDetail.zone114") &&
                       Number(record50.errorDetail!!.zone114)
 
-                    if (rejectAll || (codeError && hasANotRseError)) {
+                    if (rejectAll || (!zone114amount && codeError && hasBlockingError)) {
                       ic.accepted = false
                       ic.canceled = true
                       ic.pending = false
