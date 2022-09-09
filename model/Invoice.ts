@@ -35,6 +35,9 @@ export class Invoice {
   relatedInvoiceIoCode?: string
   relatedInvoiceNumber?: number
   startOfCoveragePeriod?: number
+  admissionDate?: number
+  locationNihii?: string
+  locationService?: number
 }
 export namespace Invoice {
   export type ReasonEnum =
