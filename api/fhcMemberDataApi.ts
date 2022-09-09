@@ -48,6 +48,8 @@ export class fhcMemberDataApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
    * @param hcpName hcpName
+   * @param hcpQuality hcpQuality
+   * @param hcpSsin hcpSsin
    */
   confirmMemberDataAcksAsyncUsingPOST(
     xFHCTokenId: string,
@@ -55,6 +57,8 @@ export class fhcMemberDataApi {
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
+    hcpQuality?: string,
+    hcpSsin?: string,
     body?: Array<string>
   ): Promise<boolean> {
     let _body = null
@@ -66,7 +70,9 @@ export class fhcMemberDataApi {
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "")
+      (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
+      (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -88,6 +94,8 @@ export class fhcMemberDataApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
    * @param hcpName hcpName
+   * @param hcpQuality hcpQuality
+   * @param hcpSsin hcpSsin
    */
   confirmMemberDataMessagesAsyncUsingPOST(
     xFHCTokenId: string,
@@ -95,6 +103,8 @@ export class fhcMemberDataApi {
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
+    hcpQuality?: string,
+    hcpSsin?: string,
     body?: Array<string>
   ): Promise<boolean> {
     let _body = null
@@ -106,7 +116,9 @@ export class fhcMemberDataApi {
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "")
+      (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
+      (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -183,6 +195,8 @@ export class fhcMemberDataApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
    * @param hcpName hcpName
+   * @param hcpQuality hcpQuality
+   * @param hcpSsin hcpSsin
    * @param messageNames messageNames
    */
   getMemberDataMessageAsyncUsingPOST(
@@ -191,7 +205,9 @@ export class fhcMemberDataApi {
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
-    messageNames: Array<string>
+    hcpQuality?: string,
+    hcpSsin?: string,
+    messageNames?: Array<string>
   ): Promise<MemberDataList> {
     let _body = null
 
@@ -202,6 +218,8 @@ export class fhcMemberDataApi {
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
+      (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (messageNames ? "&messageNames=" + encodeURIComponent(String(messageNames)) : "")
     let headers = this.headers
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -398,6 +416,7 @@ export class fhcMemberDataApi {
    * @param hcpNihii hcpNihii
    * @param hcpName hcpName
    * @param hcpQuality hcpQuality
+   * @param hcpSsin hcpSsin
    * @param date date
    * @param endDate endDate
    * @param hospitalized hospitalized
@@ -410,6 +429,7 @@ export class fhcMemberDataApi {
     hcpNihii: string,
     hcpName: string,
     hcpQuality?: string,
+    hcpSsin?: string,
     date?: number,
     endDate?: number,
     hospitalized?: boolean,
@@ -427,6 +447,7 @@ export class fhcMemberDataApi {
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
       (endDate ? "&endDate=" + encodeURIComponent(String(endDate)) : "") +
       (hospitalized ? "&hospitalized=" + encodeURIComponent(String(hospitalized)) : "") +

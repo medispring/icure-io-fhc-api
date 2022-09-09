@@ -13,6 +13,7 @@ import { Assertion } from "./Assertion"
 import { FaultType } from "./FaultType"
 import { MdaStatus } from "./MdaStatus"
 import { MycarenetError } from "./MycarenetError"
+import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
 import { decodeBase64 } from "./ModelHelper"
 
@@ -24,6 +25,7 @@ export class MemberDataBatchResponse {
   assertions?: Array<Assertion>
   errors?: Array<FaultType>
   inResponseTo?: string
+  issueInstant?: XMLGregorianCalendar
   issuer?: string
   myCarenetErrors?: Array<MycarenetError>
   responseId?: string

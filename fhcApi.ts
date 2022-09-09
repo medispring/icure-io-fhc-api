@@ -1,5 +1,6 @@
 export * from "./api/fhcAddressbookApi"
 export * from "./api/fhcAdminApi"
+export * from "./api/fhcApbApi"
 export * from "./api/fhcChapter4Api"
 export * from "./api/fhcConsentApi"
 export * from "./api/fhcConsultrnApi"

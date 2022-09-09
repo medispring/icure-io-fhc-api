@@ -37,7 +37,7 @@ export class fhcSchematronApi {
 
   /**
    *
-   * @summary getDinRoutingInfo
+   * @summary validateUsingShematron
    * @param body body
    * @param xFHCTokenId X-FHC-tokenId
    * @param schema schema

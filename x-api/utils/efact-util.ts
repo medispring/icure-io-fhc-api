@@ -227,7 +227,9 @@ export function toInvoiceBatch(
 
             const now = new Date()
             const invoiceDates = _.groupBy(
-              invoicesWithPatient.map(inv => (inv?.invoice?.invoiceDate ?? 100001).toString().substring(0, 6) + "01")
+              invoicesWithPatient.map(
+                inv => (inv?.invoice?.invoiceDate ?? 100001).toString().substring(0, 6) + "01"
+              )
             )
             //The invoiceMonth/Year of the batch must be equal to the most recent month/year of the invoices that has the highest count within the batch.
             //From the INAMI Rules: (https://www.riziv.fgov.be/SiteCollectionDocuments/instructions_facturation_electronique_2021.pdf page 213)
@@ -323,10 +325,10 @@ function toInvoice(
     efactInvoice.startOfCoveragePeriod = invoice.invoicingCodes!![0].contractDate
   }
 
-  if(invoice?.locationNihii){
-    efactInvoice.locationNihii = invoice?.locationNihii;
-    efactInvoice.locationService = invoice?.locationService;
-    efactInvoice.admissionDate = invoice?.admissionDate;
+  if (invoice?.locationNihii) {
+    efactInvoice.locationNihii = invoice?.locationNihii
+    efactInvoice.locationService = invoice?.locationService
+    efactInvoice.admissionDate = invoice?.admissionDate
   }
 
   return efactInvoice
@@ -343,11 +345,15 @@ function toInvoiceItem(
   invoiceItem.codeNomenclature = Number(invoicingCode.tarificationId!!.split("|")[1])
   invoiceItem.dateCode = dateEncode(toMoment(invoicingCode.dateCode!!)!!.toDate())
   // Only applies to flatrate invoicing (https://medispring.atlassian.net/wiki/spaces/EN/pages/2536013825/Behavior+of+diabetes+pre-care+pathways+flatrate+invoicing)
-  if(flatrateInvoice) {
+  if (flatrateInvoice) {
     invoiceItem.endDateCode =
       invoiceItem.codeNomenclature === 109594 // Diabetes pre-care pathways
         ? dateEncode(toMoment(invoicingCode.dateCode!!)!!.toDate())
-        : dateEncode(toMoment(invoicingCode.dateCode!!)!!.endOf("month").toDate())
+        : dateEncode(
+            toMoment(invoicingCode.dateCode!!)!!
+              .endOf("month")
+              .toDate()
+          )
   }
   invoiceItem.doctorIdentificationNumber = nihiiHealthcareProvider
   invoiceItem.doctorSupplement = Number(((invoicingCode.doctorSupplement || 0) * 100).toFixed(0))

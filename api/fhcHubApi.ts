@@ -723,6 +723,7 @@ export class fhcHubApi {
    * @param authorSsin authorSsin
    * @param isGlobal isGlobal
    * @param breakTheGlassReason breakTheGlassReason
+   * @param transactionTypes transactionTypes
    */
   getTransactionsListUsingGET(
     endpoint: string,
@@ -741,7 +742,8 @@ export class fhcHubApi {
     authorNihii?: string,
     authorSsin?: string,
     isGlobal?: boolean,
-    breakTheGlassReason?: string
+    breakTheGlassReason?: string,
+    transactionTypes?: Array<string>
   ): Promise<Array<TransactionSummaryDto>> {
     let _body = null
 
@@ -764,7 +766,8 @@ export class fhcHubApi {
       (isGlobal ? "&isGlobal=" + encodeURIComponent(String(isGlobal)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
-        : "")
+        : "") +
+      (transactionTypes ? "&transactionTypes=" + encodeURIComponent(String(transactionTypes)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))

@@ -56,6 +56,7 @@ export namespace Medication {
     | "DIABETES_TREATMENT"
     | "DIABETES_CONVENTION"
     | "NOT_REIMBURSABLE"
+    | "EXPLAIN_MEDICATION"
   export const InstructionsForReimbursementEnum = {
     PAYINGTHIRDPARTY: "PAYING_THIRD_PARTY" as InstructionsForReimbursementEnum,
     FIRSTDOSE: "FIRST_DOSE" as InstructionsForReimbursementEnum,
@@ -64,6 +65,7 @@ export namespace Medication {
     CHRONICKINDEYDISEASE: "CHRONIC_KINDEY_DISEASE" as InstructionsForReimbursementEnum,
     DIABETESTREATMENT: "DIABETES_TREATMENT" as InstructionsForReimbursementEnum,
     DIABETESCONVENTION: "DIABETES_CONVENTION" as InstructionsForReimbursementEnum,
-    NOTREIMBURSABLE: "NOT_REIMBURSABLE" as InstructionsForReimbursementEnum
+    NOTREIMBURSABLE: "NOT_REIMBURSABLE" as InstructionsForReimbursementEnum,
+    EXPLAINMEDICATION: "EXPLAIN_MEDICATION" as InstructionsForReimbursementEnum
   }
 }

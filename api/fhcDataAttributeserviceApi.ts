@@ -12,7 +12,7 @@
 import { XHR } from "./XHR"
 import { DaasResponse } from "../model/DaasResponse"
 
-export class fhcDataAttributeserviceApi {
+export class fhcDataAttributeServiceApi {
   host: string
   headers: Array<XHR.Header>
   fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
@@ -74,10 +74,8 @@ export class fhcDataAttributeserviceApi {
       (from ? "&from=" + encodeURIComponent(String(from)) : "") +
       (to ? "&to=" + encodeURIComponent(String(to)) : "") +
       (cause ? "&cause=" + encodeURIComponent(String(cause)) : "") +
-      (prolongation !== undefined
-        ? "&prolongation=" + encodeURIComponent(String(prolongation))
-        : "") +
-      (total !== undefined ? "&total=" + encodeURIComponent(String(total)) : "")
+      (prolongation ? "&prolongation=" + encodeURIComponent(String(prolongation)) : "") +
+      (total ? "&total=" + encodeURIComponent(String(total)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
