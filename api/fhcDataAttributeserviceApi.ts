@@ -74,8 +74,10 @@ export class fhcDataAttributeServiceApi {
       (from ? "&from=" + encodeURIComponent(String(from)) : "") +
       (to ? "&to=" + encodeURIComponent(String(to)) : "") +
       (cause ? "&cause=" + encodeURIComponent(String(cause)) : "") +
-      (prolongation ? "&prolongation=" + encodeURIComponent(String(prolongation)) : "") +
-      (total ? "&total=" + encodeURIComponent(String(total)) : "")
+      (prolongation !== undefined
+        ? "&prolongation=" + encodeURIComponent(String(prolongation))
+        : "") +
+      (total !== undefined ? "&total=" + encodeURIComponent(String(total)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
