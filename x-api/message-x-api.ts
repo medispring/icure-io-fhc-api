@@ -555,10 +555,11 @@ export class MessageXApi {
 
   isBlockingError(errorDetail: ErrorDetail, oa: string): boolean {
     //check : https://medispring.atlassian.net/browse/MS-7967
+    //check : https://medispring.atlassian.net/browse/MS-8650
     const lineNumbersToVerify = ["1", "2", "3"]
     const nonBlockingErrorLetters = ["E"]
     const nonBlockingErrorCodesByOa: { [key: string]: string[] } = {
-      "100": [],
+      "100": ["502744"],
       "200": [],
       "300": [],
       "306": [],
