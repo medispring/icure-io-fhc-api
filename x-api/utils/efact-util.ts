@@ -165,7 +165,7 @@ export function toInvoiceBatch(
   insuranceApi: IccInsuranceApi,
   invoiceXApi: IccInvoiceXApi,
   messageXApi: IccMessageXApi,
-  flatrateInvoice: boolean = false
+  speciality: string
 ): Promise<InvoicesBatch> {
   return insuranceApi
     .getInsurances(
@@ -197,10 +197,8 @@ export function toInvoiceBatch(
 
             invoicesBatch.batchRef = batchRef
             invoicesBatch.fileRef = fileRef
-            invoicesBatch.magneticInvoice = flatrateInvoice //flatrateInvoice have some different fields
-            if (flatrateInvoice) {
-              invoicesBatch.invoiceContent = 0
-            }
+            invoicesBatch.magneticInvoice = speciality === "medicalhouse" //flatrateInvoice have some different fields
+            speciality === "medicalhouse" ? invoicesBatch.invoiceContent = 0 : speciality === "midwife" ? invoicesBatch.invoiceContent = 50 : null;
             invoicesBatch.invoices = _.map(
               invoicesWithPatient,
               (invWithPat: InvoiceWithPatient) => {
@@ -220,7 +218,7 @@ export function toInvoiceBatch(
                   invWithPat.patient,
                   insurance,
                   relatedInvoiceInfo,
-                  flatrateInvoice
+                  speciality
                 )
               }
             )
@@ -281,7 +279,7 @@ function toInvoice(
   patient: Patient,
   insurance: Insurance,
   relatedInvoiceInfo: RelatedInvoiceInfo | undefined,
-  flatrateInvoice: boolean = false
+  speciality: string
 ): EfactInvoice {
   const efactInvoice = new EfactInvoice({})
   const invoiceYear = moment(invoice.created)
@@ -300,7 +298,7 @@ function toInvoice(
       patient,
       invoice,
       invoicingCode,
-      flatrateInvoice
+      speciality
     )
   })
   efactInvoice.patient = toPatient(patient)
@@ -321,7 +319,7 @@ function toInvoice(
   // TODO : fix me later
   efactInvoice.reason = EfactInvoice.ReasonEnum.Other
   efactInvoice.creditNote = invoice.creditNote
-  if (flatrateInvoice) {
+  if (speciality === "medicalhouse") {
     efactInvoice.startOfCoveragePeriod = invoice.invoicingCodes!![0].contractDate
   }
 
@@ -339,13 +337,13 @@ function toInvoiceItem(
   patient: Patient,
   invoice: Invoice,
   invoicingCode: InvoicingCode,
-  flatrateInvoice: boolean = false
+  speciality: string
 ): InvoiceItem {
   const invoiceItem = new InvoiceItem({})
   invoiceItem.codeNomenclature = Number(invoicingCode.tarificationId!!.split("|")[1])
   invoiceItem.dateCode = dateEncode(toMoment(invoicingCode.dateCode!!)!!.toDate())
   // Only applies to flatrate invoicing (https://medispring.atlassian.net/wiki/spaces/EN/pages/2536013825/Behavior+of+diabetes+pre-care+pathways+flatrate+invoicing)
-  if (flatrateInvoice) {
+  if (speciality === "medicalhouse") {
     invoiceItem.endDateCode =
       invoiceItem.codeNomenclature === 109594 // Diabetes pre-care pathways
         ? dateEncode(toMoment(invoicingCode.dateCode!!)!!.toDate())

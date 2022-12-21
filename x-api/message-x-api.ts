@@ -555,10 +555,11 @@ export class MessageXApi {
 
   isBlockingError(errorDetail: ErrorDetail, oa: string): boolean {
     //check : https://medispring.atlassian.net/browse/MS-7967
+    //check : https://medispring.atlassian.net/browse/MS-8650
     const lineNumbersToVerify = ["1", "2", "3"]
     const nonBlockingErrorLetters = ["E"]
     const nonBlockingErrorCodesByOa: { [key: string]: string[] } = {
-      "100": [],
+      "100": ["502744"],
       "200": [],
       "300": [],
       "306": [],
@@ -1041,7 +1042,8 @@ export class MessageXApi {
     fhcServer: string | undefined = undefined,
     prefixer?: (fed: Insurance, hcpId: string) => Promise<string>,
     isConnectedAsPmg: boolean = false,
-    medicalLocationId: string | null = null
+    medicalLocationId: string | null = null,
+    speciality: string = "doctor"
   ): Promise<Message> {
     const uuid = this.crypto.randomUuid()
     const smallBase36 = uuidBase36Half(uuid)
@@ -1083,7 +1085,7 @@ export class MessageXApi {
               this.insuranceApi,
               this.invoiceXApi,
               this.api,
-              medicalLocationId === "medicalhouse"
+              speciality
             )
           )
           .then(batch =>
