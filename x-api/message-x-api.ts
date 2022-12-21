@@ -1042,7 +1042,8 @@ export class MessageXApi {
     fhcServer: string | undefined = undefined,
     prefixer?: (fed: Insurance, hcpId: string) => Promise<string>,
     isConnectedAsPmg: boolean = false,
-    medicalLocationId: string | null = null
+    medicalLocationId: string | null = null,
+    speciality: string = "doctor"
   ): Promise<Message> {
     const uuid = this.crypto.randomUuid()
     const smallBase36 = uuidBase36Half(uuid)
@@ -1084,7 +1085,7 @@ export class MessageXApi {
               this.insuranceApi,
               this.invoiceXApi,
               this.api,
-              medicalLocationId === "medicalhouse"
+              speciality
             )
           )
           .then(batch =>
