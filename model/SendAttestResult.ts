@@ -26,4 +26,5 @@ export class SendAttestResult {
   commonOutput?: CommonOutput
   invoicingNumber?: string
   mycarenetConversation?: MycarenetConversation
+  timestamp?: string
 }

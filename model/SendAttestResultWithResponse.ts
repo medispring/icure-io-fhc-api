@@ -32,5 +32,6 @@ export class SendAttestResultWithResponse {
   invoicingNumber?: string
   kmehrMessage?: ArrayBuffer
   mycarenetConversation?: MycarenetConversation
+  timestamp?: string
   xades?: ArrayBuffer
 }

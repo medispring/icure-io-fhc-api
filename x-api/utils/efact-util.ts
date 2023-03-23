@@ -198,7 +198,11 @@ export function toInvoiceBatch(
             invoicesBatch.batchRef = batchRef
             invoicesBatch.fileRef = fileRef
             invoicesBatch.magneticInvoice = speciality === "medicalhouse" //flatrateInvoice have some different fields
-            speciality === "medicalhouse" ? invoicesBatch.invoiceContent = 0 : speciality === "midwife" ? invoicesBatch.invoiceContent = 50 : null;
+            speciality === "medicalhouse"
+              ? (invoicesBatch.invoiceContent = 0)
+              : speciality === "midwife"
+              ? (invoicesBatch.invoiceContent = 50)
+              : null
             invoicesBatch.invoices = _.map(
               invoicesWithPatient,
               (invWithPat: InvoiceWithPatient) => {
