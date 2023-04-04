@@ -19,6 +19,7 @@ export class Invoice {
     Object.assign(this as Invoice, json)
   }
 
+  admissionDate?: number
   creditNote?: boolean
   gnotionNihii?: string
   hospitalisedPatient?: boolean
@@ -28,6 +29,8 @@ export class Invoice {
   invoiceRef?: string
   ioCode?: string
   items?: Array<InvoiceItem>
+  locationNihii?: string
+  locationService?: number
   patient?: Patient
   reason?: Invoice.ReasonEnum
   relatedBatchSendNumber?: number
@@ -35,9 +38,6 @@ export class Invoice {
   relatedInvoiceIoCode?: string
   relatedInvoiceNumber?: number
   startOfCoveragePeriod?: number
-  admissionDate?: number
-  locationNihii?: string
-  locationService?: number
 }
 export namespace Invoice {
   export type ReasonEnum =

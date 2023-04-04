@@ -55,6 +55,7 @@ export class fhcEattestV3Api {
    * @param eAttestRef eAttestRef
    * @param reason reason
    * @param date date
+   * @param attemptNbr attemptNbr
    * @param traineeSupervisorSsin traineeSupervisorSsin
    * @param traineeSupervisorNihii traineeSupervisorNihii
    * @param traineeSupervisorFirstName traineeSupervisorFirstName
@@ -76,6 +77,7 @@ export class fhcEattestV3Api {
     eAttestRef: string,
     reason: string,
     date?: number,
+    attemptNbr?: number,
     traineeSupervisorSsin?: string,
     traineeSupervisorNihii?: string,
     traineeSupervisorFirstName?: string,
@@ -101,6 +103,7 @@ export class fhcEattestV3Api {
       (eAttestRef ? "&eAttestRef=" + encodeURIComponent(String(eAttestRef)) : "") +
       (reason ? "&reason=" + encodeURIComponent(String(reason)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
+      (attemptNbr ? "&attemptNbr=" + encodeURIComponent(String(attemptNbr)) : "") +
       (traineeSupervisorSsin
         ? "&traineeSupervisorSsin=" + encodeURIComponent(String(traineeSupervisorSsin))
         : "") +
@@ -140,6 +143,7 @@ export class fhcEattestV3Api {
    * @param eAttestRef eAttestRef
    * @param reason reason
    * @param date date
+   * @param attemptNbr attemptNbr
    * @param traineeSupervisorSsin traineeSupervisorSsin
    * @param traineeSupervisorNihii traineeSupervisorNihii
    * @param traineeSupervisorFirstName traineeSupervisorFirstName
@@ -161,6 +165,7 @@ export class fhcEattestV3Api {
     eAttestRef: string,
     reason: string,
     date?: number,
+    attemptNbr?: number,
     traineeSupervisorSsin?: string,
     traineeSupervisorNihii?: string,
     traineeSupervisorFirstName?: string,
@@ -186,6 +191,7 @@ export class fhcEattestV3Api {
       (eAttestRef ? "&eAttestRef=" + encodeURIComponent(String(eAttestRef)) : "") +
       (reason ? "&reason=" + encodeURIComponent(String(reason)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
+      (attemptNbr ? "&attemptNbr=" + encodeURIComponent(String(attemptNbr)) : "") +
       (traineeSupervisorSsin
         ? "&traineeSupervisorSsin=" + encodeURIComponent(String(traineeSupervisorSsin))
         : "") +
