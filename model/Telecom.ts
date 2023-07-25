@@ -34,6 +34,8 @@ export namespace Telecom {
     | "web"
     | "print"
     | "disk"
+    | "other"
+    | "pager"
   export const TelecomTypeEnum = {
     Mobile: "mobile" as TelecomTypeEnum,
     Phone: "phone" as TelecomTypeEnum,
@@ -46,6 +48,8 @@ export namespace Telecom {
     Apicrypt: "apicrypt" as TelecomTypeEnum,
     Web: "web" as TelecomTypeEnum,
     Print: "print" as TelecomTypeEnum,
-    Disk: "disk" as TelecomTypeEnum
+    Disk: "disk" as TelecomTypeEnum,
+    Other: "other" as TelecomTypeEnum,
+    Pager: "pager" as TelecomTypeEnum
   }
 }
