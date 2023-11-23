@@ -17,11 +17,13 @@ export class Prescription {
     Object.assign(this as Prescription, json)
   }
 
-  creationDate?: Date
+  creationDate?: number
   encryptionKeyId?: string
   feedbackAllowed?: boolean
   notificationWasSent?: boolean
   patientId?: string
+  prescriberId?: string
+  visionByOthers?: string
   requestXml?: string
   rid?: string
 }

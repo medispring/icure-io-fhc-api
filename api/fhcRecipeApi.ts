@@ -333,6 +333,15 @@ export class fhcRecipeApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
    * @param patientId patientId
+   * @param prescriberId
+   * @param from
+   * @param toInclusive
+   * @param statuses
+   * @param expiringFrom
+   * @param expiringToInclusive
+   * @param pageYear
+   * @param pageMonth
+   * @param pageNumber
    * @param hcpQuality hcpQuality
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
