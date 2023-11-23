@@ -343,6 +343,15 @@ export class fhcRecipeApi {
     xFHCPassPhrase: string,
     hcpNihii: string,
     patientId: string,
+    prescriberId?: string,
+    from?: number,
+    toInclusive?: number,
+    statuses?: string,
+    expiringFrom?: number,
+    expiringToInclusive?: number,
+    pageYear?: number,
+    pageMonth?: number,
+    pageNumber?: number,
     hcpQuality?: string,
     hcpSsin?: string,
     hcpName?: string
@@ -356,6 +365,17 @@ export class fhcRecipeApi {
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (patientId ? "&patientId=" + encodeURIComponent(String(patientId)) : "") +
+      (prescriberId ? "&prescriberId=" + encodeURIComponent(String(prescriberId)) : "") +
+      (from ? "&from=" + encodeURIComponent(String(from)) : "") +
+      (toInclusive ? "&toInclusive=" + encodeURIComponent(String(toInclusive)) : "") +
+      (statuses ? "&statuses=" + encodeURIComponent(String(statuses)) : "") +
+      (expiringFrom ? "&expiringFrom=" + encodeURIComponent(String(expiringFrom)) : "") +
+      (expiringToInclusive
+        ? "&expiringToInclusive=" + encodeURIComponent(String(expiringToInclusive))
+        : "") +
+      (pageYear !== undefined ? "&pageYear=" + encodeURIComponent(String(pageYear)) : "") +
+      (pageMonth !== undefined ? "&pageMonth=" + encodeURIComponent(String(pageMonth)) : "") +
+      (pageNumber !== undefined ? "&pageNumber=" + encodeURIComponent(String(pageNumber)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "")
@@ -472,13 +492,15 @@ export class fhcRecipeApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param rid rid
    * @param vision vision
+   * @param visionOthers visionOthers
    */
   setVisionUsingPUT(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     rid: string,
-    vision: string
+    vision: string,
+    visionOthers?: string
   ): Promise<PutVisionResult> {
     let _body = null
 
@@ -487,7 +509,8 @@ export class fhcRecipeApi {
       `/recipe/${encodeURIComponent(String(rid))}/vision` +
       "?ts=" +
       new Date().getTime() +
-      (vision ? "&vision=" + encodeURIComponent(String(vision)) : "")
+      (vision ? "&vision=" + encodeURIComponent(String(vision)) : "") +
+      (vision ? "&visionOthers=" + encodeURIComponent(String(visionOthers)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))

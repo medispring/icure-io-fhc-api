@@ -36,5 +36,6 @@ export class PrescriptionRequest {
   vendorEmail?: string
   vendorPhone?: string
   vision?: string
+  visionOthers?: string
   lang?: string
 }
