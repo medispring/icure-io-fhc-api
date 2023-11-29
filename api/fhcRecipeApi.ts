@@ -13,6 +13,7 @@ import { XHR } from "./XHR"
 import { Code } from "../model/Code"
 import { Feedback } from "../model/Feedback"
 import { GetPrescriptionStatusResult } from "../model/GetPrescriptionStatusResult"
+import { ListPrescriptionsResult } from "../model/ListPrescriptionsResult"
 import { Prescription } from "../model/Prescription"
 import { PrescriptionFullWithFeedback } from "../model/PrescriptionFullWithFeedback"
 import { PrescriptionRequest } from "../model/PrescriptionRequest"
@@ -333,15 +334,15 @@ export class fhcRecipeApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
    * @param patientId patientId
-   * @param prescriberId
-   * @param from
-   * @param toInclusive
-   * @param statuses
-   * @param expiringFrom
-   * @param expiringToInclusive
-   * @param pageYear
-   * @param pageMonth
-   * @param pageNumber
+   * @param prescriberId prescriberId
+   * @param from from
+   * @param toInclusive toInclusive
+   * @param statuses statuses
+   * @param expiringFrom expiringFrom
+   * @param expiringToInclusive expiringToInclusive
+   * @param pageYear pageYear
+   * @param pageMonth pageMonth
+   * @param pageNumber pageNumber
    * @param hcpQuality hcpQuality
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
@@ -364,7 +365,7 @@ export class fhcRecipeApi {
     hcpQuality?: string,
     hcpSsin?: string,
     hcpName?: string
-  ): Promise<Array<Prescription>> {
+  ): Promise<ListPrescriptionsResult> {
     let _body = null
 
     const _url =
@@ -393,7 +394,7 @@ export class fhcRecipeApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
-      .then(doc => (doc.body as Array<JSON>).map(it => new Prescription(it)))
+      .then(doc => new ListPrescriptionsResult(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
@@ -519,7 +520,7 @@ export class fhcRecipeApi {
       "?ts=" +
       new Date().getTime() +
       (vision ? "&vision=" + encodeURIComponent(String(vision)) : "") +
-      (vision ? "&visionOthers=" + encodeURIComponent(String(visionOthers)) : "")
+      (visionOthers ? "&visionOthers=" + encodeURIComponent(String(visionOthers)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))

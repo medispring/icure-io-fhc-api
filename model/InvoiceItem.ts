@@ -18,6 +18,7 @@ export class InvoiceItem {
     Object.assign(this as InvoiceItem, json)
   }
 
+  anatomy?: string
   codeNomenclature?: number
   dateCode?: number
   derogationMaxNumber?: InvoiceItem.DerogationMaxNumberEnum

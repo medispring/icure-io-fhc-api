@@ -30,6 +30,10 @@ export class PrescriptionFullWithFeedback {
   notificationWasSent?: boolean
   patientId?: string
   patientName?: string
+  prescriberId?: string
   requestXml?: string
   rid?: string
+  status?: string
+  validUntil?: Date
+  visionByOthers?: string
 }

@@ -9,23 +9,17 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Partial } from "./Partial"
+import { StatusType } from "./StatusType"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class Prescription {
+export class ListPrescriptionsResult {
   constructor(json: JSON | any) {
-    Object.assign(this as Prescription, json)
+    Object.assign(this as ListPrescriptionsResult, json)
   }
 
-  creationDate?: number
-  encryptionKeyId?: string
-  feedbackAllowed?: boolean
-  notificationWasSent?: boolean
-  patientId?: string
-  prescriberId?: string
-  requestXml?: string
-  rid?: string
-  status?: string
-  validUntil?: number
-  visionByOthers?: string
+  id?: string
+  partial?: Partial
+  status?: StatusType
 }

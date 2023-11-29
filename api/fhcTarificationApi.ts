@@ -56,6 +56,8 @@ export class fhcTarificationApi {
    * @param traineeSupervisorLastName traineeSupervisorLastName
    * @param guardPostNihii guardPostNihii
    * @param guardPostSsin guardPostSsin
+   * @param anatomy anatomy
+   * @param relatedService relatedService
    */
   consultTarificationUsingPOST(
     ssin: string,
@@ -75,6 +77,8 @@ export class fhcTarificationApi {
     traineeSupervisorLastName?: string,
     guardPostNihii?: string,
     guardPostSsin?: string,
+    anatomy?: string,
+    relatedService?: string,
     body?: Array<string>
   ): Promise<TarificationConsultationResult> {
     let _body = null
@@ -105,7 +109,9 @@ export class fhcTarificationApi {
         ? "&traineeSupervisorLastName=" + encodeURIComponent(String(traineeSupervisorLastName))
         : "") +
       (guardPostNihii ? "&guardPostNihii=" + encodeURIComponent(String(guardPostNihii)) : "") +
-      (guardPostSsin ? "&guardPostSsin=" + encodeURIComponent(String(guardPostSsin)) : "")
+      (guardPostSsin ? "&guardPostSsin=" + encodeURIComponent(String(guardPostSsin)) : "") +
+      (anatomy ? "&anatomy=" + encodeURIComponent(String(anatomy)) : "") +
+      (relatedService ? "&relatedService=" + encodeURIComponent(String(relatedService)) : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")

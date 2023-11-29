@@ -9,23 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Prescription } from "./Prescription"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class Prescription {
+export class Partial {
   constructor(json: JSON | any) {
-    Object.assign(this as Prescription, json)
+    Object.assign(this as Partial, json)
   }
 
-  creationDate?: number
-  encryptionKeyId?: string
-  feedbackAllowed?: boolean
-  notificationWasSent?: boolean
-  patientId?: string
-  prescriberId?: string
-  requestXml?: string
-  rid?: string
-  status?: string
-  validUntil?: number
-  visionByOthers?: string
+  hasHidden?: boolean
+  hasMoreResults?: boolean
+  prescriptions?: Array<Prescription>
 }
