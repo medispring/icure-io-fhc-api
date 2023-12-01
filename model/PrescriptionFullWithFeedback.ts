@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { Feedback } from "./Feedback"
+import { Kmehrmessage } from "./Kmehrmessage"
 
 import { decodeBase64 } from "./ModelHelper"
 
@@ -19,6 +20,7 @@ export class PrescriptionFullWithFeedback {
   }
 
   creationDate?: Date
+  decryptedContent?: Kmehrmessage
   deliverableFrom?: Date
   deliverableTo?: Date
   encryptionKeyId?: string

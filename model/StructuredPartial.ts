@@ -9,18 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CDEMPLOYMENTSITUATION } from "./CDEMPLOYMENTSITUATION"
-import { IDPROFESSION } from "./IDPROFESSION"
-import { TextType } from "./TextType"
+import { StructuredPrescription } from "./StructuredPrescription"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class ProfessionType {
+export class StructuredPartial {
   constructor(json: JSON | any) {
-    Object.assign(this as ProfessionType, json)
+    Object.assign(this as StructuredPartial, json)
   }
 
-  cds?: Array<CDEMPLOYMENTSITUATION>
-  ids?: Array<IDPROFESSION>
-  text?: TextType
+  hasHidden?: boolean
+  hasMoreResults?: boolean
+  prescriptions?: Array<StructuredPrescription>
 }

@@ -9,25 +9,26 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Kmehrmessage } from "./Kmehrmessage"
+import { HealthcareParty } from "./HealthcareParty"
+import { Medication } from "./Medication"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class Prescription {
+export class StructuredPrescription {
   constructor(json: JSON | any) {
-    Object.assign(this as Prescription, json)
+    Object.assign(this as StructuredPrescription, json)
   }
 
-  creationDate?: number
-  decryptedContent?: Kmehrmessage
-  encryptionKeyId?: string
+  creationDate?: Date
   feedbackAllowed?: boolean
+  medications?: Array<Medication>
   notificationWasSent?: boolean
   patientId?: string
   prescriberId?: string
+  prescribers?: Array<HealthcareParty>
   requestXml?: string
   rid?: string
   status?: string
-  validUntil?: number
+  validUntil?: Date
   visionByOthers?: string
 }

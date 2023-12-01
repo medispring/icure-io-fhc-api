@@ -13,7 +13,7 @@ import { XHR } from "./XHR"
 import { Code } from "../model/Code"
 import { Feedback } from "../model/Feedback"
 import { GetPrescriptionStatusResult } from "../model/GetPrescriptionStatusResult"
-import { ListPrescriptionsResult } from "../model/ListPrescriptionsResult"
+import { ListStructuredPrescriptionsResult } from "../model/ListStructuredPrescriptionsResult"
 import { Prescription } from "../model/Prescription"
 import { PrescriptionFullWithFeedback } from "../model/PrescriptionFullWithFeedback"
 import { PrescriptionRequest } from "../model/PrescriptionRequest"
@@ -365,7 +365,7 @@ export class fhcRecipeApi {
     hcpQuality?: string,
     hcpSsin?: string,
     hcpName?: string
-  ): Promise<ListPrescriptionsResult> {
+  ): Promise<ListStructuredPrescriptionsResult> {
     let _body = null
 
     const _url =
@@ -394,7 +394,7 @@ export class fhcRecipeApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
-      .then(doc => new ListPrescriptionsResult(doc.body as JSON))
+      .then(doc => new ListStructuredPrescriptionsResult(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 

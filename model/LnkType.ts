@@ -47,6 +47,7 @@ export namespace LnkType {
     | "VIDEO_X_AVI"
     | "KMB_TRANSACTION"
     | "IMAGE_DICOM"
+    | "APPLICATION_HL_7_SDA_XML"
   export const MediatypeEnum = {
     APPLICATIONMSWORD: "APPLICATION_MSWORD" as MediatypeEnum,
     APPLICATIONPDF: "APPLICATION_PDF" as MediatypeEnum,
@@ -69,7 +70,8 @@ export namespace LnkType {
     VIDEOMPEG: "VIDEO_MPEG" as MediatypeEnum,
     VIDEOXAVI: "VIDEO_X_AVI" as MediatypeEnum,
     KMBTRANSACTION: "KMB_TRANSACTION" as MediatypeEnum,
-    IMAGEDICOM: "IMAGE_DICOM" as MediatypeEnum
+    IMAGEDICOM: "IMAGE_DICOM" as MediatypeEnum,
+    APPLICATIONHL7SDAXML: "APPLICATION_HL_7_SDA_XML" as MediatypeEnum
   }
   export type TypeEnum =
     | "ISACHILDOF"
