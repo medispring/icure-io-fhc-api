@@ -66,6 +66,7 @@ export namespace Medication {
     DIABETESTREATMENT: "DIABETES_TREATMENT" as InstructionsForReimbursementEnum,
     DIABETESCONVENTION: "DIABETES_CONVENTION" as InstructionsForReimbursementEnum,
     NOTREIMBURSABLE: "NOT_REIMBURSABLE" as InstructionsForReimbursementEnum,
-    EXPLAINMEDICATION: "EXPLAIN_MEDICATION" as InstructionsForReimbursementEnum
+    EXPLAINMEDICATION: "EXPLAIN_MEDICATION" as InstructionsForReimbursementEnum,
+    DIABETESSTARTPATH: "DIABETES_STARTPATH" as InstructionsForReimbursementEnum
   }
 }
