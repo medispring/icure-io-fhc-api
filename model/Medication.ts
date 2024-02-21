@@ -57,6 +57,7 @@ export namespace Medication {
     | "DIABETES_CONVENTION"
     | "NOT_REIMBURSABLE"
     | "EXPLAIN_MEDICATION"
+    | "DIABETES_STARTPATH"
   export const InstructionsForReimbursementEnum = {
     PAYINGTHIRDPARTY: "PAYING_THIRD_PARTY" as InstructionsForReimbursementEnum,
     FIRSTDOSE: "FIRST_DOSE" as InstructionsForReimbursementEnum,

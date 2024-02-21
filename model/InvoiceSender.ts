@@ -26,7 +26,7 @@ export class InvoiceSender {
   medicalHouse?: boolean
   nihii?: number
   phoneNumber?: number
+  professionCode?: number
   specialist?: boolean
   ssin?: string
-  professionCode?: string
 }

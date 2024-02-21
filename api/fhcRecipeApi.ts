@@ -55,6 +55,8 @@ export class fhcRecipeApi {
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   createPrescriptionUsingPOST(
     xFHCKeystoreId: string,
@@ -64,6 +66,8 @@ export class fhcRecipeApi {
     hcpNihii: string,
     hcpSsin?: string,
     hcpName?: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string,
     body?: PrescriptionRequest
   ): Promise<Prescription> {
     let _body = null
@@ -85,6 +89,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new Prescription(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -101,6 +108,8 @@ export class fhcRecipeApi {
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   createPrescriptionV4UsingPOST(
     xFHCKeystoreId: string,
@@ -110,6 +119,8 @@ export class fhcRecipeApi {
     hcpNihii: string,
     hcpSsin?: string,
     hcpName?: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string,
     body?: PrescriptionRequest
   ): Promise<Prescription> {
     let _body = null
@@ -131,6 +142,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => new Prescription(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -163,6 +177,8 @@ export class fhcRecipeApi {
    * @param hcpQuality hcpQuality
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   getPrescriptionMessageUsingGET(
     xFHCKeystoreId: string,
@@ -172,7 +188,9 @@ export class fhcRecipeApi {
     hcpNihii: string,
     hcpQuality?: string,
     hcpSsin?: string,
-    hcpName?: string
+    hcpName?: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string
   ): Promise<RecipeKmehrmessageType> {
     let _body = null
 
@@ -189,6 +207,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new RecipeKmehrmessageType(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -202,13 +223,17 @@ export class fhcRecipeApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpNihii hcpNihii
    * @param rid rid
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   getPrescriptionStatusUsingGET(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    rid: string
+    rid: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string
   ): Promise<GetPrescriptionStatusResult> {
     let _body = null
 
@@ -222,6 +247,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new GetPrescriptionStatusResult(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -253,6 +281,8 @@ export class fhcRecipeApi {
    * @param hcpNihii hcpNihii
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   listFeedbacksUsingGET(
     xFHCKeystoreId: string,
@@ -261,7 +291,9 @@ export class fhcRecipeApi {
     hcpQuality?: string,
     hcpNihii?: string,
     hcpSsin?: string,
-    hcpName?: string
+    hcpName?: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string
   ): Promise<Array<Feedback>> {
     let _body = null
 
@@ -278,6 +310,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => (doc.body as Array<JSON>).map(it => new Feedback(it)))
       .catch(err => this.handleError(err))
@@ -294,6 +329,8 @@ export class fhcRecipeApi {
    * @param hcpQuality hcpQuality
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   listOpenPrescriptionsByPatientUsingGET(
     xFHCKeystoreId: string,
@@ -303,7 +340,9 @@ export class fhcRecipeApi {
     patientId: string,
     hcpQuality?: string,
     hcpSsin?: string,
-    hcpName?: string
+    hcpName?: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string
   ): Promise<Array<Prescription>> {
     let _body = null
 
@@ -321,6 +360,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => (doc.body as Array<JSON>).map(it => new Prescription(it)))
       .catch(err => this.handleError(err))
@@ -346,6 +388,8 @@ export class fhcRecipeApi {
    * @param hcpQuality hcpQuality
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   listPrescriptionsByPatientUsingGET(
     xFHCKeystoreId: string,
@@ -364,7 +408,9 @@ export class fhcRecipeApi {
     pageNumber?: number,
     hcpQuality?: string,
     hcpSsin?: string,
-    hcpName?: string
+    hcpName?: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string
   ): Promise<ListStructuredPrescriptionsResult> {
     let _body = null
 
@@ -383,9 +429,9 @@ export class fhcRecipeApi {
       (expiringToInclusive
         ? "&expiringToInclusive=" + encodeURIComponent(String(expiringToInclusive))
         : "") +
-      (pageYear !== undefined ? "&pageYear=" + encodeURIComponent(String(pageYear)) : "") +
-      (pageMonth !== undefined ? "&pageMonth=" + encodeURIComponent(String(pageMonth)) : "") +
-      (pageNumber !== undefined ? "&pageNumber=" + encodeURIComponent(String(pageNumber)) : "") +
+      (pageYear ? "&pageYear=" + encodeURIComponent(String(pageYear)) : "") +
+      (pageMonth ? "&pageMonth=" + encodeURIComponent(String(pageMonth)) : "") +
+      (pageNumber ? "&pageNumber=" + encodeURIComponent(String(pageNumber)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "")
@@ -393,6 +439,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new ListStructuredPrescriptionsResult(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -410,6 +459,8 @@ export class fhcRecipeApi {
    * @param hcpQuality hcpQuality
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   revokePrescriptionUsingDELETE(
     xFHCKeystoreId: string,
@@ -420,7 +471,9 @@ export class fhcRecipeApi {
     reason: string,
     hcpQuality?: string,
     hcpSsin?: string,
-    hcpName?: string
+    hcpName?: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string
   ): Promise<any | Boolean> {
     let _body = null
 
@@ -438,6 +491,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("DELETE", _url, headers, _body, this.fetchImpl)
       .then(doc => true)
       .catch(err => this.handleError(err))
@@ -457,6 +513,8 @@ export class fhcRecipeApi {
    * @param executorId executorId
    * @param rid rid
    * @param text text
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   sendNotificationUsingPOST(
     xFHCKeystoreId: string,
@@ -469,7 +527,9 @@ export class fhcRecipeApi {
     patientId: string,
     executorId: string,
     rid: string,
-    text: string
+    text: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string
   ): Promise<any | Boolean> {
     let _body = null
 
@@ -489,6 +549,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
       .then(doc => true)
       .catch(err => this.handleError(err))
@@ -503,6 +566,8 @@ export class fhcRecipeApi {
    * @param rid rid
    * @param vision vision
    * @param visionOthers visionOthers
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   setVisionUsingPUT(
     xFHCKeystoreId: string,
@@ -510,7 +575,9 @@ export class fhcRecipeApi {
     xFHCPassPhrase: string,
     rid: string,
     vision: string,
-    visionOthers?: string
+    visionOthers?: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string
   ): Promise<PutVisionResult> {
     let _body = null
 
@@ -525,6 +592,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("PUT", _url, headers, _body, this.fetchImpl)
       .then(doc => new PutVisionResult(doc.body as JSON))
       .catch(err => this.handleError(err))
@@ -542,6 +612,8 @@ export class fhcRecipeApi {
    * @param hcpQuality hcpQuality
    * @param hcpSsin hcpSsin
    * @param hcpName hcpName
+   * @param xFHCVendorName X-FHC-vendorName
+   * @param xFHCPackageVersion X-FHC-packageVersion
    */
   updateFeedbackFlagUsingPUT(
     xFHCKeystoreId: string,
@@ -552,7 +624,9 @@ export class fhcRecipeApi {
     hcpNihii: string,
     hcpQuality?: string,
     hcpSsin?: string,
-    hcpName?: string
+    hcpName?: string,
+    xFHCVendorName?: string,
+    xFHCPackageVersion?: string
   ): Promise<UpdateFeedbackFlagResult> {
     let _body = null
 
@@ -571,6 +645,9 @@ export class fhcRecipeApi {
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    xFHCVendorName && (headers = headers.concat(new XHR.Header("X-FHC-vendorName", xFHCVendorName)))
+    xFHCPackageVersion &&
+      (headers = headers.concat(new XHR.Header("X-FHC-packageVersion", xFHCPackageVersion)))
     return XHR.sendCommand("PUT", _url, headers, _body, this.fetchImpl)
       .then(doc => new UpdateFeedbackFlagResult(doc.body as JSON))
       .catch(err => this.handleError(err))
