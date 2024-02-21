@@ -28,4 +28,5 @@ export class InvoiceSender {
   phoneNumber?: number
   specialist?: boolean
   ssin?: string
+  professionCode?: string
 }

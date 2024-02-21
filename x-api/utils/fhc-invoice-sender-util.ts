@@ -2,7 +2,7 @@ import { HealthcareParty } from "@icure/api"
 import { InvoiceSender } from "../../model/models"
 import { getPhoneNumber } from "./hcp-util"
 
-export function toInvoiceSender(hcp: HealthcareParty, fedCode: string) {
+export function toInvoiceSender(hcp: HealthcareParty, fedCode: string, professionCode: string="10") {
   const phoneNumber = getPhoneNumber(hcp, 10) || 484082978
 
   if (!phoneNumber) {
@@ -29,7 +29,8 @@ export function toInvoiceSender(hcp: HealthcareParty, fedCode: string) {
     lastName: hcp.lastName,
     nihii: Number(hcp.nihii),
     phoneNumber: phoneNumber,
-    ssin: hcp.ssin
+    ssin: hcp.ssin,
+    professionCode: professionCode,
   }
 
   return invoiceSender

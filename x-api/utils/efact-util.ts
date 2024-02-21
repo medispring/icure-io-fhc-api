@@ -165,7 +165,8 @@ export function toInvoiceBatch(
   insuranceApi: IccInsuranceApi,
   invoiceXApi: IccInvoiceXApi,
   messageXApi: IccMessageXApi,
-  speciality: string
+  speciality: string,
+  professionCode: string
 ): Promise<InvoicesBatch> {
   return insuranceApi
     .getInsurances(
@@ -268,7 +269,7 @@ export function toInvoiceBatch(
             invoicesBatch.ioFederationCode = fedCodes[0]
             invoicesBatch.numericalRef =
               moment().get("year") * 1000000 + Number(fedCodes[0]) * 1000 + batchNumber
-            invoicesBatch.sender = toInvoiceSender(hcp, fedCodes[0])
+            invoicesBatch.sender = toInvoiceSender(hcp, fedCodes[0],professionCode)
             invoicesBatch.uniqueSendNumber = batchNumber
 
             return invoicesBatch
