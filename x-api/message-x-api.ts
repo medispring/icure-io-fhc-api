@@ -20,7 +20,8 @@ import {
   ReferralPeriod,
   string2ua,
   ua2ab,
-  User
+  User,
+  XHR
 } from "@icure/api"
 
 import * as _ from "lodash"
@@ -1044,7 +1045,7 @@ export class MessageXApi {
     isConnectedAsPmg: boolean = false,
     medicalLocationId: string | null = null,
     speciality: string = "doctor",
-    professionCode: string = "10",
+    professionCode: string = "10"
   ): Promise<Message> {
     const uuid = this.crypto.randomUuid()
     const smallBase36 = uuidBase36Half(uuid)
@@ -1064,18 +1065,24 @@ export class MessageXApi {
       ).then(prefix => {
         return this.entityReferenceApi
           .getLatest(prefix)
-          .then((er: EntityReference) => {
-            let nextSeqNumber =
+          .then(
+            (er: EntityReference) =>
               er && er.id && er.id!.startsWith(prefix)
                 ? (Number(er.id!.split(":").pop()) || 0) + 1
-                : 1
-            return this.entityReferenceApi.createEntityReference(
+                : 1,
+            (e: XHR.XHRError) => {
+              if (e.statusCode === 404) return 1
+              else throw e
+            }
+          )
+          .then((nextSeqNumber: number) =>
+            this.entityReferenceApi.createEntityReference(
               new EntityReference({
                 id: prefix + _.padStart("" + (nextSeqNumber % 1000000000), 9, "0"),
                 docId: uuid
               })
             )
-          })
+          )
           .then(er =>
             toInvoiceBatch(
               invoices,
