@@ -1,6 +1,6 @@
 {
   "name": "@icure/be-fhc-api",
-  "version": "0.4.35",
+  "version": "0.4.36",
   "description": "Typescript version of Freehealth Connector standalone API client",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -39,7 +39,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/taktik/fhc-api.git"
+    "url": "git+https://github.com/icure/fhc-api.git"
   },
   "prettier": {
     "semi": false,
@@ -48,7 +48,7 @@
   "author": "Taktik sa",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/taktik/fhc-api/issues"
+    "url": "https://github.com/icure/fhc-api/issues"
   },
-  "homepage": "https://github.com/taktik/fhc-api#readme"
+  "homepage": "https://github.com/icure/fhc-api#readme"
 }
