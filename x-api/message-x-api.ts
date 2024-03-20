@@ -332,7 +332,7 @@ export class MessageXApi {
 
     return promMsg.then(() =>
       Promise.all(
-        _.chunk(Object.keys(patsDmgs), 100).map(ssins =>
+        _.chunk(Object.keys(patsDmgs), 10).map(ssins =>
           this.patientApi
             .filterByWithUser(
               user,
