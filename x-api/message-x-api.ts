@@ -15,6 +15,7 @@ import {
   ListOfIds,
   Message,
   PaginatedListPatient,
+  Patient,
   PatientHealthCareParty,
   Receipt,
   ReferralPeriod,
@@ -352,7 +353,7 @@ export class MessageXApi {
               false
             )
             .then((pats: PaginatedListPatient) =>
-              this.patientApi.bulkUpdatePatients(
+              Promise.resolve(
                 (pats.rows || []).map(p => {
                   const actions = _.sortBy(patsDmgs[p.ssin!!], a =>
                     moment(a.date, "DD/MM/YYYY").format("YYYYMMDD")
@@ -398,6 +399,13 @@ export class MessageXApi {
                   return p
                 })
               )
+            )
+            .then((pats: Patient[]) =>
+              this.patientApi.bulkUpdatePatients(pats || []).catch(() => {
+                return Promise.all(
+                  (pats || []).map(pat => this.patientApi.modifyPatientWithUser(user, pat))
+                )
+              })
             )
         )
       ).then(() => [ackHashes, msgHashes])
