@@ -19,5 +19,5 @@ export class MemberinsuranceType {
   }
 
   id?: IDINSURANCE
-  membership?: any
+  membership?: string
 }

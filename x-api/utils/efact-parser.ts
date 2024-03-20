@@ -1264,6 +1264,9 @@ export abstract class EfactMessageReader {
     this.log("numero de controle par mutualite", zone400.zones!![i++].value)
     const controleMut = zone400.zones!![i - 1].value
     this.log("code d'erreur", zone400.zones!![i++].value)
+    this.log("signe montant demande compte C", zone400.zones!![i++].value)
+    this.log("montant demande compte C", zone400.zones!![i++].value)
+    this.log("code d'erreur", zone400.zones!![i++].value)
     this.log("reserve", zone400.zones!![i++].value)
 
     if (zone400.zones!!.length !== i) {
