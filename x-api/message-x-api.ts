@@ -9,12 +9,14 @@ import {
   IccInsuranceApi,
   IccInvoiceXApi,
   IccMessageXApi,
+  IccPatientApi,
   IccPatientXApi,
   Insurance,
   Invoice,
   ListOfIds,
   Message,
   PaginatedListPatient,
+  Patient,
   PatientHealthCareParty,
   Receipt,
   ReferralPeriod,
@@ -84,7 +86,8 @@ export class MessageXApi {
   private receiptXApi: ReceiptXApi
   private invoiceXApi: IccInvoiceXApi
   private documentXApi: IccDocumentXApi
-  private patientApi: IccPatientXApi
+  private patientXApi: IccPatientXApi
+  private patientApi: IccPatientApi
 
   constructor(
     api: IccMessageXApi,
@@ -94,7 +97,8 @@ export class MessageXApi {
     entityReferenceApi: IccEntityrefApi,
     fhcReceiptXApi: ReceiptXApi,
     invoiceXApi: IccInvoiceXApi,
-    patientApi: IccPatientXApi
+    patientXApi: IccPatientXApi,
+    patientApi: IccPatientApi
   ) {
     this.api = api
     this.documentXApi = documentXApi
@@ -102,6 +106,7 @@ export class MessageXApi {
     this.entityReferenceApi = entityReferenceApi
     this.receiptXApi = fhcReceiptXApi
     this.invoiceXApi = invoiceXApi
+    this.patientXApi = patientXApi
     this.patientApi = patientApi
     this.crypto = crypto
   }
@@ -331,77 +336,92 @@ export class MessageXApi {
       })
     })
 
-    return promMsg.then(() =>
-      Promise.all(
-        _.chunk(Object.keys(patsDmgs), 100).map(ssins =>
-          this.patientApi
-            .filterByWithUser(
-              user,
-              new FilterChainPatient({
-                filter: new AbstractFilterPatient({
-                  $type: "PatientByHcPartyAndSsinsFilter",
-                  healthcarePartyId: user.healthcarePartyId,
-                  ssins: ssins
-                })
-              }),
-              undefined,
-              undefined,
-              1000,
-              0,
-              undefined,
-              false
-            )
-            .then((pats: PaginatedListPatient) =>
-              this.patientApi.bulkUpdatePatients(
-                (pats.rows || []).map(p => {
-                  const actions = _.sortBy(patsDmgs[p.ssin!!], a =>
-                    moment(a.date, "DD/MM/YYYY").format("YYYYMMDD")
-                  )
-                  const latestAction = actions.length && actions[actions.length - 1]
+    let promPatient: Promise<Patient[]> = Promise.resolve([])
 
-                  let phcp =
-                    (p.patientHealthCareParties || (p.patientHealthCareParties = [])) &&
-                    p.patientHealthCareParties.find(
-                      phcp => phcp.healthcarePartyId === user.healthcarePartyId
-                    )
-                  if (!phcp) {
-                    p.patientHealthCareParties.push(
-                      (phcp = new PatientHealthCareParty({
-                        healthcarePartyId: user.healthcarePartyId,
-                        referralPeriods: []
-                      }))
-                    )
-                  }
-                  if (!phcp.referralPeriods) {
-                    phcp.referralPeriods = []
-                  }
-
-                  const rp =
-                    (phcp.referralPeriods && phcp.referralPeriods.find(per => !per.endDate)) ||
-                    (phcp.referralPeriods[phcp.referralPeriods.length] = new ReferralPeriod({}))
-
-                  const actionDate = Number(
-                    moment(latestAction.date, "DD/MM/YYYY").format("YYYYMMDD")
-                  )
-
-                  if (latestAction) {
-                    if (latestAction.closure) {
-                      rp.endDate = actionDate
-                      rp.comment = `-> ${latestAction.newHcp}`
-                    } else {
-                      if (actionDate > (rp.startDate || 0)) {
-                        rp.endDate = actionDate
-                        phcp.referralPeriods.push(new ReferralPeriod({ startDate: actionDate }))
-                      }
-                    }
-                  }
-                  return p
+    return promMsg.then(() => {
+      _.chunk(Object.keys(patsDmgs), 100).forEach(ssins => {
+        promPatient = promPatient
+          .then(() =>
+            this.patientApi
+              .filterPatientsBy(
+                undefined,
+                undefined,
+                1000,
+                0,
+                undefined,
+                false,
+                new FilterChainPatient({
+                  filter: new AbstractFilterPatient({
+                    $type: "PatientByHcPartyAndSsinsFilter",
+                    healthcarePartyId: user.healthcarePartyId,
+                    ssins: ssins
+                  })
                 })
               )
-            )
-        )
-      ).then(() => [ackHashes, msgHashes])
-    )
+              .then((pats: PaginatedListPatient) =>
+                Promise.resolve(
+                  (pats.rows || []).map(p => {
+                    const actions = _.sortBy(patsDmgs[p.ssin!!], a =>
+                      moment(a.date, "DD/MM/YYYY").format("YYYYMMDD")
+                    )
+                    const latestAction = actions.length && actions[actions.length - 1]
+
+                    let phcp =
+                      (p.patientHealthCareParties || (p.patientHealthCareParties = [])) &&
+                      p.patientHealthCareParties.find(
+                        phcp => phcp.healthcarePartyId === user.healthcarePartyId
+                      )
+                    if (!phcp) {
+                      p.patientHealthCareParties.push(
+                        (phcp = new PatientHealthCareParty({
+                          healthcarePartyId: user.healthcarePartyId,
+                          referralPeriods: []
+                        }))
+                      )
+                    }
+                    if (!phcp.referralPeriods) {
+                      phcp.referralPeriods = []
+                    }
+
+                    const rp =
+                      (phcp.referralPeriods && phcp.referralPeriods.find(per => !per.endDate)) ||
+                      (phcp.referralPeriods[phcp.referralPeriods.length] = new ReferralPeriod({}))
+
+                    const actionDate = Number(
+                      moment(latestAction.date, "DD/MM/YYYY").format("YYYYMMDD")
+                    )
+
+                    if (latestAction) {
+                      if (latestAction.closure) {
+                        rp.endDate = actionDate
+                        rp.comment = `-> ${latestAction.newHcp}`
+                      } else {
+                        if (actionDate > (rp.startDate || 0)) {
+                          rp.endDate = actionDate
+                          phcp.referralPeriods.push(new ReferralPeriod({ startDate: actionDate }))
+                        }
+                      }
+                    }
+                    return p
+                  })
+                )
+              )
+          )
+          .then(pats =>
+            this.patientApi.bulkUpdatePatients(pats || []).catch(() => {
+              let catchProm: Promise<Patient[]> = Promise.resolve([])
+              let newPats: Patient[] = []
+              ;(pats || []).forEach((pat: Patient) => {
+                catchProm = catchProm.then(() =>
+                  this.patientApi.modifyPatient(pat).then(p => (newPats = newPats.concat(p)))
+                )
+              })
+              return catchProm
+            })
+          )
+      })
+      return promPatient.then(() => [ackHashes, msgHashes])
+    })
   }
 
   private makeHcp(hcParty: HcpartyType | null | undefined) {
@@ -910,12 +930,12 @@ export class MessageXApi {
 
                       newInvoicePromise = (
                         newInvoicePromise ||
-                        this.patientApi
+                        this.patientXApi
                           .getPatientIdOfChildDocumentForHcpAndHcpParents(
                             iv,
                             user.healthcarePartyId!
                           )
-                          .then(patientId => this.patientApi.getPatientWithUser(user, patientId!))
+                          .then(patientId => this.patientXApi.getPatientWithUser(user, patientId!))
                           .then(pat =>
                             this.invoiceXApi.newInstance(
                               user,
