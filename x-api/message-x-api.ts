@@ -359,7 +359,7 @@ export class MessageXApi {
                 })
               )
               .then((pats: PaginatedListPatient) =>
-                Promise.resolve(
+                Promise.all(
                   (pats.rows || []).map(p => {
                     const actions = _.sortBy(patsDmgs[p.ssin!!], a =>
                       moment(a.date, "DD/MM/YYYY").format("YYYYMMDD")
