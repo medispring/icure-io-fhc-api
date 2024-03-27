@@ -365,8 +365,6 @@ export class MessageXApi {
                       moment(a.date, "DD/MM/YYYY").format("YYYYMMDD")
                     )
 
-                    // Find or Create PatientHealthCareParty
-                    // We search on User.HcpId: So it doesn't work with MedicalHouse
                     let phcp: PatientHealthCareParty =
                       ((p.patientHealthCareParties || (p.patientHealthCareParties = [])) &&
                       p.patientHealthCareParties.find(
@@ -377,25 +375,23 @@ export class MessageXApi {
                     }
                     const referralPeriods: ReferralPeriod[] = phcp.referralPeriods
 
-                    // Create or Modify Referral Periods of each actions
                     actions.map(action =>{
                       const actionDate = Number(
                         moment(action?.date || "", "DD/MM/YYYY").format("YYYYMMDD")
                       )
                       if(action){
-                        //Closure
                         if(action.closure) {
                           const rp: ReferralPeriod|undefined = referralPeriods.find(per => (!per.endDate || per.endDate > actionDate) && (per?.startDate || 0) < actionDate)
                           if(rp) {
-                            rp.comment = (rp.endDate ? "Correction End Date. " : "") + `Transferred to ${action.newHcp}`
+                            rp.comment = (rp.comment+' ' || '') + (rp.endDate ? "Correction End Date. " : "") + `Transferred to ${action.newHcp}`
                             rp.endDate = actionDate
                           }else{
-                            referralPeriods.push(new ReferralPeriod({ startDate: actionDate, endDate: actionDate, comment: `No start Date Info. Transferred to ${action.newHcp}` }))
+                            referralPeriods.push(new ReferralPeriod({ startDate: Number(moment().format("YYYYMMDD")), endDate: actionDate, comment: `No start Date Info. Transferred to ${action.newHcp}` }))
                           }
-                        } else{// Start of a new Referral
+                        } else{
                           const rp: ReferralPeriod|undefined = referralPeriods.find(per => (!per.endDate || per.endDate > actionDate) && (per?.startDate || 0) < actionDate)
                           if(rp) {
-                            rp.startDate = actionDate
+                            rp.startDate = actionDate < (rp.startDate || 0) ? actionDate : rp.startDate
                             rp.comment = (rp.comment+' ' || '')+ 'Correction Start Date.'
                           }else {
                             referralPeriods.push(new ReferralPeriod({ startDate: actionDate, comment: `New Referral to ${action.newHcp}`}))
@@ -403,11 +399,8 @@ export class MessageXApi {
                         }
                       }
                     })
-                    // Sort Referral Periods by Start Date (ascending)
                     phcp.referralPeriods = referralPeriods.sort((a, b) => (a.startDate || 0) - (b.startDate || 0))
-                    // Set Referral Flag and type if not set
                     phcp.referral = !Boolean(referralPeriods[referralPeriods.length - 1].endDate)
-                    phcp.type = phcp.type || PatientHealthCareParty.TypeEnum.Referral
                     return p
                   })
                 )
