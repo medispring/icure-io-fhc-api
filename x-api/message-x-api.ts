@@ -383,12 +383,12 @@ export class MessageXApi {
                       const actionDate = Number(
                         moment(action?.date || "", "DD/MM/YYYY").format("YYYYMMDD")
                       )
+                      const rp: ReferralPeriod|undefined = referralPeriods.find(per => ((!per.endDate || per.endDate >= actionDate) && (per?.startDate || 0) <= actionDate)
+                        || (action.form && (!per.endDate || per.endDate >= Number(moment(action.form).format("YYYYMMDD"))) && (per?.startDate || 0) <= Number(moment(action.form).format("YYYYMMDD")))
+                        || (action.to && (!per.endDate || per.endDate >= Number(moment(action.to).format("YYYYMMDD"))) && (per?.startDate || 0) <= Number(moment(action.to).format("YYYYMMDD")))
+                      )
                       if(action){
                         if(action.closure) {
-                          const rp: ReferralPeriod|undefined = referralPeriods.find(per => ((!per.endDate || per.endDate >= actionDate) && (per?.startDate || 0) <= actionDate)
-                            || (action.form && (!per.endDate || per.endDate >= Number(moment(action.form).format("YYYYMMDD"))) && (per?.startDate || 0) <= Number(moment(action.form).format("YYYYMMDD")))
-                            || (action.to && (!per.endDate || per.endDate >= Number(moment(action.to).format("YYYYMMDD"))) && (per?.startDate || 0) <= Number(moment(action.to).format("YYYYMMDD")))
-                          )
                           if(rp) {
                             if(action.from){
                               const from = Number(moment(action.from).format("YYYYMMDD"))
@@ -399,14 +399,15 @@ export class MessageXApi {
                               rp.endDate = to > (rp.endDate || 0) ? to : rp.endDate
                             }
                             rp.endDate = actionDate > (rp.endDate || 0) ? actionDate : rp.endDate
-                            rp.comment = (rp.comment+' ' || '') + (rp.endDate ? "Correction End Date. " : "") + `Transferred to ${action.newHcp}`
+                            if(action.newHcp){
+                              rp.comment = (rp.comment+' ' || '')+ `Transferred to ${action.newHcp}`
+                            }
                           }else{
                             const endDate= (actionDate || action.to) ? (Number(moment(action.to).format("YYYYMMDD")) > actionDate ? Number(moment(action.to).format("YYYYMMDD")) : actionDate) : moment().format("YYYYMMDD")
                             const startDate= action.from ? Number(moment(action.from).format("YYYYMMDD")) : moment().format("YYYYMMDD")
-                            referralPeriods.push(new ReferralPeriod({ startDate: startDate, endDate: endDate, comment: `Transferred to ${action.newHcp}` }))
+                            referralPeriods.push(new ReferralPeriod({ startDate: startDate, endDate: endDate, comment: `Transferred to ${action.newHcp ? action.newHcp : "unknown"}` }))
                           }
                         } else{
-                          const rp: ReferralPeriod|undefined = referralPeriods.find(per => (!per.endDate || per.endDate > actionDate) && (per?.startDate || 0) < actionDate)
                           if(rp) {
                             if(action.from){
                               const from = Number(moment(action.from).format("YYYYMMDD"))
@@ -417,17 +418,16 @@ export class MessageXApi {
                               const to = Number(moment(action.to).format("YYYYMMDD"))
                               rp.endDate = to > (rp.endDate || 0) ? to : rp.endDate
                             }
-                            rp.comment = (rp.comment+' ' || '')+ 'Correction Start Date.'
                           }else {
                             const endDate= action.to ? Number(moment(action.to).format("YYYYMMDD")): null
                             const startDate= (actionDate || action.from) ? (Number(moment(action.from).format("YYYYMMDD")) < actionDate ? Number(moment(action.from).format("YYYYMMDD")) : actionDate) : moment().format("YYYYMMDD")
-                            referralPeriods.push(new ReferralPeriod({ startDate: startDate, endDate: endDate, comment: `New Referral to ${action.newHcp}`}))
+                            referralPeriods.push(new ReferralPeriod({ startDate: startDate, endDate: endDate, comment: `New Referral to ${action.newHcp ? action.newHcp : "unknown"}`}))
                           }
                         }
                       }
                     })
                     phcp.referralPeriods = referralPeriods.sort((a, b) => (a.startDate || 0) - (b.startDate || 0))
-                    phcp.referral = !Boolean(referralPeriods[referralPeriods.length - 1].endDate)
+                    phcp.referral = !Boolean(referralPeriods[referralPeriods.length - 1].endDate) || (referralPeriods[referralPeriods.length - 1]?.endDate || 99999999) > Number(moment().format("YYYYMMDD"))
                     return p
                   })
                 )
