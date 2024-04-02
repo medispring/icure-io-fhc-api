@@ -155,6 +155,7 @@ export class MessageXApi {
     user: User,
     hcp: HealthcareParty,
     list: DmgsList,
+    parent: HealthcareParty,
     docXApi: IccDocumentXApi
   ): Promise<Array<Array<string>>> {
     const ackHashes: Array<string> = []
@@ -242,7 +243,7 @@ export class MessageXApi {
             if (!msgsForHcp.length) {
               throw new Error(`Cannot find parent with ref ${ref}`)
             }
-            const parent: Message = msgsForHcp[0]
+            const parentMessage: Message = msgsForHcp[0]
 
             return this.saveMessageInDb(
               user,
@@ -253,7 +254,7 @@ export class MessageXApi {
               docXApi,
               dmgsMsgList.date,
               undefined,
-              parent && parent.id
+              parentMessage && parentMessage.id
             ).then(msg => {
               dmgsMsgList.valueHash && msgHashes.push(dmgsMsgList.valueHash)
               acc.push(msg)
@@ -353,7 +354,7 @@ export class MessageXApi {
                 new FilterChainPatient({
                   filter: new AbstractFilterPatient({
                     $type: "PatientByHcPartyAndSsinsFilter",
-                    healthcarePartyId: user.healthcarePartyId,
+                    healthcarePartyId: parent.id  || hcp.parentId || hcp.id || user.healthcarePartyId,
                     ssins: ssins
                   })
                 })
@@ -380,6 +381,9 @@ export class MessageXApi {
                     const referralPeriods: ReferralPeriod[] = phcp.referralPeriods
 
                     actions.map(action =>{
+                      if(!action.newHcp){
+                        action.newHcp = action.hcp || ""
+                      }
                       const actionDate = Number(
                         moment(action?.date || "", "DD/MM/YYYY").format("YYYYMMDD")
                       )
@@ -405,7 +409,7 @@ export class MessageXApi {
                           }else{
                             const endDate= (actionDate || action.to) ? (Number(moment(action.to).format("YYYYMMDD")) > actionDate ? Number(moment(action.to).format("YYYYMMDD")) : actionDate) : moment().format("YYYYMMDD")
                             const startDate= action.from ? Number(moment(action.from).format("YYYYMMDD")) : moment().format("YYYYMMDD")
-                            referralPeriods.push(new ReferralPeriod({ startDate: startDate, endDate: endDate, comment: `Transferred to ${action.newHcp ? action.newHcp : "unknown"}` }))
+                            referralPeriods.push(new ReferralPeriod({ startDate: startDate, endDate: endDate, comment: `Transferred to ${action.newHcp ? action.newHcp : ""}` }))
                           }
                         } else{
                           if(rp) {
@@ -426,8 +430,15 @@ export class MessageXApi {
                         }
                       }
                     })
-                    phcp.referralPeriods = referralPeriods.sort((a, b) => (a.startDate || 0) - (b.startDate || 0))
-                    phcp.referral = !Boolean(referralPeriods[referralPeriods.length - 1].endDate) || (referralPeriods[referralPeriods.length - 1]?.endDate || 99999999) > Number(moment().format("YYYYMMDD"))
+                    p.patientHealthCareParties = p.patientHealthCareParties.map(phcpTemp => {
+                      if(!phcpTemp.referralPeriods){
+                        phcpTemp.referralPeriods = []
+                      }
+                      phcpTemp.referralPeriods = phcpTemp?.referralPeriods?.sort((a, b) => (a.startDate || 0) - (b.startDate || 0))
+                      const lastRp = phcpTemp?.referralPeriods?.length ? phcpTemp.referralPeriods[phcpTemp.referralPeriods.length - 1] : null
+                      phcpTemp.referral = lastRp ? !Boolean(lastRp.endDate) || (lastRp?.endDate || 99999999) > Number(moment().format("YYYYMMDD")) : false
+                      return phcpTemp
+                    })
                     return p
                   })
                 )
