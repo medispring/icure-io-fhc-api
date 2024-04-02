@@ -155,7 +155,7 @@ export class MessageXApi {
     user: User,
     hcp: HealthcareParty,
     list: DmgsList,
-    parent: HealthcareParty,
+    parentId: string,
     docXApi: IccDocumentXApi
   ): Promise<Array<Array<string>>> {
     const ackHashes: Array<string> = []
@@ -354,7 +354,7 @@ export class MessageXApi {
                 new FilterChainPatient({
                   filter: new AbstractFilterPatient({
                     $type: "PatientByHcPartyAndSsinsFilter",
-                    healthcarePartyId: parent.id  || hcp.parentId || hcp.id || user.healthcarePartyId,
+                    healthcarePartyId: parentId || hcp.parentId || hcp.id || user.healthcarePartyId,
                     ssins: ssins
                   })
                 })
@@ -372,7 +372,10 @@ export class MessageXApi {
                         phcp => phcp.healthcarePartyId === user.healthcarePartyId
                       )
                     if (!phcp) {
-                      phcp = new PatientHealthCareParty({ healthcarePartyId: user.healthcarePartyId, referralPeriods: [] })
+                      phcp = new PatientHealthCareParty({
+                        healthcarePartyId: user.healthcarePartyId,
+                        referralPeriods: []
+                      })
                       p.patientHealthCareParties.push(phcp)
                     }
                     if (!phcp.referralPeriods) {
@@ -380,63 +383,112 @@ export class MessageXApi {
                     }
                     const referralPeriods: ReferralPeriod[] = phcp.referralPeriods
 
-                    actions.map(action =>{
-                      if(!action.newHcp){
+                    actions.map(action => {
+                      if (!action.newHcp) {
                         action.newHcp = action.hcp || ""
                       }
                       const actionDate = Number(
                         moment(action?.date || "", "DD/MM/YYYY").format("YYYYMMDD")
                       )
-                      const rp: ReferralPeriod|undefined = referralPeriods.find(per => ((!per.endDate || per.endDate >= actionDate) && (per?.startDate || 0) <= actionDate)
-                        || (action.form && (!per.endDate || per.endDate >= Number(moment(action.form).format("YYYYMMDD"))) && (per?.startDate || 0) <= Number(moment(action.form).format("YYYYMMDD")))
-                        || (action.to && (!per.endDate || per.endDate >= Number(moment(action.to).format("YYYYMMDD"))) && (per?.startDate || 0) <= Number(moment(action.to).format("YYYYMMDD")))
+                      const fromDate: number | null = action.from
+                        ? action.from.toString().includes("/")
+                          ? Number(moment(action.from, "DD/MM/YYYY").format("YYYYMMDD"))
+                          : Number(moment(action.from).format("YYYYMMDD"))
+                        : null
+                      const toDate: number | null = action.to
+                        ? action.to.toString().includes("/")
+                          ? Number(moment(action.to, "DD/MM/YYYY").format("YYYYMMDD"))
+                          : Number(moment(action.to).format("YYYYMMDD"))
+                        : null
+
+                      const rp: ReferralPeriod | undefined = referralPeriods.find(
+                        per =>
+                          ((!per.endDate || per.endDate >= actionDate) &&
+                            (per?.startDate || 0) <= actionDate) ||
+                          (fromDate &&
+                            (!per.endDate || per.endDate >= fromDate) &&
+                            (per?.startDate || 0) <= fromDate) ||
+                          (toDate &&
+                            (!per.endDate || per.endDate >= toDate) &&
+                            (per?.startDate || 0) <= toDate)
                       )
-                      if(action){
-                        if(action.closure) {
-                          if(rp) {
-                            if(action.from){
-                              const from = Number(moment(action.from).format("YYYYMMDD"))
-                              rp.startDate = from < (rp.startDate || 99999999) ? from : rp.startDate
+                      if (action) {
+                        if (action.closure) {
+                          if (rp) {
+                            if (fromDate) {
+                              rp.startDate =
+                                fromDate < (rp.startDate || 99999999) ? fromDate : rp.startDate
                             }
-                            if(action.to){
-                              const to = Number(moment(action.to).format("YYYYMMDD"))
-                              rp.endDate = to > (rp.endDate || 0) ? to : rp.endDate
+                            if (toDate) {
+                              rp.endDate = toDate > (rp.endDate || 0) ? toDate : rp.endDate
                             }
                             rp.endDate = actionDate > (rp.endDate || 0) ? actionDate : rp.endDate
-                            if(action.newHcp){
-                              rp.comment = (rp.comment+' ' || '')+ `Transferred to ${action.newHcp}`
+                            if (action.newHcp) {
+                              rp.comment =
+                                (rp.comment + " " || "") + `Transferred to ${action.newHcp}`
                             }
-                          }else{
-                            const endDate= (actionDate || action.to) ? (Number(moment(action.to).format("YYYYMMDD")) > actionDate ? Number(moment(action.to).format("YYYYMMDD")) : actionDate) : moment().format("YYYYMMDD")
-                            const startDate= action.from ? Number(moment(action.from).format("YYYYMMDD")) : moment().format("YYYYMMDD")
-                            referralPeriods.push(new ReferralPeriod({ startDate: startDate, endDate: endDate, comment: `Transferred to ${action.newHcp ? action.newHcp : ""}` }))
+                          } else {
+                            const endDate =
+                              actionDate || toDate
+                                ? (toDate || 0) > actionDate
+                                  ? toDate
+                                  : actionDate
+                                : moment().format("YYYYMMDD")
+                            const startDate = fromDate ? fromDate : moment().format("YYYYMMDD")
+                            referralPeriods.push(
+                              new ReferralPeriod({
+                                startDate: startDate,
+                                endDate: endDate,
+                                comment: `Transferred to ${action.newHcp ? action.newHcp : ""}`
+                              })
+                            )
                           }
-                        } else{
-                          if(rp) {
-                            if(action.from){
-                              const from = Number(moment(action.from).format("YYYYMMDD"))
-                              rp.startDate = from < (rp.startDate || 99999999) ? from : rp.startDate
+                        } else {
+                          if (rp) {
+                            if (fromDate) {
+                              rp.startDate =
+                                fromDate < (rp.startDate || 99999999) ? fromDate : rp.startDate
                             }
-                            rp.startDate = actionDate < (rp.startDate || 99999999) ? actionDate : rp.startDate
-                            if(action.to){
-                              const to = Number(moment(action.to).format("YYYYMMDD"))
-                              rp.endDate = to > (rp.endDate || 0) ? to : rp.endDate
+                            rp.startDate =
+                              actionDate < (rp.startDate || 99999999) ? actionDate : rp.startDate
+                            if (toDate) {
+                              rp.endDate = toDate > (rp.endDate || 0) ? toDate : rp.endDate
                             }
-                          }else {
-                            const endDate= action.to ? Number(moment(action.to).format("YYYYMMDD")): null
-                            const startDate= (actionDate || action.from) ? (Number(moment(action.from).format("YYYYMMDD")) < actionDate ? Number(moment(action.from).format("YYYYMMDD")) : actionDate) : moment().format("YYYYMMDD")
-                            referralPeriods.push(new ReferralPeriod({ startDate: startDate, endDate: endDate, comment: `New Referral to ${action.newHcp ? action.newHcp : "unknown"}`}))
+                          } else {
+                            const endDate = toDate ? toDate : null
+                            const startDate =
+                              actionDate || fromDate
+                                ? (fromDate || 99999999) < actionDate
+                                  ? fromDate
+                                  : actionDate
+                                : moment().format("YYYYMMDD")
+                            referralPeriods.push(
+                              new ReferralPeriod({
+                                startDate: startDate,
+                                endDate: endDate,
+                                comment: `New Referral to ${
+                                  action.newHcp ? action.newHcp : "unknown"
+                                }`
+                              })
+                            )
                           }
                         }
                       }
                     })
                     p.patientHealthCareParties = p.patientHealthCareParties.map(phcpTemp => {
-                      if(!phcpTemp.referralPeriods){
+                      if (!phcpTemp.referralPeriods) {
                         phcpTemp.referralPeriods = []
                       }
-                      phcpTemp.referralPeriods = phcpTemp?.referralPeriods?.sort((a, b) => (a.startDate || 0) - (b.startDate || 0))
-                      const lastRp = phcpTemp?.referralPeriods?.length ? phcpTemp.referralPeriods[phcpTemp.referralPeriods.length - 1] : null
-                      phcpTemp.referral = lastRp ? !Boolean(lastRp.endDate) || (lastRp?.endDate || 99999999) > Number(moment().format("YYYYMMDD")) : false
+                      phcpTemp.referralPeriods = phcpTemp?.referralPeriods?.sort(
+                        (a, b) => (a.startDate || 0) - (b.startDate || 0)
+                      )
+                      const lastRp = phcpTemp?.referralPeriods?.length
+                        ? phcpTemp.referralPeriods[phcpTemp.referralPeriods.length - 1]
+                        : null
+                      phcpTemp.referral = lastRp
+                        ? !Boolean(lastRp.endDate) ||
+                          (lastRp?.endDate || 99999999) > Number(moment().format("YYYYMMDD"))
+                        : false
                       return phcpTemp
                     })
                     return p
