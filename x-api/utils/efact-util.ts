@@ -350,7 +350,7 @@ function toInvoiceItem(
   // Only applies to flatrate invoicing (https://medispring.atlassian.net/wiki/spaces/EN/pages/2536013825/Behavior+of+diabetes+pre-care+pathways+flatrate+invoicing)
   if (speciality === "medicalhouse") {
     invoiceItem.endDateCode =
-      invoiceItem.codeNomenclature === 109594 // Diabetes pre-care pathways
+      (invoiceItem.codeNomenclature === 109594 || invoiceItem.codeNomenclature === 400396) // Diabetes pre-care pathways
         ? dateEncode(toMoment(invoicingCode.dateCode!!)!!.toDate())
         : dateEncode(
             toMoment(invoicingCode.dateCode!!)!!
