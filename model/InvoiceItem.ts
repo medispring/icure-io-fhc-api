@@ -31,7 +31,7 @@ export class InvoiceItem {
   insuranceRefDate?: number
   internshipNihii?: string
   invoiceRef?: string
-  override3rdPayerCode?: number
+  override3rdPayerCode?: string
   patientFee?: number
   percentNorm?: InvoiceItem.PercentNormEnum
   personalInterventionCoveredByThirdPartyCode?: number

@@ -21,7 +21,7 @@ export class CodeResult {
   code?: string
   contract?: string
   fee?: Payment
-  justification?: number
+  justification?: string
   patientFee?: Payment
   reimbursement?: Payment
 }
