@@ -374,7 +374,7 @@ function toInvoiceItem(
   invoiceItem.insuranceRefDate = invoicingCode.contractDate || invoiceItem.dateCode
   invoiceItem.invoiceRef = uuidBase36(invoicingCode.id!!)
 
-  invoiceItem.override3rdPayerCode = invoicingCode.override3rdPayerCode
+  invoiceItem.override3rdPayerCode = invoicingCode.override3rdPayerCode?.toString()
   invoiceItem.patientFee = Number(((invoicingCode.patientIntervention || 0) * 100).toFixed(0))
   invoiceItem.percentNorm = getPercentNorm(invoicingCode.percentNorm || 0)
   invoiceItem.personalInterventionCoveredByThirdPartyCode =
