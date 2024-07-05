@@ -50,8 +50,6 @@ export class fhcEagreementApi {
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
-   * @param messageEventSystem messageEventSystem
-   * @param messageEventCode messageEventCode
    * @param insuranceRef insuranceRef
    * @param sctCode sctCode
    * @param sctDisplay sctDisplay
@@ -79,10 +77,8 @@ export class fhcEagreementApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    messageEventSystem: string,
-    messageEventCode: string,
     insuranceRef: string,
-    sctCode: string,
+    sctCode?: string,
     sctDisplay?: string,
     patientSsin?: string,
     patientIo?: string,
@@ -113,12 +109,6 @@ export class fhcEagreementApi {
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (messageEventSystem
-        ? "&messageEventSystem=" + encodeURIComponent(String(messageEventSystem))
-        : "") +
-      (messageEventCode
-        ? "&messageEventCode=" + encodeURIComponent(String(messageEventCode))
-        : "") +
       (insuranceRef ? "&insuranceRef=" + encodeURIComponent(String(insuranceRef)) : "") +
       (sctCode ? "&sctCode=" + encodeURIComponent(String(sctCode)) : "") +
       (sctDisplay ? "&sctDisplay=" + encodeURIComponent(String(sctDisplay)) : "") +
@@ -164,11 +154,8 @@ export class fhcEagreementApi {
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
-   * @param messageEventSystem messageEventSystem
-   * @param messageEventCode messageEventCode
    * @param pathologyStartDate pathologyStartDate
    * @param pathologyCode pathologyCode
-   * @param insuranceRef insuranceRef
    * @param sctCode sctCode
    * @param sctDisplay sctDisplay
    * @param patientSsin patientSsin
@@ -197,12 +184,9 @@ export class fhcEagreementApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    messageEventSystem: string,
-    messageEventCode: string,
     pathologyStartDate: number,
     pathologyCode: string,
-    insuranceRef: string,
-    sctCode: string,
+    sctCode?: string,
     sctDisplay?: string,
     patientSsin?: string,
     patientIo?: string,
@@ -235,17 +219,10 @@ export class fhcEagreementApi {
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (messageEventSystem
-        ? "&messageEventSystem=" + encodeURIComponent(String(messageEventSystem))
-        : "") +
-      (messageEventCode
-        ? "&messageEventCode=" + encodeURIComponent(String(messageEventCode))
-        : "") +
       (pathologyStartDate
         ? "&pathologyStartDate=" + encodeURIComponent(String(pathologyStartDate))
         : "") +
       (pathologyCode ? "&pathologyCode=" + encodeURIComponent(String(pathologyCode)) : "") +
-      (insuranceRef ? "&insuranceRef=" + encodeURIComponent(String(insuranceRef)) : "") +
       (sctCode ? "&sctCode=" + encodeURIComponent(String(sctCode)) : "") +
       (sctDisplay ? "&sctDisplay=" + encodeURIComponent(String(sctDisplay)) : "") +
       (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
@@ -296,8 +273,6 @@ export class fhcEagreementApi {
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
-   * @param messageEventSystem messageEventSystem
-   * @param messageEventCode messageEventCode
    * @param insuranceRef insuranceRef
    * @param patientSsin patientSsin
    * @param patientIo patientIo
@@ -319,8 +294,6 @@ export class fhcEagreementApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    messageEventSystem: string,
-    messageEventCode: string,
     insuranceRef: string,
     patientSsin?: string,
     patientIo?: string,
@@ -347,12 +320,6 @@ export class fhcEagreementApi {
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (messageEventSystem
-        ? "&messageEventSystem=" + encodeURIComponent(String(messageEventSystem))
-        : "") +
-      (messageEventCode
-        ? "&messageEventCode=" + encodeURIComponent(String(messageEventCode))
-        : "") +
       (insuranceRef ? "&insuranceRef=" + encodeURIComponent(String(insuranceRef)) : "") +
       (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
       (patientIo ? "&patientIo=" + encodeURIComponent(String(patientIo)) : "") +
@@ -388,8 +355,6 @@ export class fhcEagreementApi {
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
-   * @param messageEventSystem messageEventSystem
-   * @param messageEventCode messageEventCode
    * @param insuranceRef insuranceRef
    * @param sctCode sctCode
    * @param sctDisplay sctDisplay
@@ -417,10 +382,8 @@ export class fhcEagreementApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    messageEventSystem: string,
-    messageEventCode: string,
     insuranceRef: string,
-    sctCode: string,
+    sctCode?: string,
     sctDisplay?: string,
     patientSsin?: string,
     patientIo?: string,
@@ -451,12 +414,6 @@ export class fhcEagreementApi {
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (messageEventSystem
-        ? "&messageEventSystem=" + encodeURIComponent(String(messageEventSystem))
-        : "") +
-      (messageEventCode
-        ? "&messageEventCode=" + encodeURIComponent(String(messageEventCode))
-        : "") +
       (insuranceRef ? "&insuranceRef=" + encodeURIComponent(String(insuranceRef)) : "") +
       (sctCode ? "&sctCode=" + encodeURIComponent(String(sctCode)) : "") +
       (sctDisplay ? "&sctDisplay=" + encodeURIComponent(String(sctDisplay)) : "") +
@@ -502,10 +459,8 @@ export class fhcEagreementApi {
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
-   * @param messageEventSystem messageEventSystem
-   * @param messageEventCode messageEventCode
-   * @param insuranceRef insuranceRef
    * @param subTypeCode subTypeCode
+   * @param insuranceRef insuranceRef
    * @param patientSsin patientSsin
    * @param patientIo patientIo
    * @param patientIoMembership patientIoMembership
@@ -528,10 +483,8 @@ export class fhcEagreementApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    messageEventSystem: string,
-    messageEventCode: string,
-    insuranceRef: string,
     subTypeCode: string,
+    insuranceRef?: string,
     patientSsin?: string,
     patientIo?: string,
     patientIoMembership?: string,
@@ -559,14 +512,8 @@ export class fhcEagreementApi {
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (messageEventSystem
-        ? "&messageEventSystem=" + encodeURIComponent(String(messageEventSystem))
-        : "") +
-      (messageEventCode
-        ? "&messageEventCode=" + encodeURIComponent(String(messageEventCode))
-        : "") +
-      (insuranceRef ? "&insuranceRef=" + encodeURIComponent(String(insuranceRef)) : "") +
       (subTypeCode ? "&subTypeCode=" + encodeURIComponent(String(subTypeCode)) : "") +
+      (insuranceRef ? "&insuranceRef=" + encodeURIComponent(String(insuranceRef)) : "") +
       (patientSsin ? "&patientSsin=" + encodeURIComponent(String(patientSsin)) : "") +
       (patientIo ? "&patientIo=" + encodeURIComponent(String(patientIo)) : "") +
       (patientIoMembership
@@ -607,8 +554,6 @@ export class fhcEagreementApi {
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
-   * @param messageEventSystem messageEventSystem
-   * @param messageEventCode messageEventCode
    * @param pathologyStartDate pathologyStartDate
    * @param pathologyCode pathologyCode
    * @param insuranceRef insuranceRef
@@ -640,12 +585,10 @@ export class fhcEagreementApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    messageEventSystem: string,
-    messageEventCode: string,
     pathologyStartDate: number,
     pathologyCode: string,
     insuranceRef: string,
-    sctCode: string,
+    sctCode?: string,
     sctDisplay?: string,
     patientSsin?: string,
     patientIo?: string,
@@ -678,12 +621,6 @@ export class fhcEagreementApi {
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
-      (messageEventSystem
-        ? "&messageEventSystem=" + encodeURIComponent(String(messageEventSystem))
-        : "") +
-      (messageEventCode
-        ? "&messageEventCode=" + encodeURIComponent(String(messageEventCode))
-        : "") +
       (pathologyStartDate
         ? "&pathologyStartDate=" + encodeURIComponent(String(pathologyStartDate))
         : "") +
