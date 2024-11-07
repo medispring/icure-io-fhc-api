@@ -68,6 +68,7 @@ export namespace InvoiceItem {
     | "HalfPriceSecondAct"
     | "InvoiceException"
     | "ForInformation"
+    | "PseudoCodeProthesis"
   export const PercentNormEnum = {
     None: "None" as PercentNormEnum,
     SurgicalAid1: "SurgicalAid1" as PercentNormEnum,
@@ -76,7 +77,8 @@ export namespace InvoiceItem {
     Ah1n1: "Ah1n1" as PercentNormEnum,
     HalfPriceSecondAct: "HalfPriceSecondAct" as PercentNormEnum,
     InvoiceException: "InvoiceException" as PercentNormEnum,
-    ForInformation: "ForInformation" as PercentNormEnum
+    ForInformation: "ForInformation" as PercentNormEnum,
+    PseudoCodeProthesis: "PseudoCodeProthesis" as PercentNormEnum
   }
   export type PrescriberNormEnum =
     | "None"

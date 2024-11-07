@@ -1,6 +1,7 @@
 import {
   AbstractFilterPatient,
   EntityReference,
+  EntityWithDelegationTypeName,
   FilterChainPatient,
   HealthcareParty,
   IccCryptoXApi,
@@ -141,9 +142,8 @@ export class MessageXApi {
           })
           .then(doc => this.documentXApi.createDocument(doc))
           .then(doc =>
-            this.documentXApi.setDocumentAttachment(
-              doc.id!!,
-              undefined /*TODO provide keys for encryption*/,
+            this.documentXApi.setClearDocumentAttachment(
+              doc,
               <any>ua2ab(string2ua(JSON.stringify(req)))
             )
           )
@@ -564,9 +564,8 @@ export class MessageXApi {
           })
           .then(doc => docXApi.createDocument(doc))
           .then(doc =>
-            docXApi.setDocumentAttachment(
-              doc.id!!,
-              undefined /*TODO provide keys for encryption*/,
+            docXApi.setClearDocumentAttachment(
+              doc,
               <any>ua2ab(string2ua(JSON.stringify(dmgMessage)))
             )
           )
@@ -726,7 +725,7 @@ export class MessageXApi {
         return this.receiptXApi.iccApi
           .createReceipt(
             new Receipt({
-              id: this.crypto.randomUuid(),
+              id: this.crypto.primitives.randomUuid(),
               documentId: parentMessage.id,
               references: [
                 `mycarenet:efact:inputReference:${ref}`,
@@ -736,10 +735,10 @@ export class MessageXApi {
             })
           )
           .then((rcpt: Receipt) =>
-            this.receiptXApi.iccApi.setReceiptAttachment(
+            this.receiptXApi.iccApi.setReceiptAttachmentForBlobType(
               rcpt.id!,
+              rcpt.rev!,
               "tack",
-              "",
               <any>ua2ab(string2ua(JSON.stringify(efactMessage)))
             )
           )
@@ -932,19 +931,16 @@ export class MessageXApi {
               )
               .then(([doc, jsonDoc, jsonParsedDoc]) =>
                 Promise.all([
-                  this.documentXApi.setDocumentAttachment(
-                    doc.id!!,
-                    undefined /*TODO provide keys for encryption*/,
+                  this.documentXApi.setClearDocumentAttachment(
+                    doc,
                     <any>ua2ab(string2ua(efactMessage.detail!!))
                   ),
-                  this.documentXApi.setDocumentAttachment(
-                    jsonDoc.id!!,
-                    undefined /*TODO provide keys for encryption*/,
+                  this.documentXApi.setClearDocumentAttachment(
+                    jsonDoc,
                     <any>ua2ab(string2ua(JSON.stringify(efactMessage)))
                   ),
-                  this.documentXApi.setDocumentAttachment(
-                    jsonParsedDoc.id!!,
-                    undefined /*TODO provide keys for encryption*/,
+                  this.documentXApi.setClearDocumentAttachment(
+                    jsonParsedDoc,
                     <any>ua2ab(string2ua(JSON.stringify(parsedRecords)))
                   )
                 ])
@@ -1022,7 +1018,8 @@ export class MessageXApi {
                         this.patientXApi
                           .getPatientIdOfChildDocumentForHcpAndHcpParents(
                             iv,
-                            user.healthcarePartyId!
+                            user.healthcarePartyId!,
+                            EntityWithDelegationTypeName.Invoice
                           )
                           .then(patientId => this.patientXApi.getPatientWithUser(user, patientId!))
                           .then(pat =>
@@ -1056,7 +1053,7 @@ export class MessageXApi {
                       ).then(niv => {
                         niv.invoicingCodes = (niv.invoicingCodes || []).concat(
                           _.assign({}, ic, {
-                            id: this.crypto.randomUuid(),
+                            id: this.crypto.primitives.randomUuid(),
                             accepted: false,
                             canceled: false,
                             pending: true,
@@ -1156,7 +1153,7 @@ export class MessageXApi {
     speciality: string = "doctor",
     professionCode: string = "10"
   ): Promise<Message> {
-    const uuid = this.crypto.randomUuid()
+    const uuid = this.crypto.primitives.randomUuid()
     const smallBase36 = uuidBase36Half(uuid)
     const fullBase36 = uuidBase36(uuid)
     const sentDate = +new Date()
@@ -1318,16 +1315,11 @@ export class MessageXApi {
       )
       .then(([jsonDoc, doc]) =>
         Promise.all([
-          this.documentXApi.setDocumentAttachment(
-            jsonDoc.id!!,
-            undefined /*TODO provide keys for encryption*/,
+          this.documentXApi.setClearDocumentAttachment(
+            jsonDoc,
             <any>ua2ab(string2ua(JSON.stringify(res.records!!)))
           ),
-          this.documentXApi.setDocumentAttachment(
-            doc.id!!,
-            undefined /*TODO provide keys for encryption*/,
-            <any>ua2ab(string2ua(res.detail!!))
-          )
+          this.documentXApi.setClearDocumentAttachment(doc, <any>ua2ab(string2ua(res.detail!!)))
         ])
       )
       .then(() =>

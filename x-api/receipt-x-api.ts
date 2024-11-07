@@ -62,11 +62,13 @@ export class ReceiptXApi {
       .then((rcpt: Receipt) => {
         if (!rcpt.id) {
           throw new Error(`Receipt has no id: ${rcpt}`)
+        } else if (!rcpt.rev) {
+          throw new Error(`Receipt has no rev: ${rcpt}`)
         } else {
-          return this.iccApi.setReceiptAttachment(
+          return this.iccApi.setReceiptAttachmentForBlobType(
             rcpt.id,
+            rcpt.rev,
             "soapConversation",
-            undefined,
             ua2ab(string2ua(JSON.stringify(object.mycarenetConversation)))
           )
         }

@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AgreementTransaction } from "./AgreementTransaction"
 import { CommonOutput } from "./CommonOutput"
 import { MycarenetConversation } from "./MycarenetConversation"
 import { MycarenetError } from "./MycarenetError"
@@ -30,6 +29,5 @@ export class AgreementResponse {
   content?: ArrayBuffer
   errors?: Array<MycarenetError>
   mycarenetConversation?: MycarenetConversation
-  transactions?: Array<AgreementTransaction>
   warnings?: Array<MycarenetError>
 }
