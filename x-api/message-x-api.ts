@@ -731,7 +731,7 @@ export class MessageXApi {
                 `mycarenet:efact:inputReference:${ref}`,
                 efactMessage.tack!!.appliesTo,
                 efactMessage.tack!!.reference
-              ]
+              ].filter(x => x != null)
             })
           )
           .then((rcpt: Receipt) =>
@@ -1331,7 +1331,7 @@ export class MessageXApi {
             `mycarenet:efact:inputReference:${res.inputReference}`,
             res.tack!!.appliesTo!!,
             res.tack!!.reference!!
-          ],
+          ].filter(x => x != null),
           "tack",
           ua2ab(string2ua(JSON.stringify(res.tack)))
         )
