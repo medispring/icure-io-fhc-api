@@ -137,14 +137,14 @@ export class MessageXApi {
       .then(msg => {
         return this.documentXApi
           .newInstance(user, msg, {
-            mainUti: "public.json",
             name: `${msg.subject}_content.json`
           })
           .then(doc => this.documentXApi.createDocument(doc))
           .then(doc =>
             this.documentXApi.setClearDocumentAttachment(
               doc,
-              <any>ua2ab(string2ua(JSON.stringify(req)))
+              <any>ua2ab(string2ua(JSON.stringify(req))),
+              ["public.json"]
             )
           )
           .then(() => msg)
@@ -559,14 +559,14 @@ export class MessageXApi {
       .then(msg => {
         return docXApi
           .newInstance(user, msg, {
-            mainUti: "public.json",
             name: `${msg.subject}_content.json`
           })
           .then(doc => docXApi.createDocument(doc))
           .then(doc =>
             docXApi.setClearDocumentAttachment(
               doc,
-              <any>ua2ab(string2ua(JSON.stringify(dmgMessage)))
+              <any>ua2ab(string2ua(JSON.stringify(dmgMessage))),
+              ["public.json"]
             )
           )
           .then(() => msg)
@@ -910,15 +910,12 @@ export class MessageXApi {
           .then(msg =>
             Promise.all([
               this.documentXApi.newInstance(user, msg, {
-                mainUti: "public.plain-text",
                 name: msg.subject
               }),
               this.documentXApi.newInstance(user, msg, {
-                mainUti: "public.json",
                 name: `${msg.subject}_records`
               }),
               this.documentXApi.newInstance(user, msg, {
-                mainUti: "public.json",
                 name: `${msg.subject}_parsed_records`
               })
             ])
@@ -933,15 +930,18 @@ export class MessageXApi {
                 Promise.all([
                   this.documentXApi.setClearDocumentAttachment(
                     doc,
-                    <any>ua2ab(string2ua(efactMessage.detail!!))
+                    <any>ua2ab(string2ua(efactMessage.detail!!)),
+                    ["public.plain-text"]
                   ),
                   this.documentXApi.setClearDocumentAttachment(
                     jsonDoc,
-                    <any>ua2ab(string2ua(JSON.stringify(efactMessage)))
+                    <any>ua2ab(string2ua(JSON.stringify(efactMessage))),
+                    ["public.json"]
                   ),
                   this.documentXApi.setClearDocumentAttachment(
                     jsonParsedDoc,
-                    <any>ua2ab(string2ua(JSON.stringify(parsedRecords)))
+                    <any>ua2ab(string2ua(JSON.stringify(parsedRecords))),
+                    ["public.json"]
                   )
                 ])
               )
@@ -1299,11 +1299,9 @@ export class MessageXApi {
   saveMessageAttachment(user: User, msg: Message, res: EfactSendResponseWithError) {
     return Promise.all([
       this.documentXApi.newInstance(user, msg, {
-        mainUti: "public.json",
         name: "920000_records"
       }),
       this.documentXApi.newInstance(user, msg, {
-        mainUti: "public.plain-text",
         name: "920000"
       })
     ])
@@ -1317,9 +1315,12 @@ export class MessageXApi {
         Promise.all([
           this.documentXApi.setClearDocumentAttachment(
             jsonDoc,
-            <any>ua2ab(string2ua(JSON.stringify(res.records!!)))
+            <any>ua2ab(string2ua(JSON.stringify(res.records!!))),
+            ["public.json"]
           ),
-          this.documentXApi.setClearDocumentAttachment(doc, <any>ua2ab(string2ua(res.detail!!)))
+          this.documentXApi.setClearDocumentAttachment(doc, <any>ua2ab(string2ua(res.detail!!)), [
+            "public.plain-text"
+          ])
         ])
       )
       .then(() =>
