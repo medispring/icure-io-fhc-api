@@ -1041,7 +1041,8 @@ export class MessageXApi {
                                 "invoicingCodes",
                                 "error",
                                 "receipts",
-                                "encryptedSelf"
+                                "encryptedSelf",
+                                "securityMetadata"
                               ])
                             )
                           )
