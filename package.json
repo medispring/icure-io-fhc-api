@@ -5,10 +5,13 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@icure/api": "^8.0.61",
     "lodash": "^4.17.20"
   },
+  "peerDependencies": {
+    "@icure/api": "~8.1.2"
+  },
   "devDependencies": {
+    "@icure/api": "~8.1.2",
     "@types/chai": "^4.1.4",
     "@types/form-data": "^2.2.1",
     "@types/lodash": "^4.14.182",
@@ -33,7 +36,7 @@
     "build": "tsc",
     "install": "tsc",
     "prepublish": "rm -rf dist && tsc",
-    "prepare": "rimraf dist && npm run build && jq '{name:.name, version:.version, description:.description, main:\"index.js\", types:\"index.d.ts\", dependencies:.dependencies, author:.author, license:.license, bugs:.bugs, homepage:.homepage}' < package.json > dist/package.json",
+    "prepare": "rimraf dist && npm run build && jq '{name:.name, version:.version, description:.description, main:\"index.js\", types:\"index.d.ts\", dependencies:.dependencies, peerDependencies:.peerDependencies, author:.author, license:.license, bugs:.bugs, homepage:.homepage}' < package.json > dist/package.json",
     "publish": "yarn version patch && yarn run prepare && cd dist && npm publish && cd ..",
     "precommit": "pretty-quick --staged"
   },
