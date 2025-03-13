@@ -38,6 +38,7 @@ export class InvoiceItem {
   prescriberNihii?: string
   prescriberNorm?: InvoiceItem.PrescriberNormEnum
   prescriptionDate?: number
+  productLabel?: string
   reimbursedAmount?: number
   relatedCode?: number
   sideCode?: InvoiceItem.SideCodeEnum

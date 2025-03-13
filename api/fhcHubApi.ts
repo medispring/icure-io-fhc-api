@@ -1153,7 +1153,7 @@ export class fhcHubApi {
         : "") +
       (from ? "&from=" + encodeURIComponent(String(from)) : "") +
       (to ? "&to=" + encodeURIComponent(String(to)) : "") +
-      (therLinkType ? "&therLinkType=" + encodeURIComponent(String(from)) : "")
+      (therLinkType ? "&therLinkType=" + encodeURIComponent(String(therLinkType)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))

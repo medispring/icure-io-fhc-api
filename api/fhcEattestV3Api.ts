@@ -231,6 +231,7 @@ export class fhcEattestV3Api {
    * @param patientGender patientGender
    * @param date date
    * @param treatmentReason treatmentReason
+   * @param hcpQuality hcpQuality
    * @param traineeSupervisorSsin traineeSupervisorSsin
    * @param traineeSupervisorNihii traineeSupervisorNihii
    * @param traineeSupervisorFirstName traineeSupervisorFirstName
@@ -239,6 +240,7 @@ export class fhcEattestV3Api {
    * @param guardPostSsin guardPostSsin
    * @param guardPostName guardPostName
    * @param attemptNbr attemptNbr
+   * @param decisionReference decisionReference
    */
   sendAttestUsingPOST2(
     patientSsin: string,
@@ -255,6 +257,7 @@ export class fhcEattestV3Api {
     patientGender: string,
     date?: number,
     treatmentReason?: string,
+    hcpQuality?: string,
     traineeSupervisorSsin?: string,
     traineeSupervisorNihii?: string,
     traineeSupervisorFirstName?: string,
@@ -263,6 +266,7 @@ export class fhcEattestV3Api {
     guardPostSsin?: string,
     guardPostName?: string,
     attemptNbr?: number,
+    decisionReference?: string,
     body?: Eattest
   ): Promise<SendAttestResult> {
     let _body = null
@@ -297,10 +301,15 @@ export class fhcEattestV3Api {
       (traineeSupervisorLastName
         ? "&traineeSupervisorLastName=" + encodeURIComponent(String(traineeSupervisorLastName))
         : "") +
+      (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (guardPostNihii ? "&guardPostNihii=" + encodeURIComponent(String(guardPostNihii)) : "") +
       (guardPostSsin ? "&guardPostSsin=" + encodeURIComponent(String(guardPostSsin)) : "") +
       (guardPostName ? "&guardPostName=" + encodeURIComponent(String(guardPostName)) : "") +
-      (attemptNbr ? "&attemptNbr=" + encodeURIComponent(String(attemptNbr)) : "")
+      (attemptNbr ? "&attemptNbr=" + encodeURIComponent(String(attemptNbr)) : "") +
+      (decisionReference
+        ? "&decisionReference=" + encodeURIComponent(String(decisionReference))
+        : "")
+
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -331,6 +340,7 @@ export class fhcEattestV3Api {
    * @param patientGender patientGender
    * @param date date
    * @param treatmentReason treatmentReason
+   * @param hcpQuality hcpQuality
    * @param traineeSupervisorSsin traineeSupervisorSsin
    * @param traineeSupervisorNihii traineeSupervisorNihii
    * @param traineeSupervisorFirstName traineeSupervisorFirstName
@@ -339,6 +349,7 @@ export class fhcEattestV3Api {
    * @param guardPostSsin guardPostSsin
    * @param guardPostName guardPostName
    * @param attemptNbr attemptNbr
+   * @param decisionReference decisionReference
    */
   sendAttestWithResponseUsingPOST2(
     patientSsin: string,
@@ -355,6 +366,7 @@ export class fhcEattestV3Api {
     patientGender: string,
     date?: number,
     treatmentReason?: string,
+    hcpQuality?: string,
     traineeSupervisorSsin?: string,
     traineeSupervisorNihii?: string,
     traineeSupervisorFirstName?: string,
@@ -363,6 +375,7 @@ export class fhcEattestV3Api {
     guardPostSsin?: string,
     guardPostName?: string,
     attemptNbr?: number,
+    decisionReference?: string,
     body?: Eattest
   ): Promise<SendAttestResultWithResponse> {
     let _body = null
@@ -385,6 +398,7 @@ export class fhcEattestV3Api {
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
       (treatmentReason ? "&treatmentReason=" + encodeURIComponent(String(treatmentReason)) : "") +
+      (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (traineeSupervisorSsin
         ? "&traineeSupervisorSsin=" + encodeURIComponent(String(traineeSupervisorSsin))
         : "") +
@@ -400,7 +414,10 @@ export class fhcEattestV3Api {
       (guardPostNihii ? "&guardPostNihii=" + encodeURIComponent(String(guardPostNihii)) : "") +
       (guardPostSsin ? "&guardPostSsin=" + encodeURIComponent(String(guardPostSsin)) : "") +
       (guardPostName ? "&guardPostName=" + encodeURIComponent(String(guardPostName)) : "") +
-      (attemptNbr ? "&attemptNbr=" + encodeURIComponent(String(attemptNbr)) : "")
+      (attemptNbr ? "&attemptNbr=" + encodeURIComponent(String(attemptNbr)) : "") +
+      (decisionReference
+        ? "&decisionReference=" + encodeURIComponent(String(decisionReference))
+        : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
