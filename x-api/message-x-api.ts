@@ -20,9 +20,9 @@ import {
   PatientHealthCareParty,
   Receipt,
   ReferralPeriod,
-  string2ua,
   ua2ab,
   User,
+  utf8_2ua,
   XHR
 } from "@icure/api"
 
@@ -144,7 +144,7 @@ export class MessageXApi {
             this.documentXApi.setDocumentAttachment(
               doc.id!!,
               undefined /*TODO provide keys for encryption*/,
-              <any>ua2ab(string2ua(JSON.stringify(req)))
+              <any>ua2ab(utf8_2ua(JSON.stringify(req)))
             )
           )
           .then(() => msg)
@@ -567,7 +567,7 @@ export class MessageXApi {
             docXApi.setDocumentAttachment(
               doc.id!!,
               undefined /*TODO provide keys for encryption*/,
-              <any>ua2ab(string2ua(JSON.stringify(dmgMessage)))
+              <any>ua2ab(utf8_2ua(JSON.stringify(dmgMessage)))
             )
           )
           .then(() => msg)
@@ -740,7 +740,7 @@ export class MessageXApi {
               rcpt.id!,
               "tack",
               "",
-              <any>ua2ab(string2ua(JSON.stringify(efactMessage)))
+              <any>ua2ab(utf8_2ua(JSON.stringify(efactMessage)))
             )
           )
           .then(() => {
@@ -935,17 +935,17 @@ export class MessageXApi {
                   this.documentXApi.setDocumentAttachment(
                     doc.id!!,
                     undefined /*TODO provide keys for encryption*/,
-                    <any>ua2ab(string2ua(efactMessage.detail!!))
+                    <any>ua2ab(utf8_2ua(efactMessage.detail!!))
                   ),
                   this.documentXApi.setDocumentAttachment(
                     jsonDoc.id!!,
                     undefined /*TODO provide keys for encryption*/,
-                    <any>ua2ab(string2ua(JSON.stringify(efactMessage)))
+                    <any>ua2ab(utf8_2ua(JSON.stringify(efactMessage)))
                   ),
                   this.documentXApi.setDocumentAttachment(
                     jsonParsedDoc.id!!,
                     undefined /*TODO provide keys for encryption*/,
-                    <any>ua2ab(string2ua(JSON.stringify(parsedRecords)))
+                    <any>ua2ab(utf8_2ua(JSON.stringify(parsedRecords)))
                   )
                 ])
               )
@@ -1321,12 +1321,12 @@ export class MessageXApi {
           this.documentXApi.setDocumentAttachment(
             jsonDoc.id!!,
             undefined /*TODO provide keys for encryption*/,
-            <any>ua2ab(string2ua(JSON.stringify(res.records!!)))
+            <any>ua2ab(utf8_2ua(JSON.stringify(res.records!!)))
           ),
           this.documentXApi.setDocumentAttachment(
             doc.id!!,
             undefined /*TODO provide keys for encryption*/,
-            <any>ua2ab(string2ua(res.detail!!))
+            <any>ua2ab(utf8_2ua(res.detail!!))
           )
         ])
       )
@@ -1340,7 +1340,7 @@ export class MessageXApi {
             res.tack!!.reference!!
           ],
           "tack",
-          ua2ab(string2ua(JSON.stringify(res.tack)))
+          ua2ab(utf8_2ua(JSON.stringify(res.tack)))
         )
       )
   }
