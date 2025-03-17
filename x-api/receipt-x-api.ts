@@ -1,4 +1,4 @@
-import { IccReceiptXApi, Receipt, string2ua, ua2ab, User } from "@icure/api"
+import { IccReceiptXApi, Receipt, ua2ab, User, utf8_2ua } from "@icure/api"
 
 import * as _ from "lodash"
 import * as moment from "moment"
@@ -69,7 +69,7 @@ export class ReceiptXApi {
             rcpt.id,
             rcpt.rev,
             "soapConversation",
-            ua2ab(string2ua(JSON.stringify(object.mycarenetConversation)))
+            ua2ab(utf8_2ua(JSON.stringify(object.mycarenetConversation)))
           )
         }
       })

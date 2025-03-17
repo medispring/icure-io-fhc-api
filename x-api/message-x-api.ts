@@ -21,9 +21,9 @@ import {
   PatientHealthCareParty,
   Receipt,
   ReferralPeriod,
-  string2ua,
   ua2ab,
   User,
+  utf8_2ua,
   XHR
 } from "@icure/api"
 
@@ -143,7 +143,7 @@ export class MessageXApi {
           .then(doc =>
             this.documentXApi.setClearDocumentAttachment(
               doc,
-              <any>ua2ab(string2ua(JSON.stringify(req))),
+              <any>ua2ab(utf8_2ua(JSON.stringify(req))),
               ["public.json"]
             )
           )
@@ -565,7 +565,7 @@ export class MessageXApi {
           .then(doc =>
             docXApi.setClearDocumentAttachment(
               doc,
-              <any>ua2ab(string2ua(JSON.stringify(dmgMessage))),
+              <any>ua2ab(utf8_2ua(JSON.stringify(dmgMessage))),
               ["public.json"]
             )
           )
@@ -739,7 +739,7 @@ export class MessageXApi {
               rcpt.id!,
               rcpt.rev!,
               "tack",
-              <any>ua2ab(string2ua(JSON.stringify(efactMessage)))
+              <any>ua2ab(utf8_2ua(JSON.stringify(efactMessage)))
             )
           )
           .then(() => {
@@ -930,17 +930,17 @@ export class MessageXApi {
                 Promise.all([
                   this.documentXApi.setClearDocumentAttachment(
                     doc,
-                    <any>ua2ab(string2ua(efactMessage.detail!!)),
+                    <any>ua2ab(utf8_2ua(efactMessage.detail!!)),
                     ["public.plain-text"]
                   ),
                   this.documentXApi.setClearDocumentAttachment(
                     jsonDoc,
-                    <any>ua2ab(string2ua(JSON.stringify(efactMessage))),
+                    <any>ua2ab(utf8_2ua(JSON.stringify(efactMessage))),
                     ["public.json"]
                   ),
                   this.documentXApi.setClearDocumentAttachment(
                     jsonParsedDoc,
-                    <any>ua2ab(string2ua(JSON.stringify(parsedRecords))),
+                    <any>ua2ab(utf8_2ua(JSON.stringify(parsedRecords))),
                     ["public.json"]
                   )
                 ])
@@ -1316,10 +1316,10 @@ export class MessageXApi {
         Promise.all([
           this.documentXApi.setClearDocumentAttachment(
             jsonDoc,
-            <any>ua2ab(string2ua(JSON.stringify(res.records!!))),
+            <any>ua2ab(utf8_2ua(JSON.stringify(res.records!!))),
             ["public.json"]
           ),
-          this.documentXApi.setClearDocumentAttachment(doc, <any>ua2ab(string2ua(res.detail!!)), [
+          this.documentXApi.setClearDocumentAttachment(doc, <any>ua2ab(utf8_2ua(res.detail!!)), [
             "public.plain-text"
           ])
         ])
@@ -1334,7 +1334,7 @@ export class MessageXApi {
             res.tack!!.reference!!
           ].filter(x => x != null),
           "tack",
-          ua2ab(string2ua(JSON.stringify(res.tack)))
+          ua2ab(utf8_2ua(JSON.stringify(res.tack)))
         )
       )
   }
