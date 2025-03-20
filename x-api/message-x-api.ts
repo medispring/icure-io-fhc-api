@@ -21,6 +21,7 @@ import {
   PatientHealthCareParty,
   Receipt,
   ReferralPeriod,
+  retry,
   ua2ab,
   User,
   utf8_2ua,
@@ -74,6 +75,7 @@ interface StructError {
 
 class EfactSendResponseWithError extends EfactSendResponse {
   public error: string | undefined
+
   constructor(json: JSON) {
     super(json)
   }
@@ -132,19 +134,33 @@ export class MessageXApi {
         },
         subject: "Lists request",
         senderReferences: req.commonOutput
+          ? {
+              ...(req.commonOutput.inputReference
+                ? { inputReference: req.commonOutput.inputReference }
+                : {}),
+              ...(req.commonOutput.nipReference
+                ? { nipReference: req.commonOutput.nipReference }
+                : {}),
+              ...(req.commonOutput.outputReference
+                ? { outputReference: req.commonOutput.outputReference }
+                : {})
+            }
+          : undefined
       })
-      .then(msg => this.api.createMessage(msg))
+      .then(msg => retry(() => this.api.createMessage(msg)))
       .then(msg => {
         return this.documentXApi
           .newInstance(user, msg, {
             name: `${msg.subject}_content.json`
           })
-          .then(doc => this.documentXApi.createDocument(doc))
+          .then(doc => retry(() => this.documentXApi.createDocument(doc)))
           .then(doc =>
-            this.documentXApi.setClearDocumentAttachment(
-              doc,
-              <any>ua2ab(utf8_2ua(JSON.stringify(req))),
-              ["public.json"]
+            retry(() =>
+              this.documentXApi.setClearDocumentAttachment(
+                doc,
+                <any>ua2ab(utf8_2ua(JSON.stringify(req))),
+                ["public.json"]
+              )
             )
           )
           .then(() => msg)
@@ -164,7 +180,9 @@ export class MessageXApi {
       const ref = (ack.appliesTo || "").replace("urn:nip:reference:input:", "")
       promAck = promAck
         .then(() =>
-          this.api.findMessagesByTransportGuid(`GMD:OUT:${ref}`, false, undefined, undefined, 100)
+          retry(() =>
+            this.api.findMessagesByTransportGuid(`GMD:OUT:${ref}`, false, undefined, undefined, 100)
+          )
         )
         .then(parents => {
           const msgsForHcp = ((parents && parents.rows) || []).filter(
@@ -178,16 +196,18 @@ export class MessageXApi {
             (ack.date && moment(ack.date)) ||
             moment()
           ).format("YYYYMMDDHHmmss")
-          return this.api.modifyMessage(parent)
+          return retry(() => this.api.modifyMessage(parent))
         })
         .catch(e => {
           console.log(e.message)
           return null
         })
         .then(() =>
-          this.receiptXApi.logSCReceipt(ack, user, hcp.id!!, "dmg", "listAck", [
-            `nip:pin:valuehash:${ack.valueHash}`
-          ])
+          retry(() =>
+            this.receiptXApi.logSCReceipt(ack, user, hcp.id!!, "dmg", "listAck", [
+              `nip:pin:valuehash:${ack.valueHash}`
+            ])
+          )
         )
         .then(receipt => {
           ack.valueHash && ackHashes.push(ack.valueHash)
@@ -234,8 +254,9 @@ export class MessageXApi {
       })
       promMsg = promMsg.then(acc => {
         let ref = (dmgsMsgList.appliesTo || "").replace("urn:nip:reference:input:", "")
-        return this.api
-          .findMessagesByTransportGuid(`GMD:OUT:${ref}`, false, undefined, undefined, 100)
+        return retry(() =>
+          this.api.findMessagesByTransportGuid(`GMD:OUT:${ref}`, false, undefined, undefined, 100)
+        )
           .then(parents => {
             const msgsForHcp = ((parents && parents.rows) || []).filter(
               (p: Message) => p.responsible === hcp.id
@@ -245,16 +266,18 @@ export class MessageXApi {
             }
             const parentMessage: Message = msgsForHcp[0]
 
-            return this.saveMessageInDb(
-              user,
-              "List",
-              dmgsMsgList,
-              hcp,
-              metas,
-              docXApi,
-              dmgsMsgList.date,
-              undefined,
-              parentMessage && parentMessage.id
+            return retry(() =>
+              this.saveMessageInDb(
+                user,
+                "List",
+                dmgsMsgList,
+                hcp,
+                metas,
+                docXApi,
+                dmgsMsgList.date,
+                undefined,
+                parentMessage && parentMessage.id
+              )
             ).then(msg => {
               dmgsMsgList.valueHash && msgHashes.push(dmgsMsgList.valueHash)
               acc.push(msg)
@@ -269,24 +292,20 @@ export class MessageXApi {
     })
 
     _.each(list.closures, closure => {
-      const metas = {
+      const metas = Object.entries({
         type: "closure",
-        date:
-          (closure.endOfPreviousDmg && moment(closure.endOfPreviousDmg).format("DD/MM/YYYY")) ||
-          null,
+        date: closure.endOfPreviousDmg && moment(closure.endOfPreviousDmg).format("DD/MM/YYYY"),
         closure: "true",
         endOfPreviousDmg:
-          (closure.endOfPreviousDmg && moment(closure.endOfPreviousDmg).format("DD/MM/YYYY")) ||
-          null,
-        beginOfNewDmg:
-          (closure.beginOfNewDmg && moment(closure.beginOfNewDmg).format("DD/MM/YYYY")) || null,
+          closure.endOfPreviousDmg && moment(closure.endOfPreviousDmg).format("DD/MM/YYYY"),
+        beginOfNewDmg: closure.beginOfNewDmg && moment(closure.beginOfNewDmg).format("DD/MM/YYYY"),
         previousHcp: this.makeHcp(closure.previousHcParty),
         newHcp: this.makeHcp(closure.newHcParty),
-        ssin: closure.inss || null,
-        firstName: closure.firstName || null,
-        lastName: closure.lastName || null,
-        io: closure.io || null
-      }
+        ssin: closure.inss,
+        firstName: closure.firstName,
+        lastName: closure.lastName,
+        io: closure.io
+      }).reduce((acc, [k, v]) => (!!v ? { ...acc, [k]: v } : acc), {})
       closure.inss && (patsDmgs[closure.inss] || (patsDmgs[closure.inss] = [])).push(metas)
       promMsg = promMsg.then(acc => {
         return this.saveMessageInDb(
@@ -307,17 +326,17 @@ export class MessageXApi {
     })
 
     _.each(list.extensions, ext => {
-      const metas = {
+      const metas = Object.entries({
         type: "extension",
-        date: (ext.encounterDate && moment(ext.encounterDate).format("DD/MM/YYYY")) || null,
-        from: (ext.encounterDate && moment(ext.encounterDate).format("DD/MM/YYYY")) || null,
+        date: ext.encounterDate && moment(ext.encounterDate).format("DD/MM/YYYY"),
+        from: ext.encounterDate && moment(ext.encounterDate).format("DD/MM/YYYY"),
         hcp: this.makeHcp(ext.hcParty),
-        claim: ext.claim || null,
-        ssin: ext.inss || null,
-        firstName: ext.firstName || null,
-        lastName: ext.lastName || null,
-        io: ext.io || null
-      }
+        claim: ext.claim,
+        ssin: ext.inss,
+        firstName: ext.firstName,
+        lastName: ext.lastName,
+        io: ext.io
+      }).reduce((acc, [k, v]) => (!!v ? { ...acc, [k]: v } : acc), {})
       ext.inss && (patsDmgs[ext.inss] || (patsDmgs[ext.inss] = [])).push(metas)
       promMsg = promMsg.then(acc => {
         return this.saveMessageInDb(
@@ -343,8 +362,8 @@ export class MessageXApi {
       _.chunk(Object.keys(patsDmgs), 100).forEach(ssins => {
         promPatient = promPatient
           .then(() =>
-            this.patientApi
-              .filterPatientsBy(
+            retry(() =>
+              this.patientApi.filterPatientsBy(
                 undefined,
                 undefined,
                 1000,
@@ -359,154 +378,156 @@ export class MessageXApi {
                   })
                 })
               )
-              .then((pats: PaginatedListPatient) =>
-                Promise.all(
-                  (pats.rows || []).map(p => {
-                    const actions = _.sortBy(patsDmgs[p.ssin!!], a =>
-                      moment(a.date, "DD/MM/YYYY").format("YYYYMMDD")
+            ).then((pats: PaginatedListPatient) =>
+              Promise.all(
+                (pats.rows || []).map(p => {
+                  const actions = _.sortBy(patsDmgs[p.ssin!!], a =>
+                    moment(a.date, "DD/MM/YYYY").format("YYYYMMDD")
+                  )
+
+                  let phcp: PatientHealthCareParty | undefined =
+                    (p.patientHealthCareParties || (p.patientHealthCareParties = [])) &&
+                    p.patientHealthCareParties.find(
+                      phcp => phcp.healthcarePartyId === user.healthcarePartyId
                     )
+                  if (!phcp) {
+                    phcp = new PatientHealthCareParty({
+                      healthcarePartyId: user.healthcarePartyId,
+                      referralPeriods: []
+                    })
+                    p.patientHealthCareParties.push(phcp)
+                  }
+                  if (!phcp.referralPeriods) {
+                    phcp.referralPeriods = []
+                  }
+                  const referralPeriods: ReferralPeriod[] = phcp.referralPeriods
 
-                    let phcp: PatientHealthCareParty | undefined =
-                      (p.patientHealthCareParties || (p.patientHealthCareParties = [])) &&
-                      p.patientHealthCareParties.find(
-                        phcp => phcp.healthcarePartyId === user.healthcarePartyId
-                      )
-                    if (!phcp) {
-                      phcp = new PatientHealthCareParty({
-                        healthcarePartyId: user.healthcarePartyId,
-                        referralPeriods: []
-                      })
-                      p.patientHealthCareParties.push(phcp)
+                  actions.map(action => {
+                    if (!action.newHcp) {
+                      action.newHcp = action.hcp || ""
                     }
-                    if (!phcp.referralPeriods) {
-                      phcp.referralPeriods = []
-                    }
-                    const referralPeriods: ReferralPeriod[] = phcp.referralPeriods
+                    const actionDate = Number(
+                      moment(action?.date || "", "DD/MM/YYYY").format("YYYYMMDD")
+                    )
+                    const fromDate: number | null = action.from
+                      ? action.from.toString().includes("/")
+                        ? Number(moment(action.from, "DD/MM/YYYY").format("YYYYMMDD"))
+                        : Number(moment(action.from).format("YYYYMMDD"))
+                      : null
+                    const toDate: number | null = action.to
+                      ? action.to.toString().includes("/")
+                        ? Number(moment(action.to, "DD/MM/YYYY").format("YYYYMMDD"))
+                        : Number(moment(action.to).format("YYYYMMDD"))
+                      : null
 
-                    actions.map(action => {
-                      if (!action.newHcp) {
-                        action.newHcp = action.hcp || ""
-                      }
-                      const actionDate = Number(
-                        moment(action?.date || "", "DD/MM/YYYY").format("YYYYMMDD")
-                      )
-                      const fromDate: number | null = action.from
-                        ? action.from.toString().includes("/")
-                          ? Number(moment(action.from, "DD/MM/YYYY").format("YYYYMMDD"))
-                          : Number(moment(action.from).format("YYYYMMDD"))
-                        : null
-                      const toDate: number | null = action.to
-                        ? action.to.toString().includes("/")
-                          ? Number(moment(action.to, "DD/MM/YYYY").format("YYYYMMDD"))
-                          : Number(moment(action.to).format("YYYYMMDD"))
-                        : null
-
-                      const rp: ReferralPeriod | undefined = referralPeriods.find(
-                        per =>
-                          ((!per.endDate || per.endDate >= actionDate) &&
-                            (per?.startDate || 0) <= actionDate) ||
-                          (fromDate &&
-                            (!per.endDate || per.endDate >= fromDate) &&
-                            (per?.startDate || 0) <= fromDate) ||
-                          (toDate &&
-                            (!per.endDate || per.endDate >= toDate) &&
-                            (per?.startDate || 0) <= toDate)
-                      )
-                      if (action) {
-                        if (action.closure) {
-                          if (rp) {
-                            if (fromDate) {
-                              rp.startDate =
-                                fromDate < (rp.startDate || 99999999) ? fromDate : rp.startDate
-                            }
-                            if (toDate) {
-                              rp.endDate = toDate > (rp.endDate || 0) ? toDate : rp.endDate
-                            }
-                            rp.endDate = actionDate > (rp.endDate || 0) ? actionDate : rp.endDate
-                            if (action.newHcp) {
-                              rp.comment =
-                                (rp.comment + " " || "") + `Transferred to ${action.newHcp}`
-                            }
-                          } else {
-                            const endDate =
-                              actionDate || toDate
-                                ? (toDate || 0) > actionDate
-                                  ? toDate
-                                  : actionDate
-                                : moment().format("YYYYMMDD")
-                            const startDate = fromDate ? fromDate : moment().format("YYYYMMDD")
-                            referralPeriods.push(
-                              new ReferralPeriod({
-                                startDate: startDate,
-                                endDate: endDate,
-                                comment: `Transferred to ${action.newHcp ? action.newHcp : ""}`
-                              })
-                            )
+                    const rp: ReferralPeriod | undefined = referralPeriods.find(
+                      per =>
+                        ((!per.endDate || per.endDate >= actionDate) &&
+                          (per?.startDate || 0) <= actionDate) ||
+                        (fromDate &&
+                          (!per.endDate || per.endDate >= fromDate) &&
+                          (per?.startDate || 0) <= fromDate) ||
+                        (toDate &&
+                          (!per.endDate || per.endDate >= toDate) &&
+                          (per?.startDate || 0) <= toDate)
+                    )
+                    if (action) {
+                      if (action.closure) {
+                        if (rp) {
+                          if (fromDate) {
+                            rp.startDate =
+                              fromDate < (rp.startDate || 99999999) ? fromDate : rp.startDate
+                          }
+                          if (toDate) {
+                            rp.endDate = toDate > (rp.endDate || 0) ? toDate : rp.endDate
+                          }
+                          rp.endDate = actionDate > (rp.endDate || 0) ? actionDate : rp.endDate
+                          if (action.newHcp) {
+                            rp.comment =
+                              (rp.comment + " " || "") + `Transferred to ${action.newHcp}`
                           }
                         } else {
-                          if (rp) {
-                            if (fromDate) {
-                              rp.startDate =
-                                fromDate < (rp.startDate || 99999999) ? fromDate : rp.startDate
-                            }
+                          const endDate =
+                            actionDate || toDate
+                              ? (toDate || 0) > actionDate
+                                ? toDate
+                                : actionDate
+                              : moment().format("YYYYMMDD")
+                          const startDate = fromDate ? fromDate : moment().format("YYYYMMDD")
+                          referralPeriods.push(
+                            new ReferralPeriod({
+                              startDate: startDate,
+                              endDate: endDate,
+                              comment: `Transferred to ${action.newHcp ? action.newHcp : ""}`
+                            })
+                          )
+                        }
+                      } else {
+                        if (rp) {
+                          if (fromDate) {
                             rp.startDate =
-                              actionDate < (rp.startDate || 99999999) ? actionDate : rp.startDate
-                            if (toDate) {
-                              rp.endDate = toDate > (rp.endDate || 0) ? toDate : rp.endDate
-                            }
-                          } else {
-                            const endDate = toDate ? toDate : null
-                            const startDate =
-                              actionDate || fromDate
-                                ? (fromDate || 99999999) < actionDate
-                                  ? fromDate
-                                  : actionDate
-                                : moment().format("YYYYMMDD")
-                            referralPeriods.push(
-                              new ReferralPeriod({
-                                startDate: startDate,
-                                endDate: endDate,
-                                comment: `New Referral to ${
-                                  action.newHcp ? action.newHcp : "unknown"
-                                }`
-                              })
-                            )
+                              fromDate < (rp.startDate || 99999999) ? fromDate : rp.startDate
                           }
+                          rp.startDate =
+                            actionDate < (rp.startDate || 99999999) ? actionDate : rp.startDate
+                          if (toDate) {
+                            rp.endDate = toDate > (rp.endDate || 0) ? toDate : rp.endDate
+                          }
+                        } else {
+                          const endDate = toDate ? toDate : null
+                          const startDate =
+                            actionDate || fromDate
+                              ? (fromDate || 99999999) < actionDate
+                                ? fromDate
+                                : actionDate
+                              : moment().format("YYYYMMDD")
+                          referralPeriods.push(
+                            new ReferralPeriod({
+                              startDate: startDate,
+                              endDate: endDate,
+                              comment: `New Referral to ${
+                                action.newHcp ? action.newHcp : "unknown"
+                              }`
+                            })
+                          )
                         }
                       }
-                    })
-                    p.patientHealthCareParties = p.patientHealthCareParties.map(phcpTemp => {
-                      if (!phcpTemp.referralPeriods) {
-                        phcpTemp.referralPeriods = []
-                      }
-                      phcpTemp.referralPeriods = phcpTemp?.referralPeriods?.sort(
-                        (a, b) => (a.startDate || 0) - (b.startDate || 0)
-                      )
-                      const lastRp = phcpTemp?.referralPeriods?.length
-                        ? phcpTemp.referralPeriods[phcpTemp.referralPeriods.length - 1]
-                        : null
-                      phcpTemp.referral = lastRp
-                        ? !Boolean(lastRp.endDate) ||
-                          (lastRp?.endDate || 99999999) > Number(moment().format("YYYYMMDD"))
-                        : false
-                      return phcpTemp
-                    })
-                    return p
+                    }
                   })
-                )
+                  p.patientHealthCareParties = p.patientHealthCareParties.map(phcpTemp => {
+                    if (!phcpTemp.referralPeriods) {
+                      phcpTemp.referralPeriods = []
+                    }
+                    phcpTemp.referralPeriods = phcpTemp?.referralPeriods?.sort(
+                      (a, b) => (a.startDate || 0) - (b.startDate || 0)
+                    )
+                    const lastRp = phcpTemp?.referralPeriods?.length
+                      ? phcpTemp.referralPeriods[phcpTemp.referralPeriods.length - 1]
+                      : null
+                    phcpTemp.referral = lastRp
+                      ? !Boolean(lastRp.endDate) ||
+                        (lastRp?.endDate || 99999999) > Number(moment().format("YYYYMMDD"))
+                      : false
+                    return phcpTemp
+                  })
+                  return p
+                })
               )
+            )
           )
           .then(pats =>
-            this.patientApi.bulkUpdatePatients(pats || []).catch(() => {
-              let catchProm: Promise<Patient[]> = Promise.resolve([])
-              let newPats: Patient[] = []
-              ;(pats || []).forEach((pat: Patient) => {
-                catchProm = catchProm.then(() =>
-                  this.patientApi.modifyPatient(pat).then(p => (newPats = newPats.concat(p)))
-                )
+            retry(() =>
+              this.patientApi.bulkUpdatePatients(pats || []).catch(() => {
+                let catchProm: Promise<Patient[]> = Promise.resolve([])
+                let newPats: Patient[] = []
+                ;(pats || []).forEach((pat: Patient) => {
+                  catchProm = catchProm.then(() =>
+                    this.patientApi.modifyPatient(pat).then(p => (newPats = newPats.concat(p)))
+                  )
+                })
+                return catchProm
               })
-              return catchProm
-            })
+            )
           )
       })
       return promPatient.then(() => [ackHashes, msgHashes])
@@ -549,24 +570,34 @@ export class MessageXApi {
         subject: inss
           ? `${msgName} from IO ${dmgMessage.io} for ${inss}`
           : `${msgName} from IO ${dmgMessage.io}`,
-        senderReferences: {
-          inputReference: dmgMessage.commonOutput && dmgMessage.commonOutput.inputReference,
-          outputReference: dmgMessage.commonOutput && dmgMessage.commonOutput.outputReference,
-          nipReference: dmgMessage.commonOutput && dmgMessage.commonOutput.nipReference
-        }
+        senderReferences: dmgMessage.commonOutput
+          ? {
+              ...(dmgMessage.commonOutput.inputReference
+                ? { inputReference: dmgMessage.commonOutput.inputReference }
+                : {}),
+              ...(dmgMessage.commonOutput.nipReference
+                ? { nipReference: dmgMessage.commonOutput.nipReference }
+                : {}),
+              ...(dmgMessage.commonOutput.outputReference
+                ? { outputReference: dmgMessage.commonOutput.outputReference }
+                : {})
+            }
+          : undefined
       })
-      .then(msg => this.api.createMessage(msg))
+      .then(msg => retry(() => this.api.createMessage(msg)))
       .then(msg => {
         return docXApi
           .newInstance(user, msg, {
             name: `${msg.subject}_content.json`
           })
-          .then(doc => docXApi.createDocument(doc))
+          .then(doc => retry(() => docXApi.createDocument(doc)))
           .then(doc =>
-            docXApi.setClearDocumentAttachment(
-              doc,
-              <any>ua2ab(utf8_2ua(JSON.stringify(dmgMessage))),
-              ["public.json"]
+            retry(() =>
+              docXApi.setClearDocumentAttachment(
+                doc,
+                <any>ua2ab(utf8_2ua(JSON.stringify(dmgMessage))),
+                ["public.json"]
+              )
             )
           )
           .then(() => msg)
@@ -900,11 +931,19 @@ export class MessageXApi {
             received: +new Date(),
             subject: messageType,
             parentId: parentMessage.id,
-            senderReferences: {
-              inputReference: efactMessage.commonOutput!!.inputReference,
-              outputReference: efactMessage.commonOutput!!.outputReference,
-              nipReference: efactMessage.commonOutput!!.nipReference
-            }
+            senderReferences: efactMessage.commonOutput
+              ? {
+                  ...(efactMessage.commonOutput.inputReference
+                    ? { inputReference: efactMessage.commonOutput.inputReference }
+                    : {}),
+                  ...(efactMessage.commonOutput.nipReference
+                    ? { nipReference: efactMessage.commonOutput.nipReference }
+                    : {}),
+                  ...(efactMessage.commonOutput.outputReference
+                    ? { outputReference: efactMessage.commonOutput.outputReference }
+                    : {})
+                }
+              : undefined
           })
           .then(msg => this.api.createMessage(msg))
           .then(msg =>
@@ -1100,33 +1139,39 @@ export class MessageXApi {
                 parentMessage.status = (parentMessage.status || 0) | statuses
 
                 if (batchErrors.length) {
-                  parentMessage.metas = _.assign(parentMessage.metas || {}, {
-                    errors: _(batchErrors)
-                      .map(this.extractErrorMessage)
-                      .uniq()
-                      .compact()
-                      .value()
-                      .join("; ")
-                  })
+                  parentMessage.metas = Object.entries(
+                    _.assign(parentMessage.metas || {}, {
+                      errors: _(batchErrors)
+                        .map(this.extractErrorMessage)
+                        .uniq()
+                        .compact()
+                        .value()
+                        .join("; ")
+                    })
+                  ).reduce((acc, [k, v]) => (!!v ? { ...acc, [k]: v } : acc), {})
                 }
 
                 if (parsedRecords.et91) {
                   let et91s = parsedRecords.et91 as Array<ET91Data>
-                  parentMessage.metas = _.assign(parentMessage.metas || {}, {
-                    paymentReferenceAccount1: _(et91s)
-                      .map(et91 => et91.paymentReferenceAccount1)
-                      .uniq()
-                      .value()
-                      .join(", ")
-                  })
+                  parentMessage.metas = Object.entries(
+                    _.assign(parentMessage.metas || {}, {
+                      paymentReferenceAccount1: _(et91s)
+                        .map(et91 => et91.paymentReferenceAccount1)
+                        .uniq()
+                        .value()
+                        .join(", ")
+                    })
+                  ).reduce((acc, [k, v]) => (!!v ? { ...acc, [k]: v } : acc), {})
                 }
                 if (parsedRecords.et92) {
                   let et92 = parsedRecords.et92 as ET92Data
-                  parentMessage.metas = _.assign(parentMessage.metas || {}, {
-                    totalAskedAmount: Number(et92.totalAskedAmount) / 100,
-                    totalAcceptedAmount: Number(et92.totalAcceptedAmount) / 100,
-                    totalRejectedAmount: Number(et92.totalRejectedAmount) / 100
-                  })
+                  parentMessage.metas = Object.entries(
+                    _.assign(parentMessage.metas || {}, {
+                      totalAskedAmount: Number(et92.totalAskedAmount) / 100,
+                      totalAcceptedAmount: Number(et92.totalAcceptedAmount) / 100,
+                      totalRejectedAmount: Number(et92.totalRejectedAmount) / 100
+                    })
+                  ).reduce((acc, [k, v]) => (!!v ? { ...acc, [k]: v } : acc), {})
                 }
                 return this.api
                   .modifyMessage(parentMessage)
@@ -1264,7 +1309,7 @@ export class MessageXApi {
                           sent: sentDate,
                           status:
                             (message.status || 0) | (res.success ? 1 << 7 : 0) /*STATUS_SENT*/,
-                          metas: {
+                          metas: Object.entries({
                             ioFederationCode: batch.ioFederationCode,
                             numericalRef: batch.numericalRef,
                             invoiceMonth: _.padStart("" + batch.invoicingMonth, 2, "0"),
@@ -1272,7 +1317,7 @@ export class MessageXApi {
                             totalAmount: totalAmount,
                             fhc_server: fhcServer,
                             errors: res.error
-                          }
+                          }).reduce((acc, [k, v]) => (!!v ? { ...acc, [k]: v } : acc), {})
                         })
                       )
                     )
