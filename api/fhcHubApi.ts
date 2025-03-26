@@ -1318,7 +1318,8 @@ export class fhcHubApi {
     patientSsin: string,
     hubPackageId?: string,
     patientEidCardNumber?: string,
-    patientIsiCardNumber?: string
+    patientIsiCardNumber?: string,
+    therLinkType?: string
   ): Promise<RevokeTherapeuticLinkResponse> {
     let _body = null
 
@@ -1340,7 +1341,8 @@ export class fhcHubApi {
         : "") +
       (patientIsiCardNumber
         ? "&patientIsiCardNumber=" + encodeURIComponent(String(patientIsiCardNumber))
-        : "")
+        : "") +
+      (therLinkType ? "&therLinkType=" + encodeURIComponent(String(therLinkType)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
