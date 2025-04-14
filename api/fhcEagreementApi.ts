@@ -47,6 +47,9 @@ export class fhcEagreementApi {
    * @param hcpSsin hcpSsin
    * @param hcpFirstName hcpFirstName
    * @param hcpLastName hcpLastName
+   * @param prescriberNihii
+   * @param prescriberFirstName
+   * @param prescriberLastName
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
@@ -74,6 +77,9 @@ export class fhcEagreementApi {
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
+    prescriberNihii: string,
+    prescriberFirstName: string,
+    prescriberLastName: string,
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
@@ -101,6 +107,13 @@ export class fhcEagreementApi {
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
+      (prescriberNihii ? "&prescriberNihii=" + encodeURIComponent(String(prescriberNihii)) : "") +
+      (prescriberFirstName
+        ? "&prescriberFirstName=" + encodeURIComponent(String(prescriberFirstName))
+        : "") +
+      (prescriberLastName
+        ? "&prescriberLastName=" + encodeURIComponent(String(prescriberLastName))
+        : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
@@ -151,6 +164,9 @@ export class fhcEagreementApi {
    * @param hcpSsin hcpSsin
    * @param hcpFirstName hcpFirstName
    * @param hcpLastName hcpLastName
+   * @param prescriberNihii
+   * @param prescriberFirstName
+   * @param prescriberLastName
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
@@ -181,6 +197,9 @@ export class fhcEagreementApi {
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
+    prescriberNihii: string,
+    prescriberFirstName: string,
+    prescriberLastName: string,
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
@@ -214,6 +233,13 @@ export class fhcEagreementApi {
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
+      (prescriberNihii ? "&prescriberNihii=" + encodeURIComponent(String(prescriberNihii)) : "") +
+      (prescriberFirstName
+        ? "&prescriberFirstName=" + encodeURIComponent(String(prescriberFirstName))
+        : "") +
+      (prescriberLastName
+        ? "&prescriberLastName=" + encodeURIComponent(String(prescriberLastName))
+        : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +
@@ -352,6 +378,9 @@ export class fhcEagreementApi {
    * @param hcpSsin hcpSsin
    * @param hcpFirstName hcpFirstName
    * @param hcpLastName hcpLastName
+   * @param prescriberNihii
+   * @param prescriberFirstName
+   * @param prescriberLastName
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
@@ -379,6 +408,9 @@ export class fhcEagreementApi {
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
+    prescriberNihii: string,
+    prescriberFirstName: string,
+    prescriberLastName: string,
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
@@ -409,6 +441,13 @@ export class fhcEagreementApi {
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
+      (prescriberNihii ? "&prescriberNihii=" + encodeURIComponent(String(prescriberNihii)) : "") +
+      (prescriberFirstName
+        ? "&prescriberFirstName=" + encodeURIComponent(String(prescriberFirstName))
+        : "") +
+      (prescriberLastName
+        ? "&prescriberLastName=" + encodeURIComponent(String(prescriberLastName))
+        : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +
@@ -551,6 +590,9 @@ export class fhcEagreementApi {
    * @param hcpSsin hcpSsin
    * @param hcpFirstName hcpFirstName
    * @param hcpLastName hcpLastName
+   * @param prescriberNihii
+   * @param prescriberFirstName
+   * @param prescriberLastName
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
@@ -582,6 +624,9 @@ export class fhcEagreementApi {
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
+    prescriberNihii: string,
+    prescriberFirstName: string,
+    prescriberLastName: string,
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
@@ -616,6 +661,13 @@ export class fhcEagreementApi {
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
+      (prescriberNihii ? "&prescriberNihii=" + encodeURIComponent(String(prescriberNihii)) : "") +
+      (prescriberFirstName
+        ? "&prescriberFirstName=" + encodeURIComponent(String(prescriberFirstName))
+        : "") +
+      (prescriberLastName
+        ? "&prescriberLastName=" + encodeURIComponent(String(prescriberLastName))
+        : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +
