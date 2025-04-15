@@ -25,11 +25,12 @@ export class AgreementResponse {
     )
   }
 
-  acknowledged?: boolean
+  isAcknowledged?: boolean
   commonOutput?: CommonOutput
   content?: ArrayBuffer
   errors?: Array<MycarenetError>
   mycarenetConversation?: MycarenetConversation
   transactions?: Array<AgreementTransaction>
   warnings?: Array<MycarenetError>
+  xades?: ArrayBuffer
 }

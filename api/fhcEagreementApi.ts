@@ -47,9 +47,9 @@ export class fhcEagreementApi {
    * @param hcpSsin hcpSsin
    * @param hcpFirstName hcpFirstName
    * @param hcpLastName hcpLastName
-   * @param prescriberNihii
-   * @param prescriberFirstName
-   * @param prescriberLastName
+   * @param prescriberNihii prescriberNihii
+   * @param prescriberFirstName prescriberFirstName
+   * @param prescriberLastName prescriberLastName
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
@@ -61,11 +61,10 @@ export class fhcEagreementApi {
    * @param patientIoMembership patientIoMembership
    * @param orgNihii orgNihii
    * @param organizationType organizationType
-   * @param annex1 annex1
-   * @param annex2 annex2
    * @param agreementType agreementType
-   * @param numberOfSessionForAnnex1 numberOfSessionForAnnex1
-   * @param numberOfSessionForAnnex2 numberOfSessionForAnnex2
+   * @param numberOfSessionForPrescription1 numberOfSessionForPrescription1
+   * @param numberOfSessionForPrescription2 numberOfSessionForPrescription2
+   * @param attachments attachments
    */
   argueAgreementUsingPOST(
     xFHCKeystoreId: string,
@@ -91,14 +90,13 @@ export class fhcEagreementApi {
     patientIoMembership?: string,
     orgNihii?: string,
     organizationType?: string,
-    annex1?: string,
-    annex2?: string,
     agreementType?: string,
-    numberOfSessionForAnnex1?: number,
-    numberOfSessionForAnnex2?: number
+    numberOfSessionForPrescription1?: number,
+    numberOfSessionForPrescription2?: number,
+    attachments?: { type: string; data: string }[]
   ): Promise<AgreementResponse> {
     let _body = null
-
+    _body = attachments;
     const _url =
       this.host +
       `/eagreement/argueAgreement` +
@@ -134,16 +132,17 @@ export class fhcEagreementApi {
       (organizationType
         ? "&organizationType=" + encodeURIComponent(String(organizationType))
         : "") +
-      (annex1 ? "&annex1=" + encodeURIComponent(String(annex1)) : "") +
-      (annex2 ? "&annex2=" + encodeURIComponent(String(annex2)) : "") +
       (agreementType ? "&agreementType=" + encodeURIComponent(String(agreementType)) : "") +
-      (numberOfSessionForAnnex1
-        ? "&numberOfSessionForAnnex1=" + encodeURIComponent(String(numberOfSessionForAnnex1))
+      (numberOfSessionForPrescription1
+        ? "&numberOfSessionForPrescription1=" + encodeURIComponent(String(numberOfSessionForPrescription1))
         : "") +
-      (numberOfSessionForAnnex2
-        ? "&numberOfSessionForAnnex2=" + encodeURIComponent(String(numberOfSessionForAnnex2))
+      (numberOfSessionForPrescription2
+        ? "&numberOfSessionForPrescription2=" + encodeURIComponent(String(numberOfSessionForPrescription2))
         : "")
     let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
@@ -160,13 +159,12 @@ export class fhcEagreementApi {
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpQuality hcpQuality
    * @param hcpNihii hcpNihii
-   * @param hcpName hcpName
    * @param hcpSsin hcpSsin
    * @param hcpFirstName hcpFirstName
    * @param hcpLastName hcpLastName
-   * @param prescriberNihii
-   * @param prescriberFirstName
-   * @param prescriberLastName
+   * @param prescriberNihii prescriberNihii
+   * @param prescriberFirstName prescriberFirstName
+   * @param prescriberLastName prescriberLastName
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
@@ -179,13 +177,12 @@ export class fhcEagreementApi {
    * @param patientIoMembership patientIoMembership
    * @param orgNihii orgNihii
    * @param organizationType organizationType
-   * @param annex1 annex1
-   * @param annex2 annex2
    * @param agreementStartDate agreementStartDate
    * @param agreementEndDate agreementEndDate
    * @param agreementType agreementType
-   * @param numberOfSessionForAnnex1 numberOfSessionForAnnex1
-   * @param numberOfSessionForAnnex2 numberOfSessionForAnnex2
+   * @param numberOfSessionForPrescription1 numberOfSessionForPrescription1
+   * @param numberOfSessionForPrescription2 numberOfSessionForPrescription2
+   * @param attachments attachments
    */
   askAgreementUsingPOST(
     xFHCKeystoreId: string,
@@ -193,7 +190,6 @@ export class fhcEagreementApi {
     xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
-    hcpName: string,
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
@@ -205,23 +201,22 @@ export class fhcEagreementApi {
     patientGender: string,
     pathologyStartDate: number,
     pathologyCode: string,
-    sctCode?: string,
+    sctCode: string,
     sctDisplay?: string,
     patientSsin?: string,
     patientIo?: string,
     patientIoMembership?: string,
     orgNihii?: string,
     organizationType?: string,
-    annex1?: string,
-    annex2?: string,
     agreementStartDate?: number,
     agreementEndDate?: number,
     agreementType?: string,
-    numberOfSessionForAnnex1?: number,
-    numberOfSessionForAnnex2?: number
+    numberOfSessionForPrescription1?: number,
+    numberOfSessionForPrescription2?: number,
+    attachments?: { type: string; data: string }[]
   ): Promise<AgreementResponse> {
     let _body = null
-
+    _body = attachments;
     const _url =
       this.host +
       `/eagreement/askAgreement` +
@@ -229,7 +224,6 @@ export class fhcEagreementApi {
       new Date().getTime() +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
@@ -240,14 +234,17 @@ export class fhcEagreementApi {
       (prescriberLastName
         ? "&prescriberLastName=" + encodeURIComponent(String(prescriberLastName))
         : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
+      (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
+      (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
       (pathologyStartDate
-        ? "&pathologyStartDate=" + encodeURIComponent(String(pathologyStartDate))
-        : "") +
+          ? "&pathologyStartDate=" + encodeURIComponent(String(pathologyStartDate))
+          : "") +
       (pathologyCode ? "&pathologyCode=" + encodeURIComponent(String(pathologyCode)) : "") +
       (sctCode ? "&sctCode=" + encodeURIComponent(String(sctCode)) : "") +
       (sctDisplay ? "&sctDisplay=" + encodeURIComponent(String(sctDisplay)) : "") +
@@ -260,8 +257,6 @@ export class fhcEagreementApi {
       (organizationType
         ? "&organizationType=" + encodeURIComponent(String(organizationType))
         : "") +
-      (annex1 ? "&annex1=" + encodeURIComponent(String(annex1)) : "") +
-      (annex2 ? "&annex2=" + encodeURIComponent(String(annex2)) : "") +
       (agreementStartDate
         ? "&agreementStartDate=" + encodeURIComponent(String(agreementStartDate))
         : "") +
@@ -269,13 +264,16 @@ export class fhcEagreementApi {
         ? "&agreementEndDate=" + encodeURIComponent(String(agreementEndDate))
         : "") +
       (agreementType ? "&agreementType=" + encodeURIComponent(String(agreementType)) : "") +
-      (numberOfSessionForAnnex1
-        ? "&numberOfSessionForAnnex1=" + encodeURIComponent(String(numberOfSessionForAnnex1))
+      (numberOfSessionForPrescription1
+        ? "&numberOfSessionForPrescription1=" + encodeURIComponent(String(numberOfSessionForPrescription1))
         : "") +
-      (numberOfSessionForAnnex2
-        ? "&numberOfSessionForAnnex2=" + encodeURIComponent(String(numberOfSessionForAnnex2))
+      (numberOfSessionForPrescription2
+        ? "&numberOfSessionForPrescription2=" + encodeURIComponent(String(numberOfSessionForPrescription2))
         : "")
     let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
@@ -378,9 +376,9 @@ export class fhcEagreementApi {
    * @param hcpSsin hcpSsin
    * @param hcpFirstName hcpFirstName
    * @param hcpLastName hcpLastName
-   * @param prescriberNihii
-   * @param prescriberFirstName
-   * @param prescriberLastName
+   * @param prescriberNihii prescriberNihii
+   * @param prescriberFirstName prescriberFirstName
+   * @param prescriberLastName prescriberLastName
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
@@ -392,11 +390,10 @@ export class fhcEagreementApi {
    * @param patientIoMembership patientIoMembership
    * @param orgNihii orgNihii
    * @param organizationType organizationType
-   * @param annex1 annex1
-   * @param annex2 annex2
    * @param agreementType agreementType
-   * @param numberOfSessionForAnnex1 numberOfSessionForAnnex1
-   * @param numberOfSessionForAnnex2 numberOfSessionForAnnex2
+   * @param numberOfSessionForPrescription1 numberOfSessionForPrescription1
+   * @param numberOfSessionForPrescription2 numberOfSessionForPrescription2
+   * @param attachments attachments
    */
   completeAgreementUsingPOST(
     xFHCKeystoreId: string,
@@ -422,14 +419,13 @@ export class fhcEagreementApi {
     patientIoMembership?: string,
     orgNihii?: string,
     organizationType?: string,
-    annex1?: string,
-    annex2?: string,
     agreementType?: string,
-    numberOfSessionForAnnex1?: number,
-    numberOfSessionForAnnex2?: number
+    numberOfSessionForPrescription1?: number,
+    numberOfSessionForPrescription2?: number,
+    attachments?: { type: string; data: string }[]
   ): Promise<AgreementResponse> {
     let _body = null
-
+    _body = attachments;
     const _url =
       this.host +
       `/eagreement/completeAgreement` +
@@ -465,16 +461,17 @@ export class fhcEagreementApi {
       (organizationType
         ? "&organizationType=" + encodeURIComponent(String(organizationType))
         : "") +
-      (annex1 ? "&annex1=" + encodeURIComponent(String(annex1)) : "") +
-      (annex2 ? "&annex2=" + encodeURIComponent(String(annex2)) : "") +
       (agreementType ? "&agreementType=" + encodeURIComponent(String(agreementType)) : "") +
-      (numberOfSessionForAnnex1
-        ? "&numberOfSessionForAnnex1=" + encodeURIComponent(String(numberOfSessionForAnnex1))
+      (numberOfSessionForPrescription1
+        ? "&numberOfSessionForPrescription1=" + encodeURIComponent(String(numberOfSessionForPrescription1))
         : "") +
-      (numberOfSessionForAnnex2
-        ? "&numberOfSessionForAnnex2=" + encodeURIComponent(String(numberOfSessionForAnnex2))
+      (numberOfSessionForPrescription2
+        ? "&numberOfSessionForPrescription2=" + encodeURIComponent(String(numberOfSessionForPrescription2))
         : "")
     let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
@@ -580,19 +577,18 @@ export class fhcEagreementApi {
 
   /**
    *
-   * @summary extendAgreement
+   * @summary extendAgreementUsingPOST
    * @param xFHCKeystoreId X-FHC-keystoreId
    * @param xFHCTokenId X-FHC-tokenId
    * @param xFHCPassPhrase X-FHC-passPhrase
    * @param hcpQuality hcpQuality
    * @param hcpNihii hcpNihii
-   * @param hcpName hcpName
    * @param hcpSsin hcpSsin
    * @param hcpFirstName hcpFirstName
    * @param hcpLastName hcpLastName
-   * @param prescriberNihii
-   * @param prescriberFirstName
-   * @param prescriberLastName
+   * @param prescriberNihii prescriberNihii
+   * @param prescriberFirstName prescriberFirstName
+   * @param prescriberLastName prescriberLastName
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
@@ -606,13 +602,12 @@ export class fhcEagreementApi {
    * @param patientIoMembership patientIoMembership
    * @param orgNihii orgNihii
    * @param organizationType organizationType
-   * @param annex1 annex1
-   * @param annex2 annex2
    * @param agreementStartDate agreementStartDate
    * @param agreementEndDate agreementEndDate
    * @param agreementType agreementType
-   * @param numberOfSessionForAnnex1 numberOfSessionForAnnex1
-   * @param numberOfSessionForAnnex2 numberOfSessionForAnnex2
+   * @param numberOfSessionForPrescription1 numberOfSessionForPrescription1
+   * @param numberOfSessionForPrescription2 numberOfSessionForPrescription2
+   * @param attachments attachments
    */
   extendAgreementUsingPOST(
     xFHCKeystoreId: string,
@@ -620,7 +615,6 @@ export class fhcEagreementApi {
     xFHCPassPhrase: string,
     hcpQuality: string,
     hcpNihii: string,
-    hcpName: string,
     hcpSsin: string,
     hcpFirstName: string,
     hcpLastName: string,
@@ -640,16 +634,15 @@ export class fhcEagreementApi {
     patientIoMembership?: string,
     orgNihii?: string,
     organizationType?: string,
-    annex1?: string,
-    annex2?: string,
     agreementStartDate?: number,
     agreementEndDate?: number,
     agreementType?: string,
-    numberOfSessionForAnnex1?: number,
-    numberOfSessionForAnnex2?: number
+    numberOfSessionForPrescription1?: number,
+    numberOfSessionForPrescription2?: number,
+    attachments?: { type: string; data: string }[]
   ): Promise<AgreementResponse> {
     let _body = null
-
+    _body = attachments;
     const _url =
       this.host +
       `/eagreement/extendAgreement` +
@@ -657,7 +650,6 @@ export class fhcEagreementApi {
       new Date().getTime() +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
-      (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
       (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
       (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
       (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
@@ -689,8 +681,6 @@ export class fhcEagreementApi {
       (organizationType
         ? "&organizationType=" + encodeURIComponent(String(organizationType))
         : "") +
-      (annex1 ? "&annex1=" + encodeURIComponent(String(annex1)) : "") +
-      (annex2 ? "&annex2=" + encodeURIComponent(String(annex2)) : "") +
       (agreementStartDate
         ? "&agreementStartDate=" + encodeURIComponent(String(agreementStartDate))
         : "") +
@@ -698,13 +688,16 @@ export class fhcEagreementApi {
         ? "&agreementEndDate=" + encodeURIComponent(String(agreementEndDate))
         : "") +
       (agreementType ? "&agreementType=" + encodeURIComponent(String(agreementType)) : "") +
-      (numberOfSessionForAnnex1
-        ? "&numberOfSessionForAnnex1=" + encodeURIComponent(String(numberOfSessionForAnnex1))
+      (numberOfSessionForPrescription1
+        ? "&numberOfSessionForPrescription1=" + encodeURIComponent(String(numberOfSessionForPrescription1))
         : "") +
-      (numberOfSessionForAnnex2
-        ? "&numberOfSessionForAnnex2=" + encodeURIComponent(String(numberOfSessionForAnnex2))
+      (numberOfSessionForPrescription2
+        ? "&numberOfSessionForPrescription2=" + encodeURIComponent(String(numberOfSessionForPrescription2))
         : "")
     let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
