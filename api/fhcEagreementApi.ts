@@ -234,9 +234,6 @@ export class fhcEagreementApi {
       (prescriberLastName
         ? "&prescriberLastName=" + encodeURIComponent(String(prescriberLastName))
         : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
-      (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +
