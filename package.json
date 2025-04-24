@@ -1,6 +1,6 @@
 {
   "name": "@icure/be-fhc-api",
-  "version": "0.5.16",
+  "version": "0.5.18",
   "description": "Typescript version of Freehealth Connector standalone API client",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,10 +8,10 @@
     "lodash": "^4.17.20"
   },
   "peerDependencies": {
-    "@icure/api": "~8.2.0"
+    "@icure/api": ">=8.2.0 <8.4.0"
   },
   "devDependencies": {
-    "@icure/api": "~8.2.3",
+    "@icure/api": "~8.3.3",
     "@types/chai": "^4.1.4",
     "@types/form-data": "^2.2.1",
     "@types/lodash": "^4.14.182",

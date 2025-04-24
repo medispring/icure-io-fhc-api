@@ -14,9 +14,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@icure/api@npm:~8.2.3":
-  version: 8.2.3
-  resolution: "@icure/api@npm:8.2.3"
+"@icure/api@npm:~8.3.3":
+  version: 8.3.3
+  resolution: "@icure/api@npm:8.3.3"
   dependencies:
     async-mutex: "npm:^0.5.0"
     big-integer: "npm:^1.6.52"
@@ -29,7 +29,7 @@ __metadata:
     uuid: "npm:^8.3.2"
     uuid-encoder: "npm:^1.1.0"
     ws: "npm:^8.18.0"
-  checksum: 10c0/dee2c912746fd5c53d6c09d48c5c9634cedd164ca081b93151cdc950dbfa1995a3b14c92af3b1d9464bd6d2e8b856ec56870326830ab502c16ea2cc3a1df1700
+  checksum: 10c0/c5a61ba65ef291cb799226fc33c384fb73ed77d7ca82d322cec7426cd212aef281054beba17b423852b3fd1708b3d6b530140b1d58aaed38fee74be5513c9d77
   languageName: node
   linkType: hard
 
@@ -37,7 +37,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@icure/be-fhc-api@workspace:."
   dependencies:
-    "@icure/api": "npm:~8.2.3"
+    "@icure/api": "npm:~8.3.3"
     "@types/chai": "npm:^4.1.4"
     "@types/form-data": "npm:^2.2.1"
     "@types/lodash": "npm:^4.14.182"
@@ -56,7 +56,7 @@ __metadata:
     ts-node: "npm:^7.0.1"
     typescript: "npm:^4.0.3"
   peerDependencies:
-    "@icure/api": ~8.2.0
+    "@icure/api": ">=8.2.0 <8.4.0"
   languageName: unknown
   linkType: soft
 
