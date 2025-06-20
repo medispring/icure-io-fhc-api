@@ -12,11 +12,10 @@
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class NameType {
+export class CompanyListType {
   constructor(json: JSON | any) {
-    Object.assign(this as NameType, json)
+    Object.assign(this as CompanyListType, json)
   }
 
-  lang?: string
-  value?: string
+  cbeNumber?: Array<string>
 }

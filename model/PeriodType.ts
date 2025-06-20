@@ -9,14 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { XMLGregorianCalendar } from "./XMLGregorianCalendar"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class NameType {
+export class PeriodType {
   constructor(json: JSON | any) {
-    Object.assign(this as NameType, json)
+    Object.assign(this as PeriodType, json)
   }
 
-  lang?: string
-  value?: string
+  endDate?: XMLGregorianCalendar
+  startDate?: XMLGregorianCalendar
 }

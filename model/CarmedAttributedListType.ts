@@ -9,14 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ConsultCarmedInterventionResultType } from "./ConsultCarmedInterventionResultType"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class NameType {
+export class CarmedAttributedListType {
   constructor(json: JSON | any) {
-    Object.assign(this as NameType, json)
+    Object.assign(this as CarmedAttributedListType, json)
   }
 
-  lang?: string
-  value?: string
+  carmed?: Array<ConsultCarmedInterventionResultType>
 }

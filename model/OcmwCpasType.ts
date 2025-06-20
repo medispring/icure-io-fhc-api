@@ -9,14 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { NameType } from "./NameType"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class NameType {
+export class OcmwCpasType {
   constructor(json: JSON | any) {
-    Object.assign(this as NameType, json)
+    Object.assign(this as OcmwCpasType, json)
   }
 
-  lang?: string
-  value?: string
+  cbeNumber?: string
+  municipalityIns?: string
+  name?: Array<NameType>
 }

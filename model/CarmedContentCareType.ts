@@ -9,14 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { MedicalCoverType } from "./MedicalCoverType"
+import { RefundPodmiSppisType } from "./RefundPodmiSppisType"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class NameType {
+export class CarmedContentCareType {
   constructor(json: JSON | any) {
-    Object.assign(this as NameType, json)
+    Object.assign(this as CarmedContentCareType, json)
   }
 
-  lang?: string
-  value?: string
+  medicalCover?: MedicalCoverType
+  refundPodmiSppis?: RefundPodmiSppisType
 }

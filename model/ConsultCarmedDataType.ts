@@ -9,14 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { BySsinType } from "./BySsinType"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class NameType {
+export class ConsultCarmedDataType {
   constructor(json: JSON | any) {
-    Object.assign(this as NameType, json)
+    Object.assign(this as ConsultCarmedDataType, json)
   }
 
-  lang?: string
-  value?: string
+  bySsin?: BySsinType
 }

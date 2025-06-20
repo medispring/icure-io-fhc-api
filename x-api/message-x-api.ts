@@ -147,13 +147,13 @@ export class MessageXApi {
             }
           : undefined
       })
-      .then(msg => retry(() => this.api.createMessage(msg)))
+      .then(msg => retry(() => this.api.createMessageWithUser(user, msg)))
       .then(msg => {
         return this.documentXApi
           .newInstance(user, msg, {
             name: `${msg.subject}_content.json`
           })
-          .then(doc => retry(() => this.documentXApi.createDocument(doc)))
+          .then(doc => retry(() => this.documentXApi.createDocumentWithUser(user, doc)))
           .then(doc =>
             retry(() =>
               this.documentXApi.setClearDocumentAttachment(
@@ -181,7 +181,14 @@ export class MessageXApi {
       promAck = promAck
         .then(() =>
           retry(() =>
-            this.api.findMessagesByTransportGuid(`GMD:OUT:${ref}`, false, undefined, undefined, 100)
+            this.api.findMessagesByTransportGuidWithUser(
+              user,
+              `GMD:OUT:${ref}`,
+              false,
+              undefined,
+              undefined,
+              100
+            )
           )
         )
         .then(parents => {
@@ -255,7 +262,14 @@ export class MessageXApi {
       promMsg = promMsg.then(acc => {
         let ref = (dmgsMsgList.appliesTo || "").replace("urn:nip:reference:input:", "")
         return retry(() =>
-          this.api.findMessagesByTransportGuid(`GMD:OUT:${ref}`, false, undefined, undefined, 100)
+          this.api.findMessagesByTransportGuidWithUser(
+            user,
+            `GMD:OUT:${ref}`,
+            false,
+            undefined,
+            undefined,
+            100
+          )
         )
           .then(parents => {
             const msgsForHcp = ((parents && parents.rows) || []).filter(
@@ -584,13 +598,13 @@ export class MessageXApi {
             }
           : undefined
       })
-      .then(msg => retry(() => this.api.createMessage(msg)))
+      .then(msg => retry(() => this.api.createMessageWithUser(user, msg)))
       .then(msg => {
         return docXApi
           .newInstance(user, msg, {
             name: `${msg.subject}_content.json`
           })
-          .then(doc => retry(() => docXApi.createDocument(doc)))
+          .then(doc => retry(() => docXApi.createDocumentWithUser(user, doc)))
           .then(doc =>
             retry(() =>
               docXApi.setClearDocumentAttachment(
@@ -743,7 +757,14 @@ export class MessageXApi {
     const ref = Number(refStr!!) % 10000000000
 
     return this.api
-      .findMessagesByTransportGuid("EFACT:BATCH:" + ref, false, undefined, undefined, 100)
+      .findMessagesByTransportGuidWithUser(
+        user,
+        "EFACT:BATCH:" + ref,
+        false,
+        undefined,
+        undefined,
+        100
+      )
       .then(parents => {
         const msgsForHcp = ((parents && parents.rows) || []).filter(
           (p: Message) => p.responsible === hcp.id
@@ -802,7 +823,14 @@ export class MessageXApi {
       ? Number(efactMessage.commonOutput!!.inputReference) % 10000000000
       : Number(efactMessage.commonOutput!!.outputReference!!.replace(/\D+/g, "")) % 10000000000
     return this.api
-      .findMessagesByTransportGuid("EFACT:BATCH:" + ref, false, undefined, undefined, 100)
+      .findMessagesByTransportGuidWithUser(
+        user,
+        "EFACT:BATCH:" + ref,
+        false,
+        undefined,
+        undefined,
+        100
+      )
       .then(parents => {
         const msgsForHcp: Message[] = _.filter(
           parents && parents.rows,
@@ -945,7 +973,7 @@ export class MessageXApi {
                 }
               : undefined
           })
-          .then(msg => this.api.createMessage(msg))
+          .then(msg => this.api.createMessageWithUser(user, msg))
           .then(msg =>
             Promise.all([
               this.documentXApi.newInstance(user, msg, {
@@ -1174,7 +1202,7 @@ export class MessageXApi {
                   ).reduce((acc, [k, v]) => (!!v ? { ...acc, [k]: v } : acc), {})
                 }
                 return this.api
-                  .modifyMessage(parentMessage)
+                  .modifyMessageWithUser(user, parentMessage)
                   .then(
                     message =>
                       ({ message, invoices } as { message: Message; invoices: Array<Invoice> })

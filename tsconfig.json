@@ -9,12 +9,12 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "lib": ["es2017", "es6", "es5", "dom"],
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
     "baseUrl": "./",
-    "types": ["node"],
     "typeRoots": ["../node_modules/@types"]
   },
   "include": ["index.ts", "fhcApi.ts", "api/*", "model/*", "x-api/**.ts"]

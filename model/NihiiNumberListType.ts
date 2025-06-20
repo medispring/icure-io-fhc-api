@@ -12,11 +12,10 @@
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class NameType {
+export class NihiiNumberListType {
   constructor(json: JSON | any) {
-    Object.assign(this as NameType, json)
+    Object.assign(this as NihiiNumberListType, json)
   }
 
-  lang?: string
-  value?: string
+  nihiiNumber?: Array<string>
 }

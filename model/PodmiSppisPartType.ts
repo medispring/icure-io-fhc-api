@@ -9,14 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ZivAmiPatientPartType } from "./ZivAmiPatientPartType"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class NameType {
+export class PodmiSppisPartType {
   constructor(json: JSON | any) {
-    Object.assign(this as NameType, json)
+    Object.assign(this as PodmiSppisPartType, json)
   }
 
-  lang?: string
-  value?: string
+  ambulatoryCarePart?: ZivAmiPatientPartType
+  hospitalizationPart?: ZivAmiPatientPartType
+  otherPart?: ZivAmiPatientPartType
 }

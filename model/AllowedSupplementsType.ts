@@ -9,14 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SupplementTypeListType } from "./SupplementTypeListType"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class NameType {
+export class AllowedSupplementsType {
   constructor(json: JSON | any) {
-    Object.assign(this as NameType, json)
+    Object.assign(this as AllowedSupplementsType, json)
   }
 
-  lang?: string
-  value?: string
+  amountMaxAllowed?: number
+  supplementTypeList?: SupplementTypeListType
 }
