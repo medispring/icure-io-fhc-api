@@ -7,7 +7,7 @@
     "lodash": "^4.17.20"
   },
   "peerDependencies": {
-    "@icure/api": ">=8.4.0"
+    "@icure/api": ">=8.4.0 <8.5.0"
   },
   "devDependencies": {
     "@icure/api": "~8.4.0",

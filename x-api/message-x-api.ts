@@ -203,7 +203,7 @@ export class MessageXApi {
             (ack.date && moment(ack.date)) ||
             moment()
           ).format("YYYYMMDDHHmmss")
-          return retry(() => this.api.modifyMessage(parent))
+          return retry(() => this.api.modifyMessageWithUser(user, parent))
         })
         .catch(e => {
           console.log(e.message)
@@ -642,7 +642,7 @@ export class MessageXApi {
           inputReference: appliesTo && _.last(appliesTo.split(":"))
         }
       })
-      .then(msg => this.api.createMessage(msg))
+      .then(msg => this.api.createMessageWithUser(user, msg))
   }
 
   extractErrorMessage(error?: ErrorDetail): string | undefined {
@@ -802,7 +802,7 @@ export class MessageXApi {
               parentMessage.metas.sendingError = parentMessage.metas.errors
               delete parentMessage.metas.errors
             }
-            return this.api.modifyMessage(parentMessage)
+            return this.api.modifyMessageWithUser(user, parentMessage)
           })
       })
   }
@@ -988,24 +988,24 @@ export class MessageXApi {
             ])
               .then(([doc, jsonDoc, jsonParsedDoc]) =>
                 Promise.all([
-                  this.documentXApi.createDocument(doc),
-                  this.documentXApi.createDocument(jsonDoc),
-                  this.documentXApi.createDocument(jsonParsedDoc)
+                  this.documentXApi.createDocumentWithUser(user, doc),
+                  this.documentXApi.createDocumentWithUser(user, jsonDoc),
+                  this.documentXApi.createDocumentWithUser(user, jsonParsedDoc)
                 ])
               )
               .then(([doc, jsonDoc, jsonParsedDoc]) =>
                 Promise.all([
-                  this.documentXApi.setClearDocumentAttachment(
+                  this.documentXApi.encryptAndSetDocumentAttachment(
                     doc,
                     <any>ua2ab(utf8_2ua(efactMessage.detail!!)),
                     ["public.plain-text"]
                   ),
-                  this.documentXApi.setClearDocumentAttachment(
+                  this.documentXApi.encryptAndSetDocumentAttachment(
                     jsonDoc,
                     <any>ua2ab(utf8_2ua(JSON.stringify(efactMessage))),
                     ["public.json"]
                   ),
-                  this.documentXApi.setClearDocumentAttachment(
+                  this.documentXApi.encryptAndSetDocumentAttachment(
                     jsonParsedDoc,
                     <any>ua2ab(utf8_2ua(JSON.stringify(parsedRecords))),
                     ["public.json"]
@@ -1332,7 +1332,8 @@ export class MessageXApi {
                       })
                     )
                     .then(message =>
-                      this.api.createMessage(
+                      this.api.createMessageWithUser(
+                        user,
                         Object.assign(message, {
                           sent: sentDate,
                           status:
@@ -1381,8 +1382,8 @@ export class MessageXApi {
     ])
       .then(([jsonDoc, doc]) =>
         Promise.all([
-          this.documentXApi.createDocument(jsonDoc),
-          this.documentXApi.createDocument(doc)
+          this.documentXApi.createDocumentWithUser(user, jsonDoc),
+          this.documentXApi.createDocumentWithUser(user, doc)
         ])
       )
       .then(([jsonDoc, doc]) =>
