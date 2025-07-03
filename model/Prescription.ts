@@ -18,7 +18,7 @@ export class Prescription {
     Object.assign(this as Prescription, json)
   }
 
-  creationDate?: number
+  creationDate?: Date
   decryptedContent?: Kmehrmessage
   encryptionKeyId?: string
   feedbackAllowed?: boolean
@@ -28,6 +28,6 @@ export class Prescription {
   requestXml?: string
   rid?: string
   status?: string
-  validUntil?: number
+  validUntil?: Date
   visionByOthers?: string
 }

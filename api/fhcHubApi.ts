@@ -51,8 +51,8 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary convertKmehrXMLtoJSON
+   * This endpoint converts a Kmehr XML message to a JSON representation. It is useful for applications that need to process Kmehr messages in JSON format.
+   * @summary Utlity method to convert Kmehr XML to JSON
    * @param body message
    */
   convertKmehrXMLtoJSONUsingPOST(body?: string): Promise<Kmehrmessage> {
@@ -70,21 +70,21 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getAccessRight
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param sv sv
-   * @param sl sl
-   * @param value value
-   * @param hubPackageId hubPackageId
+   * This endpoint allows a healthcare provider to check the access rights of another healthcare provider to access a patient's data. It requires the healthcare provider's information and the identifiers of the document and the rights that need to be checked.
+   * @summary Get the access right for a healthcare provider to access a patient's data
+   * @param endpoint Endpoint URL of the hub (e.g., https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, etc.)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param sv The SV part of the identifier of the transaction. Obtained from the transaction list.
+   * @param sl The SL part of the identifier of the transaction. Obtained from the transaction list.
+   * @param value The value of the transaction to manage, usually the ID of the transaction
+   * @param hubPackageId The hub package ID, provided by the hub. This ID is usually different for acceptance and production environments.
    */
   getAccessRightUsingGET(
     endpoint: string,
@@ -128,18 +128,18 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getHcpConsent
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpNihii hcpNihii
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param hubPackageId hubPackageId
+   * This endpoint allows to retrieve the consent status of a healthcare provider that determines if an hcp has the right to access the hub. It requires the healthcare provider's information.
+   * @summary Get the consent status of a healthcare provider
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
    */
   getHcpConsentUsingGET(
     endpoint: string,
@@ -176,28 +176,28 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getPatientAuditTrail
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param hubPackageId hubPackageId
-   * @param from from
-   * @param to to
-   * @param authorNihii authorNihii
-   * @param authorSsin authorSsin
-   * @param isGlobal isGlobal
-   * @param breakTheGlassReason breakTheGlassReason
-   * @param ssin ssin
-   * @param sv sv
-   * @param sl sl
-   * @param id id
+   * This endpoint allows to retrieve the audit trail of a patient. It requires the healthcare provider's information, the patient's SSIN, and the hub package ID. The date range, author information, and transaction types can be provided to filter the results.
+   * @summary Get the audit trail of a patient
+   * @param endpoint value &#x3D; &#x27;The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)&#x27;
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param hubPackageId The hub package ID, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param from The start date of the search for transactions in format YYYYMMDD
+   * @param to The end date of the search for transactions in format YYYYMMDD
+   * @param authorNihii The Nihii of the author of the transaction, optional
+   * @param authorSsin The SSIN of the author of the transaction, optional
+   * @param isGlobal Whether the transaction search is global (on all hubs through intrahub) or local (on the hub where the request is made)
+   * @param breakTheGlassReason Allows a break the glass request (without a therapeutic link) by providing the reason for breaking the glass
+   * @param ssin The SSIN of the patient, optional
+   * @param sv The SV part of the identifier of the transaction, optional
+   * @param sl The SL part of the identifier of the transaction, optional
+   * @param id The ID of the transaction, optional
    */
   getPatientAuditTrailUsingGET(
     endpoint: string,
@@ -257,19 +257,19 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getPatientConsent
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
+   * This endpoint allows to retrieve a patient's consent from the hubs, in other words, the patient's consent of having institutions and healthcare providers put some information on the hubs. It requires the healthcare provider's information and the patient's SSIN.
+   * @summary Get a patient's consent
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
    */
   getPatientConsentUsingGET1(
     endpoint: string,
@@ -308,19 +308,19 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getPatient
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
+   * This endpoint allows to retrieve a patient's information from the hubs. It requires the healthcare provider's information and the patient's SSIN.
+   * @summary Get a patient from the hubs
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare party
+   * @param hcpFirstName The first name of the healthcare party
+   * @param hcpNihii The Nihii of the healthcare party
+   * @param hcpSsin The SSIN of the healthcare party
+   * @param hcpZip The ZIP code of the healthcare party
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
    */
   getPatientUsingGET(
     endpoint: string,
@@ -359,22 +359,22 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getTherapeuticLinks
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
-   * @param therLinkType therLinkType
-   * @param from from
-   * @param to to
+   * This endpoint allows to retrieve therapeutic links for a patient. It requires the healthcare provider's information, the patient's SSIN, and some optional parameters such as the type of therapeutic link, start and end dates.
+   * @summary Get therapeutic links for a patient
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param therLinkType The type of the therapeutic link to retrieve
+   * @param from The start date of the therapeutic link in format YYYYMMDD
+   * @param to The end date of the therapeutic link in format YYYYMMDD
    */
   getTherapeuticLinksUsingGET(
     endpoint: string,
@@ -420,25 +420,25 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getTransactionMessage
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param ssin ssin
-   * @param sv sv
-   * @param sl sl
-   * @param id id
-   * @param hubPackageId hubPackageId
-   * @param breakTheGlassReason breakTheGlassReason
-   * @param externalHubId externalHubId
-   * @param externalHubName externalHubName
+   * This endpoint allows to retrieve a specific transaction message for a patient. It requires the healthcare provider's information, the patient's SSIN, and the transaction ID.
+   * @summary Get a transaction of type message for a patient converted to JSON for easy frontend parsing
+   * @param endpoint Endpoint URL of the hub (e.g., https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, etc.)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param ssin The SSIN of the patient
+   * @param sv The SV part of the identifier of the transaction. Obtained from the transaction list.
+   * @param sl The SL part of the identifier of the transaction. Obtained from the transaction list.
+   * @param id The ID of the transaction to retrieve
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param breakTheGlassReason Allows a break the glass request (without a therapeutic link) by providing the reason for breaking the glass
+   * @param externalHubId The ID of the hub (1990000035 for RSW, 1990000728 for Abrumet, 1990000134 for Cozo, 1990001916 for Vitalink, ...)
+   * @param externalHubName The name of the hub
    */
   getTransactionMessageUsingGET(
     endpoint: string,
@@ -491,25 +491,25 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getTransactionSetMessage
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param ssin ssin
-   * @param sv sv
-   * @param sl sl
-   * @param id id
-   * @param hubPackageId hubPackageId
-   * @param breakTheGlassReason breakTheGlassReason
-   * @param externalHubId externalHubId
-   * @param externalHubName externalHubName
+   * This endpoint allows to retrieve a transaction set for a patient. It requires the healthcare provider's information, the patient's SSIN, and the transaction set identifier.
+   * @summary Get a transaction set (a collection of transactions) for a patient. This is mainly used for medication schemes. Returns the message in JSON format for easy frontend parsing.
+   * @param endpoint Endpoint URL of the hub (e.g., https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, etc.)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param ssin The SSIN of the patient
+   * @param sv The SV part of the identifier of the transaction set. Obtained from the transaction list.
+   * @param sl The SL part of the identifier of the transaction set. Obtained from the transaction list.
+   * @param id The ID of the transaction set to retrieve
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param breakTheGlassReason Allows a break the glass request (without a therapeutic link) by providing the reason for breaking the glass
+   * @param externalHubId The ID of the hub (1990000035 for RSW, 1990000728 for Abrumet, 1990000134 for Cozo, 1990001916 for Vitalink, ...)
+   * @param externalHubName The name of the hub
    */
   getTransactionSetMessageUsingGET(
     endpoint: string,
@@ -562,25 +562,25 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getTransactionSet
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param ssin ssin
-   * @param sv sv
-   * @param sl sl
-   * @param id id
-   * @param hubPackageId hubPackageId
-   * @param breakTheGlassReason breakTheGlassReason
-   * @param externalHubId externalHubId
-   * @param externalHubName externalHubName
+   * This endpoint allows to retrieve a transaction set for a patient. It requires the healthcare provider's information, the patient's SSIN, and the transaction set identifier.
+   * @summary Get a transaction set (a collection of transactions) for a patient. This is mainly used for medication schemes.
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param ssin The SSIN of the patient
+   * @param sv The SV part of the identifier of the transaction set. Obtained from the transaction list.
+   * @param sl The SL part of the identifier of the transaction set. Obtained from the transaction list.
+   * @param id The ID of the transaction set to retrieve
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param breakTheGlassReason Allows a break the glass request (without a therapeutic link) by providing the reason for breaking the glass
+   * @param externalHubId The ID of the hub (1990000035 for RSW, 1990000728 for Abrumet, 1990000134 for Cozo, 1990001916 for Vitalink, ...)
+   * @param externalHubName The name of the hub, if applicable
    */
   getTransactionSetUsingGET(
     endpoint: string,
@@ -633,25 +633,25 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getTransaction
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param ssin ssin
-   * @param sv sv
-   * @param sl sl
-   * @param id id
-   * @param hubPackageId hubPackageId
-   * @param breakTheGlassReason breakTheGlassReason
-   * @param externalHubId externalHubId
-   * @param externalHubName externalHubName
+   * This endpoint allows to retrieve a specific transaction for a patient. It requires the healthcare provider's information, the patient's SSIN, and the transaction ID.
+   * @summary Get a transaction (document, scan, ...) for a patient
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param ssin The SSIN of the patient
+   * @param sv The SV part of the identifier of the transaction. Obtained from the transaction list.
+   * @param sl The SL part of the identifier of the transaction. Obtained from the transaction list.
+   * @param id The ID of the transaction to retrieve
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param breakTheGlassReason Allows a break the glass request (without a therapeutic link) by providing the reason for breaking the glass
+   * @param externalHubId The ID of the hub (1990000035 for RSW, 1990000728 for Abrumet, 1990000134 for Cozo, 1990001916 for Vitalink, ...)
+   * @param externalHubName The name of the hub, if applicable
    */
   getTransactionUsingGET(
     endpoint: string,
@@ -704,26 +704,26 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary getTransactionsList
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
-   * @param from from
-   * @param to to
-   * @param authorNihii authorNihii
-   * @param authorSsin authorSsin
-   * @param isGlobal isGlobal
-   * @param breakTheGlassReason breakTheGlassReason
-   * @param transactionTypes transactionTypes
+   * This endpoint allows to retrieve the list of transactions for a patient. It requires the healthcare provider's information, the patient's SSIN, and the hub package ID. The date range, author information, and transaction types can be provided to filter the results.
+   * @summary Get the list of transactions (documents, scans, ...) for a patient
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param from The start date of the search for transactions in format YYYYMMDD
+   * @param to The end date of the search for transactions in format YYYYMMDD
+   * @param authorNihii The Nihii of the author of the transaction, optional
+   * @param authorSsin The SSIN of the author of the transaction, optional
+   * @param isGlobal Whether the transaction search is global (on all hubs through intrahub) or local (on the hub where the request is made)
+   * @param breakTheGlassReason Allows a break the glass request (without a therapeutic link) by providing the reason for breaking the glass
+   * @param transactionTypes The list of transaction types to filter the results, such as &#x27;document&#x27;, &#x27;scan&#x27;, &#x27;message&#x27;, etc. If not provided, all transaction types are returned.
    */
   getTransactionsListUsingGET(
     endpoint: string,
@@ -778,24 +778,24 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary putAccessRight
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param sv sv
-   * @param sl sl
-   * @param value value
-   * @param accessRight accessRight
-   * @param accessNihii accessNihii
-   * @param accessSsin accessSsin
-   * @param hubPackageId hubPackageId
+   * This endpoint allows a healthcare provider to manage access rights for another healthcare provider to access a patient's data. It requires the healthcare provider's information, the identifiers of the document and the rights that need to be set.
+   * @summary Put an access right for a healthcare provider to access a patient's data
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param sv The SV part of the identifier of the transaction. Obtained from the transaction list.
+   * @param sl The SL part of the identifier of the transaction. Obtained from the transaction list.
+   * @param value The value of the transaction to manage, usually the ID of the transaction
+   * @param accessRight The access right to set for the healthcare provider (allow, disallow)
+   * @param accessNihii The Nihii of the healthcare provider to allow/disallow access, optional
+   * @param accessSsin The SSIN of the healthcare provider to allow/disallow access, optional
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
    */
   putAccessRightUsingPOST(
     endpoint: string,
@@ -845,23 +845,23 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary putPatient
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param patientSsin patientSsin
-   * @param firstName firstName
-   * @param lastName lastName
-   * @param gender gender
-   * @param dateOfBirth dateOfBirth
-   * @param hubPackageId hubPackageId
+   * This endpoint allows to create or update a patient in the hubs. It requires the healthcare provider's information and the patient's details.It allows a healthcare provider to register a patient in the hub system, which is necessary for managing patient data and consent.
+   * @summary Create or update a patient in the hubs
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare party
+   * @param hcpFirstName The first name of the healthcare party
+   * @param hcpNihii The Nihii of the healthcare party
+   * @param hcpSsin The SSIN of the healthcare party
+   * @param hcpZip The ZIP code of the healthcare party
+   * @param patientSsin The SSIN of the patient
+   * @param firstName The first name of the patient
+   * @param lastName The last name of the patient
+   * @param gender The gender of the patient
+   * @param dateOfBirth The date of birth of the patient in YYYYMMDD format
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. THis ID is usually different for acceptance and production environments.
    */
   putPatientUsingPOST(
     endpoint: string,
@@ -909,22 +909,22 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary putTransactionSet
-   * @param body message
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param hubId hubId
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
-   * @param hubApplication hubApplication
+   * This endpoint allows a healthcare provider to put a transaction set for a patient. It requires the healthcare provider's information, the patient's SSIN, and the transaction set message.
+   * @summary Put a transaction set (a collection of transactions) for a patient. This is mainly used for medication schemes.
+   * @param body The transaction set message in Kmehr format
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param hubId The ID of the hub (1990000035 for RSW, 1990000728 for Abrumet, 1990000134 for Cozo, 1990001916 for Vitalink, ...)
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param hubApplication Legacy, leave as null.
    */
   putTransactionSetUsingPOST(
     endpoint: string,
@@ -971,22 +971,22 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary putTransaction
-   * @param body message
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param hubId hubId
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
-   * @param hubApplication hubApplication
+   * This endpoint allows a healthcare provider to put a transaction for a patient. It requires the healthcare provider's information, the patient's SSIN, and the transaction message.
+   * @summary Put a transaction (document, scan, ...) on the hubs for a patient
+   * @param body The transaction message in Kmehr format
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param hubId The ID of the hub (1990000035 for RSW, 1990000728 for Abrumet, 1990000134 for Cozo, 1990001916 for Vitalink, ...)
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param hubApplication Legacy, leave as null.
    */
   putTransactionUsingPOST(
     endpoint: string,
@@ -1033,21 +1033,21 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary registerPatientConsent
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
-   * @param patientEidCardNumber patientEidCardNumber
-   * @param patientIsiCardNumber patientIsiCardNumber
+   * This endpoint allows a healthcare provider to register a patient's consent in the hub system. It requires the healthcare provider's information and the patient's SSIN.It also requires some kind of proof of the patient's presence, such as an eid card number or isi card number for a child.
+   * @summary Register a patient consent
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param patientEidCardNumber The eid card number of the patient, if available
+   * @param patientIsiCardNumber The isi card number of the patient, if available
    */
   registerPatientConsentUsingPOST1(
     endpoint: string,
@@ -1094,23 +1094,24 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary registerTherapeuticLink
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
-   * @param patientEidCardNumber patientEidCardNumber
-   * @param patientIsiCardNumber patientIsiCardNumber
-   * @param from from
-   * @param to to
+   * A therapeutic link is a relationship between a healthcare provider and a patient that allows the healthcare provider to access the patient's data in the hub system. This endpoint allows a healthcare provider to register a therapeutic link for a patient. It requires the healthcare provider's information, the patient's SSIN, and some proof of presence such the eid card number, isi card number.
+   * @summary Register a therapeutic link for a patient
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param patientEidCardNumber The eid card number of the patient, if available
+   * @param patientIsiCardNumber The isi card number of the patient, if available
+   * @param therLinkType The type of the therapeutic link
+   * @param from The start date of the therapeutic link in format YYYYMMDD
+   * @param to The end date of the therapeutic link in format YYYYMMDD
    */
   registerTherapeuticLinkUsingPOST(
     endpoint: string,
@@ -1151,9 +1152,9 @@ export class fhcHubApi {
       (patientIsiCardNumber
         ? "&patientIsiCardNumber=" + encodeURIComponent(String(patientIsiCardNumber))
         : "") +
+      (therLinkType ? "&therLinkType=" + encodeURIComponent(String(therLinkType)) : "") +
       (from ? "&from=" + encodeURIComponent(String(from)) : "") +
-      (to ? "&to=" + encodeURIComponent(String(to)) : "") +
-      (therLinkType ? "&therLinkType=" + encodeURIComponent(String(therLinkType)) : "")
+      (to ? "&to=" + encodeURIComponent(String(to)) : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -1164,23 +1165,23 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary revokeAccessRight
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param sv sv
-   * @param sl sl
-   * @param value value
-   * @param accessNihii accessNihii
-   * @param accessSsin accessSsin
-   * @param hubPackageId hubPackageId
+   * This endpoint allows a healthcare provider to revoke access rights for another healthcare provider to access a patient's data. It requires the healthcare provider's information, the identifiers of the document and the identifier of the healthcare provider whose access needs to be revoked.
+   * @summary Revoke an access right for a healthcare provider to access a patient's data
+   * @param endpoint Endpoint URL of the hub (e.g., https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, etc.)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param sv The SV part of the identifier of the transaction. Obtained from the transaction list.
+   * @param sl The SL part of the identifier of the transaction. Obtained from the transaction list.
+   * @param value The value of the transaction to manage, usually the ID of the transaction
+   * @param accessNihii The Nihii of the healthcare provider to allow/disallow access, optional
+   * @param accessSsin The SSIN of the healthcare provider to allow/disallow access, optional
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
    */
   revokeAccessRightUsingDELETE(
     endpoint: string,
@@ -1228,21 +1229,21 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary revokePatientConsent
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
-   * @param patientEidCardNumber patientEidCardNumber
-   * @param patientIsiCardNumber patientIsiCardNumber
+   * This endpoint allows a healthcare provider to revoke a patient's consent in the hub system. It requires the healthcare provider's information and the patient's SSIN.It also requires some kind of proof of the patient's presence, such as an eid card number or isi card number for a child.
+   * @summary Revoke a patient's consent
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param patientEidCardNumber The eid card number of the patient, if available
+   * @param patientIsiCardNumber The isi card number of the patient, if available
    */
   revokePatientConsentUsingDELETE(
     endpoint: string,
@@ -1289,21 +1290,22 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary revokeTherapeuticLink
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param patientSsin patientSsin
-   * @param hubPackageId hubPackageId
-   * @param patientEidCardNumber patientEidCardNumber
-   * @param patientIsiCardNumber patientIsiCardNumber
+   * This endpoint allows a healthcare provider to revoke a therapeutic link for a patient. It requires the healthcare provider's information, the patient's SSIN, and some proof of presence such the eid card number, isi card number.
+   * @summary Revoke a therapeutic link for a patient
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param patientSsin The SSIN of the patient
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param patientEidCardNumber The eid card number of the patient, if available
+   * @param patientIsiCardNumber The isi card number of the patient, if available
+   * @param therLinkType The type of the therapeutic link to revoke
    */
   revokeTherapeuticLinkUsingDELETE(
     endpoint: string,
@@ -1353,23 +1355,23 @@ export class fhcHubApi {
   }
 
   /**
-   *
-   * @summary revokeTransaction
-   * @param endpoint endpoint
-   * @param xFHCKeystoreId X-FHC-keystoreId
-   * @param xFHCTokenId X-FHC-tokenId
-   * @param xFHCPassPhrase X-FHC-passPhrase
-   * @param hcpLastName hcpLastName
-   * @param hcpFirstName hcpFirstName
-   * @param hcpNihii hcpNihii
-   * @param hcpSsin hcpSsin
-   * @param hcpZip hcpZip
-   * @param ssin ssin
-   * @param sv sv
-   * @param sl sl
-   * @param id id
-   * @param hubPackageId hubPackageId
-   * @param breakTheGlassReason breakTheGlassReason
+   * This endpoint allows a healthcare provider to revoke a specific transaction for a patient. It requires the healthcare provider's information, the patient's SSIN, and the transaction ID.The actual deletion occurs if the healthcare provider has the right to do so, otherwise an error is triggered.
+   * @summary Delete a transaction (document, scan, ...) for a patient
+   * @param endpoint The endpoint URL of the hub (https://hub.reseausantewallon.be/HubServices/IntraHub/V3/IntraHub.asmx, https://hub.abrumet.be/hubservices/intrahub/v3/intrahub.asmx, https://services.cozo.be/IntrahubService/servicev3.asmx, https://vitalink.ehealth.fgov.be/vpmg/vitalink-gateway/IntraHubService, ...)
+   * @param xFHCKeystoreId The keystore ID for the certificate of the healthcare provider
+   * @param xFHCTokenId The token ID for the healthcare provider
+   * @param xFHCPassPhrase The passphrase for the keystore
+   * @param hcpLastName The last name of the healthcare provider
+   * @param hcpFirstName The first name of the healthcare provider
+   * @param hcpNihii The Nihii of the healthcare provider
+   * @param hcpSsin The SSIN of the healthcare provider
+   * @param hcpZip The ZIP code of the healthcare provider
+   * @param ssin The SSIN of the patient
+   * @param sv The SV part of the identifier of the transaction. Obtained from the transaction list.
+   * @param sl The SL part of the identifier of the transaction. Obtained from the transaction list.
+   * @param id The ID of the transaction to revoke
+   * @param hubPackageId The ID of the software package used to access the hub, provided by the hub. This ID is usually different for acceptance and production environments.
+   * @param breakTheGlassReason Allows a break the glass request (without a therapeutic link) by providing the reason for breaking the glass
    */
   revokeTransactionUsingDELETE(
     endpoint: string,

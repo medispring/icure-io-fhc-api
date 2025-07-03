@@ -9,28 +9,24 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AgreementTransaction } from "./AgreementTransaction"
+import { Author } from "./Author"
+import { CodeResult } from "./CodeResult"
 import { CommonOutput } from "./CommonOutput"
 import { MycarenetConversation } from "./MycarenetConversation"
 import { MycarenetError } from "./MycarenetError"
+import { Patient } from "./Patient"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class AgreementResponse {
+export class TarificationMediprimaConsultationResult {
   constructor(json: JSON | any) {
-    Object.assign(
-      this as AgreementResponse,
-      json,
-      json.content ? { content: decodeBase64(json.content) } : {}
-    )
+    Object.assign(this as TarificationMediprimaConsultationResult, json)
   }
 
-  acknowledged?: boolean
+  author?: Author
+  codeResults?: Array<CodeResult>
   commonOutput?: CommonOutput
-  content?: ArrayBuffer
   errors?: Array<MycarenetError>
   mycarenetConversation?: MycarenetConversation
-  transactions?: Array<AgreementTransaction>
-  warnings?: Array<MycarenetError>
-  xades?: ArrayBuffer
+  patient?: Patient
 }

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import { XHR } from "./XHR"
-import { AgreementResponse } from "../model/AgreementResponse"
+import { EAgreementResponse } from "../model/EAgreementResponse"
 
 export class fhcEagreementApi {
   host: string
@@ -94,9 +94,9 @@ export class fhcEagreementApi {
     numberOfSessionForPrescription1?: number,
     numberOfSessionForPrescription2?: number,
     attachments?: { type: string; data: string }[]
-  ): Promise<AgreementResponse> {
+  ): Promise<EAgreementResponse> {
     let _body = null
-    _body = attachments;
+    _body = attachments
     const _url =
       this.host +
       `/eagreement/argueAgreement` +
@@ -105,6 +105,9 @@ export class fhcEagreementApi {
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
+      (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
+      (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
       (prescriberNihii ? "&prescriberNihii=" + encodeURIComponent(String(prescriberNihii)) : "") +
       (prescriberFirstName
         ? "&prescriberFirstName=" + encodeURIComponent(String(prescriberFirstName))
@@ -112,9 +115,6 @@ export class fhcEagreementApi {
       (prescriberLastName
         ? "&prescriberLastName=" + encodeURIComponent(String(prescriberLastName))
         : "") +
-      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
-      (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
-      (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +
@@ -134,10 +134,12 @@ export class fhcEagreementApi {
         : "") +
       (agreementType ? "&agreementType=" + encodeURIComponent(String(agreementType)) : "") +
       (numberOfSessionForPrescription1
-        ? "&numberOfSessionForPrescription1=" + encodeURIComponent(String(numberOfSessionForPrescription1))
+        ? "&numberOfSessionForPrescription1=" +
+          encodeURIComponent(String(numberOfSessionForPrescription1))
         : "") +
       (numberOfSessionForPrescription2
-        ? "&numberOfSessionForPrescription2=" + encodeURIComponent(String(numberOfSessionForPrescription2))
+        ? "&numberOfSessionForPrescription2=" +
+          encodeURIComponent(String(numberOfSessionForPrescription2))
         : "")
     let headers = this.headers
     headers = headers
@@ -147,7 +149,7 @@ export class fhcEagreementApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => new AgreementResponse(doc.body as JSON))
+      .then(doc => new EAgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
@@ -214,9 +216,9 @@ export class fhcEagreementApi {
     numberOfSessionForPrescription1?: number,
     numberOfSessionForPrescription2?: number,
     attachments?: { type: string; data: string }[]
-  ): Promise<AgreementResponse> {
+  ): Promise<EAgreementResponse> {
     let _body = null
-    _body = attachments;
+    _body = attachments
     const _url =
       this.host +
       `/eagreement/askAgreement` +
@@ -240,8 +242,8 @@ export class fhcEagreementApi {
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
       (pathologyStartDate
-          ? "&pathologyStartDate=" + encodeURIComponent(String(pathologyStartDate))
-          : "") +
+        ? "&pathologyStartDate=" + encodeURIComponent(String(pathologyStartDate))
+        : "") +
       (pathologyCode ? "&pathologyCode=" + encodeURIComponent(String(pathologyCode)) : "") +
       (sctCode ? "&sctCode=" + encodeURIComponent(String(sctCode)) : "") +
       (sctDisplay ? "&sctDisplay=" + encodeURIComponent(String(sctDisplay)) : "") +
@@ -262,10 +264,12 @@ export class fhcEagreementApi {
         : "") +
       (agreementType ? "&agreementType=" + encodeURIComponent(String(agreementType)) : "") +
       (numberOfSessionForPrescription1
-        ? "&numberOfSessionForPrescription1=" + encodeURIComponent(String(numberOfSessionForPrescription1))
+        ? "&numberOfSessionForPrescription1=" +
+          encodeURIComponent(String(numberOfSessionForPrescription1))
         : "") +
       (numberOfSessionForPrescription2
-        ? "&numberOfSessionForPrescription2=" + encodeURIComponent(String(numberOfSessionForPrescription2))
+        ? "&numberOfSessionForPrescription2=" +
+          encodeURIComponent(String(numberOfSessionForPrescription2))
         : "")
     let headers = this.headers
     headers = headers
@@ -275,7 +279,7 @@ export class fhcEagreementApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => new AgreementResponse(doc.body as JSON))
+      .then(doc => new EAgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
@@ -322,7 +326,7 @@ export class fhcEagreementApi {
     orgNihii?: string,
     organizationType?: string,
     agreementType?: string
-  ): Promise<AgreementResponse> {
+  ): Promise<EAgreementResponse> {
     let _body = null
 
     const _url =
@@ -357,7 +361,7 @@ export class fhcEagreementApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => new AgreementResponse(doc.body as JSON))
+      .then(doc => new EAgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
@@ -420,9 +424,10 @@ export class fhcEagreementApi {
     numberOfSessionForPrescription1?: number,
     numberOfSessionForPrescription2?: number,
     attachments?: { type: string; data: string }[]
-  ): Promise<AgreementResponse> {
+  ): Promise<EAgreementResponse> {
     let _body = null
-    _body = attachments;
+    _body = attachments
+
     const _url =
       this.host +
       `/eagreement/completeAgreement` +
@@ -460,10 +465,12 @@ export class fhcEagreementApi {
         : "") +
       (agreementType ? "&agreementType=" + encodeURIComponent(String(agreementType)) : "") +
       (numberOfSessionForPrescription1
-        ? "&numberOfSessionForPrescription1=" + encodeURIComponent(String(numberOfSessionForPrescription1))
+        ? "&numberOfSessionForPrescription1=" +
+          encodeURIComponent(String(numberOfSessionForPrescription1))
         : "") +
       (numberOfSessionForPrescription2
-        ? "&numberOfSessionForPrescription2=" + encodeURIComponent(String(numberOfSessionForPrescription2))
+        ? "&numberOfSessionForPrescription2=" +
+          encodeURIComponent(String(numberOfSessionForPrescription2))
         : "")
     let headers = this.headers
     headers = headers
@@ -473,7 +480,7 @@ export class fhcEagreementApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => new AgreementResponse(doc.body as JSON))
+      .then(doc => new EAgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
@@ -526,7 +533,7 @@ export class fhcEagreementApi {
     agreementStartDate?: number,
     agreementEndDate?: number,
     agreementType?: string
-  ): Promise<AgreementResponse> {
+  ): Promise<EAgreementResponse> {
     let _body = null
 
     const _url =
@@ -568,7 +575,7 @@ export class fhcEagreementApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => new AgreementResponse(doc.body as JSON))
+      .then(doc => new EAgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
@@ -637,9 +644,9 @@ export class fhcEagreementApi {
     numberOfSessionForPrescription1?: number,
     numberOfSessionForPrescription2?: number,
     attachments?: { type: string; data: string }[]
-  ): Promise<AgreementResponse> {
+  ): Promise<EAgreementResponse> {
     let _body = null
-    _body = attachments;
+    _body = attachments
     const _url =
       this.host +
       `/eagreement/extendAgreement` +
@@ -686,10 +693,12 @@ export class fhcEagreementApi {
         : "") +
       (agreementType ? "&agreementType=" + encodeURIComponent(String(agreementType)) : "") +
       (numberOfSessionForPrescription1
-        ? "&numberOfSessionForPrescription1=" + encodeURIComponent(String(numberOfSessionForPrescription1))
+        ? "&numberOfSessionForPrescription1=" +
+          encodeURIComponent(String(numberOfSessionForPrescription1))
         : "") +
       (numberOfSessionForPrescription2
-        ? "&numberOfSessionForPrescription2=" + encodeURIComponent(String(numberOfSessionForPrescription2))
+        ? "&numberOfSessionForPrescription2=" +
+          encodeURIComponent(String(numberOfSessionForPrescription2))
         : "")
     let headers = this.headers
     headers = headers
@@ -699,7 +708,7 @@ export class fhcEagreementApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => new AgreementResponse(doc.body as JSON))
+      .then(doc => new EAgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 }

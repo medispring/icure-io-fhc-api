@@ -229,6 +229,7 @@ export class fhcEattestV3Api {
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
+   * @param isPatientRcam isPatientRcam
    * @param date date
    * @param treatmentReason treatmentReason
    * @param hcpQuality hcpQuality
@@ -255,6 +256,7 @@ export class fhcEattestV3Api {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
+    isPatientRcam?: boolean,
     date?: number,
     treatmentReason?: string,
     hcpQuality?: string,
@@ -287,6 +289,7 @@ export class fhcEattestV3Api {
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
+      (isPatientRcam ? "&isPatientRcam=" + encodeURIComponent(String(isPatientRcam)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
       (treatmentReason ? "&treatmentReason=" + encodeURIComponent(String(treatmentReason)) : "") +
       (traineeSupervisorSsin
@@ -309,7 +312,6 @@ export class fhcEattestV3Api {
       (decisionReference
         ? "&decisionReference=" + encodeURIComponent(String(decisionReference))
         : "")
-
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -338,6 +340,7 @@ export class fhcEattestV3Api {
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientGender patientGender
+   * @param isPatientRcam isPatientRcam
    * @param date date
    * @param treatmentReason treatmentReason
    * @param hcpQuality hcpQuality
@@ -364,6 +367,7 @@ export class fhcEattestV3Api {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
+    isPatientRcam?: boolean,
     date?: number,
     treatmentReason?: string,
     hcpQuality?: string,
@@ -396,6 +400,7 @@ export class fhcEattestV3Api {
         : "") +
       (patientLastName ? "&patientLastName=" + encodeURIComponent(String(patientLastName)) : "") +
       (patientGender ? "&patientGender=" + encodeURIComponent(String(patientGender)) : "") +
+      (isPatientRcam ? "&isPatientRcam=" + encodeURIComponent(String(isPatientRcam)) : "") +
       (date ? "&date=" + encodeURIComponent(String(date)) : "") +
       (treatmentReason ? "&treatmentReason=" + encodeURIComponent(String(treatmentReason)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +

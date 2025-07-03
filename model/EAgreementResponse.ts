@@ -9,19 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AgreementTransaction } from "./AgreementTransaction"
 import { CommonOutput } from "./CommonOutput"
 import { MycarenetConversation } from "./MycarenetConversation"
 import { MycarenetError } from "./MycarenetError"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class AgreementResponse {
+export class EAgreementResponse {
   constructor(json: JSON | any) {
     Object.assign(
-      this as AgreementResponse,
+      this as EAgreementResponse,
       json,
-      json.content ? { content: decodeBase64(json.content) } : {}
+      json.content ? { content: decodeBase64(json.content) } : {},
+      json.xades ? { xades: decodeBase64(json.xades) } : {}
     )
   }
 
@@ -30,7 +30,6 @@ export class AgreementResponse {
   content?: ArrayBuffer
   errors?: Array<MycarenetError>
   mycarenetConversation?: MycarenetConversation
-  transactions?: Array<AgreementTransaction>
   warnings?: Array<MycarenetError>
   xades?: ArrayBuffer
 }

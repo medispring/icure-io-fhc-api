@@ -10,7 +10,8 @@
  * Do not edit the class manually.
  */
 import { XHR } from "./XHR"
-import { ConsultCarmedInterventionResponseType } from "../model/ConsultCarmedInterventionResponseType"
+import { MediprimaMdaResponse } from "../model/MediprimaMdaResponse"
+import { TarificationMediprimaConsultationResult } from "../model/TarificationMediprimaConsultationResult"
 
 export class fhcMediprimaApi {
   host: string
@@ -33,6 +34,77 @@ export class fhcMediprimaApi {
 
   handleError(e: XHR.XHRError): never {
     throw e
+  }
+
+  /**
+   *
+   * @summary consultMediprimaTarification
+   * @param body codes
+   * @param patientSsin patientSsin
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param hcpFirstName hcpFirstName
+   * @param hcpLastName hcpLastName
+   * @param hcpNihii hcpNihii
+   * @param hcpSsin hcpSsin
+   * @param date date
+   * @param traineeSupervisorSsin traineeSupervisorSsin
+   * @param traineeSupervisorNihii traineeSupervisorNihii
+   * @param traineeSupervisorFirstName traineeSupervisorFirstName
+   * @param traineeSupervisorLastName traineeSupervisorLastName
+   */
+  consultMediprimaTarificationUsingPOST(
+    patientSsin: string,
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
+    hcpFirstName: string,
+    hcpLastName: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    date: number,
+    traineeSupervisorSsin?: string,
+    traineeSupervisorNihii?: string,
+    traineeSupervisorFirstName?: string,
+    traineeSupervisorLastName?: string,
+    body?: Array<string>
+  ): Promise<TarificationMediprimaConsultationResult> {
+    let _body = null
+    _body = body
+
+    const _url =
+      this.host +
+      `/mediprima/consultTarificationMediprima/${encodeURIComponent(String(patientSsin))}` +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpFirstName ? "&hcpFirstName=" + encodeURIComponent(String(hcpFirstName)) : "") +
+      (hcpLastName ? "&hcpLastName=" + encodeURIComponent(String(hcpLastName)) : "") +
+      (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
+      (hcpSsin ? "&hcpSsin=" + encodeURIComponent(String(hcpSsin)) : "") +
+      (date ? "&date=" + encodeURIComponent(String(date)) : "") +
+      (traineeSupervisorSsin
+        ? "&traineeSupervisorSsin=" + encodeURIComponent(String(traineeSupervisorSsin))
+        : "") +
+      (traineeSupervisorNihii
+        ? "&traineeSupervisorNihii=" + encodeURIComponent(String(traineeSupervisorNihii))
+        : "") +
+      (traineeSupervisorFirstName
+        ? "&traineeSupervisorFirstName=" + encodeURIComponent(String(traineeSupervisorFirstName))
+        : "") +
+      (traineeSupervisorLastName
+        ? "&traineeSupervisorLastName=" + encodeURIComponent(String(traineeSupervisorLastName))
+        : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+      .then(doc => new TarificationMediprimaConsultationResult(doc.body as JSON))
+      .catch(err => this.handleError(err))
   }
 
   /**
@@ -62,7 +134,7 @@ export class fhcMediprimaApi {
     startDate?: number,
     endDate?: number,
     referenceDate?: number
-  ): Promise<ConsultCarmedInterventionResponseType> {
+  ): Promise<MediprimaMdaResponse> {
     let _body = null
 
     const _url =
@@ -82,7 +154,7 @@ export class fhcMediprimaApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
-      .then(doc => new ConsultCarmedInterventionResponseType(doc.body as JSON))
+      .then(doc => new MediprimaMdaResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 }
