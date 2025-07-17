@@ -1266,6 +1266,7 @@ export class MessageXApi {
           .then(er =>
             toInvoiceBatch(
               invoices,
+              user,
               hcp,
               fullBase36,
               er && er.id ? Number(er.id.substr(prefix.length)) % 1000 : 0,

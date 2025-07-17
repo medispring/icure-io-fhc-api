@@ -1,4 +1,4 @@
-import { HealthcareParty, Invoice, Patient, Message } from "@icure/api"
+import { HealthcareParty, Invoice, Patient, Message, User } from "@icure/api"
 
 import {
   IccInvoiceXApi,
@@ -84,6 +84,7 @@ export function getFederaton(
 }
 
 export function getRelatedInvoicesInfo(
+  user: User,
   invoicesWithPatient: InvoiceWithPatient[],
   insuranceApi: IccInsuranceApi,
   invoiceXApi: IccInvoiceXApi,
@@ -108,7 +109,7 @@ export function getRelatedInvoicesInfo(
     })
 
     return Promise.all([
-      messageXApi.listMessagesByInvoiceIds(relatedInvoiceIds),
+      messageXApi.listMessagesByInvoiceIdsWithUser(user, relatedInvoiceIds),
       invoiceXApi.getInvoices(relatedInvoiceIds)
     ]).then(result => {
       const messages: Message[] = result[0]
@@ -158,6 +159,7 @@ export function getRelatedInvoicesInfo(
 // Here we trust the invoices argument for grouping validity (month, year and patient)
 export function toInvoiceBatch(
   invoicesWithPatient: Array<InvoiceWithPatient>,
+  user: User,
   hcp: HealthcareParty,
   batchRef: string,
   batchNumber: number,
@@ -189,6 +191,7 @@ export function toInvoiceBatch(
           }
 
           return getRelatedInvoicesInfo(
+            user,
             invoicesWithPatient,
             insuranceApi,
             invoiceXApi,
