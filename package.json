@@ -1,16 +1,16 @@
 {
   "name": "@icure/be-fhc-api",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Typescript version of Freehealth Connector standalone API client",
   "types": "dist/index.d.ts",
   "dependencies": {
     "lodash": "^4.17.20"
   },
   "peerDependencies": {
-    "@icure/api": ">=8.4.0 <8.5.0"
+    "@icure/api": ">=8.4.8 <8.5.0"
   },
   "devDependencies": {
-    "@icure/api": "~8.4.0",
+    "@icure/api": "~8.4.8",
     "@types/chai": "^4.1.4",
     "@types/form-data": "^2.2.1",
     "@types/lodash": "^4.14.182",
@@ -36,7 +36,7 @@
     "install": "tsc",
     "prepublish": "rm -rf dist && tsc",
     "prepare": "rimraf dist && npm run build && jq '{name:.name, version:.version, description:.description, main:\"index.js\", types:\"index.d.ts\", dependencies:.dependencies, peerDependencies:.peerDependencies, author:.author, license:.license, bugs:.bugs, homepage:.homepage}' < package.json > dist/package.json",
-    "publish": "yarn version patch && yarn run prepare && cd dist && npm publish && cd ..",
+    "publish": "yarn run prepare && cd dist && npm publish && cd ..",
     "precommit": "pretty-quick --staged"
   },
   "repository": {
