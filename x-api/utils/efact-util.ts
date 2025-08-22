@@ -312,6 +312,7 @@ function toInvoice(
   efactInvoice.patient = toPatient(patient)
   efactInvoice.ignorePrescriptionDate = !!invoice.longDelayJustification
   efactInvoice.creditNote = invoice.creditNote
+  efactInvoice.options = invoice.options
 
   if (relatedInvoiceInfo) {
     efactInvoice.relatedBatchSendNumber = Number(relatedInvoiceInfo.sendNumber)
@@ -376,7 +377,7 @@ function toInvoiceItem(
   invoiceItem.insuranceRef = invoicingCode.contract || undefined // Must be != ""
   invoiceItem.insuranceRefDate = invoicingCode.contractDate || invoiceItem.dateCode
   invoiceItem.invoiceRef = uuidBase36(invoicingCode.id!!)
-
+  invoiceItem.productLabel = invoicingCode.productLabel
   invoiceItem.override3rdPayerCode = invoicingCode.override3rdPayerCode?.toString()
   invoiceItem.patientFee = Number(((invoicingCode.patientIntervention || 0) * 100).toFixed(0))
   invoiceItem.percentNorm = getPercentNorm(invoicingCode.percentNorm || 0)
