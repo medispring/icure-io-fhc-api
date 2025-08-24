@@ -916,7 +916,14 @@ export class MessageXApi {
                     })
                   }
                 }
-
+                let refEt25 = r.et25 && r.et25.reference.trim()
+                if (r.et25 && r.et25.errorDetail) {
+                  errors.push({
+                    itemId: decodeBase36Uuid(refEt25),
+                    error: r.et25.errorDetail,
+                    record: "ET25"
+                  })
+                }
                 _.each(r.items, i => {
                   let ref = (i.et50 && i.et50.itemReference.trim()) || refEt20 //fallback
                   if (i.et50 && i.et50.errorDetail) {
