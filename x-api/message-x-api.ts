@@ -1239,7 +1239,7 @@ export class MessageXApi {
         ? prefixer(fed, hcp.id!)
         : Promise.resolve(
             `efact:${hcp.id}:${year}:${
-              fed.code === "306" ? "300" : fed.code === "675" ? "600" : fed.code
+              fed.code === "306" ? "300" : (fed.code === "675" || fed.code === "690") ? "600" : fed.code
             }:`
           )
       ).then(prefix => {
