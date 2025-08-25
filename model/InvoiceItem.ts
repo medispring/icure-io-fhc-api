@@ -45,6 +45,7 @@ export class InvoiceItem {
   timeOfDay?: InvoiceItem.TimeOfDayEnum
   transplantationCode?: InvoiceItem.TransplantationCodeEnum
   units?: number
+  options?: { [key: string]: string }
 }
 export namespace InvoiceItem {
   export type DerogationMaxNumberEnum =

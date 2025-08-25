@@ -395,6 +395,7 @@ function toInvoiceItem(
   invoiceItem.units = invoicingCode.units || 1
   invoiceItem.derogationMaxNumber = getDerogationMaxNumber(invoicingCode.derogationMaxNumber || 0)
   invoiceItem.internshipNihii = invoice.internshipNihii
+  invoiceItem.options = invoice.options
 
   return invoiceItem
 }
