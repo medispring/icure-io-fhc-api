@@ -91,6 +91,7 @@ export interface ET25Data extends ETData {
   invoiceReference: string
   identityFlag: string
   cbePcsa: string
+  refElectronicAMU: string
   cardNumber: string
   versionNumber: string
   recordControlNumber: string
@@ -633,6 +634,7 @@ export abstract class EfactMessageReader {
     const invoiceReference = this.log("ReferenceDeLetablissement", et25.zones!![i++].value)
     const identityFlag = this.log("FlagIdentificationDuBeneficiaire", et25.zones!![i++).value)
     const cbePcsa = this.log("NumBceCpas", et25.zones!![i++].value)
+    const refElectronicAMU = this.log("ReferenceAMUElectronique", et25.zones!![i++].value)
     const cardNumber = this.log("NumeroCarte", et25.zones!![i++].value)
     const versionNumber = this.log("NumVersionCarte", et25.zones!![i++].value)
     const recordControlNumber = this.log("ChiffreDeControle", et25.zones!![i++].value)
@@ -654,6 +656,7 @@ export abstract class EfactMessageReader {
       invoiceReference: invoiceReference,
       identityFlag: identityFlag,
       cbePcsa: cbePcsa,
+      refElectronicAMU: refElectronicAMU,
       cardNumber: cardNumber,
       versionNumber: versionNumber,
       recordControlNumber: recordControlNumber,
