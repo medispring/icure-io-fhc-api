@@ -77,6 +77,26 @@ export interface ET20Data extends ETData {
   insurabilityEndDate: string
 }
 
+export interface ET25Data extends ETData {
+  recordOrderNumber: string
+  mutualityCode: string
+  ssin: string
+  sexe: string
+  urgencyMedicalAssistance: string
+  nihii: string
+  establishmentStayNumber: string
+  mutualityDestination: string
+  codeCover: string
+  invoiceNumber: string
+  invoiceReference: string
+  identityFlag: string
+  cbePcsa: string
+  refElectronicAMU: string
+  cardNumber: string
+  versionNumber: string
+  recordControlNumber: string
+}
+
 export interface ET50Data extends ETData {
   recordOrderNumber: string
   sex: string
@@ -589,6 +609,61 @@ export abstract class EfactMessageReader {
       insurabilityStartDate,
       insurabilityEndDate
     }
+  }
+
+  readET25(et25: Record): ET25Data{
+    const etNumber = 25
+    let i = 0
+    if (et25.zones!![i].value !== etNumber.toString()) {
+      throw new Error(
+        `Trying to parse an ET${etNumber} that is not an ET${etNumber} --- ${JSON.stringify(et25)}`
+      )
+    }
+    i++
+    this.log("EnregistrementDeType25", et25.zones!![i].value)
+    const recordOrderNumber = this.log("NumOrdreEnregistrement", et25.zones!![i++].value)
+    const mutualityCode = this.log("NumMutuelleAffiliation", et25.zones!![i++].value)
+    const ssin = this.log("NumIdentificationMediprima", et25.zones!![i++].value)
+    const sexe = this.log("CodeSexeBeneficiaire", et25.zones!![i++].value)
+    const urgencyMedicalAssistance = this.log("CodeAideMedicaleUrgente", et25.zones!![i++].value)
+    const nihii = this.log("NumEtablissementQuiFacture", et25.zones!![i++].value)
+    const establishmentStayNumber = this.log("NumEtablissementDeSejour", et25.zones!![i++].value)
+    const mutualityDestination = this.log("NumMutualiteDestination", et25.zones!![i++].value)
+    const invoiceNumber = this.log("NumFactureIndividuelle", et25.zones!![i++].value)
+    const codeCover = this.log("CodeCouverture", et25.zones!![i++].value)
+    const invoiceReference = this.log("ReferenceDeLetablissement", et25.zones!![i++].value)
+    const identityFlag = this.log("FlagIdentificationDuBeneficiaire", et25.zones!![i++).value)
+    const cbePcsa = this.log("NumBceCpas", et25.zones!![i++].value)
+    const refElectronicAMU = this.log("ReferenceAMUElectronique", et25.zones!![i++].value)
+    const cardNumber = this.log("NumeroCarte", et25.zones!![i++].value)
+    const versionNumber = this.log("NumVersionCarte", et25.zones!![i++].value)
+    const recordControlNumber = this.log("ChiffreDeControle", et25.zones!![i++].value)
+
+    if (i !== et25.zones!!.length) {
+      throw new Error(`You didn\'t parse every zones of the ET${etNumber}`)
+    }
+
+    return{
+      errorDetail: et25.errorDetail,
+      recordOrderNumber: recordOrderNumber,
+      mutualityCode: mutualityCode,
+      ssin: ssin,
+      sexe: sexe,
+      urgencyMedicalAssistance: urgencyMedicalAssistance,
+      nihii: nihii,
+      establishmentStayNumber: establishmentStayNumber,
+      codeCover: codeCover,
+      invoiceReference: invoiceReference,
+      identityFlag: identityFlag,
+      cbePcsa: cbePcsa,
+      refElectronicAMU: refElectronicAMU,
+      cardNumber: cardNumber,
+      versionNumber: versionNumber,
+      recordControlNumber: recordControlNumber,
+      mutualityDestination:  mutualityDestination,
+      invoiceNumber: invoiceNumber
+    }
+
   }
 
   readET50(et50: Record): ET50Data {
@@ -1341,6 +1416,10 @@ export class EfactMessage920900Reader extends EfactMessageReader {
       while (rawRecords[i].zones!![0].value === "20") {
         const et20 = this.readET20(rawRecords[i])
         i++
+        if(rawRecords[i].zones!![0].value === "25") {
+          const et25 = this.readET25(rawRecords[i])
+          i++
+        }
         const items = []
         while (
           rawRecords[i].zones!![0].value === "50" ||
@@ -1435,6 +1514,10 @@ export class EfactMessage920099Reader extends EfactMessageReader {
       while (rawRecords[i].zones!![0].value === "20") {
         const et20 = this.readET20(rawRecords[i])
         i++
+        if(rawRecords[i].zones!![0].value === "25") {
+          const et25 = this.readET25(rawRecords[i])
+          i++
+        }
         const items = []
         while (
           rawRecords[i].zones!![0].value === "50" ||
@@ -1509,6 +1592,10 @@ export class EfactMessage920098Reader extends EfactMessageReader {
       while (rawRecords[i].zones!![0].value === "20") {
         const et20 = this.readET20(rawRecords[i])
         i++
+        if(rawRecords[i].zones!![0].value === "25") {
+          const et25 = this.readET25(rawRecords[i])
+          i++
+        }
         const items = []
         while (
           rawRecords[i].zones!![0].value === "50" ||

@@ -36,10 +36,12 @@ export interface InvoiceWithPatient {
 const base36UUID = new UuidEncoder()
 
 function ensureNoFederation(invoices: Array<InvoiceWithPatient>, insurances: Array<Insurance>) {
-  // We will check here for recipient which are federations (except 306).
+  // We will check here for recipient which are federations (except 306, 675, 690).
+  // 675 => Mutuality for marines
+  // 690 => Mutuality for Public Centres for Social Welfare
 
   const federations = insurances.filter(
-    i => i.code !== "306" && i.code !== "675" && i.id === i.parent
+    i => i.code !== "306" && i.code !== "675" && i.code !== "690" && i.id === i.parent
   )
 
   if (federations.length > 0) {
