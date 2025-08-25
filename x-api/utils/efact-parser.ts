@@ -186,6 +186,7 @@ export interface ET92Data {
 
 export interface ET20_80Data {
   et20: ET20Data
+  et25?: ET25Data
   items: Array<{
     et50?: ET50Data | undefined
     et51?: ET51Data | undefined
@@ -611,7 +612,7 @@ export abstract class EfactMessageReader {
     }
   }
 
-  readET25(et25: Record): ET25Data{
+  readET25(et25: Record): ET25Data {
     const etNumber = 25
     let i = 0
     if (et25.zones!![i].value !== etNumber.toString()) {
@@ -632,7 +633,7 @@ export abstract class EfactMessageReader {
     const invoiceNumber = this.log("NumFactureIndividuelle", et25.zones!![i++].value)
     const codeCover = this.log("CodeCouverture", et25.zones!![i++].value)
     const invoiceReference = this.log("ReferenceDeLetablissement", et25.zones!![i++].value)
-    const identityFlag = this.log("FlagIdentificationDuBeneficiaire", et25.zones!![i++).value)
+    const identityFlag = this.log("FlagIdentificationDuBeneficiaire", et25.zones!![i++].value)
     const cbePcsa = this.log("NumBceCpas", et25.zones!![i++].value)
     const refElectronicAMU = this.log("ReferenceAMUElectronique", et25.zones!![i++].value)
     const cardNumber = this.log("NumeroCarte", et25.zones!![i++].value)
@@ -643,7 +644,7 @@ export abstract class EfactMessageReader {
       throw new Error(`You didn\'t parse every zones of the ET${etNumber}`)
     }
 
-    return{
+    return {
       errorDetail: et25.errorDetail,
       recordOrderNumber: recordOrderNumber,
       mutualityCode: mutualityCode,
@@ -660,10 +661,9 @@ export abstract class EfactMessageReader {
       cardNumber: cardNumber,
       versionNumber: versionNumber,
       recordControlNumber: recordControlNumber,
-      mutualityDestination:  mutualityDestination,
+      mutualityDestination: mutualityDestination,
       invoiceNumber: invoiceNumber
     }
-
   }
 
   readET50(et50: Record): ET50Data {
@@ -1416,7 +1416,7 @@ export class EfactMessage920900Reader extends EfactMessageReader {
       while (rawRecords[i].zones!![0].value === "20") {
         const et20 = this.readET20(rawRecords[i])
         i++
-        if(rawRecords[i].zones!![0].value === "25") {
+        if (rawRecords[i].zones!![0].value === "25") {
           const et25 = this.readET25(rawRecords[i])
           i++
         }
@@ -1514,7 +1514,7 @@ export class EfactMessage920099Reader extends EfactMessageReader {
       while (rawRecords[i].zones!![0].value === "20") {
         const et20 = this.readET20(rawRecords[i])
         i++
-        if(rawRecords[i].zones!![0].value === "25") {
+        if (rawRecords[i].zones!![0].value === "25") {
           const et25 = this.readET25(rawRecords[i])
           i++
         }
@@ -1592,7 +1592,7 @@ export class EfactMessage920098Reader extends EfactMessageReader {
       while (rawRecords[i].zones!![0].value === "20") {
         const et20 = this.readET20(rawRecords[i])
         i++
-        if(rawRecords[i].zones!![0].value === "25") {
+        if (rawRecords[i].zones!![0].value === "25") {
           const et25 = this.readET25(rawRecords[i])
           i++
         }

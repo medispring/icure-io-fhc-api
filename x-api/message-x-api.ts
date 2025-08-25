@@ -916,8 +916,8 @@ export class MessageXApi {
                     })
                   }
                 }
-                let refEt25 = r.et25 && r.et25.reference.trim()
                 if (r.et25 && r.et25.errorDetail) {
+                  let refEt25 = r.et25.invoiceReference.trim()
                   errors.push({
                     itemId: decodeBase36Uuid(refEt25),
                     error: r.et25.errorDetail,
@@ -1246,7 +1246,11 @@ export class MessageXApi {
         ? prefixer(fed, hcp.id!)
         : Promise.resolve(
             `efact:${hcp.id}:${year}:${
-              fed.code === "306" ? "300" : (fed.code === "675" || fed.code === "690") ? "600" : fed.code
+              fed.code === "306"
+                ? "300"
+                : fed.code === "675" || fed.code === "690"
+                ? "600"
+                : fed.code
             }:`
           )
       ).then(prefix => {
