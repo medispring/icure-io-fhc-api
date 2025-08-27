@@ -621,24 +621,54 @@ export abstract class EfactMessageReader {
       )
     }
     i++
-    this.log("EnregistrementDeType25", et25.zones!![i].value)
-    const recordOrderNumber = this.log("NumOrdreEnregistrement", et25.zones!![i++].value)
-    const mutualityCode = this.log("NumMutuelleAffiliation", et25.zones!![i++].value)
-    const ssin = this.log("NumIdentificationMediprima", et25.zones!![i++].value)
-    const sexe = this.log("CodeSexeBeneficiaire", et25.zones!![i++].value)
-    const urgencyMedicalAssistance = this.log("CodeAideMedicaleUrgente", et25.zones!![i++].value)
-    const nihii = this.log("NumEtablissementQuiFacture", et25.zones!![i++].value)
-    const establishmentStayNumber = this.log("NumEtablissementDeSejour", et25.zones!![i++].value)
-    const mutualityDestination = this.log("NumMutualiteDestination", et25.zones!![i++].value)
-    const invoiceNumber = this.log("NumFactureIndividuelle", et25.zones!![i++].value)
-    const codeCover = this.log("CodeCouverture", et25.zones!![i++].value)
-    const invoiceReference = this.log("ReferenceDeLetablissement", et25.zones!![i++].value)
-    const identityFlag = this.log("FlagIdentificationDuBeneficiaire", et25.zones!![i++].value)
-    const cbePcsa = this.log("NumBceCpas", et25.zones!![i++].value)
-    const refElectronicAMU = this.log("ReferenceAMUElectronique", et25.zones!![i++].value)
-    const cardNumber = this.log("NumeroCarte", et25.zones!![i++].value)
-    const versionNumber = this.log("NumVersionCarte", et25.zones!![i++].value)
-    const recordControlNumber = this.log("ChiffreDeControle", et25.zones!![i++].value)
+    this.log("EnregistrementDeType25", et25.zones!![i].value);
+    const recordOrderNumber = this.log("NumOrdreEnregistrement", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const mutualityCode = this.log("NumMutuelleAffiliation", et25.zones!![i++].value);
+    const ssin = this.log("NumIdentificationMediprima", et25.zones!![i++].value);
+    const sexe = this.log("CodeSexeBeneficiaire", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const urgencyMedicalAssistance = this.log("CodeAideMedicaleUrgente", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const nihii = this.log("NumEtablissementQuiFacture", et25.zones!![i++].value);
+    const establishmentStayNumber = this.log("NumEtablissementDeSejour", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const mutualityDestination = this.log("NumMutualiteDestination", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const invoiceNumber = this.log("NumFactureIndividuelle", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const codeCover = this.log("CodeCouverture", et25.zones!![i++].value);
+    const invoiceReference = this.log("ReferenceDeLetablissement", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const identityFlag = this.log("FlagIdentificationDuBeneficiaire", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const cbePcsa = this.log("NumBceCpas", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const refElectronicAMU = this.log("ReferenceAMUElectronique", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const cardNumber = this.log("NumeroCarte", et25.zones!![i++].value);
+    const versionNumber = this.log("NumVersionCarte", et25.zones!![i++].value);
+    this.log("Reserve", et25.zones!![i++].value);
+    const recordControlNumber = this.log("ChiffreDeControle", et25.zones!![i++].value);
 
     if (i !== et25.zones!!.length) {
       throw new Error(`You didn\'t parse every zones of the ET${etNumber}`)
