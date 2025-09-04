@@ -419,7 +419,7 @@ function getPercentNorm(norm: number) {
     : norm === 8
     ? InvoiceItem.PercentNormEnum.SurgicalSameField
     : norm === 9
-    ? InvoiceItem.PercentNormEnum.Supplement
+    ? InvoiceItem.PercentNormEnum.PseudoCodeProthesis
     : InvoiceItem.PercentNormEnum.None
 }
 
