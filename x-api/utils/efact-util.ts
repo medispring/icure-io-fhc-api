@@ -416,6 +416,10 @@ function getPercentNorm(norm: number) {
     ? InvoiceItem.PercentNormEnum.InvoiceException
     : norm === 7
     ? InvoiceItem.PercentNormEnum.ForInformation
+    : norm === 8
+    ? InvoiceItem.PercentNormEnum.SurgicalSameField
+    : norm === 9
+    ? InvoiceItem.PercentNormEnum.Supplement
     : InvoiceItem.PercentNormEnum.None
 }
 
