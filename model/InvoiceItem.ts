@@ -71,6 +71,7 @@ export namespace InvoiceItem {
     | "InvoiceException"
     | "ForInformation"
     | "PseudoCodeProthesis"
+    | "SurgicalSameField"
   export const PercentNormEnum = {
     None: "None" as PercentNormEnum,
     SurgicalAid1: "SurgicalAid1" as PercentNormEnum,
@@ -80,7 +81,8 @@ export namespace InvoiceItem {
     HalfPriceSecondAct: "HalfPriceSecondAct" as PercentNormEnum,
     InvoiceException: "InvoiceException" as PercentNormEnum,
     ForInformation: "ForInformation" as PercentNormEnum,
-    PseudoCodeProthesis: "PseudoCodeProthesis" as PercentNormEnum
+    PseudoCodeProthesis: "PseudoCodeProthesis" as PercentNormEnum,
+    SurgicalSameField: "SurgicalSameField" as PercentNormEnum,
   }
   export type PrescriberNormEnum =
     | "None"
