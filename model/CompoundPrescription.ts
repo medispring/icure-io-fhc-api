@@ -22,3 +22,12 @@ export class CompoundPrescription {
   galenicForm?: GalenicForm
   quantity?: KmehrQuantity
 }
+
+export class MagistralText extends CompoundPrescription {
+  constructor(json: JSON | any) {
+    super(json)
+    Object.assign(this as MagistralText, { text: json?.text })
+  }
+
+  text?: string
+}
