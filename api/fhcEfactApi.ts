@@ -85,6 +85,96 @@ export class fhcEfactApi {
 
   /**
    *
+   * @summary confirmMediprimaAcks
+   * @param body valueHashes
+   * @param nihii nihii
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param ssin ssin
+   * @param firstName firstName
+   * @param lastName lastName
+   */
+  confirmMediprimaAcksUsingPUT(
+    nihii: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    ssin: string,
+    firstName: string,
+    lastName: string,
+    body?: Array<string>
+  ): Promise<boolean> {
+    let _body = null
+    _body = body
+
+    const _url =
+      this.host +
+      `/efact/mediprima/confirm/acks/${encodeURIComponent(String(nihii))}` +
+      "?ts=" +
+      new Date().getTime() +
+      (ssin ? "&ssin=" + encodeURIComponent(String(ssin)) : "") +
+      (firstName ? "&firstName=" + encodeURIComponent(String(firstName)) : "") +
+      (lastName ? "&lastName=" + encodeURIComponent(String(lastName)) : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("PUT", _url, headers, _body, this.fetchImpl)
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary confirmMediprimaMessages
+   * @param body valueHashes
+   * @param nihii nihii
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param ssin ssin
+   * @param firstName firstName
+   * @param lastName lastName
+   */
+  confirmMediprimaMessagesUsingPUT(
+    nihii: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    ssin: string,
+    firstName: string,
+    lastName: string,
+    body?: Array<string>
+  ): Promise<boolean> {
+    let _body = null
+    _body = body
+
+    const _url =
+      this.host +
+      `/efact/mediprima/confirm/msgs/${encodeURIComponent(String(nihii))}` +
+      "?ts=" +
+      new Date().getTime() +
+      (ssin ? "&ssin=" + encodeURIComponent(String(ssin)) : "") +
+      (firstName ? "&firstName=" + encodeURIComponent(String(firstName)) : "") +
+      (lastName ? "&lastName=" + encodeURIComponent(String(lastName)) : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("PUT", _url, headers, _body, this.fetchImpl)
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
    * @summary confirmMessages
    * @param body valueHashes
    * @param nihii nihii
@@ -125,6 +215,52 @@ export class fhcEfactApi {
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("PUT", _url, headers, _body, this.fetchImpl)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary loadMediprimaMessages
+   * @param nihii nihii
+   * @param language language
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param ssin ssin
+   * @param firstName firstName
+   * @param lastName lastName
+   * @param limit limit
+   */
+  loadMediprimaMessagesUsingGET(
+    nihii: string,
+    language: string,
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    ssin: string,
+    firstName: string,
+    lastName: string,
+    limit: number
+  ): Promise<Array<EfactMessage>> {
+    let _body = null
+
+    const _url =
+      this.host +
+      `/efact/mediprima/${encodeURIComponent(String(nihii))}/${encodeURIComponent(
+        String(language)
+      )}` +
+      "?ts=" +
+      new Date().getTime() +
+      (ssin ? "&ssin=" + encodeURIComponent(String(ssin)) : "") +
+      (firstName ? "&firstName=" + encodeURIComponent(String(firstName)) : "") +
+      (lastName ? "&lastName=" + encodeURIComponent(String(lastName)) : "") +
+      (limit ? "&limit=" + encodeURIComponent(String(limit)) : "")
+    let headers = this.headers
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+      .then(doc => (doc.body as Array<JSON>).map(it => new EfactMessage(it)))
       .catch(err => this.handleError(err))
   }
 

@@ -19,6 +19,7 @@ export class MessageStatusOperationResponse {
   }
 
   acks?: Array<Acknowledgement>
+  code?: string
   error?: Error
   messageId?: string
   success?: boolean

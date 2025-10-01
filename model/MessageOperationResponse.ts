@@ -17,6 +17,7 @@ export class MessageOperationResponse {
     Object.assign(this as MessageOperationResponse, json)
   }
 
+  code?: string
   error?: Error
   messageId?: string
   success?: boolean
