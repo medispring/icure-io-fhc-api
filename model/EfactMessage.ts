@@ -25,6 +25,7 @@ export class EfactMessage {
   hashValue?: string
   id?: string
   message?: Array<Record>
+  messageReference?: string
   name?: string
   tack?: TAck
   xades?: string
