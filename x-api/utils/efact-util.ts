@@ -41,7 +41,7 @@ function ensureNoFederation(invoices: Array<InvoiceWithPatient>, insurances: Arr
   // 690 => Mutuality for Public Centres for Social Welfare
 
   const federations = insurances.filter(
-    i => i.code !== "306" && i.code !== "675" && i.code !== "690" && i.id === i.parent
+    i => i.code !== "306" && i.code !== "675" && i.code !== "690" && i.code !== "691" && i.id === i.parent
   )
 
   if (federations.length > 0) {
